@@ -3,8 +3,6 @@ package com.crazyputting.objects;
 import com.badlogic.gdx.math.Vector3;
 import com.crazyputting.function.Function;
 
-import java.util.ArrayList;
-
 public class PuttingCourse {
 
     private String name;
@@ -12,15 +10,16 @@ public class PuttingCourse {
     private Vector3 flag;
     private Vector3 start;
     private double frictionCoefficient;
-    private double holeTollerance;
+    private double holeTolerance;
     final private double maximumVelocity = 3.0; // in meters per second
 
     public PuttingCourse(Function height,
-                         Vector3 flag, Vector3 start, double mu) {
+                         Vector3 flag, Vector3 start, double mu,double holeTolerance) {
         this.height = height;
         this.flag = flag;
         this.start = start;
-        frictionCoefficient = mu;
+        this.holeTolerance =holeTolerance;
+        this.frictionCoefficient = mu;
     }
 
     public double get_height(Vector3 pos) {
@@ -44,7 +43,7 @@ public class PuttingCourse {
     }
 
     public double get_hole_tolerance() {
-        return holeTollerance;
+        return holeTolerance;
     }
 
     public String get_Name() {
