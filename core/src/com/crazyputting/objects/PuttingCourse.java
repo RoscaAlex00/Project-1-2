@@ -14,10 +14,11 @@ public class PuttingCourse {
     final private double maximumVelocity = 3.0; // in meters per second
 
     public PuttingCourse(Function height,
-                         Vector3 flag, Vector3 start, double mu,double holeTolerance) {
+                         Vector3 flag, Vector3 start, double mu,double holeTolerance,String name) {
         this.height = height;
         this.flag = flag;
         this.start = start;
+        this.name=name;
         this.holeTolerance =holeTolerance;
         this.frictionCoefficient = mu;
     }
