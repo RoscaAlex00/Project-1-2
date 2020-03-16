@@ -4,6 +4,8 @@ import com.badlogic.gdx.math.Vector3;
 
 public interface Function {
 
-        public double evaluate(Vector3 p);
-        public Vector3 gradient(Vector3 p);
+        float calcXDeriv(float x,float y);
+        float calcYDeriv(float x,float y);
+
+    double evaluate(Vector3 pos);
 }
