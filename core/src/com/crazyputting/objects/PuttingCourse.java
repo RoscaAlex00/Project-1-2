@@ -46,6 +46,6 @@ public class PuttingCourse {
     }
 
     public String get_Name() {
-    return name;
+        return name;
     }
 }
