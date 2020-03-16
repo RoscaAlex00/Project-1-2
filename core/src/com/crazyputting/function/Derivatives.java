@@ -1,7 +1,5 @@
 package com.crazyputting.function;
 
-import com.badlogic.gdx.math.Vector3;
-
 import java.io.Serializable;
 import java.util.Stack;
 
@@ -174,11 +172,6 @@ public class Derivatives implements Function, Serializable {
      */
     public float calcYDeriv(float x, float y) {
         return evaluate(yDeriv, x, y);
-    }
-
-    @Override
-    public double evaluate(Vector3 pos) {
-        return 0;
     }
 
     /**
