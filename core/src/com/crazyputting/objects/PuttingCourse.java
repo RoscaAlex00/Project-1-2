@@ -12,6 +12,7 @@ public class PuttingCourse {
     private Vector3 flag;
     private Vector3 start;
     private double frictionCoefficient;
+    private double holeTollerance;
     final private double maximumVelocity = 3.0; // in meters per second
 
     public PuttingCourse(Function height,
@@ -42,7 +43,8 @@ public class PuttingCourse {
         return maximumVelocity;
     }
 
-    public void get_hole_tolerance() {
+    public double get_hole_tolerance() {
+        return holeTollerance;
     }
 
     public String get_Name() {
