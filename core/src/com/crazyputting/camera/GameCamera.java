@@ -19,5 +19,7 @@ public class GameCamera extends InputAdapter {
         position = ourCamera.position;
     }
 
+    //Not needed atm
+
 
 }
