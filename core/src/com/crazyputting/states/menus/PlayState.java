@@ -7,6 +7,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Scaling;
 import com.badlogic.gdx.utils.viewport.ScalingViewport;
 import com.crazyputting.engine.Engine;
+import com.crazyputting.engine.solver.Euler;
+import com.crazyputting.managers.GameInputProcessor;
 import com.crazyputting.managers.GameStateManager;
 import com.crazyputting.objects.Ball;
 import com.crazyputting.objects.PuttingCourse;
@@ -21,7 +23,6 @@ public class PlayState extends ThreeDimensional {
     private Stage hud;
     private boolean paused = false;
     private boolean isPushed = false;
-    private boolean isSettings = false;
     private boolean moving = false;
 
     private GameStateManager manager;
@@ -34,33 +35,30 @@ public class PlayState extends ThreeDimensional {
     public PlayState(GameStateManager manager, Terrain terrain) {
         super(manager, terrain);
     }
-}
 
-    /*
-    public PlayState(GameStateManager manager, PlayState course, Player player) {
+
+    public PlayState(GameStateManager manager, PuttingCourse course) {
         super(manager, course.getTerrain(0));
 
         this.course = course;
         hole_number = 1;
 
-        ball = new Ball(terrain.getStart().cpy());
+        ball = new Ball(terrain.getStartPos().cpy());
         instances.add(ball.getModel());
 
-        this.player = player;
-        player.setState(this);
         this.manager = manager;
     }
 
     /**
      * Method responsible for creating the menu, this is a part of the requirements of libGDX.
      */
-   /* @Override
+    @Override
     public void create() {
         super.create();
 
-        // ball.update(terrain.getFunction().evaluate(ball.getPosition().x, ball.getPosition().y));
+        ball.update(terrain.getFunction().evaluateF(ball.getPosition().x, ball.getPosition().y));
 
-        // engine = new Engine(terrain, ball, StateManager.settings.getSolver());
+        engine = new Engine(ball, terrain, new Euler());
         createHUD();
 
         setProcessors();
@@ -75,7 +73,7 @@ public class PlayState extends ThreeDimensional {
         table.setFillParent(true);
     }
 
-    /*
+
 
     @Override
     public void render() {
@@ -100,15 +98,9 @@ public class PlayState extends ThreeDimensional {
             isPushed = false;
             setProcessors();
         }
-        if(isSettings){
-            isSettings = false;
-            Gdx.input.setInputProcessor(new InputMultiplexer(pause,this));
-        }
-        if (paused) return;
         if (!ball.isStopped()) {
             if(!moving){
                 moving = true;
-                Gdx.input.setInputProcessor(new InputMultiplexer(this,hud));
             }
             ball.updateInstance(terrain.getFunction().evaluateF(ball.getPosition().x, ball.getPosition().y),engine.updateBall(dt));
         }
@@ -117,27 +109,16 @@ public class PlayState extends ThreeDimensional {
                 moving = false;
                 setProcessors();
             }
-            player.handleInput(this);
         }
         if(engine.isGoal()) {
-
+            System.out.println("You WON!");
         }
-        if(player.getHitCount() >= 17) endState(new LoseState(manager,this));
-        updateLabels();
     }
 
-    private void updateLabels(){
-        labels.get("score").setText("Score: "+String.valueOf(player.getHitCount()));
-        if (controller.isFocused()) labels.get("focus").setText("Ball focus ON");
-        else labels.get("focus").setText("");
-        String dist = "Distance to hole: " + String.valueOf(ball.getPosition().dst(terrain.getHole()) / 10) + "m";
-        labels.get("distance").setText(dist);
-        labels.get("speed").setText("Speed: " + String.valueOf(ball.getVelocity().len()/10) + "m/s");
-    }
 
     //Setting inputProcessor that processes the key-events and stuff like that.
     public void setProcessors() {
-        Gdx.input.setInputProcessor(new InputMultiplexer(hud, player.getInputProcessor(), this, controller));
+        Gdx.input.setInputProcessor(new GameInputProcessor());
     }
 
     public Ball getBall() {
@@ -150,10 +131,9 @@ public class PlayState extends ThreeDimensional {
 
 
     public void restart(){
-        ball.getPosition().set(terrain.getStart().cpy());
+        ball.getPosition().set(terrain.getStartPos().cpy());
         ball.setStopped();
         ball.updateInstance(terrain.getFunction().evaluateF(ball.getPosition().x,ball.getPosition().y),0);
-        player.resetCount();
     }
 
     @Override

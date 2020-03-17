@@ -3,51 +3,46 @@ package com.crazyputting.objects;
 import com.badlogic.gdx.math.Vector3;
 import com.crazyputting.function.Function;
 
+import java.util.ArrayList;
+
 public class PuttingCourse {
 
+    private ArrayList<Terrain> course;
     private String name;
-    private int height;
-    private Vector3 flag;
-    private Vector3 start;
-    private double frictionCoefficient;
-    private double holeTolerancee;
-    final private double maximumVelocity = 3.0; // in meters per second
+    private int[] scores;
 
-    public PuttingCourse(int height,
-                         Vector3 flag, Vector3 start, double mu,double holeTolerance,String name) {
-        this.height = height;
-        this.flag = flag;
-        this.start = start;
-        this.name=name;
-        this.holeTolerancee =holeTolerance;
-        this.frictionCoefficient = mu;
+    /**
+     * Takes properties from the course class
+     * @param course
+     */
+    public PuttingCourse(ArrayList<Terrain> course, String name) {
+        this.course = course;
+        this.name = name;
+        scores = new int[course.size()];
     }
 
-    public int get_height() {
-        return height;
+    public PuttingCourse(Terrain terrain){
+        course = new ArrayList<>();
+        course.add(terrain);
+        this.name = terrain.getName();
+        scores = new int[1];
     }
 
-    public Vector3 get_flag_position() {
-        return flag;
+    /**
+     *Takes properties from the terrain class
+     * @param i
+     * @return a new course with the desired properties
+     */
+    public Terrain getTerrain(int i){
+        return course.get(i);
     }
 
-    public Vector3 get_start_position() {
-        return start;
-    }
-
-    public double get_friction_coefficient() {
-        return frictionCoefficient;
-    }
-
-    public double get_maximum_velocity() {
-        return maximumVelocity;
-    }
-
-    public double get_hole_tolerance() {
-        return holeTolerancee;
-    }
-
-    public String get_Name() {
+    public String getName(){
         return name;
     }
+
+    public int getSize(){
+        return course.size();
+    }
+
 }

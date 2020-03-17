@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.g3d.Model;
 import com.badlogic.gdx.graphics.g3d.ModelInstance;
 import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
 import com.badlogic.gdx.graphics.g3d.utils.ModelBuilder;
+import com.badlogic.gdx.math.Quaternion;
 import com.badlogic.gdx.math.Vector3;
 
 import java.awt.*;
@@ -40,6 +41,7 @@ public class Ball {
      */
     public void hit(Vector3 initialHit){
         stopped = false;
+        colliding = true;
         velocity = initialHit.cpy();
     }
 
@@ -60,7 +62,23 @@ public class Ball {
         ball = new ModelInstance(sphere, position.x, position.y, position.z);
     }
 
-    public void setStopped() { stopped = true; }
+    public void setStopped() {
+        velocity = new Vector3(0,0,0);
+        this.stopped = true;
+    }
+
+    public void updateInstance(float z,float displacement){
+        if(displacement != 0) colliding = false;
+        position.z = z;
+        ball.transform.setTranslation(position.x,position.y,position.z+(diameter));
+        float rotAngle = (float) ((180 * displacement) / (Math.PI * (diameter/2)));
+        Quaternion sys = ball.transform.getRotation(new Quaternion());
+        Vector3 worldAxis = new Vector3(0,0,1).crs(velocity);
+        worldAxis.rotate(sys.getPitch(),1,0,0);
+        worldAxis.rotate(sys.getYaw(),0,1,0);
+        worldAxis.rotate(sys.getRoll(),0,0,1);
+        ball.transform.rotate(new Quaternion(worldAxis,rotAngle/40));
+    }
 
     public float getMass() { return mass; }
 

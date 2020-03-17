@@ -12,22 +12,23 @@ import com.badlogic.gdx.graphics.g3d.environment.DirectionalLight;
 import com.badlogic.gdx.utils.Array;
 import com.crazyputting.managers.GameInputProcessor;
 import com.crazyputting.managers.GameStateManager;
+import com.crazyputting.models.HeightField;
+import com.crazyputting.models.TerrainModel;
 import com.crazyputting.objects.Terrain;
 
 import java.util.ArrayList;
 
 public abstract class ThreeDimensional extends GameState {
     protected PerspectiveCamera camera;
-    private ModelBatch batch;
     protected ArrayList<ModelInstance> instances = new ArrayList<>();
-
-    private Color bgColor = new Color(.8f,.8f,.8f,1f);
-    private Environment environment;
-
     protected Terrain terrain;
-  //  private TerrainModel terrainModel;
+    private ModelBatch batch;
+    private Color bgColor = new Color(.8f, .8f, .8f, 1f);
+    private Environment environment;
+    private TerrainModel terrainModel;
     private Array<Renderable> fields;
     private ArrayList<ModelInstance> skeleton;
+
 
     private boolean hideWalls = false;
     private boolean showSkeleton = false;
@@ -40,7 +41,7 @@ public abstract class ThreeDimensional extends GameState {
     /**
      * Creates a model batch with the environment's properties and camera properties.
      */
-    public void create () {
+    public void create() {
         batch = new ModelBatch();
 
         //camera setup
@@ -55,7 +56,7 @@ public abstract class ThreeDimensional extends GameState {
 
         //environment setup
         DirectionalLight light = new DirectionalLight();
-        light.set(.8f,.8f,.8f, -1f,-1f,-1f);
+        light.set(.8f, .8f, .8f, -1f, -1f, -1f);
 
         environment = new Environment();
         environment.clear();
@@ -66,18 +67,20 @@ public abstract class ThreeDimensional extends GameState {
     }
 
     public abstract void pause();
+
     public abstract void resume();
 
     /**
      * Shows on the screen all the different instances of the game
+     *
      * @param instances instances of the game
      */
-    public void render (final ArrayList<ModelInstance> instances) {
+    public void render(final ArrayList<ModelInstance> instances) {
         batch.begin(camera);
         if (instances != null) batch.render(instances, environment);
-        if(showSkeleton) batch.render(skeleton,environment);
-        else for (Renderable r: fields) batch.render(r);
-        if(!hideWalls) batch.render((RenderableProvider) environment);
+        if (showSkeleton) batch.render(skeleton, environment);
+        else for (Renderable r : fields) batch.render(r);
+        if (!hideWalls) batch.render((RenderableProvider) environment);
         batch.end();
     }
 
@@ -92,45 +95,48 @@ public abstract class ThreeDimensional extends GameState {
     }
 
     @Override
-    public void dispose(){
+    public void dispose() {
         batch.dispose();
     }
 
     /**
      * Creates the game's field.
      */
-    public void createTerrain(){
-       // terrainModel = new TerrainModel(terrain);
+    public void createTerrain() {
+        terrainModel = new TerrainModel(terrain);
+        Array<HeightField> hf = terrainModel.map;
 
         fields = new Array<>();
-       // for (int i = 0; i < hf.size; i++) {
+        for (int i = 0; i < hf.size; i++) {
             Renderable field = new Renderable();
             field.environment = environment;
-          //  field.meshPart.mesh = hf.get(i).mesh;
+            field.meshPart.mesh = hf.get(i).mesh;
             field.meshPart.primitiveType = GL20.GL_TRIANGLES;
             field.meshPart.offset = 0;
-          //  field.meshPart.size = hf.get(i).mesh.getNumIndices();
+            field.meshPart.size = hf.get(i).mesh.getNumIndices();
             field.meshPart.update();
             field.material = new Material(TextureAttribute.createDiffuse(new Texture("grass.jpg")));
             fields.add(field);
         }
-
-
-    public void update(float dt){
-        camera.update();
     }
 
-    public PerspectiveCamera getCamera() {
-        return camera;
+
+        public void update ( float dt){
+            camera.update();
+        }
+
+        public PerspectiveCamera getCamera () {
+            return camera;
+        }
+
+        public Terrain getTerrain () {
+            return terrain;
+        }
+
+        protected void toggleSkeleton () {
+            if (!showSkeleton) skeleton = terrainModel.generateSkeleton();
+            showSkeleton = !showSkeleton;
+        }
+
     }
 
-    public Terrain getTerrain() {
-        return terrain;
-    }
-
-    protected void toggleSkeleton(){
-        //if(!showSkeleton) skeleton = terrainModel.generateSkeleton();
-        showSkeleton = !showSkeleton;
-    }
-
-}
