@@ -72,24 +72,25 @@ public class CreatorMenu extends GameState {
         final TextField fieldCourseWidth = new TextField("50", skin);
         Label labelCourseDepth = new Label("Depth of field: ", skin);
         final TextField fieldCourseDepth = new TextField("50", skin);
+        final TextField functionField = new TextField("50", skin);
+        Label labelFunction = new Label("Function : ", skin);
 
         ChangeListener listener = new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                float goalX = 0, goalY = 0, goalRadius = 0, depth = 0, width = 0;
+                float goalX = 0, goalY = 0, goalRadius = 0;
+                int depth = 0, width = 0;
                 boolean error;
                 error = fieldGoalX.toString().isEmpty() || fieldGoalY.toString().isEmpty() ||
-                        fieldGoalRadius.toString().isEmpty() || fieldCourseWidth.toString().isEmpty() ||
+                        functionField.toString().isEmpty() || fieldCourseWidth.toString().isEmpty() ||
                         fieldCourseDepth.toString().isEmpty();
                 try {
                     goalX = Float.parseFloat(fieldGoalX.getText().replaceAll(" ", ""));
                     goalY = Float.parseFloat(fieldGoalY.getText().replaceAll(" ", ""));
-                    goalRadius = Float.parseFloat(fieldGoalRadius.getText().replaceAll(" ", ""));
-                    width = Float.parseFloat(fieldCourseWidth.getText().replaceAll(" ", ""));
-                    depth = Float.parseFloat(fieldCourseDepth.getText().replaceAll(" ", ""));
-                }
-                catch (Exception e) {
-                    TextButton buttonOK = new TextButton("Okey", skin);
+                    width = Integer.parseInt(fieldCourseWidth.getText().replaceAll(" ", ""));
+                    depth = Integer.parseInt(fieldCourseDepth.getText().replaceAll(" ", ""));
+                } catch (Exception e) {
+                    TextButton buttonOK = new TextButton("Ok", skin);
                     Label labelError0 = new Label("Not all fields contain real values.", skin);
                     labelError0.setColor(Color.RED);
 
@@ -116,19 +117,8 @@ public class CreatorMenu extends GameState {
                 }
                 if (!error) {
                     Terrain newTerrain = new Terrain(depth, width, new Vector3(0, 0, 0),
-                            new Vector3(goalX, goalY, 0), new Function() {
-                        @Override
-                        public float calcXDeriv(float x, float y) { return 0; }
-                        @Override
-                        public float calcYDeriv(float x, float y) { return 0; }
-                        @Override
-                        public double evaluate(Vector3 pos) { return 0; }
-
-                        @Override
-                        public float evaluateF(float f, float g) {
-                            return 0;
-                        }
-                    }, "newTerrain");
+                            new Vector3(goalX, goalY, 0), new Derivatives(functionField.getText())
+                            , "newTerrain");
                     gsm.terrain = newTerrain;
                     gsm.setState(GameStateManager.PLAY);
                 }
@@ -142,9 +132,9 @@ public class CreatorMenu extends GameState {
         goal.add(fieldGoalX);
         goal.add(labelGoalY);
         goal.add(fieldGoalY);
-        goal.row().pad(10,0,10,0);
-        goal.add(labelGoalRadius);
-        goal.add(fieldGoalRadius);
+        goal.row().pad(10, 0, 10, 0);
+        goal.add(labelFunction);
+        goal.add(functionField);
 
         fieldSize.addActor(labelCourseDepth);
         fieldSize.addActor(fieldCourseDepth);
@@ -154,7 +144,7 @@ public class CreatorMenu extends GameState {
         playButton.setX(playButton.getX() + 50);
 
         table.add(goal);
-        table.row().pad(10,0,10,0);
+        table.row().pad(10, 0, 10, 0);
         table.add(fieldSize);
         table.row();
         table.add(playButton);
