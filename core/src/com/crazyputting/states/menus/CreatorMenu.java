@@ -8,7 +8,10 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
@@ -16,6 +19,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.crazyputting.CrazyPutting;
 import com.crazyputting.managers.GameStateManager;
+import com.crazyputting.objects.Terrain;
 
 public class CreatorMenu extends GameState{
 
@@ -28,13 +32,6 @@ public class CreatorMenu extends GameState{
     private Image background;
     private BitmapFont comicFont;
     private FreeTypeFontGenerator gen;
-
-    private Label labelGoalX;
-    private TextField fieldGoalX;
-    private Label labelGoalY;
-    private TextField fieldGoalY;
-    private Label labelGoalRadius;
-    private TextField fieldGoalRadius;
 
     public CreatorMenu(GameStateManager gsm) { super(gsm); }
 
@@ -56,33 +53,100 @@ public class CreatorMenu extends GameState{
         skin = new Skin(Gdx.files.internal("comic/skin/comic-ui.json"));
         CrazyPutting.cam.update();
         Gdx.input.setInputProcessor(stage);
+
         Table table = new Table();
+        final Table goal = new Table();
+        HorizontalGroup goalRadius = new HorizontalGroup();
+        HorizontalGroup fieldSize = new HorizontalGroup();
 
-        labelGoalX = new Label("Goal  X = ", skin);
-        fieldGoalX = new TextField("5", skin);
-        labelGoalY = new Label("Goal  Y = ", skin);
-        fieldGoalY = new TextField("0", skin);
-        labelGoalRadius = new Label("Goal Radius: ", skin);
-        fieldGoalRadius = new TextField("0.5", skin);
+        Label labelGoalX = new Label("Goal  X = ", skin);
+        final TextField fieldGoalX = new TextField("5", skin);
+        Label labelGoalY = new Label("Goal Y = ", skin);
+        final TextField fieldGoalY = new TextField("0", skin);
 
-        TextButton playButton = new TextButton("Play", skin);
-        playButton.addListener(new ChangeListener() {
+        Label labelGoalRadius = new Label("Goal Radius: ", skin);
+        final TextField fieldGoalRadius = new TextField("0.5", skin);
+
+        Label labelCourseWidth = new Label("Width of field: ", skin);
+        final TextField fieldCourseWidth = new TextField("50", skin);
+        Label labelCourseDepth = new Label("Depth of field: ", skin);
+        final TextField fieldCourseDepth = new TextField("50", skin);
+
+        ChangeListener listener = new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                launch();
-            }
-        });
+                float goalX = 0, goalY = 0, goalRadius = 0;
+                double depth = 0, width = 0;
+                boolean error;
+                error = fieldGoalX.toString().isEmpty() || fieldGoalY.toString().isEmpty() ||
+                        fieldGoalRadius.toString().isEmpty() || fieldCourseWidth.toString().isEmpty() ||
+                        fieldCourseDepth.toString().isEmpty();
+                try {
+                    goalX = Float.parseFloat(fieldGoalX.getText().replaceAll(" ", ""));
+                    goalY = Float.parseFloat(fieldGoalY.getText().replaceAll(" ", ""));
+                    goalRadius = Float.parseFloat(fieldGoalRadius.getText().replaceAll(" ", ""));
+                    width = Double.parseDouble(fieldCourseWidth.getText().replaceAll(" ", ""));
+                    depth = Double.parseDouble(fieldCourseDepth.getText().replaceAll(" ", ""));
+                }
+                catch (Exception e) {
+                    TextButton buttonOK = new TextButton("Okey", skin);
+                    Label labelError0 = new Label("Not all fields contain real values.", skin);
+                    labelError0.setColor(Color.RED);
 
-        table.add(labelGoalX);
-        table.add(fieldGoalX);
-        table.row().pad(20,0,20,0);
-        table.add(labelGoalY);
-        table.add(fieldGoalY);
-        table.row().pad(20,0,20,0);
-        table.add(labelGoalRadius);
-        table.add(fieldGoalRadius);
+                    final Dialog parseError = new Dialog("", skin);
+                    parseError.setWidth(300);
+                    parseError.setHeight(200);
+                    parseError.setModal(true);
+
+                    buttonOK.addListener(new InputListener() {
+                        @Override
+                        public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                            parseError.hide();
+                            parseError.cancel();
+                            parseError.remove();
+                            return true;
+                        }
+                    });
+
+                    parseError.getContentTable().add(labelError0).pad(20, 20, 20, 20);
+                    parseError.getButtonTable().add(buttonOK).width(50).height(50).pad(20, 20,
+                            20, 20);
+                    parseError.show(stage).setPosition(200, 200);
+                    error = true;
+                }
+                if (!error) {
+                    Terrain newTerrain = new Terrain(depth, width, new Vector3(0,0,0),
+                            new Vector3(goalX, goalY, 0));
+                    gsm.terrain = newTerrain;
+                    gsm.setState(GameStateManager.PLAY);
+                }
+            }
+        };
+
+        TextButton playButton = new TextButton("Play", skin);
+        playButton.addListener(listener);
+
+        goal.add(labelGoalX);
+        goal.add(fieldGoalX);
+        goal.add(labelGoalY);
+        goal.add(fieldGoalY);
+        goal.row().pad(10,0,10,0);
+        goal.add(labelGoalRadius);
+        goal.add(fieldGoalRadius);
+
+        fieldSize.addActor(labelCourseDepth);
+        fieldSize.addActor(fieldCourseDepth);
+        fieldSize.addActor(labelCourseWidth);
+        fieldSize.addActor(fieldCourseWidth);
+
+        playButton.setX(playButton.getX() + 50);
+
+        table.add(goal);
+        table.row().pad(10,0,10,0);
+        table.add(fieldSize);
         table.row();
         table.add(playButton);
+        table.setY(table.getY() + 80);
 
         table.setFillParent(true);
         stage.addActor(background);
@@ -103,7 +167,7 @@ public class CreatorMenu extends GameState{
         stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 30f));
         stage.draw();
         spriteBatch.begin();
-        comicFont.draw(spriteBatch, "Creator Menu", 265, 540);
+        comicFont.draw(spriteBatch, "Creator Menu", 265, 560);
         spriteBatch.end();
     }
 
@@ -113,28 +177,7 @@ public class CreatorMenu extends GameState{
     }
 
     public void launch(){
-        System.out.println("hello");
-        float goalX, goalY, goalRadius;
-        boolean error;
-        error = fieldGoalX.toString().isEmpty() || fieldGoalY.toString().isEmpty() ||
-                fieldGoalRadius.toString().isEmpty();
-        if (!error){
-            try {
-                goalX = Float.parseFloat(fieldGoalX.getText().replaceAll(" ",""));
-                goalY = Float.parseFloat(fieldGoalY.getText().replaceAll(" ",""));
-                goalRadius = Float.parseFloat(fieldGoalRadius.getText().replaceAll(" ",""));
-            }
-            catch (Exception e){
-                //TODO: add alert for illegal parsing
-                error = true;
-            }
-            if (!error){
-                gsm.setState(GameStateManager.PLAY);
-            }
-        }
-        else{
-            //TODO: add Alert for having an empty field
-        }
+
     }
 
     @Override
