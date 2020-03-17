@@ -18,6 +18,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.crazyputting.CrazyPutting;
+import com.crazyputting.function.Derivatives;
 import com.crazyputting.function.Function;
 import com.crazyputting.managers.GameStateManager;
 import com.crazyputting.objects.Terrain;
@@ -119,7 +120,7 @@ public class CreatorMenu extends GameState {
                     Terrain newTerrain = new Terrain(depth, width, new Vector3(0, 0, 0),
                             new Vector3(goalX, goalY, 0), new Derivatives(functionField.getText())
                             , "newTerrain");
-                    gsm.terrain = newTerrain;
+                    gsm.setTerrain(newTerrain);
                     gsm.setState(GameStateManager.PLAY);
                 }
             }

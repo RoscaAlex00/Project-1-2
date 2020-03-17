@@ -22,9 +22,9 @@ public class GameStateManager {
         if (state == MENU) {
             gameState = new MainMenu(this);
         }
-    //    if (state == PLAY) {
-  //         gameState = new PlayState(this);
-        //         }
+        if (state == PLAY) {
+           gameState = new PlayState(this,this.terrain);
+                 }
         if (state == SETTINGS) {
             gameState = new SettingsMenu(this);
         }
@@ -40,5 +40,8 @@ public class GameStateManager {
 
     public void draw() {
         gameState.draw();
+    }
+    public void setTerrain(Terrain newTerrain){
+        this.terrain = newTerrain;
     }
 }

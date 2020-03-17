@@ -3,11 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="ffc0c29f-f188-461c-aea6-92c01c3edf12" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/com/crazyputting/engine/Engine.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/com/crazyputting/engine/Engine.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/com/crazyputting/models/TerrainModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/com/crazyputting/models/TerrainModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/com/crazyputting/objects/Ball.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/com/crazyputting/objects/Ball.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/com/crazyputting/objects/PuttingCourse.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/com/crazyputting/objects/PuttingCourse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/com/crazyputting/objects/Terrain.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/com/crazyputting/objects/Terrain.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/com/crazyputting/camera/GameCamera.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/com/crazyputting/camera/GameCamera.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/com/crazyputting/managers/GameStateManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/com/crazyputting/managers/GameStateManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/com/crazyputting/states/menus/CreatorMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/com/crazyputting/states/menus/CreatorMenu.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/src/com/crazyputting/states/menus/PlayState.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/com/crazyputting/states/menus/PlayState.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/src/com/crazyputting/states/menus/ThreeDimensional.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/com/crazyputting/states/menus/ThreeDimensional.java" afterDir="false" />
     </list>
@@ -125,6 +123,7 @@
       <workItem from="1584027839106" duration="874000" />
       <workItem from="1584029747741" duration="555000" />
       <workItem from="1584466515404" duration="1928000" />
+      <workItem from="1584478041406" duration="853000" />
     </task>
     <task id="LOCAL-00001" summary="Finished Main Menu">
       <created>1583950780377</created>
@@ -324,26 +323,26 @@
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="421" y="58" key="FileChooserDialogImpl/0.0.1280.680@0.0.1280.680" timestamp="1584450360988" />
-    <state width="1493" height="210" key="GridCell.Tab.0.bottom" timestamp="1584468502452">
+    <state width="1493" height="210" key="GridCell.Tab.0.bottom" timestamp="1584478893866">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="1237" height="163" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1584453304802" />
-    <state width="1493" height="210" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1584468502452" />
-    <state width="1493" height="210" key="GridCell.Tab.0.center" timestamp="1584468502452">
+    <state width="1493" height="210" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1584478893866" />
+    <state width="1493" height="210" key="GridCell.Tab.0.center" timestamp="1584478893866">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="1237" height="163" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1584453304802" />
-    <state width="1493" height="210" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1584468502452" />
-    <state width="1493" height="210" key="GridCell.Tab.0.left" timestamp="1584468502452">
+    <state width="1493" height="210" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1584478893866" />
+    <state width="1493" height="210" key="GridCell.Tab.0.left" timestamp="1584478893865">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="1237" height="163" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1584453304802" />
-    <state width="1493" height="210" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1584468502452" />
-    <state width="1493" height="210" key="GridCell.Tab.0.right" timestamp="1584468502452">
+    <state width="1493" height="210" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1584478893865" />
+    <state width="1493" height="210" key="GridCell.Tab.0.right" timestamp="1584478893866">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="1237" height="163" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1584453304802" />
-    <state width="1493" height="210" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1584468502452" />
+    <state width="1493" height="210" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1584478893866" />
     <state x="316" y="39" width="706" height="602" key="NewModule_or_Project.wizard" timestamp="1584450374128">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
@@ -352,10 +351,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="361" y="146" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1584459572776" />
-    <state x="465" y="238" key="com.intellij.ide.util.TipDialog" timestamp="1584466531108">
+    <state x="465" y="238" key="com.intellij.ide.util.TipDialog" timestamp="1584478042828">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="465" y="238" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1584466531108" />
+    <state x="465" y="238" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1584478042828" />
     <state x="578" y="330" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1584466537166">
       <screen x="0" y="0" width="1536" height="824" />
     </state>

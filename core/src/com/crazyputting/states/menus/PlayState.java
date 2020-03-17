@@ -52,11 +52,11 @@ public class PlayState extends ThreeDimensional {
     /**
      * Method responsible for creating the menu, this is a part of the requirements of libGDX.
      */
-    @Override
-    public void create() {
-        super.create();
+    public void init() {
+        super.init();
 
         ball.update(terrain.getFunction().evaluateF(ball.getPosition().x, ball.getPosition().y));
+        controller.initFocus(ball.getPosition());
 
         engine = new Engine(ball, terrain, new Euler());
         createHUD();
@@ -75,9 +75,6 @@ public class PlayState extends ThreeDimensional {
 
 
 
-    @Override
-    public void render() {
-    }
 
 
     @Override
@@ -118,7 +115,7 @@ public class PlayState extends ThreeDimensional {
 
     //Setting inputProcessor that processes the key-events and stuff like that.
     public void setProcessors() {
-        Gdx.input.setInputProcessor(new GameInputProcessor());
+        Gdx.input.setInputProcessor(controller);
     }
 
     public Ball getBall() {
@@ -130,22 +127,14 @@ public class PlayState extends ThreeDimensional {
     }
 
 
-    public void restart(){
-        ball.getPosition().set(terrain.getStartPos().cpy());
-        ball.setStopped();
-        ball.updateInstance(terrain.getFunction().evaluateF(ball.getPosition().x,ball.getPosition().y),0);
-    }
-
-    @Override
-    public void init() {
-
-    }
 
 
     @Override
     public void draw() {
-
-    }
+            super.draw();
+            hud.act();
+            hud.draw();
+        }
 
     @Override
     public void handleInput() {

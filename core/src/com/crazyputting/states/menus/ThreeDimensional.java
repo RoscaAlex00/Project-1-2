@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
 import com.badlogic.gdx.graphics.g3d.attributes.TextureAttribute;
 import com.badlogic.gdx.graphics.g3d.environment.DirectionalLight;
 import com.badlogic.gdx.utils.Array;
+import com.crazyputting.camera.GameCamera;
 import com.crazyputting.managers.GameInputProcessor;
 import com.crazyputting.managers.GameStateManager;
 import com.crazyputting.models.HeightField;
@@ -22,6 +23,7 @@ public abstract class ThreeDimensional extends GameState {
     protected PerspectiveCamera camera;
     protected ArrayList<ModelInstance> instances = new ArrayList<>();
     protected Terrain terrain;
+    public GameCamera controller;
     private ModelBatch batch;
     private Color bgColor = new Color(.8f, .8f, .8f, 1f);
     private Environment environment;
@@ -41,7 +43,7 @@ public abstract class ThreeDimensional extends GameState {
     /**
      * Creates a model batch with the environment's properties and camera properties.
      */
-    public void create() {
+    public void init() {
         batch = new ModelBatch();
 
         //camera setup
@@ -52,7 +54,7 @@ public abstract class ThreeDimensional extends GameState {
         camera.far = 1000f;
         camera.update();
 
-        Gdx.input.setInputProcessor(new GameInputProcessor());
+        Gdx.input.setInputProcessor(controller = new GameCamera(camera));
 
         //environment setup
         DirectionalLight light = new DirectionalLight();
@@ -84,8 +86,8 @@ public abstract class ThreeDimensional extends GameState {
         batch.end();
     }
 
-    public void render() {
-        camera.update();
+    public void draw() {
+        controller.update();
 
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
         Gdx.gl.glClearColor(bgColor.r, bgColor.g, bgColor.b, bgColor.a);
