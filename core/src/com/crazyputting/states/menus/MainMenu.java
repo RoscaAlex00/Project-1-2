@@ -125,7 +125,7 @@ public class MainMenu extends GameState {
 
     public void select() {
         if (currentItem == 0) {
-            gsm.setState(GameStateManager.PLAY);
+            gsm.setState(GameStateManager.COURSE_CREATOR);
         }
         if (currentItem == 1) {
             gsm.setState(GameStateManager.SETTINGS);
