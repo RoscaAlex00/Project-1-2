@@ -18,10 +18,11 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.crazyputting.CrazyPutting;
+import com.crazyputting.function.Function;
 import com.crazyputting.managers.GameStateManager;
 import com.crazyputting.objects.Terrain;
 
-public class CreatorMenu extends GameState{
+public class CreatorMenu extends GameState {
 
     private SpriteBatch spriteBatch;
     private Stage stage;
@@ -75,8 +76,7 @@ public class CreatorMenu extends GameState{
         ChangeListener listener = new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                float goalX = 0, goalY = 0, goalRadius = 0;
-                double depth = 0, width = 0;
+                float goalX = 0, goalY = 0, goalRadius = 0, depth = 0, width = 0;
                 boolean error;
                 error = fieldGoalX.toString().isEmpty() || fieldGoalY.toString().isEmpty() ||
                         fieldGoalRadius.toString().isEmpty() || fieldCourseWidth.toString().isEmpty() ||
@@ -85,8 +85,8 @@ public class CreatorMenu extends GameState{
                     goalX = Float.parseFloat(fieldGoalX.getText().replaceAll(" ", ""));
                     goalY = Float.parseFloat(fieldGoalY.getText().replaceAll(" ", ""));
                     goalRadius = Float.parseFloat(fieldGoalRadius.getText().replaceAll(" ", ""));
-                    width = Double.parseDouble(fieldCourseWidth.getText().replaceAll(" ", ""));
-                    depth = Double.parseDouble(fieldCourseDepth.getText().replaceAll(" ", ""));
+                    width = Float.parseFloat(fieldCourseWidth.getText().replaceAll(" ", ""));
+                    depth = Float.parseFloat(fieldCourseDepth.getText().replaceAll(" ", ""));
                 }
                 catch (Exception e) {
                     TextButton buttonOK = new TextButton("Okey", skin);
@@ -115,8 +115,20 @@ public class CreatorMenu extends GameState{
                     error = true;
                 }
                 if (!error) {
-                    Terrain newTerrain = new Terrain(depth, width, new Vector3(0,0,0),
-                            new Vector3(goalX, goalY, 0));
+                    Terrain newTerrain = new Terrain(depth, width, new Vector3(0, 0, 0),
+                            new Vector3(goalX, goalY, 0), new Function() {
+                        @Override
+                        public float calcXDeriv(float x, float y) { return 0; }
+                        @Override
+                        public float calcYDeriv(float x, float y) { return 0; }
+                        @Override
+                        public double evaluate(Vector3 pos) { return 0; }
+
+                        @Override
+                        public float evaluateF(float f, float g) {
+                            return 0;
+                        }
+                    }, "newTerrain");
                     gsm.terrain = newTerrain;
                     gsm.setState(GameStateManager.PLAY);
                 }
@@ -173,10 +185,6 @@ public class CreatorMenu extends GameState{
 
     @Override
     public void handleInput() {
-
-    }
-
-    public void launch(){
 
     }
 
