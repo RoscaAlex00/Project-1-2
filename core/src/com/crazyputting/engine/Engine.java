@@ -22,11 +22,10 @@ public class Engine {
     float dt = Gdx.graphics.getDeltaTime();
 
 
-    public Engine(Ball yourBall, Terrain yourTerrain, Euler yourSolver, Hole newHole) {
+    public Engine(Ball yourBall, Terrain yourTerrain, Euler yourSolver) {
         this.ball = yourBall;
         this.terrain = yourTerrain;
         this.solver = yourSolver;
-        this.hole = newHole;
         radius = hole.getHoleRadius();
         mass = yourBall.getMass();
     }

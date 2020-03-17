@@ -23,8 +23,8 @@ public class GameStateManager {
             gameState = new MainMenu(this);
         }
         if (state == PLAY) {
-            gameState = new PlayState(this, terrain);
-        }
+           gameState = new PlayState(this,this.terrain);
+                 }
         if (state == SETTINGS) {
             gameState = new SettingsMenu(this);
         }

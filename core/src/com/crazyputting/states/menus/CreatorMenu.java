@@ -21,7 +21,6 @@ import com.crazyputting.CrazyPutting;
 import com.crazyputting.function.Derivatives;
 import com.crazyputting.function.Function;
 import com.crazyputting.managers.GameStateManager;
-import com.crazyputting.objects.Hole;
 import com.crazyputting.objects.Terrain;
 
 public class CreatorMenu extends GameState {
@@ -89,11 +88,9 @@ public class CreatorMenu extends GameState {
                 try {
                     goalX = Float.parseFloat(fieldGoalX.getText().replaceAll(" ", ""));
                     goalY = Float.parseFloat(fieldGoalY.getText().replaceAll(" ", ""));
-                    goalRadius = Float.parseFloat(fieldGoalRadius.getText().replaceAll(" ", ""));
                     width = Integer.parseInt(fieldCourseWidth.getText().replaceAll(" ", ""));
                     depth = Integer.parseInt(fieldCourseDepth.getText().replaceAll(" ", ""));
-                }
-                catch (Exception e) {
+                } catch (Exception e) {
                     TextButton buttonOK = new TextButton("Ok", skin);
                     Label labelError0 = new Label("Not all fields contain real values.", skin);
                     labelError0.setColor(Color.RED);
@@ -120,9 +117,8 @@ public class CreatorMenu extends GameState {
                     error = true;
                 }
                 if (!error) {
-                    Vector3 holeVector = new Vector3(goalX, goalY, 0);
                     Terrain newTerrain = new Terrain(depth, width, new Vector3(0, 0, 0),
-                            new Hole(goalRadius, holeVector), new Derivatives(functionField.getText())
+                            new Vector3(goalX, goalY, 0), new Derivatives(functionField.getText())
                             , "newTerrain");
                     gsm.setTerrain(newTerrain);
                     gsm.setState(GameStateManager.PLAY);

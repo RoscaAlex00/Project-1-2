@@ -36,8 +36,8 @@ public abstract class ThreeDimensional extends GameState {
     private boolean showSkeleton = false;
 
     public ThreeDimensional(GameStateManager manager, Terrain terrain) {
-        super(manager, terrain);
-        //this.terrain = terrain;
+        super(manager);
+        this.terrain = terrain;
     }
 
     /**
@@ -105,7 +105,6 @@ public abstract class ThreeDimensional extends GameState {
      * Creates the game's field.
      */
     public void createTerrain() {
-        this.terrain = super.terrain;
         terrainModel = new TerrainModel(terrain);
         Array<HeightField> hf = terrainModel.map;
 

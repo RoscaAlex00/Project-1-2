@@ -8,17 +8,17 @@ public class Terrain {
     private float height;
     private float width;
     private Vector3 startPos;
-    private Hole hole;
+    private Vector3 endPos;
     private String name;
     private Function yourFunction;
     private final float HOLE_DIAMETER = 1.10f;
 
-    public Terrain(float ourHeight, float ourWidth, Vector3 startingPoint, Hole endHole,
+    public Terrain(float ourHeight, float ourWidth, Vector3 startingPoint, Vector3 endingPoint,
                    Function function, String name) {
         this.height = ourHeight;
         this.width = ourWidth;
         this.startPos = startingPoint;
-        this.hole = endHole;
+        this.endPos = endingPoint;
         this.name = name;
         this.yourFunction = function;
     }
@@ -39,8 +39,8 @@ public class Terrain {
         return startPos;
     }
 
-    public Hole getHole() {
-        return hole;
+    public Vector3 getEndPos() {
+        return endPos;
     }
 
 

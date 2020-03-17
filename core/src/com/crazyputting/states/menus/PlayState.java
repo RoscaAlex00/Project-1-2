@@ -11,7 +11,6 @@ import com.crazyputting.engine.solver.Euler;
 import com.crazyputting.managers.GameInputProcessor;
 import com.crazyputting.managers.GameStateManager;
 import com.crazyputting.objects.Ball;
-import com.crazyputting.objects.Hole;
 import com.crazyputting.objects.PuttingCourse;
 import com.crazyputting.objects.Terrain;
 
@@ -21,12 +20,10 @@ import java.util.HashMap;
 public class PlayState extends ThreeDimensional {
     private Engine engine;
     private Ball ball;
-    private Hole hole;
     private Stage hud;
     private boolean paused = false;
     private boolean isPushed = false;
     private boolean moving = false;
-    protected Terrain terrain;
 
     private GameStateManager manager;
 
@@ -57,15 +54,11 @@ public class PlayState extends ThreeDimensional {
      */
     public void init() {
         super.init();
-        this.terrain = super.terrain;
-        this.hole = terrain.getHole();
-        this.ball = new Ball(terrain.getStartPos().cpy());
 
         ball.update(terrain.getFunction().evaluateF(ball.getPosition().x, ball.getPosition().y));
         controller.initFocus(ball.getPosition());
 
-        //TODO: implement hole
-        engine = new Engine(ball, terrain, new Euler(), hole);
+        engine = new Engine(ball, terrain, new Euler());
         createHUD();
 
         setProcessors();
