@@ -77,7 +77,7 @@ public class TerrainModel {
         final float hole_depth = 3;
         for (float i = 0; i <= width * DIV_SIZE; i++) {
             for (float j = 0; j <= height * DIV_SIZE; j++) {
-                if (terrain.getEndPos().dst(new Vector3(x0 + (i / DIV_SIZE), y0 + (j / DIV_SIZE), 0)) <= hole_rad) {
+                if (terrain.getHole().getPos().dst(new Vector3(x0 + (i / DIV_SIZE), y0 + (j / DIV_SIZE), 0)) <= hole_rad) {
                     heights[ih] = terrain.getFunction().evaluateF(x0 + (i / DIV_SIZE), y0 + (j / DIV_SIZE)) - hole_depth;
                 } else heights[ih] = terrain.getFunction().evaluateF(x0 + (i / DIV_SIZE), y0 + (j / DIV_SIZE));
                 ih++;
