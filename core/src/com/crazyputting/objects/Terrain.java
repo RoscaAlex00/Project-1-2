@@ -5,11 +5,14 @@ import com.crazyputting.function.Function;
 
 
 public class Terrain {
+	
     private double height;
     private double width;
     private Vector3 startPos;
     private Vector3 endPos;
     private Function function;
+    
+    private final float HOLE_DIAMETER = 1.10f;
 
     public Terrain(double ourHeight, double ourWidth, Vector3 startingPoint, Vector3 endingPoint) {
         this.height = ourHeight;
@@ -42,5 +45,9 @@ public class Terrain {
 
     public float getMU() {
         return 0;
+    }
+    
+    public float getHoleDiameter() {
+        return HOLE_DIAMETER;
     }
 }
