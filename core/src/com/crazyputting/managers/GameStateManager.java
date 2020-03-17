@@ -9,6 +9,7 @@ public class GameStateManager {
     public static final int MENU = 0;
     public static final int PLAY = 1;
     public static final int SETTINGS = 2;
+    public static final int COURSE_CREATOR = 3;
     private GameState gameState;
 
     public GameStateManager() {
