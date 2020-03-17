@@ -1,9 +1,6 @@
 package com.crazyputting.managers;
 
-import com.crazyputting.states.menus.GameState;
-import com.crazyputting.states.menus.MainMenu;
-import com.crazyputting.states.menus.PlayState;
-import com.crazyputting.states.menus.SettingsMenu;
+import com.crazyputting.states.menus.*;
 
 public class GameStateManager {
     public static final int MENU = 0;
@@ -28,6 +25,9 @@ public class GameStateManager {
         }
         if (state == SETTINGS) {
             gameState = new SettingsMenu(this);
+        }
+        if (state == COURSE_CREATOR) {
+            gameState = new CreatorMenu(this);
         }
 
     }

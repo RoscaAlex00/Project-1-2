@@ -2,7 +2,6 @@ package com.crazyputting.function;
 
 import com.badlogic.gdx.math.Vector3;
 
-
 import java.io.Serializable;
 import java.util.Stack;
 
@@ -20,11 +19,6 @@ public class Derivatives implements Function, Serializable {
         infix = inFix;
     }
 
-    /**
-     * Constructor for the formula class, it stores the formula, and it's x and y derivatives in binary expression trees.
-     *
-     * @param postFix array that holds a formula in a post fix notation.
-     */
     public Derivatives(String[] postFix) {
         this.postfix = postFix;
         Stack<Node> nodeStack = new Stack();
@@ -50,7 +44,6 @@ public class Derivatives implements Function, Serializable {
         root = nodeStack.peek();
 
         xDeriv = xDerive(root);
-//        printTree(xDeriv);
         yDeriv = yDerive(root);
 
         boolean x = false;
@@ -61,30 +54,6 @@ public class Derivatives implements Function, Serializable {
         }
         if (!x) xDeriv = new Node("0");
         if (!y) yDeriv = new Node("0");
-    }
-
-    private void printTree(Node t) {
-        if (t.left != null) printTree(t.left);
-        if (t.right != null) printTree(t.right);
-        System.out.println(t.value);
-    }
-
-    /**
-     * Inner Class that is the nodes of the binary expression tree.
-     */
-    private class Node implements Serializable {
-        String value; //Each node has a value (either a number or an operator)
-        Node left, right; //Each node has 2 children
-
-        /**
-         * Constructor for the node class.
-         *
-         * @param value the operator or value that is stored in the node.
-         */
-        Node(String value) {
-            this.value = value;
-            left = right = null;
-        }
     }
 
     /**
@@ -127,7 +96,6 @@ public class Derivatives implements Function, Serializable {
 
         return priority;
     }
-
 
     /**
      * Converts an infix notation formula to a postfix notation formula.
@@ -542,5 +510,23 @@ public class Derivatives implements Function, Serializable {
             post += s;
         }
         return infix == null ? post : infix;
+    }
+
+    /**
+     * Inner Class that is the nodes of the binary expression tree.
+     */
+    private class Node implements Serializable {
+        String value; //Each node has a value (either a number or an operator)
+        Node left, right; //Each node has 2 children
+
+        /**
+         * Constructor for the node class.
+         *
+         * @param value the operator or value that is stored in the node.
+         */
+        Node(String value) {
+            this.value = value;
+            left = right = null;
+        }
     }
 }
