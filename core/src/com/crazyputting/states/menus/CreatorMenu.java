@@ -48,7 +48,7 @@ public class CreatorMenu extends GameState{
         img = new Texture("lime.jpg");
         background = new Image(img);
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
-        parameter.size = 20;
+        parameter.size = 40;
         comicFont = gen.generateFont(parameter);
         comicFont.setColor(Color.BLACK);
         stage = new Stage(viewport, spriteBatch);
@@ -56,22 +56,13 @@ public class CreatorMenu extends GameState{
         skin = new Skin(Gdx.files.internal("comic/skin/comic-ui.json"));
         CrazyPutting.cam.update();
         Gdx.input.setInputProcessor(stage);
-    }
-
-    @Override
-    public void update(float dt) {
-        handleInput();
-    }
-
-    @Override
-    public void draw() {
         Table table = new Table();
 
-        labelGoalX = new Label("Goal  x = ", skin, String.valueOf(comicFont), Color.BLACK);
+        labelGoalX = new Label("Goal  X = ", skin);
         fieldGoalX = new TextField("5", skin);
-        labelGoalY = new Label("y = ", skin, String.valueOf(comicFont), Color.BLACK);
+        labelGoalY = new Label("Goal  Y = ", skin);
         fieldGoalY = new TextField("0", skin);
-        labelGoalRadius = new Label("Goalradius: ", skin, String.valueOf(comicFont), Color.BLACK);
+        labelGoalRadius = new Label("Goal Radius: ", skin);
         fieldGoalRadius = new TextField("0.5", skin);
 
         TextButton playButton = new TextButton("Play", skin);
@@ -84,6 +75,7 @@ public class CreatorMenu extends GameState{
 
         table.add(labelGoalX);
         table.add(fieldGoalX);
+        table.row().pad(20,0,20,0);
         table.add(labelGoalY);
         table.add(fieldGoalY);
         table.row().pad(20,0,20,0);
@@ -91,11 +83,20 @@ public class CreatorMenu extends GameState{
         table.add(fieldGoalRadius);
         table.row();
         table.add(playButton);
-        
+
         table.setFillParent(true);
         stage.addActor(background);
         stage.addActor(table);
 
+    }
+
+    @Override
+    public void update(float dt) {
+        handleInput();
+    }
+
+    @Override
+    public void draw() {
         Gdx.gl.glClearColor(.1f, .12f, .16f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 

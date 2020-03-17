@@ -25,12 +25,9 @@ public abstract class ThreeDimensional extends GameState {
     private Environment environment;
 
     protected Terrain terrain;
-    private TerrainModel terrainModel;
+  //  private TerrainModel terrainModel;
     private Array<Renderable> fields;
-    private ArrayList<ModelInstance> obstacles;
-    private ArrayList<ModelInstance> walls;
     private ArrayList<ModelInstance> skeleton;
-    private ModelInstance water;
 
     private boolean hideWalls = false;
     private boolean showSkeleton = false;
@@ -80,8 +77,7 @@ public abstract class ThreeDimensional extends GameState {
         if (instances != null) batch.render(instances, environment);
         if(showSkeleton) batch.render(skeleton,environment);
         else for (Renderable r: fields) batch.render(r);
-        if(!hideWalls) batch.render(obstacles,environment);
-        batch.render(walls,environment);
+        if(!hideWalls) batch.render((RenderableProvider) environment);
         batch.end();
     }
 
@@ -104,21 +100,21 @@ public abstract class ThreeDimensional extends GameState {
      * Creates the game's field.
      */
     public void createTerrain(){
-        terrainModel = new TerrainModel(terrain);
+       // terrainModel = new TerrainModel(terrain);
 
         fields = new Array<>();
-        for (int i = 0; i < hf.size; i++) {
+       // for (int i = 0; i < hf.size; i++) {
             Renderable field = new Renderable();
             field.environment = environment;
-            field.meshPart.mesh = hf.get(i).mesh;
+          //  field.meshPart.mesh = hf.get(i).mesh;
             field.meshPart.primitiveType = GL20.GL_TRIANGLES;
             field.meshPart.offset = 0;
-            field.meshPart.size = hf.get(i).mesh.getNumIndices();
+          //  field.meshPart.size = hf.get(i).mesh.getNumIndices();
             field.meshPart.update();
-            field.material = new Material(TextureAttribute.createDiffuse(new Texture("Textures/grass_texture_better.jpg")));
+            field.material = new Material(TextureAttribute.createDiffuse(new Texture("grass.jpg")));
             fields.add(field);
         }
-    }
+
 
     public void update(float dt){
         camera.update();
@@ -133,7 +129,7 @@ public abstract class ThreeDimensional extends GameState {
     }
 
     protected void toggleSkeleton(){
-        if(!showSkeleton) skeleton = terrainModel.generateSkeleton();
+        //if(!showSkeleton) skeleton = terrainModel.generateSkeleton();
         showSkeleton = !showSkeleton;
     }
 

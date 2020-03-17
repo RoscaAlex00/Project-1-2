@@ -20,9 +20,9 @@ public class GameStateManager {
         if (state == MENU) {
             gameState = new MainMenu(this);
         }
-        if (state == PLAY) {
-            gameState = new PlayState(this);
-        }
+    //    if (state == PLAY) {
+  //         gameState = new PlayState(this);
+        //         }
         if (state == SETTINGS) {
             gameState = new SettingsMenu(this);
         }
