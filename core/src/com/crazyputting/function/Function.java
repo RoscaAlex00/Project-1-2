@@ -6,6 +6,5 @@ public interface Function {
 
         float calcXDeriv(float x,float y);
         float calcYDeriv(float x,float y);
-
-    double evaluate(Vector3 pos);
+        double evaluate(Vector3 pos);
 }

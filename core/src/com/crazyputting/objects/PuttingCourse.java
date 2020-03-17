@@ -6,14 +6,14 @@ import com.crazyputting.function.Function;
 public class PuttingCourse {
 
     private String name;
-    private Function height;
+    private int height;
     private Vector3 flag;
     private Vector3 start;
     private double frictionCoefficient;
     private double holeTolerancee;
     final private double maximumVelocity = 3.0; // in meters per second
 
-    public PuttingCourse(Function height,
+    public PuttingCourse(int height,
                          Vector3 flag, Vector3 start, double mu,double holeTolerance,String name) {
         this.height = height;
         this.flag = flag;
@@ -23,8 +23,8 @@ public class PuttingCourse {
         this.frictionCoefficient = mu;
     }
 
-    public double get_height(Vector3 pos) {
-        return height.evaluate(pos);
+    public int get_height() {
+        return height;
     }
 
     public Vector3 get_flag_position() {

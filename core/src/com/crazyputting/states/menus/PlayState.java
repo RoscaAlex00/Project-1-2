@@ -1,10 +1,12 @@
 package com.crazyputting.states.menus;
 
 import com.crazyputting.managers.GameStateManager;
+import com.crazyputting.objects.Terrain;
 
-public class PlayState extends GameState {
-    public PlayState(GameStateManager gsm) {
-        super(gsm);
+public class PlayState extends ThreeDimensional {
+
+    public PlayState(GameStateManager manager, Terrain terrain) {
+        super(manager, terrain);
     }
 
     @Override
@@ -24,6 +26,16 @@ public class PlayState extends GameState {
 
     @Override
     public void handleInput() {
+
+    }
+
+    @Override
+    public void pause() {
+
+    }
+
+    @Override
+    public void resume() {
 
     }
 

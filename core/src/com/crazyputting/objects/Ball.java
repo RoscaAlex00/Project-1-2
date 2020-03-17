@@ -1,6 +1,8 @@
 package com.crazyputting.objects;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.VertexAttributes;
 import com.badlogic.gdx.graphics.g3d.Material;
 import com.badlogic.gdx.graphics.g3d.Model;
@@ -9,10 +11,8 @@ import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
 import com.badlogic.gdx.graphics.g3d.utils.ModelBuilder;
 import com.badlogic.gdx.math.Vector3;
 
-/*
-TODO: implement texture for golf-ball
+import java.awt.*;
 
- */
 
 public class Ball {
     private final float mass = 0.045f; //in kilograms
@@ -20,6 +20,7 @@ public class Ball {
 
     private boolean colliding = false;
     private boolean stopped = false;
+    private Texture ballTexture = new Texture("ball.jpeg");
 
     private Vector3 velocity;
     public Vector3 position;
