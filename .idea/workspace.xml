@@ -1,83 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b5d55cf2-e17d-4dd6-8137-7e7b3fbda22a" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/resourceHashesCache.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/classAnalysis.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/jarAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/jarAnalysis.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/javaCompile.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/taskHistory.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/build/classes/java/main/com/crazyputting/camera/GameCamera.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/build/classes/java/main/com/crazyputting/camera/GameCamera.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/build/classes/java/main/com/crazyputting/engine/Engine.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/build/classes/java/main/com/crazyputting/engine/Engine.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/build/classes/java/main/com/crazyputting/engine/PuttingSimulator.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/build/classes/java/main/com/crazyputting/function/Function.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/build/classes/java/main/com/crazyputting/function/Function.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/build/classes/java/main/com/crazyputting/managers/GameStateManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/build/classes/java/main/com/crazyputting/managers/GameStateManager.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/build/classes/java/main/com/crazyputting/objects/Ball.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/build/classes/java/main/com/crazyputting/objects/Ball.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/build/classes/java/main/com/crazyputting/objects/PuttingCourse.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/build/classes/java/main/com/crazyputting/objects/PuttingCourse.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/build/classes/java/main/com/crazyputting/objects/Terrain.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/build/classes/java/main/com/crazyputting/objects/Terrain.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/build/classes/java/main/com/crazyputting/states/menus/CreatorMenu$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/build/classes/java/main/com/crazyputting/states/menus/CreatorMenu$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/build/classes/java/main/com/crazyputting/states/menus/CreatorMenu.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/build/classes/java/main/com/crazyputting/states/menus/CreatorMenu.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/build/classes/java/main/com/crazyputting/states/menus/GameState.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/build/classes/java/main/com/crazyputting/states/menus/GameState.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/build/classes/java/main/com/crazyputting/states/menus/PlayState.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/build/classes/java/main/com/crazyputting/states/menus/PlayState.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/build/classes/java/main/com/crazyputting/states/menus/ThreeDimensional.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/build/classes/java/main/com/crazyputting/states/menus/ThreeDimensional.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/build/libs/core-1.0.jar" beforeDir="false" afterPath="$PROJECT_DIR$/core/build/libs/core-1.0.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/com/crazyputting/engine/Engine.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/com/crazyputting/engine/Engine.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/com/crazyputting/managers/GameStateManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/com/crazyputting/managers/GameStateManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/com/crazyputting/models/TerrainModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/com/crazyputting/models/TerrainModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/com/crazyputting/objects/Ball.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/com/crazyputting/objects/Ball.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/com/crazyputting/objects/Terrain.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/com/crazyputting/objects/Terrain.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/com/crazyputting/states/menus/CreatorMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/com/crazyputting/states/menus/CreatorMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/com/crazyputting/states/menus/GameState.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/com/crazyputting/states/menus/GameState.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/com/crazyputting/states/menus/PlayState.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/com/crazyputting/states/menus/PlayState.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/com/crazyputting/states/menus/ThreeDimensional.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/com/crazyputting/states/menus/ThreeDimensional.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/desktop/build/resources/main/comic/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/desktop/build/resources/main/comic/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/desktop/build/resources/main/comic/raw/font-button-export.fnt" beforeDir="false" afterPath="$PROJECT_DIR$/desktop/build/resources/main/comic/raw/font-button-export.fnt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/desktop/build/resources/main/comic/raw/font-export.fnt" beforeDir="false" afterPath="$PROJECT_DIR$/desktop/build/resources/main/comic/raw/font-export.fnt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/desktop/build/resources/main/comic/raw/font-title-export.fnt" beforeDir="false" afterPath="$PROJECT_DIR$/desktop/build/resources/main/comic/raw/font-title-export.fnt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/desktop/build/resources/main/comic/skin/comic-ui.atlas" beforeDir="false" afterPath="$PROJECT_DIR$/desktop/build/resources/main/comic/skin/comic-ui.atlas" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/desktop/build/resources/main/comic/skin/comic-ui.json" beforeDir="false" afterPath="$PROJECT_DIR$/desktop/build/resources/main/comic/skin/comic-ui.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/desktop/build/resources/main/comic/skin/font-button-export.fnt" beforeDir="false" afterPath="$PROJECT_DIR$/desktop/build/resources/main/comic/skin/font-button-export.fnt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/desktop/build/resources/main/comic/skin/font-export.fnt" beforeDir="false" afterPath="$PROJECT_DIR$/desktop/build/resources/main/comic/skin/font-export.fnt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/desktop/build/resources/main/comic/skin/font-title-export.fnt" beforeDir="false" afterPath="$PROJECT_DIR$/desktop/build/resources/main/comic/skin/font-title-export.fnt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/desktop/build/resources/main/freezing/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/desktop/build/resources/main/freezing/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/desktop/build/resources/main/freezing/raw/font-button-export.fnt" beforeDir="false" afterPath="$PROJECT_DIR$/desktop/build/resources/main/freezing/raw/font-button-export.fnt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/desktop/build/resources/main/freezing/raw/font-export.fnt" beforeDir="false" afterPath="$PROJECT_DIR$/desktop/build/resources/main/freezing/raw/font-export.fnt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/desktop/build/resources/main/freezing/raw/font-title-export.fnt" beforeDir="false" afterPath="$PROJECT_DIR$/desktop/build/resources/main/freezing/raw/font-title-export.fnt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/desktop/build/resources/main/freezing/skin/font-button-export.fnt" beforeDir="false" afterPath="$PROJECT_DIR$/desktop/build/resources/main/freezing/skin/font-button-export.fnt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/desktop/build/resources/main/freezing/skin/font-export.fnt" beforeDir="false" afterPath="$PROJECT_DIR$/desktop/build/resources/main/freezing/skin/font-export.fnt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/desktop/build/resources/main/freezing/skin/font-title-export.fnt" beforeDir="false" afterPath="$PROJECT_DIR$/desktop/build/resources/main/freezing/skin/font-title-export.fnt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/desktop/build/resources/main/freezing/skin/freezing-ui.atlas" beforeDir="false" afterPath="$PROJECT_DIR$/desktop/build/resources/main/freezing/skin/freezing-ui.atlas" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/desktop/build/resources/main/freezing/skin/freezing-ui.json" beforeDir="false" afterPath="$PROJECT_DIR$/desktop/build/resources/main/freezing/skin/freezing-ui.json" afterDir="false" />
+    <list default="true" id="93d88c88-29ca-4706-810f-a52000931fcd" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExternalProjectsManager">
-    <system id="GRADLE">
-      <state>
-        <projects_view>
-          <tree_state>
-            <expand />
-            <select />
-          </tree_state>
-        </projects_view>
-      </state>
-    </system>
+  <component name="CodeStyleSettingsInfer">
+    <option name="done" value="true" />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectId" id="1ZIRQkddokBLsVWKvB4kqxXHqq3" />
-  <component name="PropertiesComponent">
-    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+  <component name="ProjectCodeStyleSettingsMigration">
+    <option name="version" value="1" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
   </component>
   <component name="ServiceViewManager">
     <option name="viewStates">
@@ -97,26 +41,8 @@
   <component name="TaskManager">
     <servers />
   </component>
-  <component name="WindowStateProjectService">
-    <state x="184" y="0" key="CommitChangelistDialog2" timestamp="1584522814985">
-      <screen x="0" y="0" width="1280" height="680" />
-    </state>
-    <state x="184" y="0" key="CommitChangelistDialog2/0.0.1280.680@0.0.1280.680" timestamp="1584522814985" />
-    <state width="1237" height="163" key="GridCell.Tab.0.bottom" timestamp="1584522760478">
-      <screen x="0" y="0" width="1280" height="680" />
-    </state>
-    <state width="1237" height="163" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1584522760478" />
-    <state width="1237" height="163" key="GridCell.Tab.0.center" timestamp="1584522760477">
-      <screen x="0" y="0" width="1280" height="680" />
-    </state>
-    <state width="1237" height="163" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1584522760477" />
-    <state width="1237" height="163" key="GridCell.Tab.0.left" timestamp="1584522760477">
-      <screen x="0" y="0" width="1280" height="680" />
-    </state>
-    <state width="1237" height="163" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1584522760477" />
-    <state width="1237" height="163" key="GridCell.Tab.0.right" timestamp="1584522760478">
-      <screen x="0" y="0" width="1280" height="680" />
-    </state>
-    <state width="1237" height="163" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1584522760478" />
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="merge" />
+    <option name="LAST_COMMIT_MESSAGE" value="merge" />
   </component>
 </project>
