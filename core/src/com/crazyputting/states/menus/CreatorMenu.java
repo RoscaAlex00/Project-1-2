@@ -60,7 +60,6 @@ public class CreatorMenu extends GameState {
         Table main = new Table();
         HorizontalGroup start = new HorizontalGroup();
         HorizontalGroup goal = new HorizontalGroup();
-        HorizontalGroup function = new HorizontalGroup();
         HorizontalGroup fieldSize = new HorizontalGroup();
         HorizontalGroup constants = new HorizontalGroup();
 
@@ -77,8 +76,7 @@ public class CreatorMenu extends GameState {
         final TextField goalRadiusField = new TextField("0.5", skin);
 
         Label functionLabel = new Label("Function of Terrain: ", skin);
-        final TextField functionField = new TextField("(0.1 * sin(x)) + (0.01 * (y^2))", skin);
-        //functionField.setWidth(200);
+        final TextField functionField = new TextField("0", skin);
 
         Label courseLengthLabel = new Label("            Fieldlength: ", skin);
         final TextField courseLengthField = new TextField("50", skin);
@@ -158,9 +156,6 @@ public class CreatorMenu extends GameState {
         goal.addActor(goalRadiusLabel);
         goal.addActor(goalRadiusField);
 
-        function.addActor(functionLabel);
-        function.addActor(functionField);
-
         fieldSize.addActor(courseLengthLabel);
         fieldSize.addActor(courseLengthField);
         fieldSize.addActor(courseWidthLabel);
@@ -175,9 +170,9 @@ public class CreatorMenu extends GameState {
         main.row().pad(5, 0, 5, 0);
         main.add(goal).fillY().align(Align.left);
         main.row().pad(5, 0, 5, 0);
-        main.add(functionLabel).fillY().align(Align.left);
+        main.add(functionLabel).fillY().align(Align.center);
         main.row().pad(5, 0, 5, 0);
-        main.add(functionField).fillY().align(Align.left).width(300);
+        main.add(functionField).fillY().align(Align.center).width(300);
         main.row().pad(5, 0, 5, 0);
         main.add(fieldSize).fillY().align(Align.left);
         main.row().pad(5, 0, 5, 0);
