@@ -15,11 +15,11 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.crazyputting.CrazyPutting;
 import com.crazyputting.function.Derivatives;
-import com.crazyputting.function.Function;
 import com.crazyputting.managers.GameStateManager;
 import com.crazyputting.objects.Hole;
 import com.crazyputting.objects.Terrain;
@@ -48,7 +48,7 @@ public class CreatorMenu extends GameState {
         img = new Texture("lime.jpg");
         background = new Image(img);
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
-        parameter.size = 40;
+        parameter.size = 30;
         comicFont = gen.generateFont(parameter);
         comicFont.setColor(Color.BLACK);
         stage = new Stage(viewport, spriteBatch);
@@ -57,25 +57,38 @@ public class CreatorMenu extends GameState {
         CrazyPutting.cam.update();
         Gdx.input.setInputProcessor(stage);
 
-        Table table = new Table();
-        final Table goal = new Table();
-        HorizontalGroup goalRadius = new HorizontalGroup();
+        Table main = new Table();
+        HorizontalGroup start = new HorizontalGroup();
+        HorizontalGroup goal = new HorizontalGroup();
+        HorizontalGroup function = new HorizontalGroup();
         HorizontalGroup fieldSize = new HorizontalGroup();
+        HorizontalGroup constants = new HorizontalGroup();
 
-        Label labelGoalX = new Label("Goal  X = ", skin);
-        final TextField fieldGoalX = new TextField("5", skin);
-        Label labelGoalY = new Label("Goal Y = ", skin);
-        final TextField fieldGoalY = new TextField("0", skin);
+        Label startXLabel = new Label("                 Start X = ", skin);
+        final TextField startXField = new TextField("0", skin);
+        Label startYLabel = new Label("Start Y = ", skin);
+        final TextField startYField = new TextField("0", skin);
 
-        Label labelGoalRadius = new Label("Goal Radius: ", skin);
-        final TextField fieldGoalRadius = new TextField("0.5", skin);
+        Label goalXLabel = new Label("                  Goal X = ", skin);
+        final TextField goalXField = new TextField("5", skin);
+        Label goalYLabel = new Label("Goal Y = ", skin);
+        final TextField goalYField = new TextField("0", skin);
+        Label goalRadiusLabel = new Label("Goal Radius: ", skin);
+        final TextField goalRadiusField = new TextField("0.5", skin);
 
-        Label labelCourseWidth = new Label("Width of field: ", skin);
-        final TextField fieldCourseWidth = new TextField("50", skin);
-        Label labelCourseDepth = new Label("Depth of field: ", skin);
-        final TextField fieldCourseDepth = new TextField("50", skin);
-        final TextField functionField = new TextField("50", skin);
-        Label labelFunction = new Label("Function : ", skin);
+        Label functionLabel = new Label("Function of Terrain: ", skin);
+        final TextField functionField = new TextField("(0.1 * sin(x)) + (0.01 * (y^2))", skin);
+        //functionField.setWidth(200);
+
+        Label courseLengthLabel = new Label("            Fieldlength: ", skin);
+        final TextField courseLengthField = new TextField("50", skin);
+        Label courseWidthLabel = new Label("Fieldwidth: ", skin);
+        final TextField courseWidthField = new TextField("50", skin);
+
+        Label frictionLabel = new Label("Friction coefficient: ", skin);
+        final TextField frictionField = new TextField("0.15", skin);
+        Label speedLabel = new Label("Maximum speed (in m/s): ", skin);
+        final TextField speedField = new TextField("15", skin);
 
         ChangeListener listener = new ChangeListener() {
             @Override
@@ -83,15 +96,15 @@ public class CreatorMenu extends GameState {
                 float goalX = 0, goalY = 0, goalRadius = 0;
                 int depth = 0, width = 0;
                 boolean error;
-                error = fieldGoalX.toString().isEmpty() || fieldGoalY.toString().isEmpty() ||
-                        functionField.toString().isEmpty() || fieldCourseWidth.toString().isEmpty() ||
-                        fieldCourseDepth.toString().isEmpty();
+                error = goalXField.toString().isEmpty() || goalYField.toString().isEmpty() ||
+                        functionField.toString().isEmpty() || courseWidthField.toString().isEmpty() ||
+                        courseLengthField.toString().isEmpty();
                 try {
-                    goalX = Float.parseFloat(fieldGoalX.getText().replaceAll(" ", ""));
-                    goalY = Float.parseFloat(fieldGoalY.getText().replaceAll(" ", ""));
-                    goalRadius = Float.parseFloat(fieldGoalRadius.getText().replaceAll(" ", ""));
-                    width = Integer.parseInt(fieldCourseWidth.getText().replaceAll(" ", ""));
-                    depth = Integer.parseInt(fieldCourseDepth.getText().replaceAll(" ", ""));
+                    goalX = Float.parseFloat(goalXField.getText().replaceAll(" ", ""));
+                    goalY = Float.parseFloat(goalYField.getText().replaceAll(" ", ""));
+                    goalRadius = Float.parseFloat(goalRadiusField.getText().replaceAll(" ", ""));
+                    width = Integer.parseInt(courseWidthField.getText().replaceAll(" ", ""));
+                    depth = Integer.parseInt(courseLengthField.getText().replaceAll(" ", ""));
                 }
                 catch (Exception e) {
                     TextButton buttonOK = new TextButton("Ok", skin);
@@ -133,32 +146,49 @@ public class CreatorMenu extends GameState {
         TextButton playButton = new TextButton("Play", skin);
         playButton.addListener(listener);
 
-        goal.add(labelGoalX);
-        goal.add(fieldGoalX);
-        goal.add(labelGoalY);
-        goal.add(fieldGoalY);
-        goal.row().pad(10, 0, 10, 0);
-        goal.add(labelFunction);
-        goal.add(functionField);
+        start.addActor(startXLabel);
+        start.addActor(startXField);
+        start.addActor(startYLabel);
+        start.addActor(startYField);
 
-        fieldSize.addActor(labelCourseDepth);
-        fieldSize.addActor(fieldCourseDepth);
-        fieldSize.addActor(labelCourseWidth);
-        fieldSize.addActor(fieldCourseWidth);
+        goal.addActor(goalXLabel);
+        goal.addActor(goalXField);
+        goal.addActor(goalYLabel);
+        goal.addActor(goalYField);
+        goal.addActor(goalRadiusLabel);
+        goal.addActor(goalRadiusField);
 
-        playButton.setX(playButton.getX() + 50);
+        function.addActor(functionLabel);
+        function.addActor(functionField);
 
-        table.add(goal);
-        table.row().pad(10, 0, 10, 0);
-        table.add(fieldSize);
-        table.row();
-        table.add(playButton);
-        table.setY(table.getY() + 80);
+        fieldSize.addActor(courseLengthLabel);
+        fieldSize.addActor(courseLengthField);
+        fieldSize.addActor(courseWidthLabel);
+        fieldSize.addActor(courseWidthField);
 
-        table.setFillParent(true);
+        constants.addActor(frictionLabel);
+        constants.addActor(frictionField);
+        constants.addActor(speedLabel);
+        constants.addActor(speedField);
+
+        main.add(start).fillY().align(Align.left);
+        main.row().pad(5, 0, 5, 0);
+        main.add(goal).fillY().align(Align.left);
+        main.row().pad(5, 0, 5, 0);
+        main.add(functionLabel).fillY().align(Align.left);
+        main.row().pad(5, 0, 5, 0);
+        main.add(functionField).fillY().align(Align.left).width(300);
+        main.row().pad(5, 0, 5, 0);
+        main.add(fieldSize).fillY().align(Align.left);
+        main.row().pad(5, 0, 5, 0);
+        main.add(constants).fillY().align(Align.left);
+        main.row().pad(5, 0, 5, 0);
+        main.add(playButton);
+        main.setY(main.getY());
+
+        main.setFillParent(true);
         stage.addActor(background);
-        stage.addActor(table);
-
+        stage.addActor(main);
     }
 
     @Override
@@ -174,7 +204,8 @@ public class CreatorMenu extends GameState {
         stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 30f));
         stage.draw();
         spriteBatch.begin();
-        comicFont.draw(spriteBatch, "Creator Menu", 265, 560);
+
+        comicFont.draw(spriteBatch, "Creator Menu", 265, 570);
         spriteBatch.end();
     }
 
