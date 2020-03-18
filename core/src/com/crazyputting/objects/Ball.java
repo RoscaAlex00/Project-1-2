@@ -21,7 +21,7 @@ public class Ball {
 
     private boolean colliding = false;
     private boolean stopped = false;
-    private Texture ballTexture = new Texture("ball.jpeg");
+    private Texture ballTexture = new Texture("ball.jpg");
 
     private Vector3 velocity;
     public Vector3 position;
