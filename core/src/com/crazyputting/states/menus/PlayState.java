@@ -89,7 +89,6 @@ public class PlayState extends ThreeDimensional {
 
     @Override
     public void update(float dt) {
-        System.out.println("Hello");
         super.update(dt);
         if(isPushed){
             paused = false;
