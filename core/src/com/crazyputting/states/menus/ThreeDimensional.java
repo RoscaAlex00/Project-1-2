@@ -9,12 +9,15 @@ import com.badlogic.gdx.graphics.g3d.*;
 import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
 import com.badlogic.gdx.graphics.g3d.attributes.TextureAttribute;
 import com.badlogic.gdx.graphics.g3d.environment.DirectionalLight;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
 import com.crazyputting.camera.GameCamera;
 import com.crazyputting.managers.GameInputProcessor;
+import com.crazyputting.managers.GameKeys;
 import com.crazyputting.managers.GameStateManager;
 import com.crazyputting.models.HeightField;
 import com.crazyputting.models.TerrainModel;
+import com.crazyputting.objects.Ball;
 import com.crazyputting.objects.Terrain;
 
 import java.util.ArrayList;
@@ -23,6 +26,7 @@ public abstract class ThreeDimensional extends GameState {
     protected PerspectiveCamera camera;
     protected ArrayList<ModelInstance> instances = new ArrayList<>();
     protected Terrain terrain;
+    protected Ball ball;
     public GameCamera controller;
     private ModelBatch batch;
     private Color bgColor = new Color(.8f, .8f, .8f, 1f);
@@ -84,12 +88,6 @@ public abstract class ThreeDimensional extends GameState {
         else for (Renderable r : fields) batch.render(r);
         batch.render(terrainModel.getEdges(), environment);
         batch.render(terrainModel.getBallModel(), environment);
-/*
-        if (instances != null) batch.render(instances, environment);
-        if (showSkeleton) batch.render(skeleton, environment);
-        else for (Renderable r : fields) batch.render(r);
-        if (!hideWalls) batch.render((RenderableProvider) environment); *///castException
-
         batch.end();
     }
 
@@ -147,6 +145,7 @@ public abstract class ThreeDimensional extends GameState {
             if (!showSkeleton) skeleton = terrainModel.generateSkeleton();
             showSkeleton = !showSkeleton;
         }
+
 
     }
 

@@ -2,6 +2,7 @@ package com.crazyputting.states.menus;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Scaling;
@@ -9,6 +10,7 @@ import com.badlogic.gdx.utils.viewport.ScalingViewport;
 import com.crazyputting.engine.Engine;
 import com.crazyputting.engine.solver.Euler;
 import com.crazyputting.managers.GameInputProcessor;
+import com.crazyputting.managers.GameKeys;
 import com.crazyputting.managers.GameStateManager;
 import com.crazyputting.objects.Ball;
 import com.crazyputting.objects.Hole;
@@ -57,7 +59,7 @@ public class PlayState extends ThreeDimensional {
         super.init();
         this.terrain = super.terrain;
         this.hole = terrain.getHole();
-        this.ball = new Ball(terrain.getStartPos().cpy());
+        this.ball = terrain.getBall();
 
         ball.update(terrain.getFunction().evaluateF(ball.getPosition().x, ball.getPosition().y));
         controller.initFocus(ball.getPosition());
@@ -89,6 +91,7 @@ public class PlayState extends ThreeDimensional {
 
     @Override
     public void update(float dt) {
+        handleInput();
         super.update(dt);
         if(isPushed){
             paused = false;
@@ -134,8 +137,18 @@ public class PlayState extends ThreeDimensional {
         }
 
     @Override
-    public void handleInput() {
+    public void handleInput(){
+        if (GameKeys.isPressed(GameKeys.UP)){
+            hit(1); //TODO: implement hit charge
+            System.out.println("HELLO?");
+        }
+    }
 
+    private void hit(float percentage){
+        //TODO: find vector of direction camera looks to
+        //TODO: move the ball
+        System.out.println(terrain + "Hey");
+        ball.setVelocity(new Vector3(15,15,0));
     }
 
 

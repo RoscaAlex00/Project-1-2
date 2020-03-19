@@ -8,6 +8,7 @@ public class Terrain {
     private float height;
     private float width;
     private Vector3 startPos;
+    private Ball ball;
     private Hole hole;
     private String name;
     private Function yourFunction;
@@ -15,11 +16,12 @@ public class Terrain {
     private float frictionCoefficient;
     private float maximumVelocity;
 
-    public Terrain(float ourHeight, float ourWidth, Vector3 startingPoint, Hole endHole,
+    public Terrain(float ourHeight, float ourWidth, Ball ball, Hole endHole,
                    Function function, float MU, float maxSpeed, String name) {
         this.height = ourHeight;
         this.width = ourWidth;
-        this.startPos = startingPoint; //TODO: edit the z value, using the function
+        this.startPos = ball.position.cpy(); //TODO: edit the z value, using the function
+        this.ball = ball;
         this.hole = endHole;
         this.name = name;
         this.yourFunction = function;
@@ -42,6 +44,8 @@ public class Terrain {
     public Vector3 getStartPos() {
         return startPos;
     }
+
+    public Ball getBall(){ return ball; }
 
     public Hole getHole() {
         return hole;

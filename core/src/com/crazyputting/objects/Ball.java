@@ -92,7 +92,10 @@ public class Ball {
 
     public boolean isStopped() { return stopped; }
 
+    public void setVelocity(Vector3 newVelocity){ this.velocity = newVelocity;}
+
     public Vector3 getVelocity(){ return velocity; }
+
     public Vector3 getPosition(){return position;}
 
     public ModelInstance getModel(){ return ball; }

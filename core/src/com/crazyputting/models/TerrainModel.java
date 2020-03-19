@@ -22,7 +22,7 @@ public class TerrainModel {
 
     private final int DIV_SIZE = 10;
     private final int CHUNK_SIZE = 5;
-    private Ball ball = new Ball(new Vector3(10,10,0)); //temp
+    private Ball ball;
     public Array<HeightField> map;
     private ArrayList<ModelInstance> edges;
     private Terrain terrain;
@@ -32,6 +32,7 @@ public class TerrainModel {
     public TerrainModel(Terrain terrain) {
 
         this.terrain = terrain;
+        this.ball = terrain.getBall();
 
         edges = new ArrayList<>();
         map = new Array<>();
