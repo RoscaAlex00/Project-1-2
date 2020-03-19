@@ -39,10 +39,8 @@ public class PlayState extends ThreeDimensional {
         super(manager, terrain);
     }
 
-
     public PlayState(GameStateManager manager, PuttingCourse course) {
         super(manager, course.getTerrain(0));
-
         this.course = course;
         hole_number = 1;
 
@@ -79,10 +77,6 @@ public class PlayState extends ThreeDimensional {
         table.setFillParent(true);
     }
 
-
-
-
-
     @Override
     public void pause() {
     }
@@ -95,6 +89,7 @@ public class PlayState extends ThreeDimensional {
 
     @Override
     public void update(float dt) {
+        System.out.println("Hello");
         super.update(dt);
         if(isPushed){
             paused = false;
@@ -131,9 +126,6 @@ public class PlayState extends ThreeDimensional {
     public PuttingCourse getCourse() {
         return course;
     }
-
-
-
 
     @Override
     public void draw() {

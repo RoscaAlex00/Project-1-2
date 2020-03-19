@@ -20,6 +20,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.crazyputting.CrazyPutting;
 import com.crazyputting.function.Derivatives;
+import com.crazyputting.function.Function;
 import com.crazyputting.managers.GameStateManager;
 import com.crazyputting.objects.Hole;
 import com.crazyputting.objects.Terrain;
@@ -64,16 +65,16 @@ public class CreatorMenu extends GameState {
         HorizontalGroup constants = new HorizontalGroup();
 
         Label startXLabel = new Label("                 Start X = ", skin);
-        final TextField startXField = new TextField("0", skin);
+        final TextField startXField = new TextField("10", skin);
         Label startYLabel = new Label("Start Y = ", skin);
-        final TextField startYField = new TextField("0", skin);
+        final TextField startYField = new TextField("10", skin);
 
         Label goalXLabel = new Label("                  Goal X = ", skin);
-        final TextField goalXField = new TextField("5", skin);
+        final TextField goalXField = new TextField("20", skin);
         Label goalYLabel = new Label("Goal Y = ", skin);
-        final TextField goalYField = new TextField("0", skin);
+        final TextField goalYField = new TextField("20", skin);
         Label goalRadiusLabel = new Label("Goal Radius: ", skin);
-        final TextField goalRadiusField = new TextField("0.5", skin);
+        final TextField goalRadiusField = new TextField("2", skin);
 
         Label functionLabel = new Label("Function of Terrain: ", skin);
         final TextField functionField = new TextField("0", skin);
@@ -91,18 +92,26 @@ public class CreatorMenu extends GameState {
         ChangeListener listener = new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                float goalX = 0, goalY = 0, goalRadius = 0;
-                int depth = 0, width = 0;
+                /*TODO: add sth that checks if the function has been correctly formatted
+                    Or alternatively, sth like a scientific calculator, so the user always puts in a
+                    correct value*/
+                float goalX = 0, goalY = 0, goalRadius = 0, startX = 0, startY = 0, MU = 0, vMax = 0;
+                Function function = new Derivatives(functionField.getText());
+                int length = 0, width = 0;
                 boolean error;
                 error = goalXField.toString().isEmpty() || goalYField.toString().isEmpty() ||
                         functionField.toString().isEmpty() || courseWidthField.toString().isEmpty() ||
                         courseLengthField.toString().isEmpty();
                 try {
+                    startX = Float.parseFloat(startXField.getText().replaceAll(" ", ""));
+                    startY = Float.parseFloat(startYField.getText().replaceAll(" ", ""));
                     goalX = Float.parseFloat(goalXField.getText().replaceAll(" ", ""));
                     goalY = Float.parseFloat(goalYField.getText().replaceAll(" ", ""));
                     goalRadius = Float.parseFloat(goalRadiusField.getText().replaceAll(" ", ""));
                     width = Integer.parseInt(courseWidthField.getText().replaceAll(" ", ""));
-                    depth = Integer.parseInt(courseLengthField.getText().replaceAll(" ", ""));
+                    length = Integer.parseInt(courseLengthField.getText().replaceAll(" ", ""));
+                    MU = Float.parseFloat(frictionField.getText().replaceAll(" ", ""));
+                    vMax = Float.parseFloat(speedField.getText().replaceAll(" ", ""));
                 }
                 catch (Exception e) {
                     TextButton buttonOK = new TextButton("Ok", skin);
@@ -131,10 +140,12 @@ public class CreatorMenu extends GameState {
                     error = true;
                 }
                 if (!error) {
+                    Vector3 ballVector = new Vector3(startX, startY, 1);
                     Vector3 holeVector = new Vector3(goalX, goalY, 0);
-                    Terrain newTerrain = new Terrain(depth, width, new Vector3(0, 0, 0),
-                            new Hole(goalRadius, holeVector), new Derivatives(functionField.getText())
-                            , "newTerrain");
+                    Hole hole = new Hole(goalRadius, holeVector);
+                    Terrain newTerrain = new Terrain(length, width, ballVector, hole, function, MU, vMax,"newTerrain");
+                    /*PuttingCourse course = new PuttingCourse(newTerrain);
+                    gsm.setCourse(course);*/
                     gsm.setTerrain(newTerrain);
                     gsm.setState(GameStateManager.PLAY);
                 }

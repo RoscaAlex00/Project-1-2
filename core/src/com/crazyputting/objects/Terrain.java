@@ -12,15 +12,19 @@ public class Terrain {
     private String name;
     private Function yourFunction;
     private final float HOLE_DIAMETER = 1.10f;
+    private float frictionCoefficient;
+    private float maximumVelocity;
 
     public Terrain(float ourHeight, float ourWidth, Vector3 startingPoint, Hole endHole,
-                   Function function, String name) {
+                   Function function, float MU, float maxSpeed, String name) {
         this.height = ourHeight;
         this.width = ourWidth;
-        this.startPos = startingPoint;
+        this.startPos = startingPoint; //TODO: edit the z value, using the function
         this.hole = endHole;
         this.name = name;
         this.yourFunction = function;
+        this.frictionCoefficient = MU;
+        this.maximumVelocity = maxSpeed;
     }
 
 
@@ -43,10 +47,11 @@ public class Terrain {
         return hole;
     }
 
-
     public float getMU() {
-        return 0;
+        return frictionCoefficient;
     }
+
+    public float getMaximumVelocity(){ return maximumVelocity; }
 
     public String getName() {
         return name;
