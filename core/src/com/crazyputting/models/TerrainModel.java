@@ -1,14 +1,18 @@
 package com.crazyputting.models;
 
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.VertexAttributes;
 import com.badlogic.gdx.graphics.g3d.Material;
+import com.badlogic.gdx.graphics.g3d.Model;
 import com.badlogic.gdx.graphics.g3d.ModelInstance;
+import com.badlogic.gdx.graphics.g3d.attributes.TextureAttribute;
 import com.badlogic.gdx.graphics.g3d.utils.MeshPartBuilder;
 import com.badlogic.gdx.graphics.g3d.utils.ModelBuilder;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
 import com.crazyputting.function.Function;
+import com.crazyputting.objects.Ball;
 import com.crazyputting.objects.Terrain;
 
 import java.util.ArrayList;
@@ -18,6 +22,7 @@ public class TerrainModel {
 
     private final int DIV_SIZE = 10;
     private final int CHUNK_SIZE = 5;
+    private Ball ball = new Ball(new Vector3(10,10,0)); //temp
     public Array<HeightField> map;
     private ArrayList<ModelInstance> edges;
     private Terrain terrain;
@@ -44,7 +49,20 @@ public class TerrainModel {
                 map.add(createField(i, j));
             }
         }
+        ModelBuilder modelBuilder = new ModelBuilder();
+        float height_border = 20f;
+        float width_border = 1f;
 
+        Texture brick = new Texture("brick.jpg");
+        Model border_w = modelBuilder.createBox(terrain.getWidth() + (2 * width_border), width_border, height_border,
+                new Material(TextureAttribute.createDiffuse(brick)), attr);
+        edges.add(new ModelInstance(border_w, terrain.getWidth() / 2, -width_border / 2, (-height_border / 2) + 7));
+        edges.add(new ModelInstance(border_w, terrain.getWidth() / 2, terrain.getHeight() + width_border / 2, (-height_border / 2) + 7));
+
+        Model border_d = modelBuilder.createBox(width_border, terrain.getHeight(), height_border,
+                new Material(TextureAttribute.createDiffuse(brick)), attr);
+        edges.add(new ModelInstance(border_d, -(width_border / 2), terrain.getHeight() / 2, (-height_border / 2) + 7));
+        edges.add(new ModelInstance(border_d, terrain.getWidth() + (width_border / 2), terrain.getHeight() / 2, (-height_border / 2) + 7));
     }
 
     //TODO: Textures for edges
@@ -117,6 +135,9 @@ public class TerrainModel {
         return skeletons;
     }
 
+    public ModelInstance getBallModel(){
+        return ball.getModel();
+    }
 
     public ArrayList<ModelInstance> getEdges() {
         return edges;

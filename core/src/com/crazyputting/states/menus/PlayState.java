@@ -64,7 +64,7 @@ public class PlayState extends ThreeDimensional {
         ball.update(terrain.getFunction().evaluateF(ball.getPosition().x, ball.getPosition().y));
         controller.initFocus(ball.getPosition());
 
-        engine = new Engine(ball, terrain, new Euler(), hole);
+        engine = new Engine(ball, terrain, hole);
         createHUD();
 
         setProcessors();

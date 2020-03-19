@@ -33,6 +33,7 @@ public class Ball {
      */
     public Ball (Vector3 initPosition){
         position = initPosition;
+        velocity = new Vector3(0,0,0);
         ballCreator();
     }
 

@@ -34,6 +34,7 @@ public abstract class ThreeDimensional extends GameState {
 
     private boolean hideWalls = false;
     private boolean showSkeleton = false;
+    private boolean current = false;
 
     public ThreeDimensional(GameStateManager manager, Terrain terrain) {
         super(manager, terrain);
@@ -79,9 +80,16 @@ public abstract class ThreeDimensional extends GameState {
     public void render(final ArrayList<ModelInstance> instances) {
         batch.begin(camera);
         if (instances != null) batch.render(instances, environment);
+        if (current) batch.render((RenderableProvider) environment);
+        else for (Renderable r : fields) batch.render(r);
+        batch.render(terrainModel.getEdges(), environment);
+        batch.render(terrainModel.getBallModel(), environment);
+/*
+        if (instances != null) batch.render(instances, environment);
         if (showSkeleton) batch.render(skeleton, environment);
         else for (Renderable r : fields) batch.render(r);
-        if (!hideWalls) batch.render((RenderableProvider) environment);
+        if (!hideWalls) batch.render((RenderableProvider) environment); *///castException
+
         batch.end();
     }
 
@@ -104,6 +112,7 @@ public abstract class ThreeDimensional extends GameState {
      * Creates the game's field.
      */
     public void createTerrain() {
+        this.terrain = super.terrain;
         terrainModel = new TerrainModel(terrain);
         Array<HeightField> hf = terrainModel.map;
 

@@ -22,10 +22,10 @@ public class Engine {
     float dt = Gdx.graphics.getDeltaTime();
 
 
-    public Engine(Ball yourBall, Terrain yourTerrain, Euler yourSolver, Hole newHole) {
+    public Engine(Ball yourBall, Terrain yourTerrain, Hole newHole) {
         this.ball = yourBall;
         this.terrain = yourTerrain;
-        this.solver = yourSolver;
+        this.solver = new Euler(this);
         this.hole = newHole;
         radius = hole.getHoleRadius();
         mass = yourBall.getMass();
@@ -75,7 +75,10 @@ public class Engine {
         Vector3 position = ball.getPosition();
         Vector3 velocity = ball.getVelocity();
 
-        Vector3 newVel = solver.getSpeed(new Vector3(position),new Vector3(velocity));
+        Vector3 temp1 = new Vector3(position);
+        Vector3 temp2 = new Vector3(velocity);
+
+        Vector3 newVel = solver.getSpeed(temp1,temp2);
         ball.getVelocity().set(newVel.cpy());
         Vector3 newPos = solver.getPosition(new Vector3(position),new Vector3(velocity));
         ball.getPosition().set(newPos);
