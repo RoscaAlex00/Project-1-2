@@ -1,6 +1,7 @@
 package com.crazyputting.states.menus;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -112,6 +113,9 @@ public class PlayState extends ThreeDimensional {
         }
         if(engine.isGoal()) {
             System.out.println("You WON!");
+        }
+        if(Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
+            ball.hit(new Vector3(10,10, 0));
         }
     }
 

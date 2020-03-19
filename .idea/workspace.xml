@@ -13,19 +13,11 @@
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/taskHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/build/classes/java/main/com/crazyputting/objects/Ball.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/build/classes/java/main/com/crazyputting/objects/Ball.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/build/classes/java/main/com/crazyputting/objects/Terrain.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/build/classes/java/main/com/crazyputting/objects/Terrain.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/build/classes/java/main/com/crazyputting/states/menus/CreatorMenu$1$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/build/classes/java/main/com/crazyputting/states/menus/CreatorMenu$1$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/build/classes/java/main/com/crazyputting/states/menus/CreatorMenu$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/build/classes/java/main/com/crazyputting/states/menus/CreatorMenu$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/build/classes/java/main/com/crazyputting/states/menus/CreatorMenu.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/build/classes/java/main/com/crazyputting/states/menus/CreatorMenu.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/build/classes/java/main/com/crazyputting/models/TerrainModel.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/build/classes/java/main/com/crazyputting/models/TerrainModel.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/build/classes/java/main/com/crazyputting/states/menus/PlayState.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/build/classes/java/main/com/crazyputting/states/menus/PlayState.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/build/classes/java/main/com/crazyputting/states/menus/ThreeDimensional.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/build/classes/java/main/com/crazyputting/states/menus/ThreeDimensional.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/build/libs/core-1.0.jar" beforeDir="false" afterPath="$PROJECT_DIR$/core/build/libs/core-1.0.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/com/crazyputting/models/TerrainModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/com/crazyputting/models/TerrainModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/com/crazyputting/objects/Ball.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/com/crazyputting/objects/Ball.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/com/crazyputting/objects/Terrain.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/com/crazyputting/objects/Terrain.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/com/crazyputting/states/menus/CreatorMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/com/crazyputting/states/menus/CreatorMenu.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/src/com/crazyputting/states/menus/PlayState.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/com/crazyputting/states/menus/PlayState.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/com/crazyputting/states/menus/ThreeDimensional.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/com/crazyputting/states/menus/ThreeDimensional.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -118,7 +110,14 @@
       <option name="project" value="LOCAL" />
       <updated>1584616970664</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="ball in terrain">
+      <created>1584620260437</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1584620260437</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -129,7 +128,8 @@
     <MESSAGE value="visualisation works better" />
     <MESSAGE value="ball position from CreatorMenu" />
     <MESSAGE value="ball displayed on the screen" />
-    <option name="LAST_COMMIT_MESSAGE" value="ball displayed on the screen" />
+    <MESSAGE value="ball in terrain" />
+    <option name="LAST_COMMIT_MESSAGE" value="ball in terrain" />
   </component>
   <component name="WindowStateProjectService">
     <state x="96" y="0" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1584550752832">
@@ -140,30 +140,30 @@
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="371" y="124" key="#com.intellij.ide.util.TreeClassChooserDialog/0.0.1280.680@0.0.1280.680" timestamp="1584550736693" />
-    <state x="243" y="0" key="CommitChangelistDialog2" timestamp="1584620220357">
+    <state x="243" y="0" key="CommitChangelistDialog2" timestamp="1584620259624">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="243" y="0" key="CommitChangelistDialog2/0.0.1280.680@0.0.1280.680" timestamp="1584620220357" />
+    <state x="243" y="0" key="CommitChangelistDialog2/0.0.1280.680@0.0.1280.680" timestamp="1584620259624" />
     <state x="421" y="58" key="FileChooserDialogImpl" timestamp="1584616082738">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="421" y="58" key="FileChooserDialogImpl/0.0.1280.680@0.0.1280.680" timestamp="1584616082738" />
-    <state width="1237" height="133" key="GridCell.Tab.0.bottom" timestamp="1584620220384">
+    <state width="1237" height="133" key="GridCell.Tab.0.bottom" timestamp="1584620805274">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1237" height="133" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1584620220384" />
-    <state width="1237" height="133" key="GridCell.Tab.0.center" timestamp="1584620220384">
+    <state width="1237" height="133" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1584620805274" />
+    <state width="1237" height="133" key="GridCell.Tab.0.center" timestamp="1584620805274">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1237" height="133" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1584620220384" />
-    <state width="1237" height="133" key="GridCell.Tab.0.left" timestamp="1584620220383">
+    <state width="1237" height="133" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1584620805274" />
+    <state width="1237" height="133" key="GridCell.Tab.0.left" timestamp="1584620805273">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1237" height="133" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1584620220383" />
-    <state width="1237" height="133" key="GridCell.Tab.0.right" timestamp="1584620220384">
+    <state width="1237" height="133" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1584620805273" />
+    <state width="1237" height="133" key="GridCell.Tab.0.right" timestamp="1584620805274">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1237" height="133" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1584620220384" />
+    <state width="1237" height="133" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1584620805274" />
     <state x="316" y="39" width="659" height="602" key="NewModule_or_Project.wizard" timestamp="1584616095564">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
