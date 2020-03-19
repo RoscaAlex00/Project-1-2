@@ -47,7 +47,7 @@ public class PlayState extends ThreeDimensional {
         this.course = course;
         hole_number = 1;
 
-        ball = new Ball(terrain.getStartPos().cpy());
+        ball = new Ball(terrain.getBall().getPosition().cpy());
         instances.add(ball.getModel());
 
         this.manager = manager;
@@ -103,7 +103,8 @@ public class PlayState extends ThreeDimensional {
             if(!moving){
                 moving = true;
             }
-            ball.updateInstance(terrain.getFunction().evaluateF(ball.getPosition().x, ball.getPosition().y),engine.updateBall(dt));
+            ball.updateInstance(terrain.getFunction().evaluateF(ball.getPosition().x, ball.getPosition().y),
+                    engine.updateBall(dt));
         }
         else {
             if(moving){
@@ -111,11 +112,14 @@ public class PlayState extends ThreeDimensional {
                 setProcessors();
             }
         }
-        if(engine.isGoal()) {
-            System.out.println("You WON!");
-        }
-        if(Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
-            ball.hit(new Vector3(10,10, 0));
+        if (ball.isStopped()) {
+            if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
+                ball.hit(new Vector3(1, 1, 0));
+            }
+            if(engine.isGoal()) {
+                gsm.setState(GameStateManager.END);
+                System.out.println("You WON!");
+            }
         }
     }
 

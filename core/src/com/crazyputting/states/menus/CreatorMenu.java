@@ -141,14 +141,11 @@ public class CreatorMenu extends GameState {
                     error = true;
                 }
                 if (!error) {
-                    Vector3 ballVector = new Vector3(startX, startY, 1);
+                    Vector3 ballVector = new Vector3(startX, startY, 0);
                     Ball ball = new Ball(ballVector);
                     Vector3 holeVector = new Vector3(goalX, goalY, 0);
                     Hole hole = new Hole(goalRadius, holeVector);
                     Terrain newTerrain = new Terrain(length, width, ball, hole, function, MU, vMax,"newTerrain");
-                    System.out.println(newTerrain);
-                    /*PuttingCourse course = new PuttingCourse(newTerrain);
-                    gsm.setCourse(course);*/
                     gsm.setTerrain(newTerrain);
                     gsm.setState(GameStateManager.PLAY);
                 }

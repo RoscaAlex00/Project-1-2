@@ -41,9 +41,7 @@ public class Terrain {
         return width;
     }
 
-    public Vector3 getStartPos() {
-        return startPos;
-    }
+    //public Vector3 getStartPos() { return startPos; }
 
     public Ball getBall(){ return ball; }
 

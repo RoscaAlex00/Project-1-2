@@ -9,6 +9,7 @@ public class GameStateManager {
     public static final int PLAY = 1;
     public static final int SETTINGS = 2;
     public static final int COURSE_CREATOR = 3;
+    public static final int END = 4;
     private GameState gameState;
     private Terrain terrain;
     private PuttingCourse course;
@@ -34,7 +35,9 @@ public class GameStateManager {
         if (state == COURSE_CREATOR) {
             gameState = new CreatorMenu(this);
         }
-
+        if (state == END) {
+            gameState = new EndState(this);
+        }
     }
 
     public void update(float dt) {
