@@ -41,7 +41,7 @@ public class EndState extends GameState {
         viewport = new FitViewport(CrazyPutting.width, CrazyPutting.height, CrazyPutting.cam);
         viewport.apply();
         gen = new FreeTypeFontGenerator(Gdx.files.internal("comic/raw/SF_Arch_Rival.ttf"));
-        img = new Texture("winScreen.jpg");
+        img = new Texture("winScreen.png" );
         background = new Image(img);
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
         parameter.size = 65;

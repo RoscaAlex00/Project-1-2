@@ -6,7 +6,6 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -31,12 +30,7 @@ public class CreatorMenu extends GameState {
     private SpriteBatch spriteBatch;
     private Stage stage;
     private Skin skin;
-    private TextureAtlas atlas;
-    private Viewport viewport;
-    private Texture img;
-    private Image background;
     private BitmapFont comicFont;
-    private FreeTypeFontGenerator gen;
 
     public CreatorMenu(GameStateManager gsm) { super(gsm); }
 
@@ -44,17 +38,16 @@ public class CreatorMenu extends GameState {
     public void init() {
 
         spriteBatch = new SpriteBatch();
-        viewport = new FitViewport(CrazyPutting.width, CrazyPutting.height, CrazyPutting.cam);
+        Viewport viewport = new FitViewport(CrazyPutting.width, CrazyPutting.height, CrazyPutting.cam);
         viewport.apply();
-        gen = new FreeTypeFontGenerator(Gdx.files.internal("comic/raw/SF_Arch_Rival.ttf"));
-        img = new Texture("lime.jpg");
-        background = new Image(img);
+        FreeTypeFontGenerator gen = new FreeTypeFontGenerator(Gdx.files.internal("comic/raw/SF_Arch_Rival.ttf"));
+        Texture img = new Texture("lime.jpg");
+        Image background = new Image(img);
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
         parameter.size = 30;
         comicFont = gen.generateFont(parameter);
         comicFont.setColor(Color.BLACK);
         stage = new Stage(viewport, spriteBatch);
-        atlas = new TextureAtlas("comic/skin/comic-ui.atlas");
         skin = new Skin(Gdx.files.internal("comic/skin/comic-ui.json"));
         CrazyPutting.cam.update();
         Gdx.input.setInputProcessor(stage);
@@ -86,7 +79,7 @@ public class CreatorMenu extends GameState {
         final TextField courseWidthField = new TextField("50", skin);
 
         Label frictionLabel = new Label("Friction coefficient: ", skin);
-        final TextField frictionField = new TextField("0.15", skin);
+        final TextField frictionField = new TextField("5", skin);
         Label speedLabel = new Label("Maximum speed (in m/s): ", skin);
         final TextField speedField = new TextField("15", skin);
 

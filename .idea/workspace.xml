@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="93d88c88-29ca-4706-810f-a52000931fcd" name="Default Changelist" comment="moving ball">
-      <change afterPath="$PROJECT_DIR$/core/src/com/crazyputting/states/menus/EndState.java" afterDir="false" />
+    <list default="true" id="93d88c88-29ca-4706-810f-a52000931fcd" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/fileContent/fileContent.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/fileContent/fileContent.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/resourceHashesCache.bin" afterDir="false" />
@@ -14,18 +14,16 @@
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/taskHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/build/classes/java/main/com/crazyputting/managers/GameStateManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/build/classes/java/main/com/crazyputting/managers/GameStateManager.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/build/classes/java/main/com/crazyputting/objects/Terrain.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/build/classes/java/main/com/crazyputting/objects/Terrain.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/build/classes/java/main/com/crazyputting/states/menus/CreatorMenu$1$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/build/classes/java/main/com/crazyputting/states/menus/CreatorMenu$1$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/build/classes/java/main/com/crazyputting/states/menus/CreatorMenu$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/build/classes/java/main/com/crazyputting/states/menus/CreatorMenu$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/build/classes/java/main/com/crazyputting/states/menus/CreatorMenu.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/build/classes/java/main/com/crazyputting/states/menus/CreatorMenu.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/build/classes/java/main/com/crazyputting/states/menus/MainMenu.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/build/classes/java/main/com/crazyputting/states/menus/MainMenu.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/build/classes/java/main/com/crazyputting/states/menus/PlayState.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/build/classes/java/main/com/crazyputting/states/menus/PlayState.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/build/classes/java/main/com/crazyputting/states/menus/ThreeDimensional.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/build/classes/java/main/com/crazyputting/states/menus/ThreeDimensional.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/build/libs/core-1.0.jar" beforeDir="false" afterPath="$PROJECT_DIR$/core/build/libs/core-1.0.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/com/crazyputting/managers/GameStateManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/com/crazyputting/managers/GameStateManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/com/crazyputting/objects/Terrain.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/com/crazyputting/objects/Terrain.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/src/com/crazyputting/states/menus/CreatorMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/com/crazyputting/states/menus/CreatorMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/com/crazyputting/states/menus/MainMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/com/crazyputting/states/menus/MainMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/com/crazyputting/states/menus/EndState.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/com/crazyputting/states/menus/EndState.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/src/com/crazyputting/states/menus/PlayState.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/com/crazyputting/states/menus/PlayState.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/com/crazyputting/states/menus/ThreeDimensional.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/com/crazyputting/states/menus/ThreeDimensional.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -139,7 +137,14 @@
       <option name="project" value="LOCAL" />
       <updated>1584620975010</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="winning screen">
+      <created>1584627562192</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1584627562192</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -152,7 +157,9 @@
     <MESSAGE value="ball displayed on the screen" />
     <MESSAGE value="ball in terrain" />
     <MESSAGE value="moving ball" />
-    <option name="LAST_COMMIT_MESSAGE" value="moving ball" />
+    <MESSAGE value="winnig screen" />
+    <MESSAGE value="winning screen" />
+    <option name="LAST_COMMIT_MESSAGE" value="winning screen" />
   </component>
   <component name="WindowStateProjectService">
     <state x="96" y="0" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1584550752832">
@@ -167,37 +174,49 @@
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="371" y="124" key="#com.intellij.ide.util.TreeClassChooserDialog/0.0.1280.680@0.0.1280.680" timestamp="1584550736693" />
-    <state x="243" y="0" key="CommitChangelistDialog2" timestamp="1584627536553">
+    <state x="243" y="0" key="CommitChangelistDialog2" timestamp="1584821149961">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="243" y="0" key="CommitChangelistDialog2/0.0.1280.680@0.0.1280.680" timestamp="1584627536553" />
-    <state x="421" y="58" key="FileChooserDialogImpl" timestamp="1584616082738">
+    <state x="243" y="0" key="CommitChangelistDialog2/0.0.1280.680@0.0.1280.680" timestamp="1584821149961" />
+    <state x="421" y="58" key="FileChooserDialogImpl" timestamp="1584633830398">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="421" y="58" key="FileChooserDialogImpl/0.0.1280.680@0.0.1280.680" timestamp="1584616082738" />
-    <state width="1237" height="133" key="GridCell.Tab.0.bottom" timestamp="1584627536563">
+    <state x="421" y="58" key="FileChooserDialogImpl/0.0.1280.680@0.0.1280.680" timestamp="1584633830398" />
+    <state width="1237" height="133" key="GridCell.Tab.0.bottom" timestamp="1584820755677">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1237" height="133" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1584627536563" />
-    <state width="1237" height="133" key="GridCell.Tab.0.center" timestamp="1584627536563">
+    <state width="1237" height="133" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1584820755677" />
+    <state width="1237" height="133" key="GridCell.Tab.0.center" timestamp="1584820755677">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1237" height="133" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1584627536563" />
-    <state width="1237" height="133" key="GridCell.Tab.0.left" timestamp="1584627536563">
+    <state width="1237" height="133" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1584820755677" />
+    <state width="1237" height="133" key="GridCell.Tab.0.left" timestamp="1584820755677">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1237" height="133" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1584627536563" />
-    <state width="1237" height="133" key="GridCell.Tab.0.right" timestamp="1584627536563">
+    <state width="1237" height="133" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1584820755677" />
+    <state width="1237" height="133" key="GridCell.Tab.0.right" timestamp="1584820755677">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1237" height="133" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1584627536563" />
-    <state x="316" y="39" width="659" height="602" key="NewModule_or_Project.wizard" timestamp="1584616095564">
+    <state width="1237" height="133" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1584820755677" />
+    <state x="316" y="39" width="745" height="602" key="NewModule_or_Project.wizard" timestamp="1584633839847">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="316" y="39" width="659" height="602" key="NewModule_or_Project.wizard/0.0.1280.680@0.0.1280.680" timestamp="1584616095564" />
-    <state x="450" y="257" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1584627518301">
+    <state x="316" y="39" width="745" height="602" key="NewModule_or_Project.wizard/0.0.1280.680@0.0.1280.680" timestamp="1584633839847" />
+    <state x="450" y="257" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1584821174756">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="450" y="257" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1280.680@0.0.1280.680" timestamp="1584627518301" />
+    <state x="450" y="257" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1280.680@0.0.1280.680" timestamp="1584821174756" />
+    <state x="282" y="67" width="700" height="530" key="recent.locations.popup" timestamp="1584813000540">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="282" y="67" width="700" height="530" key="recent.locations.popup/0.0.1280.680@0.0.1280.680" timestamp="1584813000540" />
+    <state x="297" y="151" key="run.anything.popup" timestamp="1584812269017">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="297" y="151" key="run.anything.popup/0.0.1280.680@0.0.1280.680" timestamp="1584812269017" />
+    <state x="303" y="1" width="672" height="678" key="search.everywhere.popup" timestamp="1584817042637">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="303" y="1" width="672" height="678" key="search.everywhere.popup/0.0.1280.680@0.0.1280.680" timestamp="1584817042637" />
   </component>
 </project>

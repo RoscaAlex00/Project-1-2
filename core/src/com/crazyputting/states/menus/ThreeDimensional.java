@@ -35,7 +35,6 @@ public abstract class ThreeDimensional extends GameState {
     private Array<Renderable> fields;
     private ArrayList<ModelInstance> skeleton;
 
-
     private boolean hideWalls = false;
     private boolean showSkeleton = false;
     private boolean current = false;
@@ -51,7 +50,7 @@ public abstract class ThreeDimensional extends GameState {
         batch = new ModelBatch();
 
         //camera setup
-        camera = new PerspectiveCamera(67, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        camera = new PerspectiveCamera(75, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         camera.position.set(10f, 0f, 10f);
         camera.lookAt(10, 10, 0);
         camera.near = 0.1f;
@@ -129,23 +128,21 @@ public abstract class ThreeDimensional extends GameState {
     }
 
 
-        public void update ( float dt){
-            camera.update();
-        }
-
-        public PerspectiveCamera getCamera () {
-            return camera;
-        }
-
-        public Terrain getTerrain () {
-            return terrain;
-        }
-
-        protected void toggleSkeleton () {
-            if (!showSkeleton) skeleton = terrainModel.generateSkeleton();
-            showSkeleton = !showSkeleton;
-        }
-
-
+    public void update ( float dt){
+        camera.update();
     }
+
+    public PerspectiveCamera getCamera () {
+        return camera;
+    }
+
+    public Terrain getTerrain () {
+        return terrain;
+    }
+
+    protected void toggleSkeleton () {
+        if (!showSkeleton) skeleton = terrainModel.generateSkeleton();
+        showSkeleton = !showSkeleton;
+    }
+}
 
