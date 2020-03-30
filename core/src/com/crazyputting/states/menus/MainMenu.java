@@ -81,17 +81,17 @@ public class MainMenu extends GameState {
 
         for (int i = 0; i < 3; i++) {
             if (currentItem == 0) {
-                newGame.setColor(Color.LIME);
+                newGame.setColor(Color.SKY);
             } else {
                 newGame.setColor(Color.WHITE);
             }
             if (currentItem == 1) {
-                preferences.setColor(Color.LIME);
+                preferences.setColor(Color.SKY);
             } else {
                 preferences.setColor(Color.WHITE);
             }
             if (currentItem == 2) {
-                exit.setColor(Color.LIME);
+                exit.setColor(Color.SKY);
             } else {
                 exit.setColor(Color.WHITE);
             }

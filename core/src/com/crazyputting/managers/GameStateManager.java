@@ -1,6 +1,5 @@
 package com.crazyputting.managers;
 
-import com.crazyputting.objects.PuttingCourse;
 import com.crazyputting.objects.Terrain;
 import com.crazyputting.states.menus.*;
 
@@ -12,7 +11,6 @@ public class GameStateManager {
     public static final int END = 4;
     private GameState gameState;
     private Terrain terrain;
-    private PuttingCourse course;
 
     public GameStateManager() {
         setState(MENU);
@@ -54,7 +52,4 @@ public class GameStateManager {
 
     public Terrain getTerrain(){ return terrain; }
 
-    public void setCourse(PuttingCourse newCourse){ this.course = newCourse; }
-
-    public PuttingCourse getCourse(){ return course; }
 }

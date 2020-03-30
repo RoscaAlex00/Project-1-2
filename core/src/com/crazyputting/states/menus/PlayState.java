@@ -18,7 +18,6 @@ import com.crazyputting.engine.Engine;
 import com.crazyputting.managers.GameStateManager;
 import com.crazyputting.objects.Ball;
 import com.crazyputting.objects.Hole;
-import com.crazyputting.objects.PuttingCourse;
 import com.crazyputting.objects.Terrain;
 
 public class PlayState extends ThreeDimensional {
@@ -43,27 +42,11 @@ public class PlayState extends ThreeDimensional {
 
     private GameStateManager manager;
 
-    private PuttingCourse course;
-    private int hole_number;
 
     public PlayState(GameStateManager manager, Terrain terrain) {
         super(manager, terrain);
     }
 
-    public PlayState(GameStateManager manager, PuttingCourse course) {
-        super(manager, course.getTerrain(0));
-        this.course = course;
-        hole_number = 1;
-
-        ball = new Ball(terrain.getBall().getPosition().cpy());
-        instances.add(ball.getModel());
-
-        this.manager = manager;
-    }
-
-    /**
-     * Method responsible for creating the menu, this is a part of the requirements of libGDX.
-     */
     public void init() {
         super.init();
         this.terrain = super.terrain;
@@ -99,23 +82,10 @@ public class PlayState extends ThreeDimensional {
         setProcessors();
     }
 
-    //Method which creates the HUD for the game.
     private void createHUD() {
         hud = new Stage(new ScalingViewport(Scaling.fit, Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
-
-        //used to organise the different input elements
         Table table = new Table();
         table.setFillParent(true);
-    }
-
-    @Override
-    public void pause() {
-    }
-
-    @Override
-    public void resume() {
-        paused = !paused;
-        setProcessors();
     }
 
     @Override
@@ -164,7 +134,6 @@ public class PlayState extends ThreeDimensional {
     }
 
 
-    //Setting inputProcessor that processes the key-events and stuff like that.
     public void setProcessors() {
         Gdx.input.setInputProcessor(controller);
     }
@@ -173,9 +142,6 @@ public class PlayState extends ThreeDimensional {
         return ball;
     }
 
-    public PuttingCourse getCourse() {
-        return course;
-    }
 
     public float calcMeterPercentage(){
         float chargeTime = (System.currentTimeMillis() - startChargeTime)/1000.0f; //chargeTime in seconds

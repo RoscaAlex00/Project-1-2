@@ -23,33 +23,25 @@ import com.crazyputting.objects.Terrain;
 import java.util.ArrayList;
 
 public abstract class ThreeDimensional extends GameState {
+    public GameCamera controller;
     protected PerspectiveCamera camera;
     protected ArrayList<ModelInstance> instances = new ArrayList<>();
     protected Terrain terrain;
     protected Ball ball;
-    public GameCamera controller;
     private ModelBatch batch;
     private Color bgColor = new Color(.8f, .8f, .8f, 1f);
     private Environment environment;
     private TerrainModel terrainModel;
     private Array<Renderable> fields;
-    private ArrayList<ModelInstance> skeleton;
-
-    private boolean hideWalls = false;
-    private boolean showSkeleton = false;
     private boolean current = false;
 
     public ThreeDimensional(GameStateManager manager, Terrain terrain) {
         super(manager, terrain);
     }
 
-    /**
-     * Creates a model batch with the environment's properties and camera properties.
-     */
     public void init() {
         batch = new ModelBatch();
 
-        //camera setup
         camera = new PerspectiveCamera(75, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         camera.position.set(10f, 0f, 10f);
         camera.lookAt(10, 10, 0);
@@ -59,7 +51,6 @@ public abstract class ThreeDimensional extends GameState {
 
         Gdx.input.setInputProcessor(controller = new GameCamera(camera));
 
-        //environment setup
         DirectionalLight light = new DirectionalLight();
         light.set(.8f, .8f, .8f, -1f, -1f, -1f);
 
@@ -71,15 +62,6 @@ public abstract class ThreeDimensional extends GameState {
         createTerrain();
     }
 
-    public abstract void pause();
-
-    public abstract void resume();
-
-    /**
-     * Shows on the screen all the different instances of the game
-     *
-     * @param instances instances of the game
-     */
     public void render(final ArrayList<ModelInstance> instances) {
         batch.begin(camera);
         if (instances != null) batch.render(instances, environment);
@@ -105,9 +87,6 @@ public abstract class ThreeDimensional extends GameState {
         batch.dispose();
     }
 
-    /**
-     * Creates the game's field.
-     */
     public void createTerrain() {
         this.terrain = super.terrain;
         terrainModel = new TerrainModel(terrain);
@@ -128,21 +107,17 @@ public abstract class ThreeDimensional extends GameState {
     }
 
 
-    public void update ( float dt){
+    public void update(float dt) {
         camera.update();
     }
 
-    public PerspectiveCamera getCamera () {
+    public PerspectiveCamera getCamera() {
         return camera;
     }
 
-    public Terrain getTerrain () {
+    public Terrain getTerrain() {
         return terrain;
     }
 
-    protected void toggleSkeleton () {
-        if (!showSkeleton) skeleton = terrainModel.generateSkeleton();
-        showSkeleton = !showSkeleton;
-    }
 }
 

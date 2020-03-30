@@ -1,12 +1,15 @@
-package com.crazyputting.engine.solver;
+package com.crazyputting.engine;
 
 import com.badlogic.gdx.math.Vector3;
 import com.crazyputting.engine.Engine;
+import com.crazyputting.engine.Solver;
 
 public class Euler implements Solver {
     private Engine engine;
 
-    public Euler(Engine engine){ this.engine = engine;}
+    public Euler(Engine engine) {
+        this.engine = engine;
+    }
 
     @Override
     public void set_step_size(double h) {

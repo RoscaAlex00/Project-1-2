@@ -22,8 +22,8 @@ public class TerrainModel {
 
     private final int DIV_SIZE = 10;
     private final int CHUNK_SIZE = 5;
-    private Ball ball;
     public Array<HeightField> map;
+    private Ball ball;
     private ArrayList<ModelInstance> edges;
     private Terrain terrain;
     private int attr;
@@ -66,8 +66,6 @@ public class TerrainModel {
         edges.add(new ModelInstance(border_d, terrain.getWidth() + (width_border / 2), terrain.getHeight() / 2, (-height_border / 2) + 7));
     }
 
-    //TODO: Textures for edges
-
 
     private HeightField createField(int x, int y) {
 
@@ -105,38 +103,7 @@ public class TerrainModel {
         return heights;
     }
 
-    public ArrayList<ModelInstance> generateSkeleton() {
-        ArrayList<ModelInstance> skeletons = new ArrayList<>();
-
-        ArrayList<Function> functions = new ArrayList<>();
-        functions.add(terrain.getFunction());
-
-        ModelBuilder modelBuilder = new ModelBuilder();
-        MeshPartBuilder builder;
-
-        for (Function f : functions) {
-            for (int i = 0; i < terrain.getWidth(); i++) {
-                for (int j = 0; j < terrain.getHeight(); j++) {
-                    for (float k = 0; k < 1 - (1f / DIV_SIZE); k += (1f / DIV_SIZE)) {
-                        modelBuilder.begin();
-                        builder = modelBuilder.part("line", 1, 3, new Material());
-                        builder.setColor(Color.BLACK);
-                        builder.line(i + k, j, terrain.getFunction().evaluateF(i + k, j), i + k + (1f / DIV_SIZE), j, f.evaluateF(i + k + (1f / DIV_SIZE), j));
-                        skeletons.add(new ModelInstance(modelBuilder.end()));
-
-                        modelBuilder.begin();
-                        builder = modelBuilder.part("line", 1, 3, new Material());
-                        builder.setColor(Color.BLACK);
-                        builder.line(i, j + k, terrain.getFunction().evaluateF(i, j + k), i, j + k + (1f / DIV_SIZE), f.evaluateF(i, j + k + (1f / DIV_SIZE)));
-                        skeletons.add(new ModelInstance(modelBuilder.end()));
-                    }
-                }
-            }
-        }
-        return skeletons;
-    }
-
-    public ModelInstance getBallModel(){
+    public ModelInstance getBallModel() {
         return ball.getModel();
     }
 

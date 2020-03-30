@@ -56,24 +56,12 @@ public class Derivatives implements Function, Serializable {
         if (!y) yDeriv = new Node("0");
     }
 
-    /**
-     * Method that checks if the value of a node is an operator or not.
-     *
-     * @param s the value of the checked node.
-     */
     private static boolean isOperator(String s) {
         if (s.equals("(") || s.equals(")") || s.equals("+") || s.equals("-") || s.equals("*") || s.equals("/") || s.equals("^") || s.equals("ln") || s.equals("sin") || s.equals("cos")) {
             return true;
         }
         return false;
     }
-
-    /**
-     * Is used by the convertor to check which operator has priority
-     *
-     * @param op the operator
-     * @return it's priority value (higher equals higher priority)
-     */
 
     private static int getPriority(String op) {
         int priority = 0;
@@ -97,12 +85,6 @@ public class Derivatives implements Function, Serializable {
         return priority;
     }
 
-    /**
-     * Converts an infix notation formula to a postfix notation formula.
-     *
-     * @param infix the infix notation formula.
-     * @return the postfix notation formula.
-     */
     private static String[] convert(String[] infix) {
         Stack<String> operatorStack = new Stack();
         Stack<String> postfixStack = new Stack();
@@ -143,35 +125,14 @@ public class Derivatives implements Function, Serializable {
         return postfix;
     }
 
-    /**
-     * Calls the evaluation method for the main tree.
-     *
-     * @param x the x position on the function.
-     * @param y the y position on the function.
-     * @return the value of the evaluated tree.
-     */
     public float evaluateF(float x, float y) {
         return evaluate(root, x, y);
     }
 
-    /**
-     * Calls the evaluation method for the x derivation tree.
-     *
-     * @param x the x position on the function.
-     * @param y the y position on the function.
-     * @return the evaluated value of the derived tree.
-     */
     public float calcXDeriv(float x, float y) {
         return evaluate(xDeriv, x, y);
     }
 
-    /**
-     * Calls the evaluation method for the y derivation tree.
-     *
-     * @param x the x position on the function.
-     * @param y the y position on the function.
-     * @return the evaluated value of the derived tree.
-     */
     public float calcYDeriv(float x, float y) {
         return evaluate(yDeriv, x, y);
     }
@@ -181,13 +142,6 @@ public class Derivatives implements Function, Serializable {
         return 0;
     }
 
-    /**
-     * Evaluates the value of a given tree.
-     *
-     * @param xValue the x position on the function.
-     * @param yValue the y position on the function.
-     * @return the value of the evaluated tree.
-     */
     private float evaluate(Node root, float xValue, float yValue) {
         if (!isOperator(root.value)) {
             if (root.value.equals("x")) {
@@ -253,12 +207,6 @@ public class Derivatives implements Function, Serializable {
         }
     }
 
-    /**
-     * Calculates the partially derivation of a tree in the x direction.
-     *
-     * @param root the root node of the tree from which to start deriving.
-     * @return the tree of the partially derived function.
-     */
     private Node xDerive(Node root) {
         if (!isOperator(root.value)) {
             if (root.value.equals("x")) {
@@ -378,12 +326,6 @@ public class Derivatives implements Function, Serializable {
         return tempNode;
     }
 
-    /**
-     * Calculates the partially derivation of a tree in the y direction.
-     *
-     * @param root the root node of the tree from which to start deriving.
-     * @return the tree of the partially derived function.
-     */
     private Node yDerive(Node root) {
         if (!isOperator(root.value)) {
             if (root.value.equals("y")) {
@@ -512,18 +454,10 @@ public class Derivatives implements Function, Serializable {
         return infix == null ? post : infix;
     }
 
-    /**
-     * Inner Class that is the nodes of the binary expression tree.
-     */
     private class Node implements Serializable {
         String value; //Each node has a value (either a number or an operator)
         Node left, right; //Each node has 2 children
 
-        /**
-         * Constructor for the node class.
-         *
-         * @param value the operator or value that is stored in the node.
-         */
         Node(String value) {
             this.value = value;
             left = right = null;
