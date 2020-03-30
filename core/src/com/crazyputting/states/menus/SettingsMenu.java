@@ -38,7 +38,7 @@ public class SettingsMenu extends GameState {
         viewport = new FitViewport(CrazyPutting.width, CrazyPutting.height, CrazyPutting.cam);
         viewport.apply();
         gen = new FreeTypeFontGenerator(Gdx.files.internal("comic/raw/SF_Arch_Rival.ttf"));
-        img = new Texture("lime.jpg");
+        img = new Texture("blue.jpg");
         background = new Image(img);
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
         parameter.size = 65;
