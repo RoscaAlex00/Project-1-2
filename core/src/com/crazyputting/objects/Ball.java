@@ -64,13 +64,6 @@ public class Ball {
         if (displacement != 0) colliding = false;
         position.z = z;
         ball.transform.setTranslation(position.x, position.y, position.z + (diameter));
-        float rotAngle = (float) ((180 * displacement) / (Math.PI * (diameter / 2)));
-        Quaternion sys = ball.transform.getRotation(new Quaternion());
-        Vector3 worldAxis = new Vector3(0, 0, 1).crs(velocity);
-        worldAxis.rotate(sys.getPitch(), 1, 0, 0);
-        worldAxis.rotate(sys.getYaw(), 0, 1, 0);
-        worldAxis.rotate(sys.getRoll(), 0, 0, 1);
-        ball.transform.rotate(new Quaternion(worldAxis, rotAngle / 40));
     }
 
     public float getMass() {
