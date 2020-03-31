@@ -5,12 +5,19 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.PerspectiveCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g3d.*;
 import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
 import com.badlogic.gdx.graphics.g3d.attributes.TextureAttribute;
 import com.badlogic.gdx.graphics.g3d.environment.DirectionalLight;
 import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.crazyputting.CrazyPutting;
 import com.crazyputting.camera.GameCamera;
 import com.crazyputting.managers.GameInputProcessor;
 import com.crazyputting.managers.GameKeys;
@@ -33,6 +40,11 @@ public abstract class ThreeDimensional extends GameState {
     private Environment environment;
     private TerrainModel terrainModel;
     private Array<Renderable> fields;
+    private SpriteBatch back;
+    private Stage stage;
+    private Texture img;
+    private Image background;
+
     private boolean current = false;
 
     public ThreeDimensional(GameStateManager manager, Terrain terrain) {
@@ -40,6 +52,11 @@ public abstract class ThreeDimensional extends GameState {
     }
 
     public void init() {
+        back = new SpriteBatch();
+        stage = new Stage(new FitViewport(CrazyPutting.width, CrazyPutting.height, CrazyPutting.cam),back);
+        img = new Texture("playbg.png");
+        background = new Image(img);
+
         batch = new ModelBatch();
 
         camera = new PerspectiveCamera(75, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
@@ -74,9 +91,12 @@ public abstract class ThreeDimensional extends GameState {
 
     public void draw() {
         controller.update();
+        stage.addActor(background);
 
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
         Gdx.gl.glClearColor(bgColor.r, bgColor.g, bgColor.b, bgColor.a);
+        stage.act();
+        stage.draw();
 
         update(Gdx.graphics.getDeltaTime());
         render(instances);
