@@ -54,7 +54,7 @@ public abstract class ThreeDimensional extends GameState {
     public void init() {
         back = new SpriteBatch();
         stage = new Stage(new FitViewport(CrazyPutting.width, CrazyPutting.height, CrazyPutting.cam),back);
-        img = new Texture("playbg.png");
+        img = new Texture("lightbluesky.png");
         background = new Image(img);
 
         batch = new ModelBatch();
