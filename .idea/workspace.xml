@@ -1,10 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="93d88c88-29ca-4706-810f-a52000931fcd" name="Default Changelist" comment="">
+    <list default="true" id="93d88c88-29ca-4706-810f-a52000931fcd" name="Default Changelist" comment="Added background in game. (light blue)">
+      <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/resourceHashesCache.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/classAnalysis.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/javaCompile.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/assets/playbg.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/com/crazyputting/states/menus/ThreeDimensional.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/com/crazyputting/states/menus/ThreeDimensional.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/build/classes/java/main/com/crazyputting/states/menus/ThreeDimensional.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/build/classes/java/main/com/crazyputting/states/menus/ThreeDimensional.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/build/libs/core-1.0.jar" beforeDir="false" afterPath="$PROJECT_DIR$/core/build/libs/core-1.0.jar" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -94,7 +102,7 @@
       <workItem from="1585576749628" duration="213000" />
       <workItem from="1585580081566" duration="453000" />
       <workItem from="1585696453434" duration="1185000" />
-      <workItem from="1585727581948" duration="1560000" />
+      <workItem from="1585727581948" duration="1696000" />
     </task>
     <task id="LOCAL-00001" summary="new CreatorMenu">
       <created>1584558969369</created>
@@ -187,7 +195,14 @@
       <option name="project" value="LOCAL" />
       <updated>1585697552210</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="Added background in game. (light blue)">
+      <created>1585729276659</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1585729276659</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -209,7 +224,8 @@
     <MESSAGE value="setiings menu" />
     <MESSAGE value="ball update" />
     <MESSAGE value="Added background in game. (light gray)" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added background in game. (light gray)" />
+    <MESSAGE value="Added background in game. (light blue)" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added background in game. (light blue)" />
   </component>
   <component name="WindowStateProjectService">
     <state x="485" y="72" key="#Launcher" timestamp="1585576421252">
@@ -229,36 +245,36 @@
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="371" y="124" key="#com.intellij.ide.util.TreeClassChooserDialog/0.0.1280.680@0.0.1280.680" timestamp="1584550736693" />
-    <state x="292" y="0" key="CommitChangelistDialog2" timestamp="1585697551207">
+    <state x="292" y="0" key="CommitChangelistDialog2" timestamp="1585729275447">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="243" y="0" key="CommitChangelistDialog2/0.0.1280.680@0.0.1280.680" timestamp="1584821189005" />
-    <state x="292" y="0" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1585697551207" />
+    <state x="292" y="0" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1585729275447" />
     <state x="505" y="70" key="FileChooserDialogImpl" timestamp="1585574515127">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="421" y="58" key="FileChooserDialogImpl/0.0.1280.680@0.0.1280.680" timestamp="1584633830398" />
     <state x="505" y="70" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1585574515127" />
-    <state width="1493" height="210" key="GridCell.Tab.0.bottom" timestamp="1585729222528">
+    <state width="1493" height="210" key="GridCell.Tab.0.bottom" timestamp="1585730381353">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="1237" height="133" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1584820755677" />
-    <state width="1493" height="210" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1585729222528" />
-    <state width="1493" height="210" key="GridCell.Tab.0.center" timestamp="1585729222527">
+    <state width="1493" height="210" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1585730381353" />
+    <state width="1493" height="210" key="GridCell.Tab.0.center" timestamp="1585730381353">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="1237" height="133" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1584820755677" />
-    <state width="1493" height="210" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1585729222527" />
-    <state width="1493" height="210" key="GridCell.Tab.0.left" timestamp="1585729222527">
+    <state width="1493" height="210" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1585730381353" />
+    <state width="1493" height="210" key="GridCell.Tab.0.left" timestamp="1585730381353">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="1237" height="133" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1584820755677" />
-    <state width="1493" height="210" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1585729222527" />
-    <state width="1493" height="210" key="GridCell.Tab.0.right" timestamp="1585729222527">
+    <state width="1493" height="210" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1585730381353" />
+    <state width="1493" height="210" key="GridCell.Tab.0.right" timestamp="1585730381353">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="1237" height="133" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1584820755677" />
-    <state width="1493" height="210" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1585729222527" />
+    <state width="1493" height="210" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1585730381353" />
     <state width="1493" height="261" key="GridCell.Tab.1.bottom" timestamp="1585575616128">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -279,14 +295,14 @@
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="316" y="39" width="745" height="602" key="NewModule_or_Project.wizard/0.0.1280.680@0.0.1280.680" timestamp="1584633839847" />
-    <state x="361" y="146" key="Vcs.Push.Dialog.v2" timestamp="1585697557254">
+    <state x="361" y="146" key="Vcs.Push.Dialog.v2" timestamp="1585729279862">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="361" y="146" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1585697557254" />
-    <state x="465" y="238" key="com.intellij.ide.util.TipDialog" timestamp="1585727581929">
+    <state x="361" y="146" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1585729279862" />
+    <state x="465" y="238" key="com.intellij.ide.util.TipDialog" timestamp="1585730255603">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="465" y="238" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1585727581929" />
+    <state x="465" y="238" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1585730255603" />
     <state x="450" y="257" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1584821174756">
       <screen x="0" y="0" width="1280" height="680" />
     </state>

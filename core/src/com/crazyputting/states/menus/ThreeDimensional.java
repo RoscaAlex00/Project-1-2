@@ -69,7 +69,7 @@ public abstract class ThreeDimensional extends GameState {
         Gdx.input.setInputProcessor(controller = new GameCamera(camera));
 
         DirectionalLight light = new DirectionalLight();
-        light.set(.8f, .8f, .8f, -1f, -1f, -1f);
+        light.set(.95f, .95f, .95f, -1f, -1f, -1f);
 
         environment = new Environment();
         environment.clear();
