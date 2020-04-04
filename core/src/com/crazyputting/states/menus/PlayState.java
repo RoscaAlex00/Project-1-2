@@ -14,7 +14,9 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Scaling;
 import com.badlogic.gdx.utils.viewport.ScalingViewport;
+import com.crazyputting.engine.Euler;
 import com.crazyputting.engine.Physics;
+import com.crazyputting.engine.PhysicsSolver;
 import com.crazyputting.managers.GameStateManager;
 import com.crazyputting.objects.Ball;
 import com.crazyputting.objects.Hole;
@@ -52,6 +54,7 @@ public class PlayState extends ThreeDimensional {
         this.terrain = super.terrain;
         this.hole = terrain.getHole();
         this.ball = terrain.getBall();
+        PhysicsSolver solver = terrain.getSolver();
 
         spriteBatch = new SpriteBatch();
         FreeTypeFontGenerator gen = new FreeTypeFontGenerator(Gdx.files.internal("comic/raw/SF_Arch_Rival.ttf"));
@@ -64,7 +67,7 @@ public class PlayState extends ThreeDimensional {
         ball.update(terrain.getFunction().evaluateF(ball.getPosition().x, ball.getPosition().y));
         controller.initFocus(ball.getPosition());
 
-        physics = new Physics(ball, terrain, hole);
+        physics = new Physics(ball, terrain, hole, solver);
         createHUD();
 
         Texture meterImg = new Texture("chargeMeter.jpg");

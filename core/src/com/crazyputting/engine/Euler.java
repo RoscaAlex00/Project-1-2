@@ -5,7 +5,7 @@ import com.badlogic.gdx.math.Vector3;
 public class Euler implements PhysicsSolver {
     private Physics physics;
 
-    public Euler(Physics physics) {
+    public void setPhysics(Physics physics){
         this.physics = physics;
     }
 

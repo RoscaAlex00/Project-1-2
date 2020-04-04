@@ -4,13 +4,13 @@ import com.badlogic.gdx.math.Vector3;
 
 public class RungeKutta implements PhysicsSolver {
     private Physics physics;
-
-    public RungeKutta(Physics engine) {
-        this.physics = engine;
+    @Override
+    public void set_step_size(double h) {
     }
 
     @Override
-    public void set_step_size(double h) {
+    public void setPhysics(Physics physics) {
+        this.physics = physics;
     }
 
     @Override

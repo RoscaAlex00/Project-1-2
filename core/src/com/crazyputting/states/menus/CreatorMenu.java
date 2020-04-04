@@ -18,6 +18,10 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.crazyputting.CrazyPutting;
+import com.crazyputting.engine.Euler;
+import com.crazyputting.engine.PhysicsSolver;
+import com.crazyputting.engine.RungeKutta;
+import com.crazyputting.engine.Verlet;
 import com.crazyputting.function.Derivatives;
 import com.crazyputting.function.Function;
 import com.crazyputting.managers.GameStateManager;
@@ -57,6 +61,7 @@ public class CreatorMenu extends GameState {
         HorizontalGroup goal = new HorizontalGroup();
         HorizontalGroup fieldSize = new HorizontalGroup();
         HorizontalGroup constants = new HorizontalGroup();
+        HorizontalGroup solverInput = new HorizontalGroup();
 
         Label startXLabel = new Label("                 Start X = ", skin);
         final TextField startXField = new TextField("10", skin);
@@ -78,10 +83,14 @@ public class CreatorMenu extends GameState {
         Label courseWidthLabel = new Label("Fieldwidth: ", skin);
         final TextField courseWidthField = new TextField("50", skin);
 
-        Label frictionLabel = new Label("Friction coefficient: ", skin);
+        Label solverLabel = new Label("                    Solver:  ", skin);
+        final SelectBox<String> solverSelect = new SelectBox<>(skin);
+        solverSelect.setItems("Euler", "Verlet", "Runge Kutta"/*, "Leapfrog"*/);
+
+        /*Label frictionLabel = new Label("Friction coefficient: ", skin);
         final TextField frictionField = new TextField("5", skin);
         Label speedLabel = new Label("Maximum speed (in m/s): ", skin);
-        final TextField speedField = new TextField("15", skin);
+        final TextField speedField = new TextField("15", skin);*/
 
         ChangeListener listener = new ChangeListener() {
             @Override
@@ -92,6 +101,8 @@ public class CreatorMenu extends GameState {
                 float goalX = 0, goalY = 0, goalRadius = 0, startX = 0, startY = 0, MU = 0, vMax = 0;
                 Function function = new Derivatives(functionField.getText());
                 int length = 0, width = 0;
+                String select = solverSelect.getSelected();
+
                 boolean error;
                 error = goalXField.toString().isEmpty() || goalYField.toString().isEmpty() ||
                         functionField.toString().isEmpty() || courseWidthField.toString().isEmpty() ||
@@ -104,8 +115,8 @@ public class CreatorMenu extends GameState {
                     goalRadius = Float.parseFloat(goalRadiusField.getText().replaceAll(" ", ""));
                     width = Integer.parseInt(courseWidthField.getText().replaceAll(" ", ""));
                     length = Integer.parseInt(courseLengthField.getText().replaceAll(" ", ""));
-                    MU = Float.parseFloat(frictionField.getText().replaceAll(" ", ""));
-                    vMax = Float.parseFloat(speedField.getText().replaceAll(" ", ""));
+                    /*MU = Float.parseFloat(frictionField.getText().replaceAll(" ", ""));
+                    vMax = Float.parseFloat(speedField.getText().replaceAll(" ", ""));*/
                 }
                 catch (Exception e) {
                     TextButton buttonOK = new TextButton("Ok", skin);
@@ -134,11 +145,24 @@ public class CreatorMenu extends GameState {
                     error = true;
                 }
                 if (!error) {
+                    PhysicsSolver solver;
+                    if (select.equals("Verlet")){
+                        solver = new Verlet();
+                    }
+                    else if (select.equals("Runge Kutta")){
+                        solver = new RungeKutta();
+                    }
+                    else {
+                        solver = new Euler();
+                    }
                     Vector3 ballVector = new Vector3(startX, startY, 0);
                     Ball ball = new Ball(ballVector);
                     Vector3 holeVector = new Vector3(goalX, goalY, 0);
                     Hole hole = new Hole(goalRadius, holeVector);
-                    Terrain newTerrain = new Terrain(length, width, ball, hole, function, MU, vMax,"newTerrain");
+                    MU = 5;
+                    vMax = 15;
+                    Terrain newTerrain = new Terrain(length, width, ball, hole, function, MU,
+                            vMax,"newTerrain", solver);
                     gsm.setTerrain(newTerrain);
                     gsm.setState(GameStateManager.PLAY);
                 }
@@ -165,10 +189,13 @@ public class CreatorMenu extends GameState {
         fieldSize.addActor(courseWidthLabel);
         fieldSize.addActor(courseWidthField);
 
-        constants.addActor(frictionLabel);
+        /*constants.addActor(frictionLabel);
         constants.addActor(frictionField);
         constants.addActor(speedLabel);
-        constants.addActor(speedField);
+        constants.addActor(speedField);*/
+
+        solverInput.addActor(solverLabel);
+        solverInput.addActor(solverSelect);
 
         main.add(start).fillY().align(Align.left);
         main.row().pad(5, 0, 5, 0);
@@ -179,8 +206,10 @@ public class CreatorMenu extends GameState {
         main.add(functionField).fillY().align(Align.center).width(300);
         main.row().pad(5, 0, 5, 0);
         main.add(fieldSize).fillY().align(Align.left);
-        main.row().pad(5, 0, 5, 0);
-        main.add(constants).fillY().align(Align.left);
+        /*main.row().pad(5, 0, 5, 0);
+        main.add(constants).fillY().align(Align.left);*/
+        main.row().pad(5,0,5,0);
+        main.add(solverInput).fillY().align(Align.left);
         main.row().pad(5, 0, 5, 0);
         main.add(playButton);
         main.setY(main.getY());

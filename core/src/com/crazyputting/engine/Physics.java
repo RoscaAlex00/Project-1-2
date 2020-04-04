@@ -15,16 +15,17 @@ public class Physics {
     float dt = Gdx.graphics.getDeltaTime();
     private Ball ball;
     private Terrain terrain;
-    private Euler solver;
+    private PhysicsSolver solver;
     private Hole hole;
     private float mass;
     private float radius;
 
 
-    public Physics(Ball yourBall, Terrain yourTerrain, Hole newHole) {
+    public Physics(Ball yourBall, Terrain yourTerrain, Hole newHole, PhysicsSolver solver) {
         this.ball = yourBall;
         this.terrain = yourTerrain;
-        this.solver = new Euler(this);
+        this.solver = solver;
+        solver.setPhysics(this);
         this.hole = newHole;
         radius = hole.getHoleRadius();
         mass = yourBall.getMass();

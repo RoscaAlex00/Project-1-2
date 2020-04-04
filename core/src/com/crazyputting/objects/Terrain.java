@@ -1,6 +1,8 @@
 package com.crazyputting.objects;
 
 import com.badlogic.gdx.math.Vector3;
+import com.crazyputting.engine.Physics;
+import com.crazyputting.engine.PhysicsSolver;
 import com.crazyputting.function.Function;
 
 
@@ -15,9 +17,10 @@ public class Terrain {
     private final float HOLE_DIAMETER = 1.10f;
     private float frictionCoefficient;
     private float maximumVelocity;
+    private PhysicsSolver solver;
 
-    public Terrain(float ourHeight, float ourWidth, Ball ball, Hole endHole,
-                   Function function, float MU, float maxSpeed, String name) {
+    public Terrain(float ourHeight, float ourWidth, Ball ball, Hole endHole, Function function, float MU,
+                   float maxSpeed, String name, PhysicsSolver solver) {
         this.height = ourHeight;
         this.width = ourWidth;
         this.startPos = ball.position.cpy(); //TODO: edit the z value, using the function
@@ -27,6 +30,7 @@ public class Terrain {
         this.yourFunction = function;
         this.frictionCoefficient = MU;
         this.maximumVelocity = maxSpeed;
+        this.solver = solver;
     }
 
 
@@ -63,4 +67,7 @@ public class Terrain {
         return HOLE_DIAMETER;
     }
 
+    public PhysicsSolver getSolver(){
+        return solver;
+    }
 }
