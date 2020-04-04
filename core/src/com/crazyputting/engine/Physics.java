@@ -7,7 +7,7 @@ import com.crazyputting.objects.Hole;
 import com.crazyputting.objects.Terrain;
 
 
-public class Engine {
+public class Physics {
     protected final double SPVELOCITY = 0.02;
     protected final double SPACCELERATION = 0.9;
     protected final float GRAVITY = 9.81f;
@@ -21,7 +21,7 @@ public class Engine {
     private float radius;
 
 
-    public Engine(Ball yourBall, Terrain yourTerrain, Hole newHole) {
+    public Physics(Ball yourBall, Terrain yourTerrain, Hole newHole) {
         this.ball = yourBall;
         this.terrain = yourTerrain;
         this.solver = new Euler(this);

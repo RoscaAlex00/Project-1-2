@@ -14,14 +14,14 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Scaling;
 import com.badlogic.gdx.utils.viewport.ScalingViewport;
-import com.crazyputting.engine.Engine;
+import com.crazyputting.engine.Physics;
 import com.crazyputting.managers.GameStateManager;
 import com.crazyputting.objects.Ball;
 import com.crazyputting.objects.Hole;
 import com.crazyputting.objects.Terrain;
 
 public class PlayState extends ThreeDimensional {
-    private Engine engine;
+    private Physics physics;
     private Ball ball;
     private Hole hole;
 
@@ -64,7 +64,7 @@ public class PlayState extends ThreeDimensional {
         ball.update(terrain.getFunction().evaluateF(ball.getPosition().x, ball.getPosition().y));
         controller.initFocus(ball.getPosition());
 
-        engine = new Engine(ball, terrain, hole);
+        physics = new Physics(ball, terrain, hole);
         createHUD();
 
         Texture meterImg = new Texture("chargeMeter.jpg");
@@ -102,7 +102,7 @@ public class PlayState extends ThreeDimensional {
                 moving = true;
             }
             ball.updateInstance(terrain.getFunction().evaluateF(ball.getPosition().x, ball.getPosition().y),
-                    engine.updateBall(dt));
+                    physics.updateBall(dt));
         }
         else {
             if(moving){
@@ -127,7 +127,7 @@ public class PlayState extends ThreeDimensional {
                 float scalingFactor = terrain.getMaximumVelocity() * (float) (1 / hypotenuse);
                 ball.hit(cameraDirection.scl(reverse * scalingFactor * charge));
             }
-            if(engine.isGoal()) {
+            if(physics.isGoal()) {
                 gsm.setState(GameStateManager.END);
             }
         }

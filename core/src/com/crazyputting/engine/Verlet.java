@@ -2,10 +2,10 @@ package com.crazyputting.engine;
 
 import com.badlogic.gdx.math.Vector3;
 
-public class RungeKutta implements PhysicsSolver {
+public class Verlet implements PhysicsSolver {
     private Physics physics;
 
-    public RungeKutta(Physics engine) {
+    public Verlet(Physics engine) {
         this.physics = engine;
     }
 
@@ -15,11 +15,17 @@ public class RungeKutta implements PhysicsSolver {
 
     @Override
     public Vector3 getPosition(Vector3 position, Vector3 velocity) {
-        return null;
+        float newX = 0f;
+        float newY = 0f;
+
+        return new Vector3(newX, newY, 0);
     }
 
     @Override
     public Vector3 getSpeed(Vector3 position, Vector3 velocity) {
-        return null;
+        float newVelX = 0f;
+        float newVelY = 0f;
+
+        return new Vector3(newVelX, newVelY, 0);
     }
 }
