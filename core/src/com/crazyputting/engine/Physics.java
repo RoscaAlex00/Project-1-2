@@ -98,5 +98,8 @@ public class Physics {
         }
         ball.getPosition().z = terrain.getFunction().evaluateF(position.x, position.y);
     }
+    protected void setDt(float dt){
+        this.dt = dt;
+    }
 
 }

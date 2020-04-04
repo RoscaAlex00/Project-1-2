@@ -16,16 +16,18 @@ public class Verlet implements PhysicsSolver {
 
     @Override
     public Vector3 getPosition(Vector3 position, Vector3 velocity) {
-        float newX = 0f;
-        float newY = 0f;
+        float newX = (position.x + (physics.getDt() * velocity.x) +
+                (physics.getDt() * physics.getAcceleration(position, velocity).x * physics.getDt() / 2));
+        float newY = (position.y + (physics.getDt() * velocity.y) +
+                (physics.getDt() * physics.getAcceleration(position, velocity).y * physics.getDt() / 2));
 
         return new Vector3(newX, newY, 0);
     }
 
     @Override
     public Vector3 getSpeed(Vector3 position, Vector3 velocity) {
-        float newVelX = 0f;
-        float newVelY = 0f;
+        float newVelX = (velocity.x + physics.getDt() * physics.getAcceleration(position, velocity).x);
+        float newVelY = (velocity.y + physics.getDt() * physics.getAcceleration(position, velocity).y);
 
         return new Vector3(newVelX, newVelY, 0);
     }

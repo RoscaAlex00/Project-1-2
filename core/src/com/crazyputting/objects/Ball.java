@@ -18,7 +18,7 @@ import java.awt.*;
 
 public class Ball {
     private final float mass = 0.045f; //in kilograms
-    private final float diameter = 0.65f; //in meters
+    private final float diameter = 0.62f; //in meters
     public Vector3 position;
     private boolean colliding = false;
     private boolean stopped = false;
