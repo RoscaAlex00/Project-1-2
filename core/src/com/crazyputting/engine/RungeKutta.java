@@ -21,7 +21,7 @@ public class RungeKutta implements PhysicsSolver {
         float k3 = physics.getDt() * rungeFunction(velocity.x + (physics.getDt() / 2), velocity.y + (k2 / 2));
         float k4 = physics.getDt() * rungeFunction(velocity.x + physics.getDt(), velocity.y + k3);
         float newX = position.x + physics.getDt();
-        float newY = (position.y + (1 / 6) * (k1 + 2 * k2 + 2 * k3 + k4));
+        float newY = (position.y + (1f / 6) * (k1 + 2 * k2 + 2 * k3 + k4));
         return new Vector3(newX, newY, 0);
     }
 
