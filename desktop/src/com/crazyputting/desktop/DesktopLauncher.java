@@ -7,8 +7,8 @@ import com.crazyputting.CrazyPutting;
 public class DesktopLauncher {
 	public static void main (String[] arg) {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
-		config.height = 600;
-		config.width = 800;
+		config.height = 768;
+		config.width = 1024;
 		config.resizable = false;
 		new LwjglApplication(new CrazyPutting(), config);
 	}

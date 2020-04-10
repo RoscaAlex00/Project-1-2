@@ -29,6 +29,7 @@ public class MainMenu extends GameState {
     private Image background;
     private BitmapFont comicFont;
     private FreeTypeFontGenerator gen;
+    private Color ourColor;
 
     public MainMenu(GameStateManager gsm) {
         super(gsm);
@@ -39,18 +40,20 @@ public class MainMenu extends GameState {
         spriteBatch = new SpriteBatch();
         viewport = new FitViewport(CrazyPutting.width, CrazyPutting.height, CrazyPutting.cam);
         viewport.apply();
-        gen = new FreeTypeFontGenerator(Gdx.files.internal("comic/raw/SF_Arch_Rival.ttf"));
-        img = new Texture("mainMenu.jpg");
+        gen = new FreeTypeFontGenerator(Gdx.files.internal("comic/raw/PAC-FONT.ttf"));
+        img = new Texture("golfGAME.jpg");
         background = new Image(img);
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
-        parameter.size = 55;
+        parameter.size = 72;
         comicFont = gen.generateFont(parameter);
         comicFont.setColor(Color.BLACK);
         stage = new Stage(viewport, spriteBatch);
         atlas = new TextureAtlas("comic/skin/comic-ui.atlas");
-        skin = new Skin(Gdx.files.internal("comic/skin/comic-ui.json"));
+        skin = new Skin(Gdx.files.internal("cloud-form/skin/cloud-form-ui.json"));
         CrazyPutting.cam.update();
         Gdx.input.setInputProcessor(stage);
+        ourColor = new Color(178f/255f,223f/255f,182f/255f,1f);
+
 
     }
 
@@ -66,13 +69,14 @@ public class MainMenu extends GameState {
         TextButton newGame = new TextButton("Play", skin);
         TextButton preferences = new TextButton("Settings", skin);
         TextButton exit = new TextButton("Exit", skin);
-        table.add(newGame).fillX().uniformX();
-        table.row().pad(50, 0, 50, 0);
+        table.add(newGame).width(250);
+        table.row().pad(20, 0, 20, 0);
         table.add(preferences).fillX().uniformX();
         table.row();
         table.add(exit).fillX().uniformX();
 
         table.setFillParent(true);
+        table.setTransform(true);
         stage.addActor(background);
 
         stage.addActor(table);
@@ -81,17 +85,17 @@ public class MainMenu extends GameState {
 
         for (int i = 0; i < 3; i++) {
             if (currentItem == 0) {
-                newGame.setColor(Color.SKY);
+                newGame.setColor(ourColor);
             } else {
                 newGame.setColor(Color.WHITE);
             }
             if (currentItem == 1) {
-                preferences.setColor(Color.SKY);
+                preferences.setColor(ourColor);
             } else {
                 preferences.setColor(Color.WHITE);
             }
             if (currentItem == 2) {
-                exit.setColor(Color.SKY);
+                exit.setColor(ourColor);
             } else {
                 exit.setColor(Color.WHITE);
             }
@@ -101,7 +105,7 @@ public class MainMenu extends GameState {
         stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 30f));
         stage.draw();
         spriteBatch.begin();
-        comicFont.draw(spriteBatch, title, 225, 540);
+        comicFont.draw(spriteBatch, title, 100, 700);
         spriteBatch.end();
 
 

@@ -44,15 +44,15 @@ public class CreatorMenu extends GameState {
         spriteBatch = new SpriteBatch();
         Viewport viewport = new FitViewport(CrazyPutting.width, CrazyPutting.height, CrazyPutting.cam);
         viewport.apply();
-        FreeTypeFontGenerator gen = new FreeTypeFontGenerator(Gdx.files.internal("comic/raw/SF_Arch_Rival.ttf"));
-        Texture img = new Texture("blue.jpg");
+        FreeTypeFontGenerator gen = new FreeTypeFontGenerator(Gdx.files.internal("comic/raw/PAC-FONT.ttf"));
+        Texture img = new Texture("creatormenu.jpg");
         Image background = new Image(img);
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
-        parameter.size = 30;
+        parameter.size = 45;
         comicFont = gen.generateFont(parameter);
-        comicFont.setColor(Color.BLACK);
+        comicFont.setColor(Color.WHITE);
         stage = new Stage(viewport, spriteBatch);
-        skin = new Skin(Gdx.files.internal("comic/skin/comic-ui.json"));
+        skin = new Skin(Gdx.files.internal("cloud-form/skin/cloud-form-ui.json"));
         CrazyPutting.cam.update();
         Gdx.input.setInputProcessor(stage);
 
@@ -63,24 +63,24 @@ public class CreatorMenu extends GameState {
         HorizontalGroup constants = new HorizontalGroup();
         HorizontalGroup solverInput = new HorizontalGroup();
 
-        Label startXLabel = new Label("                 Start X = ", skin);
+        Label startXLabel = new Label("                       Start X = ",skin);
         final TextField startXField = new TextField("10", skin);
-        Label startYLabel = new Label("Start Y = ", skin);
+        Label startYLabel = new Label("        Start Y = ", skin);
         final TextField startYField = new TextField("10", skin);
 
-        Label goalXLabel = new Label("                  Goal X = ", skin);
+        Label goalXLabel = new Label("    Goal X = ", skin);
         final TextField goalXField = new TextField("20", skin);
-        Label goalYLabel = new Label("Goal Y = ", skin);
+        Label goalYLabel = new Label("     Goal Y = ", skin);
         final TextField goalYField = new TextField("20", skin);
-        Label goalRadiusLabel = new Label("Goal Radius: ", skin);
-        final TextField goalRadiusField = new TextField("2", skin);
+        Label goalRadiusLabel = new Label("     Goal Radius: ", skin);
+        final TextField goalRadiusField = new TextField("1", skin);
 
         Label functionLabel = new Label("Function of Terrain: ", skin);
         final TextField functionField = new TextField("0", skin);
 
-        Label courseLengthLabel = new Label("            Fieldlength: ", skin);
+        Label courseLengthLabel = new Label("                  Field Length: ", skin);
         final TextField courseLengthField = new TextField("50", skin);
-        Label courseWidthLabel = new Label("Fieldwidth: ", skin);
+        Label courseWidthLabel = new Label("    Field Width: ", skin);
         final TextField courseWidthField = new TextField("50", skin);
 
         Label solverLabel = new Label("                    Solver:  ", skin);
@@ -196,22 +196,22 @@ public class CreatorMenu extends GameState {
 
         solverInput.addActor(solverLabel);
         solverInput.addActor(solverSelect);
-
+        main.row();
         main.add(start).fillY().align(Align.left);
-        main.row().pad(5, 0, 5, 0);
+        main.row().pad(20, 0, 20, 0);
         main.add(goal).fillY().align(Align.left);
-        main.row().pad(5, 0, 5, 0);
+        main.row().pad(20, 0, 20, 0);
         main.add(functionLabel).fillY().align(Align.center);
-        main.row().pad(5, 0, 5, 0);
+        main.row().pad(20, 0, 20, 0);
         main.add(functionField).fillY().align(Align.center).width(300);
-        main.row().pad(5, 0, 5, 0);
+        main.row().pad(20, 0, 20, 0);
         main.add(fieldSize).fillY().align(Align.left);
         /*main.row().pad(5, 0, 5, 0);
         main.add(constants).fillY().align(Align.left);*/
-        main.row().pad(5,0,5,0);
-        main.add(solverInput).fillY().align(Align.left);
-        main.row().pad(5, 0, 5, 0);
-        main.add(playButton);
+        main.row().pad(20,0,20,0);
+        main.add(solverInput).fillY().align(Align.center);
+        main.row().pad(20, 0, 20, 0);
+        main.add(playButton).align(Align.center);
         main.setY(main.getY());
 
         main.setFillParent(true);
@@ -233,7 +233,7 @@ public class CreatorMenu extends GameState {
         stage.draw();
         spriteBatch.begin();
 
-        comicFont.draw(spriteBatch, "Creator Menu", 265, 570);
+        comicFont.draw(spriteBatch, "Creator Menu", 245, 720);
         spriteBatch.end();
     }
 
