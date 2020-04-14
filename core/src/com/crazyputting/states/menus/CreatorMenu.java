@@ -85,7 +85,7 @@ public class CreatorMenu extends GameState {
 
         Label solverLabel = new Label("                    Solver:  ", skin);
         final SelectBox<String> solverSelect = new SelectBox<>(skin);
-        solverSelect.setItems("Euler", "Verlet", "Runge Kutta"/*, "Leapfrog"*/);
+        solverSelect.setItems("Euler", "Verlet", "Runge-Kutta", "Adams-Bashforth");
 
         /*Label frictionLabel = new Label("Friction coefficient: ", skin);
         final TextField frictionField = new TextField("5", skin);
@@ -149,9 +149,12 @@ public class CreatorMenu extends GameState {
                     if (select.equals("Verlet")){
                         solver = new Verlet();
                     }
-                    else if (select.equals("Runge Kutta")){
+                    else if (select.equals("Runge-Kutta")){
                         solver = new RungeKutta();
-                    }
+                    }/*
+                    else if (select.equals("Adams-BashForth")){
+                        solver = new AdamsBashForth();
+                    }*/
                     else {
                         solver = new Euler();
                     }
@@ -159,7 +162,7 @@ public class CreatorMenu extends GameState {
                     Ball ball = new Ball(ballVector);
                     Vector3 holeVector = new Vector3(goalX, goalY, 0);
                     Hole hole = new Hole(goalRadius, holeVector);
-                    MU = 5;
+                    MU = 1.5f;
                     vMax = 15;
                     Terrain newTerrain = new Terrain(length, width, ball, hole, function, MU,
                             vMax,"newTerrain", solver);

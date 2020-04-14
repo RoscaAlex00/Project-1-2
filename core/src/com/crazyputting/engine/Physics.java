@@ -8,7 +8,7 @@ import com.crazyputting.objects.Terrain;
 
 
 public class Physics {
-    protected final double SPVELOCITY = 0.02;
+    protected final double SPVELOCITY = 0.2;
     protected final double SPACCELERATION = 0.9;
     protected final float GRAVITY = 9.81f;
     private final float GOAL_TOLERANCE = 2f;
