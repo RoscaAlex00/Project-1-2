@@ -18,10 +18,7 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.crazyputting.CrazyPutting;
-import com.crazyputting.engine.Euler;
-import com.crazyputting.engine.PhysicsSolver;
-import com.crazyputting.engine.RungeKutta;
-import com.crazyputting.engine.Verlet;
+import com.crazyputting.engine.*;
 import com.crazyputting.function.Derivatives;
 import com.crazyputting.function.Function;
 import com.crazyputting.managers.GameStateManager;
@@ -151,10 +148,10 @@ public class CreatorMenu extends GameState {
                     }
                     else if (select.equals("Runge-Kutta")){
                         solver = new RungeKutta();
-                    }/*
-                    else if (select.equals("Adams-BashForth")){
-                        solver = new AdamsBashForth();
-                    }*/
+                    }
+                    else if (select.equals("Adams-Bashforth")){
+                        solver = new AdamsBashforth();
+                    }
                     else {
                         solver = new Euler();
                     }
