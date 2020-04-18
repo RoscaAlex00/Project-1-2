@@ -1,7 +1,7 @@
 package com.crazyputting.objects;
 
 import com.badlogic.gdx.math.Vector3;
-import com.crazyputting.engine.Physics;
+import com.crazyputting.Bot.Player;
 import com.crazyputting.engine.PhysicsSolver;
 import com.crazyputting.function.Function;
 
@@ -18,12 +18,13 @@ public class Terrain {
     private float frictionCoefficient;
     private float maximumVelocity;
     private PhysicsSolver solver;
+    private Player player;
 
     public Terrain(float ourHeight, float ourWidth, Ball ball, Hole endHole, Function function, float MU,
-                   float maxSpeed, String name, PhysicsSolver solver) {
+                   float maxSpeed, String name, PhysicsSolver solver, Player player) {
         this.height = ourHeight;
         this.width = ourWidth;
-        this.startPos = ball.position.cpy(); //TODO: edit the z value, using the function
+        this.startPos = ball.getPosition().cpy();
         this.ball = ball;
         this.hole = endHole;
         this.name = name;
@@ -31,12 +32,14 @@ public class Terrain {
         this.frictionCoefficient = MU;
         this.maximumVelocity = maxSpeed;
         this.solver = solver;
+        this.player = player;
     }
 
 
     public float getHeight() {
         return height;
     }
+
     public Function getFunction(){
         return yourFunction;
     }
@@ -45,7 +48,9 @@ public class Terrain {
         return width;
     }
 
-    //public Vector3 getStartPos() { return startPos; }
+    public Vector3 getStartPos() {
+        return startPos;
+    }
 
     public Ball getBall(){ return ball; }
 
@@ -69,5 +74,9 @@ public class Terrain {
 
     public PhysicsSolver getSolver(){
         return solver;
+    }
+
+    public Player getPlayer(){
+        return player;
     }
 }

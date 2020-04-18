@@ -19,7 +19,7 @@ import java.awt.*;
 public class Ball {
     private final float mass = 0.15f; //in kilograms
     private final float diameter = 0.62f; //in meters
-    public Vector3 position;
+    private Vector3 position;
     private boolean colliding = false;
     private boolean stopped = false;
     private Texture ballTexture = new Texture("ball.jpg");

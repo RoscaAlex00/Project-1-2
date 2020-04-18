@@ -14,7 +14,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Scaling;
 import com.badlogic.gdx.utils.viewport.ScalingViewport;
-import com.crazyputting.engine.Euler;
+import com.crazyputting.Bot.Human;
+import com.crazyputting.Bot.Player;
 import com.crazyputting.engine.Physics;
 import com.crazyputting.engine.PhysicsSolver;
 import com.crazyputting.managers.GameStateManager;
@@ -26,6 +27,8 @@ public class PlayState extends ThreeDimensional {
     private Physics physics;
     private Ball ball;
     private Hole hole;
+    private Player player;
+    protected Terrain terrain;
 
     private SpriteBatch spriteBatch;
     private Stage hud;
@@ -37,13 +40,12 @@ public class PlayState extends ThreeDimensional {
     private boolean paused = false;
     private boolean isPushed = false;
     private boolean moving = false;
-    protected Terrain terrain;
+    private boolean playerIsHuman = false;
 
     private boolean isSpacePressed = false;
     private long startChargeTime;
 
     private GameStateManager manager;
-
 
     public PlayState(GameStateManager manager, Terrain terrain) {
         super(manager, terrain);
@@ -54,6 +56,7 @@ public class PlayState extends ThreeDimensional {
         this.terrain = super.terrain;
         this.hole = terrain.getHole();
         this.ball = terrain.getBall();
+        this.player = terrain.getPlayer();
         PhysicsSolver solver = terrain.getSolver();
 
         spriteBatch = new SpriteBatch();
@@ -70,18 +73,21 @@ public class PlayState extends ThreeDimensional {
         physics = new Physics(ball, terrain, hole, solver);
         createHUD();
 
-        Texture meterImg = new Texture("chargeMeter.jpg");
-        chargeMeter = new Image(meterImg);
-        chargeMeter.setScaleY(0.2f);
-        chargeMeter.setPosition(7, 10);
+        if (player instanceof Human){
+            Texture meterImg = new Texture("chargeMeter.jpg");
+            chargeMeter = new Image(meterImg);
+            chargeMeter.setScaleY(0.2f);
+            chargeMeter.setPosition(7, 10);
 
-        Texture barImg = new Texture("chargeBar.jpg");
-        chargeBar = new Image(barImg);
-        chargeBar.setScale(0.055f);
-        chargeBar.setPosition(7, 10);
+            Texture barImg = new Texture("chargeBar.jpg");
+            chargeBar = new Image(barImg);
+            chargeBar.setScale(0.055f);
+            chargeBar.setPosition(7, 10);
 
-        hud.addActor(chargeMeter);
-        hud.addActor(chargeBar);
+            hud.addActor(chargeMeter);
+            hud.addActor(chargeBar);
+        }
+
         setProcessors();
     }
 
@@ -114,28 +120,28 @@ public class PlayState extends ThreeDimensional {
             }
         }
         if (ball.isStopped()) {
-            if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
-                isSpacePressed = true;
-                startChargeTime = System.currentTimeMillis();
-            }
-            if (!Gdx.input.isKeyPressed(Input.Keys.SPACE) && isSpacePressed){
-                float charge = calcMeterPercentage();
-                isSpacePressed = false;
-                float reverse = 1;
+            if (player instanceof Human) {
+                if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
+                    isSpacePressed = true;
+                    startChargeTime = System.currentTimeMillis();
+                }
+                if (!Gdx.input.isKeyPressed(Input.Keys.SPACE) && isSpacePressed) {
+                    float charge = calcMeterPercentage();
+                    isSpacePressed = false;
 
-                Vector3 cameraDirection = camera.direction.cpy();
-                if (cameraDirection.z < -0.999849)
-                    reverse = -1;
-                double hypotenuse = Math.sqrt(Math.pow(cameraDirection.x, 2) + Math.pow(cameraDirection.y, 2));
-                float scalingFactor = terrain.getMaximumVelocity() * (float) (1 / hypotenuse);
-                ball.hit(cameraDirection.scl(reverse * scalingFactor * charge));
+                    Vector3 cameraDirection = camera.direction.cpy();
+
+                    ball.hit(player.shot_velocity(cameraDirection, charge));
+                }
+            }
+            else{
+                ball.hit(player.shot_velocity(ball.getPosition(),0));
             }
             if(physics.isGoal()) {
                 gsm.setState(GameStateManager.END);
             }
         }
     }
-
 
     public void setProcessors() {
         Gdx.input.setInputProcessor(controller);
@@ -144,7 +150,6 @@ public class PlayState extends ThreeDimensional {
     public Ball getBall() {
         return ball;
     }
-
 
     public float calcMeterPercentage(){
         float chargeTime = (System.currentTimeMillis() - startChargeTime)/1000.0f; //chargeTime in seconds
@@ -159,7 +164,7 @@ public class PlayState extends ThreeDimensional {
 
     @Override
     public void draw() {
-        if (isSpacePressed){
+        if (isSpacePressed && player instanceof Human){
             float barIndex = calcMeterPercentage();
             chargeBar.setX(7 + (barIndex * (chargeMeter.getWidth() - chargeBar.getWidth()*0.055f)));
         }
@@ -167,15 +172,16 @@ public class PlayState extends ThreeDimensional {
         hud.act();
         hud.draw();
 
-        spriteBatch.begin();
-        comicFont.draw(spriteBatch, "Shot Charge :", 20, 50);
-        spriteBatch.end();
+        if (player instanceof Human) {
+            spriteBatch.begin();
+            comicFont.draw(spriteBatch, "Shot Charge :", 20, 50);
+            spriteBatch.end();
+        }
     }
 
     @Override
     public void handleInput(){
     }
-
 
     @Override
     public void dispose() {
