@@ -1,4 +1,4 @@
-package com.crazyputting.Bot;
+package com.crazyputting.player;
 
 import com.badlogic.gdx.math.Vector3;
 
