@@ -98,7 +98,7 @@ public class PlayState extends ThreeDimensional {
     }
 
     @Override
-    public void update(float dt) {
+    public void update(float dt) throws IllegalAccessException {
         handleInput();
         super.update(dt);
         if(isPushed){
@@ -135,7 +135,7 @@ public class PlayState extends ThreeDimensional {
                 }
             }
             else{
-                ball.hit(player.shot_velocity(ball.getPosition(),0));
+                ball.hit(player.shot_velocity(terrain));
             }
             if(physics.isGoal()) {
                 gsm.setState(GameStateManager.END);
@@ -163,7 +163,7 @@ public class PlayState extends ThreeDimensional {
     }
 
     @Override
-    public void draw() {
+    public void draw() throws IllegalAccessException {
         if (isSpacePressed && player instanceof Human){
             float barIndex = calcMeterPercentage();
             chargeBar.setX(7 + (barIndex * (chargeMeter.getWidth() - chargeBar.getWidth()*0.055f)));

@@ -89,7 +89,7 @@ public abstract class ThreeDimensional extends GameState {
         batch.end();
     }
 
-    public void draw() {
+    public void draw() throws IllegalAccessException {
         controller.update();
         stage.addActor(background);
 
@@ -127,7 +127,7 @@ public abstract class ThreeDimensional extends GameState {
     }
 
 
-    public void update(float dt) {
+    public void update(float dt) throws IllegalAccessException {
         camera.update();
     }
 

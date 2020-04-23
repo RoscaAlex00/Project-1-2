@@ -32,8 +32,12 @@ public class CrazyPutting extends ApplicationAdapter {
     public void render() {
         Gdx.gl.glClearColor(0, 0, 0, 0);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        gsm.update(Gdx.graphics.getDeltaTime());
-        gsm.draw();
+        try {
+            gsm.update(Gdx.graphics.getDeltaTime());
+            gsm.draw();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
         if (GameKeys.isDown(GameKeys.SPACE)) {
             System.out.println("down");
         }

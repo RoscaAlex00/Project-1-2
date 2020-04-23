@@ -12,12 +12,21 @@ public class Human implements Player {
     }
 
     @Override
-    public Vector3 shot_velocity(Vector3 ball_position, float charge) {
+    public Vector3 shot_velocity(Vector3 camera_direction, float charge) {
         float reverse = 1;
-        if (ball_position.z < -0.999849)
+        if (camera_direction.z < -0.999849)
             reverse = -1;
-        double hypotenuse = Math.sqrt(Math.pow(ball_position.x, 2) + Math.pow(ball_position.y, 2));
+        double hypotenuse = Math.sqrt(Math.pow(camera_direction.x, 2) + Math.pow(camera_direction.y, 2));
         float scalingFactor = maximumVelocity * (float) (1 / hypotenuse);
-        return ball_position.scl(reverse * scalingFactor * charge);
+        return camera_direction.scl(reverse * scalingFactor * charge);
+    }
+
+    /**
+     * Only used for the AI classes
+     * @return null
+     */
+    @Override
+    public Vector3 shot_velocity(Terrain terrain) throws IllegalAccessException {
+        throw new IllegalAccessException("This is the wrong class");
     }
 }

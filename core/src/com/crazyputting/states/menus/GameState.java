@@ -23,9 +23,9 @@ public abstract class GameState {
 
     public abstract void init();
 
-    public abstract void update(float dt);
+    public abstract void update(float dt) throws IllegalAccessException;
 
-    public abstract void draw();
+    public abstract void draw() throws IllegalAccessException;
 
     public abstract void handleInput();
 
