@@ -62,7 +62,7 @@ public class Physics {
     public boolean isGoal() {
         Vector3 pos = ball.getPosition().cpy();
         Vector3 vel = ball.getVelocity().cpy();
-        Vector3 hol = hole.getPos().cpy();
+        Vector3 hol = hole.getPosition().cpy();
         pos.z = 0f;
         vel.z = 0f;
         hol.z = 0f;
@@ -76,15 +76,14 @@ public class Physics {
     public float updateBall(float dt) {
         this.dt = dt;
 
+        solver.setHit(ball.isHit());
+
         Vector3 position = ball.getPosition();
         Vector3 velocity = ball.getVelocity();
 
-        Vector3 temp1 = new Vector3(position);
-        Vector3 temp2 = new Vector3(velocity);
-
-        Vector3 newVel = solver.getSpeed(temp1, temp2);
+        Vector3 newVel = solver.getSpeed(position.cpy(), velocity.cpy());
         ball.getVelocity().set(newVel.cpy());
-        Vector3 newPos = solver.getPosition(new Vector3(position), new Vector3(velocity));
+        Vector3 newPos = solver.getPosition(position.cpy(), velocity.cpy());
         ball.getPosition().set(newPos);
 
         updateBall(newPos, newVel);

@@ -16,19 +16,22 @@ public class Verlet implements PhysicsSolver {
 
     @Override
     public Vector3 getPosition(Vector3 position, Vector3 velocity) {
-        float newX = (position.x + (physics.getDt() * velocity.x) +
-                (physics.getDt() * physics.getAcceleration(position, velocity).x * physics.getDt() / 2));
-        float newY = (position.y + (physics.getDt() * velocity.y) +
-                (physics.getDt() * physics.getAcceleration(position, velocity).y * physics.getDt() / 2));
-
-        return new Vector3(newX, newY, 0);
+        Vector3 pos1 = position.cpy().add(velocity.cpy().scl(physics.getDt()));
+        return pos1.cpy().add(physics.getAcceleration(position, velocity).cpy().scl((float) Math.pow(physics.getDt(), 2)/2f));
     }
 
     @Override
     public Vector3 getSpeed(Vector3 position, Vector3 velocity) {
-        float newVelX = (velocity.x + physics.getDt() * physics.getAcceleration(position, velocity).x);
-        float newVelY = (velocity.y + physics.getDt() * physics.getAcceleration(position, velocity).y);
+        Vector3 velNext = velocity.cpy().add(physics.getAcceleration(position, velocity).cpy().scl(physics.getDt()));
+        Vector3 posNext = position.cpy().add(velocity.cpy().scl(physics.getDt()));
+        Vector3 accNext = physics.getAcceleration(posNext, velNext).cpy();
+        Vector3 accSum = accNext.add(physics.getAcceleration(position, velocity).cpy());
 
-        return new Vector3(newVelX, newVelY, 0);
+        return velocity.cpy().add(accSum.scl(physics.getDt() / 2f));
+    }
+
+    @Override
+    public void setHit(boolean isHit) {
+
     }
 }

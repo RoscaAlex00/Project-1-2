@@ -10,4 +10,6 @@ public interface PhysicsSolver {
     Vector3 getPosition(Vector3 position, Vector3 velocity);
 
     Vector3 getSpeed(Vector3 position, Vector3 velocity);
+
+    void setHit(boolean isHit);
 }
