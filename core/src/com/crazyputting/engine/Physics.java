@@ -96,16 +96,16 @@ public class Physics {
             ball.setStopped();
         }
         if(position.x <= 0.2f){
-            ball.hit(new Vector3(3.5f,0,0));
+            ball.hit(new Vector3(4f,0,0));
         }
         if(position.y <= 0.2f){
-            ball.hit(new Vector3(0,3.5f,0));
+            ball.hit(new Vector3(0,4f,0));
         }
         if(position.x >= terrain.getWidth()-0.3f){
-            ball.hit(new Vector3(-3.5f,0,0));
+            ball.hit(new Vector3(-4f,0,0));
         }
         if(position.y >= terrain.getHeight()-0.3f){
-            ball.hit(new Vector3(0,-3.5f,0));
+            ball.hit(new Vector3(0,-4f,0));
         }
         ball.getPosition().z = terrain.getFunction().evaluateF(position.x, position.y);
     }

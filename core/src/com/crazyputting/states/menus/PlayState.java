@@ -44,6 +44,7 @@ public class PlayState extends ThreeDimensional {
 
     private boolean isSpacePressed = false;
     private long startChargeTime;
+    private int hitCounter = 0;
 
     private GameStateManager manager;
 
@@ -132,6 +133,7 @@ public class PlayState extends ThreeDimensional {
                     Vector3 cameraDirection = camera.direction.cpy();
 
                     ball.hit(player.shot_velocity(cameraDirection, charge));
+                    hitCounter++;
                 }
             }
             else{
@@ -174,7 +176,8 @@ public class PlayState extends ThreeDimensional {
 
         if (player instanceof Human) {
             spriteBatch.begin();
-            comicFont.draw(spriteBatch, "Shot Charge :", 20, 50);
+            comicFont.draw(spriteBatch,"Hit Counter : " + hitCounter,872,760);
+            comicFont.draw(spriteBatch, "Shot Charge :", 15, 50);
             spriteBatch.end();
         }
     }
