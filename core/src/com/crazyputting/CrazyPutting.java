@@ -1,7 +1,10 @@
 package com.crazyputting;
 
 import com.badlogic.gdx.ApplicationAdapter;
+import com.badlogic.gdx.Audio;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -10,14 +13,22 @@ import com.crazyputting.managers.GameInputProcessor;
 import com.crazyputting.managers.GameKeys;
 import com.crazyputting.managers.GameStateManager;
 
+import java.io.File;
+
 public class CrazyPutting extends ApplicationAdapter {
     public static int width;
     public static int height;
     public static OrthographicCamera cam;
     private GameStateManager gsm;
+    private Music music;
+
 
     @Override
     public void create() {
+        music = Gdx.audio.newMusic(Gdx.files.internal("golfmusic.ogg"));
+        music.setLooping(true);
+        music.setVolume(0.25f);
+        music.play();
         width = Gdx.graphics.getWidth();
         height = Gdx.graphics.getHeight();
         cam = new OrthographicCamera(width, height);
