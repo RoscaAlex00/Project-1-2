@@ -19,9 +19,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d282317d-79fa-4578-8d00-2b6d745c632f" name="Default Changelist" comment="AB4 implemented">
-      <change afterPath="$PROJECT_DIR$/.idea/Game.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+    <list default="true" id="d282317d-79fa-4578-8d00-2b6d745c632f" name="Default Changelist" comment="ball stops at borders">
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/fileContent/fileContent.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/fileContent/fileContent.lock" afterDir="false" />
@@ -29,16 +27,10 @@
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/resourceHashesCache.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/classAnalysis.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/jarAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/jarAnalysis.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/javaCompile.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/taskHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/build/classes/java/main/com/crazyputting/engine/Physics.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/build/classes/java/main/com/crazyputting/engine/Physics.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/build/classes/java/main/com/crazyputting/engine/PhysicsSolver.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/build/classes/java/main/com/crazyputting/engine/PhysicsSolver.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/build/libs/core-1.0.jar" beforeDir="false" afterPath="$PROJECT_DIR$/core/build/libs/core-1.0.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/src/com/crazyputting/engine/Physics.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/com/crazyputting/engine/Physics.java" afterDir="false" />
     </list>
@@ -133,7 +125,7 @@
       <workItem from="1586169645596" duration="1407000" />
       <workItem from="1586545617244" duration="9542000" />
       <workItem from="1586859864197" duration="926000" />
-      <workItem from="1588967402610" duration="472000" />
+      <workItem from="1588967402610" duration="1089000" />
     </task>
     <task id="LOCAL-00001" summary="new CreatorMenu">
       <created>1584558969369</created>
@@ -296,7 +288,14 @@
       <option name="project" value="LOCAL" />
       <updated>1587638152931</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="ball stops at borders">
+      <created>1588968159648</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1588968159648</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -314,7 +313,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="new CreatorMenu" />
     <MESSAGE value="better CreatorMenu" />
     <MESSAGE value="visualisation Works better" />
     <MESSAGE value="visualisation works better" />
@@ -339,7 +337,8 @@
     <MESSAGE value="Drop-down menu for human player and AI. Human and AI in one interface" />
     <MESSAGE value="Exceptions added for Player and the first version of fitness function" />
     <MESSAGE value="AB4 implemented" />
-    <option name="LAST_COMMIT_MESSAGE" value="AB4 implemented" />
+    <MESSAGE value="ball stops at borders" />
+    <option name="LAST_COMMIT_MESSAGE" value="ball stops at borders" />
   </component>
   <component name="WindowStateProjectService">
     <state x="606" y="91" key="#Launcher" timestamp="1588967525054">
@@ -375,30 +374,30 @@
     </state>
     <state x="421" y="58" key="FileChooserDialogImpl/0.0.1280.680@0.0.1280.680" timestamp="1588247861115" />
     <state x="505" y="70" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1585574515127" />
-    <state width="1340" height="266" key="GridCell.Tab.0.bottom" timestamp="1588967868031">
+    <state width="1340" height="266" key="GridCell.Tab.0.bottom" timestamp="1588968489479">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1237" height="133" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1588423879837" />
     <state width="1493" height="210" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1586935793748" />
-    <state width="1340" height="266" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1588967868031" />
-    <state width="1340" height="266" key="GridCell.Tab.0.center" timestamp="1588967868031">
+    <state width="1340" height="266" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1588968489479" />
+    <state width="1340" height="266" key="GridCell.Tab.0.center" timestamp="1588968489479">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1237" height="133" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1588423879836" />
     <state width="1493" height="210" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1586935793748" />
-    <state width="1340" height="266" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1588967868031" />
-    <state width="1340" height="266" key="GridCell.Tab.0.left" timestamp="1588967868031">
+    <state width="1340" height="266" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1588968489479" />
+    <state width="1340" height="266" key="GridCell.Tab.0.left" timestamp="1588968489479">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1237" height="133" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1588423879836" />
     <state width="1493" height="210" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1586935793744" />
-    <state width="1340" height="266" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1588967868031" />
-    <state width="1340" height="266" key="GridCell.Tab.0.right" timestamp="1588967868031">
+    <state width="1340" height="266" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1588968489479" />
+    <state width="1340" height="266" key="GridCell.Tab.0.right" timestamp="1588968489479">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1237" height="133" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1588423879837" />
     <state width="1493" height="210" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1586935793748" />
-    <state width="1340" height="266" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1588967868031" />
+    <state width="1340" height="266" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1588968489479" />
     <state width="1493" height="261" key="GridCell.Tab.1.bottom" timestamp="1585575616128">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -419,11 +418,12 @@
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="223" y="11" width="745" height="602" key="NewModule_or_Project.wizard/0.0.1280.680@0.0.1280.680" timestamp="1588247873741" />
-    <state x="301" y="120" key="Vcs.Push.Dialog.v2" timestamp="1587638160489">
-      <screen x="0" y="0" width="1280" height="680" />
+    <state x="452" y="184" key="Vcs.Push.Dialog.v2" timestamp="1588968163683">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="301" y="120" key="Vcs.Push.Dialog.v2/0.0.1280.680@0.0.1280.680" timestamp="1587638160489" />
     <state x="361" y="146" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1586555100822" />
+    <state x="452" y="184" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1588968163683" />
     <state x="465" y="238" key="com.intellij.ide.util.TipDialog" timestamp="1586935204647">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
