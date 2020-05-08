@@ -95,6 +95,9 @@ public class Physics {
         if (velocity.len() < SPVELOCITY && calcGravity(position).len() < SPACCELERATION) {
             ball.setStopped();
         }
+        if(position.x<= 0.3f || position.y <= 0.3f || position.x >= terrain.getWidth()-0.3f || position.y >= terrain.getHeight()-0.3f){
+            ball.setStopped();
+        }
         ball.getPosition().z = terrain.getFunction().evaluateF(position.x, position.y);
     }
     protected void setDt(float dt){
