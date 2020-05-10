@@ -62,7 +62,7 @@ public class Physics {
     public boolean isGoal() {
         Vector3 pos = ball.getPosition().cpy();
         Vector3 vel = ball.getVelocity().cpy();
-        Vector3 hol = hole.getPos().cpy();
+        Vector3 hol = hole.getPosition().cpy();
         pos.z = 0f;
         vel.z = 0f;
         hol.z = 0f;
@@ -76,15 +76,14 @@ public class Physics {
     public float updateBall(float dt) {
         this.dt = dt;
 
+        solver.setHit(ball.isHit());
+
         Vector3 position = ball.getPosition();
         Vector3 velocity = ball.getVelocity();
 
-        Vector3 temp1 = new Vector3(position);
-        Vector3 temp2 = new Vector3(velocity);
-
-        Vector3 newVel = solver.getSpeed(temp1, temp2);
+        Vector3 newVel = solver.getSpeed(position.cpy(), velocity.cpy());
         ball.getVelocity().set(newVel.cpy());
-        Vector3 newPos = solver.getPosition(new Vector3(position), new Vector3(velocity));
+        Vector3 newPos = solver.getPosition(position.cpy(), velocity.cpy());
         ball.getPosition().set(newPos);
 
         updateBall(newPos, newVel);
@@ -95,6 +94,18 @@ public class Physics {
     protected void updateBall(Vector3 position, Vector3 velocity) {
         if (velocity.len() < SPVELOCITY && calcGravity(position).len() < SPACCELERATION) {
             ball.setStopped();
+        }
+        if(position.x <= 0.2f){
+            ball.hit(new Vector3(4f,0,0));
+        }
+        if(position.y <= 0.2f){
+            ball.hit(new Vector3(0,4f,0));
+        }
+        if(position.x >= terrain.getWidth()-0.3f){
+            ball.hit(new Vector3(-4f,0,0));
+        }
+        if(position.y >= terrain.getHeight()-0.3f){
+            ball.hit(new Vector3(0,-4f,0));
         }
         ball.getPosition().z = terrain.getFunction().evaluateF(position.x, position.y);
     }

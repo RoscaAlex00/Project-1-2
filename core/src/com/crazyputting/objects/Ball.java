@@ -22,6 +22,8 @@ public class Ball {
     private Vector3 position;
     private boolean colliding = false;
     private boolean stopped = false;
+    private boolean isHit = false;
+
     private Texture ballTexture = new Texture("ball.jpg");
     private Vector3 velocity;
     private ModelInstance ball;
@@ -33,9 +35,10 @@ public class Ball {
     }
 
     public void hit(Vector3 initialHit) {
-        stopped = false;
-        colliding = true;
-        velocity = initialHit.cpy();
+        this.stopped = false;
+        this.colliding = true;
+        this.isHit = true;
+        this.velocity = initialHit.cpy();
     }
 
     public void update(float z) {
@@ -57,6 +60,7 @@ public class Ball {
 
     public void setStopped() {
         velocity = new Vector3(0, 0, 0);
+        this.isHit = false;
         this.stopped = true;
     }
 
@@ -80,6 +84,10 @@ public class Ball {
 
     public boolean isStopped() {
         return stopped;
+    }
+
+    public boolean isHit(){
+        return isHit;
     }
 
     public Vector3 getVelocity() {

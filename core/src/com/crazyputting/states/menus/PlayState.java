@@ -44,6 +44,7 @@ public class PlayState extends ThreeDimensional {
 
     private boolean isSpacePressed = false;
     private long startChargeTime;
+    private int hitCounter = 0;
 
     private GameStateManager manager;
 
@@ -98,7 +99,7 @@ public class PlayState extends ThreeDimensional {
     }
 
     @Override
-    public void update(float dt) {
+    public void update(float dt) throws IllegalAccessException {
         handleInput();
         super.update(dt);
         if(isPushed){
@@ -132,10 +133,11 @@ public class PlayState extends ThreeDimensional {
                     Vector3 cameraDirection = camera.direction.cpy();
 
                     ball.hit(player.shot_velocity(cameraDirection, charge));
+                    hitCounter++;
                 }
             }
             else{
-                ball.hit(player.shot_velocity(ball.getPosition(),0));
+                ball.hit(player.shot_velocity(terrain));
             }
             if(physics.isGoal()) {
                 gsm.setState(GameStateManager.END);
@@ -163,7 +165,7 @@ public class PlayState extends ThreeDimensional {
     }
 
     @Override
-    public void draw() {
+    public void draw() throws IllegalAccessException {
         if (isSpacePressed && player instanceof Human){
             float barIndex = calcMeterPercentage();
             chargeBar.setX(7 + (barIndex * (chargeMeter.getWidth() - chargeBar.getWidth()*0.055f)));
@@ -174,7 +176,8 @@ public class PlayState extends ThreeDimensional {
 
         if (player instanceof Human) {
             spriteBatch.begin();
-            comicFont.draw(spriteBatch, "Shot Charge :", 20, 50);
+            comicFont.draw(spriteBatch,"Hit Counter : " + hitCounter,872,760);
+            comicFont.draw(spriteBatch, "Shot Charge :", 15, 50);
             spriteBatch.end();
         }
     }

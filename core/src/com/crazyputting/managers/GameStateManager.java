@@ -38,11 +38,11 @@ public class GameStateManager {
         }
     }
 
-    public void update(float dt) {
+    public void update(float dt) throws IllegalAccessException {
         gameState.update(dt);
     }
 
-    public void draw() {
+    public void draw() throws IllegalAccessException {
         gameState.draw();
     }
 

@@ -10,7 +10,7 @@ public class Hole {
         this.holeRadius = rad;
         this.pos = yourPos;
     }
-    public Vector3 getPos() {
+    public Vector3 getPosition() {
         return pos;
     }
     public float getHoleRadius() {

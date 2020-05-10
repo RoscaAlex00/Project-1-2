@@ -4,6 +4,8 @@ import com.badlogic.gdx.math.Vector3;
 
 public interface Player {
 
-    Vector3 shot_velocity(Vector3 ball_position, float charge);
+    Vector3 shot_velocity(Vector3 camera_direction, float charge) throws IllegalAccessException;
+
+    Vector3 shot_velocity(Terrain terrain) throws IllegalAccessException;
 
 }

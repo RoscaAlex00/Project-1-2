@@ -24,16 +24,16 @@ public class Derivatives implements Function, Serializable {
         Stack<Node> nodeStack = new Stack();
         Node tempRoot, tempLeft, tempRight;
 
-        for (int i = 0; i < postFix.length; i++) {
-            tempRoot = new Node(postFix[i]);
+        for (String fix : postFix) {
+            tempRoot = new Node(fix);
 
-            if (!isOperator(postFix[i])) {
+            if (!isOperator(fix)) {
                 nodeStack.push(tempRoot);
             } else {
                 tempRight = nodeStack.pop();
                 tempRoot.right = tempRight;
 
-                if (!postFix[i].equals("ln") && !postFix[i].equals("sin") && !postFix[i].equals("cos")) {
+                if (!fix.equals("ln") && !fix.equals("sin") && !fix.equals("cos")) {
                     tempLeft = nodeStack.pop();
                     tempRoot.left = tempLeft;
                 }
@@ -57,18 +57,13 @@ public class Derivatives implements Function, Serializable {
     }
 
     private static boolean isOperator(String s) {
-        if (s.equals("(") || s.equals(")") || s.equals("+") || s.equals("-") || s.equals("*") || s.equals("/") || s.equals("^") || s.equals("ln") || s.equals("sin") || s.equals("cos")) {
-            return true;
-        }
-        return false;
+        return s.equals("(") || s.equals(")") || s.equals("+") || s.equals("-") || s.equals("*") || s.equals("/") ||
+                s.equals("^") || s.equals("ln") || s.equals("sin") || s.equals("cos");
     }
 
     private static int getPriority(String op) {
         int priority = 0;
 
-        if (op.equals("-") || op.equals("+")) {
-            priority = 0;
-        }
         if (op.equals("*") || op.equals("/")) {
             priority = 1;
         }
@@ -89,13 +84,12 @@ public class Derivatives implements Function, Serializable {
         Stack<String> operatorStack = new Stack();
         Stack<String> postfixStack = new Stack();
 
-        for (int i = 0; i < infix.length; i++) {
-            String currentSymbol = infix[i];
-
+        for (String currentSymbol : infix) {
             if (!isOperator(currentSymbol)) {
                 postfixStack.push(currentSymbol);
             } else {
-                while (!operatorStack.isEmpty() && (getPriority(currentSymbol) < getPriority(operatorStack.peek())) && !operatorStack.peek().equals("(")) {
+                while (!operatorStack.isEmpty() && (getPriority(currentSymbol) < getPriority(operatorStack.peek())) &&
+                        !operatorStack.peek().equals("(")) {
                     postfixStack.push(operatorStack.pop());
                 }
                 operatorStack.push(currentSymbol);
@@ -210,11 +204,9 @@ public class Derivatives implements Function, Serializable {
     private Node xDerive(Node root) {
         if (!isOperator(root.value)) {
             if (root.value.equals("x")) {
-                Node tempNode = new Node("1");
-                return tempNode;
+                return new Node("1");
             }
-            Node tempNode = new Node("0");
-            return tempNode;
+            return new Node("0");
         }
 
         if (root.value.equals("+")) {
@@ -329,11 +321,9 @@ public class Derivatives implements Function, Serializable {
     private Node yDerive(Node root) {
         if (!isOperator(root.value)) {
             if (root.value.equals("y")) {
-                Node tempNode = new Node("1");
-                return tempNode;
+                return new Node("1");
             }
-            Node tempNode = new Node("0");
-            return tempNode;
+            return new Node("0");
         }
 
         if (root.value.equals("+")) {
@@ -447,11 +437,11 @@ public class Derivatives implements Function, Serializable {
 
     @Override
     public String toString() {
-        String post = "";
+        StringBuilder post = new StringBuilder();
         for (String s : postfix) {
-            post += s;
+            post.append(s);
         }
-        return infix == null ? post : infix;
+        return infix == null ? post.toString() : infix;
     }
 
     private class Node implements Serializable {
