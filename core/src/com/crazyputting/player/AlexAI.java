@@ -5,6 +5,7 @@ import com.badlogic.gdx.math.Vector3;
 import com.crazyputting.objects.Ball;
 import com.crazyputting.objects.Hole;
 import com.crazyputting.objects.Terrain;
+import sun.security.rsa.RSAUtil;
 
 public class AlexAI implements Player {
     private Hole hole;
@@ -19,25 +20,26 @@ public class AlexAI implements Player {
 
     @Override
     public Vector3 shot_velocity(Terrain terrain) throws IllegalAccessException {
-        Vector3 diff = new Vector3();
         this.ball = terrain.getBall();
-        Vector3 ballPos = ball.getPosition();
-        Vector3 threshold = new Vector3(3.5f, 3.5f, 0);
+        Vector3 threshold = new Vector3(5f, 5f, 0);
         this.hole = terrain.getHole();
         velocity = new Vector3();
 
         float subX = hole.getPosition().cpy().sub(terrain.getBall().getPosition().cpy()).x;
         float subY = hole.getPosition().cpy().sub(terrain.getBall().getPosition().cpy()).y;
 
-        if (subX < threshold.x && subY < threshold.y && subX > -3.5f && subY > -3.5f) {
+        if (subX < threshold.x && subY < threshold.y && subX > -threshold.x && subY > -threshold.y) {
+            //System.out.println("threshold: " + subX + " y: " + subY);
             velocity = hole.getPosition().cpy().sub(terrain.getBall().getPosition().cpy());
-        } else if (velocity.len() == 0) {
+            velocity.scl(1.12f);
+        } else if (subX < 15f && subY < 15f && subX > -15f && subY > -15f) {
+            // System.out.println("regular: " + subX + " y: " + subY);
             velocity = hole.getPosition().cpy().sub(terrain.getBall().getPosition().cpy());
-            velocity.scl(0.385f);
+            velocity.scl(0.75f);
         } else {
-            diff.x = terrain.getHole().getPosition().cpy().x - ballPos.x;
-            diff.y = terrain.getHole().getPosition().cpy().y - ballPos.y;
-            velocity.add(diff);
+            //System.out.println("regula22: " + subX + " y: " + subY);
+            velocity = hole.getPosition().cpy().sub(terrain.getBall().getPosition().cpy());
+            velocity.scl(0.3f);
         }
         ball.hit(velocity);
         return null;
