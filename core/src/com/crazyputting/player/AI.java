@@ -54,14 +54,14 @@ public class AI implements Player {
         population.initializePopulation(100);
 
         //Calculate fitness of each individual
-        for(int i = 0;i<population.getIndividuals().length;i++){
+        for (int i = 0; i < population.getIndividuals().length; i++) {
             ball.hit(population.getIndividuals()[i].getShotVelocity());
             population.getIndividuals()[i].calcFitness(ball.getPosition().cpy());
         }
         heapSort.sort(population.getIndividuals());
 
 
-        for(int i = 0;i<population.getIndividuals().length;i++){
+        for (int i = 0; i < population.getIndividuals().length; i++) {
             System.out.println(population.getIndividuals()[i].getFitness());
         }
 
@@ -118,8 +118,8 @@ public class AI implements Player {
 
     private Individual parentCrossover(Individual individual, Individual individual1) {
         Individual offSpring = new Individual(population.getTerrain());
-        float offSpringX = (individual.getShotVelocity().x * individual1.getShotVelocity().x) / 2;
-        float offSpringY = (individual.getShotVelocity().y * individual1.getShotVelocity().y) / 2;
+        float offSpringX = (individual.getShotVelocity().x + individual1.getShotVelocity().x) / 2;
+        float offSpringY = (individual.getShotVelocity().y + individual1.getShotVelocity().y) / 2;
         offSpring.setShotVelocity(new Vector3(offSpringX, offSpringY, 0));
         return offSpring;
     }
