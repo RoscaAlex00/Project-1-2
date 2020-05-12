@@ -14,21 +14,20 @@ import java.util.Random;
 
 public class AI implements Player {
 
+    int generationCount = 0;
     private Terrain terrain;
     private float maximumVelocity;
     private float frictionCoefficient;
     private Hole hole;
     private Ball ball;
     private Function terrainFunction;
-
+    private HeapSort heapSort = new HeapSort();
     private Population population;
-    private Individual fittest;
-    private Individual secondFittest;
-    int generationCount = 0;
 
     public AI(float maximumVelocity) {
         this.maximumVelocity = maximumVelocity;
     }
+
 
     @Override
     public Vector3 shot_velocity(Vector3 ball_position, float charge) throws IllegalAccessException {
@@ -43,100 +42,119 @@ public class AI implements Player {
         this.ball = terrain.getBall();
         this.terrainFunction = terrain.getFunction();
 
-        return new Vector3(1,1,1);
+        return new Vector3(1, 1, 1);
     }
 
-    private void update() {
+    public void runLoop() {
 
-        Random rn = new Random();
 
         //Initialize population
         population = new Population(terrain);
-        population.initializePopulation(10);
+        shot_velocity(terrain);
+        population.initializePopulation(100);
 
         //Calculate fitness of each individual
-        population.calculateFitness();
+        for(int i = 0;i<population.getIndividuals().length;i++){
+            ball.hit(population.getIndividuals()[i].getShotVelocity());
+            population.getIndividuals()[i].calcFitness(ball.getPosition().cpy());
+        }
+        heapSort.sort(population.getIndividuals());
 
-        System.out.println("Generation: " + generationCount + " Fittest: " + population.getFittestValue());
+
+        for(int i = 0;i<population.getIndividuals().length;i++){
+            System.out.println(population.getIndividuals()[i].getFitness());
+        }
 
         //While population gets an individual with maximum fitness (the best fitness is the smallest one)
-        while (population.getFittestValue() >= 1) {
+      /*  while (population.individuals[0].getFitness() >= 1) {
             ++generationCount;
-
-            //Do selection
-            selection();
-
-            //Do crossover
-            crossover();
-
-            //Do mutation under a random probability
-            if (rn.nextInt()%7 < 5) {
-                mutation();
-            }
-
-            //Add fittest offspring to population
-            addFittestOffspring();
+            Individual[] newIndividuals = crossover(population);
+            population.setIndividuals(newIndividuals);
+            mutation(population);
 
             //Calculate new fitness value
             population.calculateFitness();
+            heapSort.sort(population.getIndividuals());
 
-            System.out.println("Generation: " + generationCount + " Fittest: " + population.getFittestValue());
+            System.out.println("Generation: " + generationCount + " Fittest: " + population.getIndividuals()[0].getFitness());
         }
 
         System.out.println("\nSolution found in generation " + generationCount);
-        System.out.println("Fitness: "+ population.getFittest().getFitness());
+        System.out.println("Fitness: " + population.individuals[0].getFitness());*/
 
     }
 
+
+    @Override
+    public void setTerrain(Terrain terrain) {
+        this.terrain = terrain;
+    }
+
+
     //Selection
-    void selection() {
-
-        //Select the most fittest individual
-        fittest = population.getFittest();
-
-        //Select the second most fittest individual
-        secondFittest = population.getSecondFittest();
+    Individual[] tournamentSelection(Population population) {
+        Individual[] tournamentPopulation = new Individual[4];
+        for (int i = 0; i < 4; i++) {
+            tournamentPopulation[i] = population.getIndividuals()[(int) (Math.random() * population.getIndividuals().length)];
+        }
+        return tournamentPopulation;
     }
 
     //TODO: Crossover
-    void crossover() {
-        Random rn = new Random();
+    Individual[] crossover(Population population) {
+        int length = population.getIndividuals().length;
+        Individual[] offsprings = new Individual[length];
 
-        //Select a random crossover point
+        for (int i = 0; i < length; i++) {
+            Individual parent1 = tournamentSelection(population)[0];
+            Individual parent2 = tournamentSelection(population)[0];
 
-        //Swap values among parents
+            offsprings[i] = parentCrossover(parent1, parent2);
+        }
+
+        return offsprings;
+
     }
+
+    private Individual parentCrossover(Individual individual, Individual individual1) {
+        Individual offSpring = new Individual(population.getTerrain());
+        float offSpringX = (individual.getShotVelocity().x * individual1.getShotVelocity().x) / 2;
+        float offSpringY = (individual.getShotVelocity().y * individual1.getShotVelocity().y) / 2;
+        offSpring.setShotVelocity(new Vector3(offSpringX, offSpringY, 0));
+        return offSpring;
+    }
+
 
     //TODO: Mutation
-    void mutation() {
-        Random rn = new Random();
+    void mutation(Population population) {
+        double chanceOfMutation = 0.07;
+        double xOrYOrZ = Math.random();
+        double plusOrMinus = Math.random();
 
-        //Select a random mutation point
-
-        //Flip values at the mutation point
-    }
-
-    //Get fittest offspring
-    Individual getFittestOffspring() {
-        if (fittest.getFitness() > secondFittest.getFitness()) {
-            return fittest;
+        for (int i = 0; i < population.getIndividuals().length; i++) {
+            double check = Math.random();
+            if (check <= chanceOfMutation) {
+                if (xOrYOrZ <= 0.50) {
+                    Vector3 mutatedX = population.getIndividuals()[i].getShotVelocity();
+                    if (plusOrMinus >= 0.50) {
+                        mutatedX.x = mutatedX.x - 0.1f;
+                    } else {
+                        mutatedX.x = mutatedX.x + 0.1f;
+                    }
+                    population.getIndividuals()[i].setShotVelocity(mutatedX);
+                } else {
+                    Vector3 mutatedY = population.getIndividuals()[i].getShotVelocity();
+                    if (plusOrMinus >= 0.50) {
+                        mutatedY.y = mutatedY.y - 0.1f;
+                    } else {
+                        mutatedY.y = mutatedY.y + 0.1f;
+                    }
+                    population.getIndividuals()[i].setShotVelocity(mutatedY);
+                }
+            }
         }
-        return secondFittest;
+
     }
 
-
-    //Replace least fittest individual from most fittest offspring
-    void addFittestOffspring() {
-
-        //Update fitness values of offspring
-        fittest.calcFitness();
-        secondFittest.calcFitness();
-
-        //Get index of least fit individual
-        int leastFittestIndex = population.getLeastFittestIndex();
-
-        //Replace least fittest individual from most fittest offspring
-        population.individuals[leastFittestIndex] = getFittestOffspring();
-    }
 }
 

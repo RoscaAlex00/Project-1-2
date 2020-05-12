@@ -27,9 +27,11 @@ public class Ball {
     private Texture ballTexture = new Texture("ball.jpg");
     private Vector3 velocity;
     private ModelInstance ball;
+    private Vector3 initialPosition;
 
     public Ball(Vector3 initPosition) {
         position = initPosition;
+        this.initialPosition = initPosition;
         velocity = new Vector3(0, 0, 0);
         ballCreator();
     }
@@ -104,5 +106,12 @@ public class Ball {
 
     public ModelInstance getModel() {
         return ball;
+    }
+    public void setPosition(Vector3 pos){
+        this.position = pos;
+    }
+
+    public void setPositionToInitial(){
+        this.position = initialPosition;
     }
 }

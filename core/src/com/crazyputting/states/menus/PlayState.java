@@ -14,6 +14,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Scaling;
 import com.badlogic.gdx.utils.viewport.ScalingViewport;
+import com.crazyputting.player.AI;
 import com.crazyputting.player.Human;
 import com.crazyputting.player.Player;
 import com.crazyputting.engine.Physics;
@@ -22,6 +23,7 @@ import com.crazyputting.managers.GameStateManager;
 import com.crazyputting.objects.Ball;
 import com.crazyputting.objects.Hole;
 import com.crazyputting.objects.Terrain;
+import com.crazyputting.player.Population;
 
 public class PlayState extends ThreeDimensional {
     private Physics physics;
@@ -45,6 +47,7 @@ public class PlayState extends ThreeDimensional {
     private boolean isSpacePressed = false;
     private long startChargeTime;
     private int hitCounter = 0;
+    private Population newPopulation;
 
     private GameStateManager manager;
 
@@ -87,6 +90,9 @@ public class PlayState extends ThreeDimensional {
 
             hud.addActor(chargeMeter);
             hud.addActor(chargeBar);
+        }
+        if(player instanceof AI){
+            player.setTerrain(terrain);
         }
 
         setProcessors();
@@ -136,8 +142,9 @@ public class PlayState extends ThreeDimensional {
                     hitCounter++;
                 }
             }
-            else{
-                ball.hit(player.shot_velocity(terrain));
+            if(player instanceof AI){
+                player.runLoop();
+                ball.setPosition(new Vector3(10,10,0));
             }
             if(physics.isGoal()) {
                 gsm.setState(GameStateManager.END);

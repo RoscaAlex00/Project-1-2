@@ -17,28 +17,33 @@ public class Individual {
     private Vector3 shotVelocity;
     
     public Individual(Terrain terrain) {
-        Random rn = new Random();
-        
+
         this.terrain = terrain;
         this.hole = terrain.getHole();
         this.ball = terrain.getBall();
-        shotVelocity = new Vector3(rn.nextFloat(), rn.nextFloat(), rn.nextFloat()); // Needs to be changed (only reflects the idea)
-        ball.hit(shotVelocity);
-
-        fitness = Float.MAX_VALUE;
+        shotVelocity = new Vector3((float)Math.random() * 10, (float)Math.random() * 10,0);
     }
 
     //Calculate fitness
-    public void calcFitness() {
+    public void calcFitness(Vector3 ballpos) {
     	Vector3 holePos = hole.getPosition().cpy();
-        Vector3 ballPos = ball.getPosition().cpy();
+        Vector3 ballPos = ballpos.cpy();
         Vector3 ballToHoleDistance = holePos.sub(ballPos);
         ballToHoleDistance.z = 0;
         fitness = ballToHoleDistance.len();
     }
 
 	public float getFitness() {
-		calcFitness();
 		return fitness;
 	}
+
+	public void setFitness(float newFitness){
+        this.fitness = newFitness;
+    }
+    public void setShotVelocity(Vector3 newVelocity){
+        this.shotVelocity = newVelocity;
+    }
+    public Vector3 getShotVelocity(){
+        return shotVelocity;
+    }
 }

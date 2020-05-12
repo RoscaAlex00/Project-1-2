@@ -9,4 +9,7 @@ public interface Player {
 
     Vector3 shot_velocity(Terrain terrain) throws IllegalAccessException;
 
+    void runLoop();
+    void setTerrain(Terrain terrain);
+
 }
