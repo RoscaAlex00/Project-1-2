@@ -1,48 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="d282317d-79fa-4578-8d00-2b6d745c632f" name="Default Changelist" comment="AB4 implemented">
+    <list default="true" id="d282317d-79fa-4578-8d00-2b6d745c632f" name="Default Changelist" comment="AI optimization + Lower borders for better visuals.">
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/resourceHashesCache.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/classAnalysis.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/jarAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/jarAnalysis.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/javaCompile.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/taskHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/build/classes/java/main/com/crazyputting/Bot/AI.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/build/classes/java/main/com/crazyputting/Bot/AI.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/build/classes/java/main/com/crazyputting/Bot/PuttingBot.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/build/classes/java/main/com/crazyputting/CrazyPutting.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/build/classes/java/main/com/crazyputting/CrazyPutting.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/build/classes/java/main/com/crazyputting/engine/AdamsBashforth.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/build/classes/java/main/com/crazyputting/engine/AdamsBashforth.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/build/classes/java/main/com/crazyputting/engine/Euler.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/build/classes/java/main/com/crazyputting/engine/Euler.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/build/classes/java/main/com/crazyputting/engine/Physics.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/build/classes/java/main/com/crazyputting/engine/Physics.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/build/classes/java/main/com/crazyputting/engine/RungeKutta.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/build/classes/java/main/com/crazyputting/engine/RungeKutta.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/build/classes/java/main/com/crazyputting/engine/Verlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/build/classes/java/main/com/crazyputting/engine/Verlet.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/build/classes/java/main/com/crazyputting/function/Derivatives$Node.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/build/classes/java/main/com/crazyputting/function/Derivatives$Node.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/build/classes/java/main/com/crazyputting/function/Derivatives.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/build/classes/java/main/com/crazyputting/function/Derivatives.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/build/classes/java/main/com/crazyputting/managers/GameStateManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/build/classes/java/main/com/crazyputting/managers/GameStateManager.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/build/classes/java/main/com/crazyputting/models/TerrainModel.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/build/classes/java/main/com/crazyputting/models/TerrainModel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/build/classes/java/main/com/crazyputting/objects/Ball.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/build/classes/java/main/com/crazyputting/objects/Ball.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/build/classes/java/main/com/crazyputting/objects/Hole.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/build/classes/java/main/com/crazyputting/objects/Hole.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/build/classes/java/main/com/crazyputting/objects/Terrain.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/build/classes/java/main/com/crazyputting/objects/Terrain.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/build/classes/java/main/com/crazyputting/states/menus/CreatorMenu$1$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/build/classes/java/main/com/crazyputting/states/menus/CreatorMenu$1$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/build/classes/java/main/com/crazyputting/states/menus/CreatorMenu$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/build/classes/java/main/com/crazyputting/states/menus/CreatorMenu$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/build/classes/java/main/com/crazyputting/states/menus/CreatorMenu.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/build/classes/java/main/com/crazyputting/states/menus/CreatorMenu.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/build/classes/java/main/com/crazyputting/states/menus/GameState.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/build/classes/java/main/com/crazyputting/states/menus/GameState.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/build/classes/java/main/com/crazyputting/states/menus/PlayState.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/build/classes/java/main/com/crazyputting/states/menus/PlayState.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/build/classes/java/main/com/crazyputting/states/menus/ThreeDimensional.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/build/classes/java/main/com/crazyputting/states/menus/ThreeDimensional.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/build/classes/java/main/com/crazyputting/player/AlexAI.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/build/classes/java/main/com/crazyputting/player/AlexAI.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/build/libs/core-1.0.jar" beforeDir="false" afterPath="$PROJECT_DIR$/core/build/libs/core-1.0.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/com/crazyputting/engine/AdamsBashforth.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/com/crazyputting/engine/AdamsBashforth.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/com/crazyputting/engine/Euler.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/com/crazyputting/engine/Euler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/com/crazyputting/engine/Physics.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/com/crazyputting/engine/Physics.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/com/crazyputting/engine/PhysicsSolver.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/com/crazyputting/engine/PhysicsSolver.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/com/crazyputting/engine/RungeKutta.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/com/crazyputting/engine/RungeKutta.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/com/crazyputting/engine/Verlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/com/crazyputting/engine/Verlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/com/crazyputting/function/Derivatives.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/com/crazyputting/function/Derivatives.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/com/crazyputting/objects/Ball.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/com/crazyputting/objects/Ball.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/com/crazyputting/models/TerrainModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/com/crazyputting/models/TerrainModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/com/crazyputting/player/AlexAI.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/com/crazyputting/player/AlexAI.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -86,40 +77,36 @@
   <component name="ProjectId" id="1ZJIE0DhocPJJmruFDwvQRits1X" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
-    <option name="showExcludedFiles" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../UNI/Year_1/SE/DKE_SE_Base" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/core/src/com/crazyputting/player" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\dolbi\Desktop\Our Project\core\src\com\crazyputting\player" />
       <recent name="C:\Users\dolbi\Desktop\Our Project\core\assets\comic\raw" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Alex\Desktop\Game\core\assets" />
     </key>
   </component>
   <component name="RunManager">
     <configuration name="Launcher" type="Application" factoryName="Application">
+      <option name="ALTERNATIVE_JRE_PATH" value="12" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
       <option name="MAIN_CLASS_NAME" value="com.crazyputting.desktop.DesktopLauncher" />
-      <module name="Project-1-2.desktop.main" />
+      <module name="Game.desktop.main" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-  </component>
-  <component name="ServiceViewManager">
-    <option name="viewStates">
-      <list>
-        <serviceView>
-          <treeState>
-            <expand />
-            <select />
-          </treeState>
-        </serviceView>
-      </list>
-    </option>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -146,6 +133,15 @@
       <workItem from="1586169645596" duration="1407000" />
       <workItem from="1586545617244" duration="9542000" />
       <workItem from="1586859864197" duration="926000" />
+      <workItem from="1588967402610" duration="4195000" />
+      <workItem from="1589196471637" duration="162000" />
+      <workItem from="1589283599202" duration="11994000" />
+      <workItem from="1589312520729" duration="627000" />
+      <workItem from="1589313234020" duration="36000" />
+      <workItem from="1589320027160" duration="1386000" />
+      <workItem from="1589321431562" duration="47000" />
+      <workItem from="1589376233983" duration="349000" />
+      <workItem from="1589386622864" duration="3121000" />
     </task>
     <task id="LOCAL-00001" summary="new CreatorMenu">
       <created>1584558969369</created>
@@ -308,21 +304,81 @@
       <option name="project" value="LOCAL" />
       <updated>1587638152931</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="ball stops at borders">
+      <created>1588968159648</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1588968159648</updated>
+    </task>
+    <task id="LOCAL-00025" summary="some kind of collisions">
+      <created>1588968807123</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1588968807123</updated>
+    </task>
+    <task id="LOCAL-00026" summary="add hitCounter">
+      <created>1588970027312</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1588970027312</updated>
+    </task>
+    <task id="LOCAL-00027" summary="refactor classes">
+      <created>1589118069466</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1589118069467</updated>
+    </task>
+    <task id="LOCAL-00028" summary="fix compile error">
+      <created>1589118243893</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1589118243893</updated>
+    </task>
+    <task id="LOCAL-00029" summary="Simple AI version,GA still doesn't work">
+      <created>1589312259401</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1589312259401</updated>
+    </task>
+    <task id="LOCAL-00030" summary="Simple AI version,GA still doesn't work">
+      <created>1589312276547</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1589312276547</updated>
+    </task>
+    <task id="LOCAL-00031" summary="AI update">
+      <created>1589321403545</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1589321403545</updated>
+    </task>
+    <option name="localTasksCounter" value="32" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="1" />
+    <option name="version" value="2" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="new CreatorMenu" />
-    <MESSAGE value="better CreatorMenu" />
-    <MESSAGE value="visualisation Works better" />
-    <MESSAGE value="visualisation works better" />
-    <MESSAGE value="ball position from CreatorMenu" />
-    <MESSAGE value="ball displayed on the screen" />
-    <MESSAGE value="ball in terrain" />
-    <MESSAGE value="moving ball" />
     <MESSAGE value="winnig screen" />
     <MESSAGE value="winning screen" />
     <MESSAGE value="charging shots with bar and slider" />
@@ -340,23 +396,33 @@
     <MESSAGE value="Drop-down menu for human player and AI. Human and AI in one interface" />
     <MESSAGE value="Exceptions added for Player and the first version of fitness function" />
     <MESSAGE value="AB4 implemented" />
-    <option name="LAST_COMMIT_MESSAGE" value="AB4 implemented" />
+    <MESSAGE value="ball stops at borders" />
+    <MESSAGE value="some kind of collisions" />
+    <MESSAGE value="add hitCounter" />
+    <MESSAGE value="refactor classes" />
+    <MESSAGE value="fix compile error" />
+    <MESSAGE value="Simple AI version,GA still doesn't work" />
+    <MESSAGE value="AI update" />
+    <MESSAGE value="AI optimization + Lower borders for better visuals." />
+    <option name="LAST_COMMIT_MESSAGE" value="AI optimization + Lower borders for better visuals." />
   </component>
   <component name="WindowStateProjectService">
-    <state x="485" y="72" key="#Launcher" timestamp="1585576421252">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state x="606" y="91" key="#Launcher" timestamp="1589304603361">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="485" y="72" key="#Launcher/0.0.1536.824@0.0.1536.824" timestamp="1585576421252" />
+    <state x="485" y="72" key="#Launcher/0.0.1536.824@0.0.1536.824" timestamp="1589117633416" />
+    <state x="606" y="91" key="#Launcher/0.0.1920.1040@0.0.1920.1040" timestamp="1589304603361" />
     <state x="96" y="0" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1586960497883">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="96" y="0" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1280.680@0.0.1280.680" timestamp="1586960497883" />
     <state x="115" y="0" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824@0.0.1536.824" timestamp="1585574618308" />
-    <state x="446" y="50" key="#com.intellij.ide.util.MemberChooser" timestamp="1588421199122">
-      <screen x="0" y="0" width="1280" height="680" />
+    <state x="669" y="77" key="#com.intellij.ide.util.MemberChooser" timestamp="1589390017365">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="446" y="50" key="#com.intellij.ide.util.MemberChooser/0.0.1280.680@0.0.1280.680" timestamp="1588421199122" />
-    <state x="535" y="61" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824@0.0.1536.824" timestamp="1586935609497" />
+    <state x="535" y="61" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824@0.0.1536.824" timestamp="1589290578666" />
+    <state x="669" y="77" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1589390017365" />
     <state x="371" y="124" key="#com.intellij.ide.util.TreeClassChooserDialog" timestamp="1584550736694">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
@@ -365,65 +431,78 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="270" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1536.824@0.0.1536.824" timestamp="1586006496559" />
-    <state x="243" y="0" key="CommitChangelistDialog2" timestamp="1588423689679">
-      <screen x="0" y="0" width="1280" height="680" />
+    <state x="292" y="0" key="CommitChangelistDialog2" timestamp="1589118242337">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="243" y="0" key="CommitChangelistDialog2/0.0.1280.680@0.0.1280.680" timestamp="1588423689679" />
-    <state x="292" y="0" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1586935745891" />
+    <state x="292" y="0" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1589118242337" />
     <state x="421" y="58" key="FileChooserDialogImpl" timestamp="1588247861115">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="421" y="58" key="FileChooserDialogImpl/0.0.1280.680@0.0.1280.680" timestamp="1588247861115" />
     <state x="505" y="70" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1585574515127" />
-    <state width="1237" height="133" key="GridCell.Tab.0.bottom" timestamp="1588423879837">
-      <screen x="0" y="0" width="1280" height="680" />
+    <state width="1877" height="297" key="GridCell.Tab.0.bottom" timestamp="1589390761207">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1237" height="133" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1588423879837" />
-    <state width="1493" height="210" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1586935793748" />
-    <state width="1237" height="133" key="GridCell.Tab.0.center" timestamp="1588423879836">
-      <screen x="0" y="0" width="1280" height="680" />
+    <state width="1478" height="210" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1589295487829" />
+    <state width="1877" height="297" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1589390761207" />
+    <state width="1877" height="297" key="GridCell.Tab.0.center" timestamp="1589390761207">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1237" height="133" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1588423879836" />
-    <state width="1493" height="210" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1586935793748" />
-    <state width="1237" height="133" key="GridCell.Tab.0.left" timestamp="1588423879836">
-      <screen x="0" y="0" width="1280" height="680" />
+    <state width="1478" height="210" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1589295487829" />
+    <state width="1877" height="297" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1589390761207" />
+    <state width="1877" height="297" key="GridCell.Tab.0.left" timestamp="1589390761206">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1237" height="133" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1588423879836" />
-    <state width="1493" height="210" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1586935793744" />
-    <state width="1237" height="133" key="GridCell.Tab.0.right" timestamp="1588423879837">
-      <screen x="0" y="0" width="1280" height="680" />
+    <state width="1478" height="210" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1589295487829" />
+    <state width="1877" height="297" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1589390761206" />
+    <state width="1877" height="297" key="GridCell.Tab.0.right" timestamp="1589390761207">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1237" height="133" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1588423879837" />
-    <state width="1493" height="210" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1586935793748" />
-    <state width="1493" height="261" key="GridCell.Tab.1.bottom" timestamp="1585575616128">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state width="1478" height="210" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1589295487829" />
+    <state width="1877" height="297" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1589390761207" />
+    <state width="1877" height="348" key="GridCell.Tab.1.bottom" timestamp="1589390096751">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1493" height="261" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1585575616128" />
-    <state width="1493" height="261" key="GridCell.Tab.1.center" timestamp="1585575616128">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state width="1478" height="258" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1589291636819" />
+    <state width="1877" height="348" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1589390096751" />
+    <state width="1877" height="348" key="GridCell.Tab.1.center" timestamp="1589390096751">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1493" height="261" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1585575616128" />
-    <state width="1493" height="261" key="GridCell.Tab.1.left" timestamp="1585575616128">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state width="1478" height="258" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1589291636818" />
+    <state width="1877" height="348" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1589390096751" />
+    <state width="1877" height="348" key="GridCell.Tab.1.left" timestamp="1589390096751">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1493" height="261" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1585575616128" />
-    <state width="1493" height="261" key="GridCell.Tab.1.right" timestamp="1585575616128">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state width="1478" height="258" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1589291636818" />
+    <state width="1877" height="348" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1589390096751" />
+    <state width="1877" height="348" key="GridCell.Tab.1.right" timestamp="1589390096751">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1493" height="261" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1585575616128" />
+    <state width="1478" height="258" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1589291636819" />
+    <state width="1877" height="348" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1589390096751" />
     <state x="223" y="11" width="745" height="602" key="NewModule_or_Project.wizard" timestamp="1588247873741">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="223" y="11" width="745" height="602" key="NewModule_or_Project.wizard/0.0.1280.680@0.0.1280.680" timestamp="1588247873741" />
-    <state x="301" y="120" key="Vcs.Push.Dialog.v2" timestamp="1587638160489">
-      <screen x="0" y="0" width="1280" height="680" />
+    <state x="461" y="165" key="SettingsEditor" timestamp="1588969046412">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="461" y="165" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1588969046412" />
+    <state x="452" y="184" key="Vcs.Push.Dialog.v2" timestamp="1589321405054">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="301" y="120" key="Vcs.Push.Dialog.v2/0.0.1280.680@0.0.1280.680" timestamp="1587638160489" />
-    <state x="361" y="146" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1586555100822" />
-    <state x="465" y="238" key="com.intellij.ide.util.TipDialog" timestamp="1586935204647">
+    <state x="549" y="182" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1589118247495" />
+    <state x="452" y="184" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1589321405054" />
+    <state x="465" y="238" key="com.intellij.ide.util.TipDialog" timestamp="1589283602177">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="465" y="238" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1586935204647" />
+    <state x="465" y="238" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1589283602177" />
     <state x="450" y="257" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1588423646673">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
@@ -441,9 +520,10 @@
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="297" y="151" key="run.anything.popup/0.0.1280.680@0.0.1280.680" timestamp="1584812269017" />
-    <state x="303" y="1" width="672" height="678" key="search.everywhere.popup" timestamp="1584817042637">
-      <screen x="0" y="0" width="1280" height="680" />
+    <state x="455" y="2" width="1008" height="1037" key="search.everywhere.popup" timestamp="1589376401323">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="303" y="1" width="672" height="678" key="search.everywhere.popup/0.0.1280.680@0.0.1280.680" timestamp="1584817042637" />
+    <state x="455" y="2" width="1008" height="1037" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1589376401323" />
   </component>
 </project>

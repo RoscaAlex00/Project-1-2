@@ -17,9 +17,10 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.crazyputting.Bot.AI;
-import com.crazyputting.Bot.Human;
-import com.crazyputting.Bot.Player;
+import com.crazyputting.player.AI;
+import com.crazyputting.player.AlexAI;
+import com.crazyputting.player.Human;
+import com.crazyputting.player.Player;
 import com.crazyputting.CrazyPutting;
 import com.crazyputting.engine.*;
 import com.crazyputting.function.Derivatives;
@@ -88,7 +89,7 @@ public class CreatorMenu extends GameState {
         solverSelect.setItems("Euler", "Verlet", "Runge-Kutta", "Adams-Bashforth");
         Label playerLabel = new Label("                    Player: ", skin);
         final SelectBox<String> playerSelect = new SelectBox<>(skin);
-        playerSelect.setItems("Human","AI");
+        playerSelect.setItems("Human","AI","AlexAI");
 
         /*Label frictionLabel = new Label("Friction coefficient: ", skin);
         final TextField frictionField = new TextField("5", skin);
@@ -171,6 +172,9 @@ public class CreatorMenu extends GameState {
                     switch (selectedPlayer){
                         case "AI":
                             player = new AI(vMax);
+                            break;
+                        case "AlexAI":
+                            player = new AlexAI();
                             break;
                         default:
                             player = new Human(vMax);

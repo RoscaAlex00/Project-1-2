@@ -1,4 +1,4 @@
-package com.crazyputting.Bot;
+package com.crazyputting.player;
 
 import com.badlogic.gdx.math.Vector3;
 import com.crazyputting.objects.Terrain;
@@ -29,4 +29,14 @@ public class Human implements Player {
     public Vector3 shot_velocity(Terrain terrain) throws IllegalAccessException {
         throw new IllegalAccessException("This is the wrong class");
     }
+
+    @Override
+    public void runLoop() {
+    }
+
+    @Override
+    public void setTerrain(Terrain terrain) {
+
+    }
+
 }

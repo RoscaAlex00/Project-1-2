@@ -95,6 +95,18 @@ public class Physics {
         if (velocity.len() < SPVELOCITY && calcGravity(position).len() < SPACCELERATION) {
             ball.setStopped();
         }
+        if(position.x <= 0.2f){
+            ball.hit(new Vector3(4f,0,0));
+        }
+        if(position.y <= 0.2f){
+            ball.hit(new Vector3(0,4f,0));
+        }
+        if(position.x >= terrain.getWidth()-0.3f){
+            ball.hit(new Vector3(-4f,0,0));
+        }
+        if(position.y >= terrain.getHeight()-0.3f){
+            ball.hit(new Vector3(0,-4f,0));
+        }
         ball.getPosition().z = terrain.getFunction().evaluateF(position.x, position.y);
     }
     protected void setDt(float dt){

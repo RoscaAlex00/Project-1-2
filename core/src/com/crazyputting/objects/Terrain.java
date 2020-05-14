@@ -1,7 +1,7 @@
 package com.crazyputting.objects;
 
 import com.badlogic.gdx.math.Vector3;
-import com.crazyputting.Bot.Player;
+import com.crazyputting.player.Player;
 import com.crazyputting.engine.PhysicsSolver;
 import com.crazyputting.function.Function;
 

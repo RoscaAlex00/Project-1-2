@@ -14,8 +14,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Scaling;
 import com.badlogic.gdx.utils.viewport.ScalingViewport;
-import com.crazyputting.Bot.Human;
-import com.crazyputting.Bot.Player;
+import com.crazyputting.player.*;
 import com.crazyputting.engine.Physics;
 import com.crazyputting.engine.PhysicsSolver;
 import com.crazyputting.managers.GameStateManager;
@@ -44,6 +43,8 @@ public class PlayState extends ThreeDimensional {
 
     private boolean isSpacePressed = false;
     private long startChargeTime;
+    private int hitCounter = 0;
+    private Population newPopulation;
 
     private GameStateManager manager;
 
@@ -73,7 +74,7 @@ public class PlayState extends ThreeDimensional {
         physics = new Physics(ball, terrain, hole, solver);
         createHUD();
 
-        if (player instanceof Human){
+        if (player instanceof Human) {
             Texture meterImg = new Texture("chargeMeter.jpg");
             chargeMeter = new Image(meterImg);
             chargeMeter.setScaleY(0.2f);
@@ -86,6 +87,12 @@ public class PlayState extends ThreeDimensional {
 
             hud.addActor(chargeMeter);
             hud.addActor(chargeBar);
+        }
+        if (player instanceof AI) {
+            player.setTerrain(terrain);
+        }
+        if (player instanceof AlexAI) {
+            player.setTerrain(terrain);
         }
 
         setProcessors();
@@ -101,20 +108,19 @@ public class PlayState extends ThreeDimensional {
     public void update(float dt) throws IllegalAccessException {
         handleInput();
         super.update(dt);
-        if(isPushed){
+        if (isPushed) {
             paused = false;
             isPushed = false;
             setProcessors();
         }
         if (!ball.isStopped()) {
-            if(!moving){
+            if (!moving) {
                 moving = true;
             }
             ball.updateInstance(terrain.getFunction().evaluateF(ball.getPosition().x, ball.getPosition().y),
                     physics.updateBall(dt));
-        }
-        else {
-            if(moving){
+        } else {
+            if (moving) {
                 moving = false;
                 setProcessors();
             }
@@ -132,12 +138,17 @@ public class PlayState extends ThreeDimensional {
                     Vector3 cameraDirection = camera.direction.cpy();
 
                     ball.hit(player.shot_velocity(cameraDirection, charge));
+                    hitCounter++;
                 }
             }
-            else{
-                ball.hit(player.shot_velocity(terrain));
+            if (player instanceof AI) {
+                player.runLoop();
+                ball.setPosition(new Vector3(10, 10, 0));
             }
-            if(physics.isGoal()) {
+            if (player instanceof AlexAI) {
+                player.shot_velocity(terrain);
+            }
+            if (physics.isGoal()) {
                 gsm.setState(GameStateManager.END);
             }
         }
@@ -151,22 +162,21 @@ public class PlayState extends ThreeDimensional {
         return ball;
     }
 
-    public float calcMeterPercentage(){
-        float chargeTime = (System.currentTimeMillis() - startChargeTime)/1000.0f; //chargeTime in seconds
+    public float calcMeterPercentage() {
+        float chargeTime = (System.currentTimeMillis() - startChargeTime) / 1000.0f; //chargeTime in seconds
         float remainder = chargeTime % 2;
         if ((((int) chargeTime) % 2) == 0) {
             return remainder;
-        }
-        else {
+        } else {
             return (2.0f - remainder);
         }
     }
 
     @Override
     public void draw() throws IllegalAccessException {
-        if (isSpacePressed && player instanceof Human){
+        if (isSpacePressed && player instanceof Human) {
             float barIndex = calcMeterPercentage();
-            chargeBar.setX(7 + (barIndex * (chargeMeter.getWidth() - chargeBar.getWidth()*0.055f)));
+            chargeBar.setX(7 + (barIndex * (chargeMeter.getWidth() - chargeBar.getWidth() * 0.055f)));
         }
         super.draw();
         hud.act();
@@ -174,13 +184,14 @@ public class PlayState extends ThreeDimensional {
 
         if (player instanceof Human) {
             spriteBatch.begin();
-            comicFont.draw(spriteBatch, "Shot Charge :", 20, 50);
+            comicFont.draw(spriteBatch, "Hit Counter : " + hitCounter, 872, 760);
+            comicFont.draw(spriteBatch, "Shot Charge :", 15, 50);
             spriteBatch.end();
         }
     }
 
     @Override
-    public void handleInput(){
+    public void handleInput() {
     }
 
     @Override
