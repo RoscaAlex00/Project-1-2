@@ -14,8 +14,6 @@ public class AdamsBashforth implements PhysicsSolver {
 
     private ArrayList<Vector3> positions = new ArrayList<>();
     private ArrayList<Vector3> velocities = new ArrayList<>();
-    private Vector3[] accelerationFunctions = new Vector3[4];
-    private Vector3[] velocityFunctions = new Vector3[4];
     private final int[] ab4Coefficients = new int[]{-9,37,-59,55};
 
     @Override
@@ -45,6 +43,7 @@ public class AdamsBashforth implements PhysicsSolver {
             }
             positions.set(positions.size() - 1, position.cpy());
 
+            Vector3[] velocityFunctions = new Vector3[4];
             for (int i = 0; i < velocityFunctions.length; i++) {
                 velocityFunctions[i] = velocities.get(i).cpy();
             }
@@ -76,6 +75,7 @@ public class AdamsBashforth implements PhysicsSolver {
             }
             velocities.set(ORDER - 1, velocity.cpy());
 
+            Vector3[] accelerationFunctions = new Vector3[4];
             for (int i = 0; i < accelerationFunctions.length; i++) {
                 accelerationFunctions[i] = physics.getAcceleration(positions.get(i), velocities.get(i)).cpy();
             }
