@@ -31,7 +31,9 @@ public class AdamsBashforth implements PhysicsSolver {
 
     @Override
     public Vector3 getPosition(Vector3 position, Vector3 velocity) {
+        //Doesn't add new positions to the list if the ball is not moving.
         if (isHit) {
+            //Makes a list of positions, to use those in the adams-bashforth steps
             if (positions.size() < ORDER) {
                 Vector3 newPos = bootstrap.getPosition(position.cpy(), velocity.cpy());
                 positions.add(newPos.cpy());
@@ -43,7 +45,6 @@ public class AdamsBashforth implements PhysicsSolver {
             }
             positions.set(positions.size() - 1, position.cpy());
 
-            //error here (need to use getSpeed())?
             for (int i = 0; i < velocityFunctions.length; i++) {
                 velocityFunctions[i] = velocities.get(i).cpy();
             }
@@ -54,13 +55,16 @@ public class AdamsBashforth implements PhysicsSolver {
             }
             return positions.get(3).add(funSum.scl(physics.getDt() / 24f));
         }
+        //Clears the positions list so the function doesn't use wrong values.
         positions.clear();
         return bootstrap.getPosition(position, velocity);
     }
 
     @Override
     public Vector3 getSpeed(Vector3 position, Vector3 velocity) {
+        //Doesn't add new velocities to the list if the ball is not moving.
         if (isHit) {
+            //Makes a list of velocities, to use those in the adams-bashforth steps
             if (velocities.size() < ORDER) {
                 Vector3 newSpeed = bootstrap.getSpeed(position.cpy(), velocity.cpy());
                 velocities.add(newSpeed.cpy());
@@ -82,6 +86,7 @@ public class AdamsBashforth implements PhysicsSolver {
             }
             return velocities.get(3).add(funSum.scl(physics.getDt() / 24f));
         }
+        //Clears the velocities list so the function doesn't use wrong values.
         velocities.clear();
         return bootstrap.getSpeed(position,velocity);
     }

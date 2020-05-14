@@ -20,17 +20,7 @@ public class RungeKutta implements PhysicsSolver {
         Vector3 funK1 = getSpeed(position,velocity).cpy();
         Vector3 k1 = funK1.scl(physics.getDt());
 
-        /*
-        float sclFactor = 4/3f;
-        Vector3 velK2 = setDtGetSpeed(position,velocity,sclFactor);
-
-        sclFactor = 5/3f;
-        Vector3 velK3 = setDtGetSpeed(position,velocity,sclFactor);
-
-        sclFactor = 2f;
-        Vector3 velK4 = setDtGetSpeed(position,velocity,sclFactor);
-        */
-
+        //Used to get the time-differences in the function.
         float sclFactor = 1/3f;
         Vector3 velK2 = setDtGetSpeed(position,velocity,sclFactor);
 
@@ -66,19 +56,16 @@ public class RungeKutta implements PhysicsSolver {
         Vector3 k1 = funK1.scl(physics.getDt());
 
         Vector3 posK2 = position.cpy().add(velocity.cpy().scl(physics.getDt()/3f));
-        //Vector3 posK2 = position.cpy().add(physics.getDt()/3f);
         Vector3 velK2 = velocity.cpy().add(k1.cpy().scl(1/3f));
         Vector3 funK2 = physics.getAcceleration(posK2,velK2).cpy();
         Vector3 k2 = funK2.scl(physics.getDt());
 
         Vector3 posK3 = position.cpy().add(velocity.cpy().scl((2*physics.getDt())/3f));
-        //Vector3 posK3 = position.cpy().add((2*physics.getDt())/3f);
         Vector3 velK3 = velocity.cpy().sub(k1.cpy().scl(1/3f)).add(k2.cpy());
         Vector3 funK3 = physics.getAcceleration(posK3,velK3).cpy();
         Vector3 k3 = funK3.scl(physics.getDt());
 
         Vector3 posK4 = position.cpy().add(velocity.cpy().scl(physics.getDt()));
-        //Vector3 posK4 = position.cpy().add(physics.getDt());
         Vector3 velK4 = velocity.cpy().add(k1.cpy()).sub(k2.cpy()).add(k3.cpy());
         Vector3 funK4 = physics.getAcceleration(posK4,velK4).cpy();
         Vector3 k4 = funK4.scl(physics.getDt());
