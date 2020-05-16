@@ -3,6 +3,7 @@ package com.crazyputting.engine;
 import com.badlogic.gdx.math.Vector3;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class AdamsBashforth implements PhysicsSolver {
     private final int ORDER = 4;
@@ -12,8 +13,8 @@ public class AdamsBashforth implements PhysicsSolver {
     private Physics physics;
     private PhysicsSolver bootstrap = new RungeKutta();
 
-    private ArrayList<Vector3> positions = new ArrayList<>();
-    private ArrayList<Vector3> velocities = new ArrayList<>();
+    private List<Vector3> positions = new ArrayList<>();
+    private List<Vector3> velocities = new ArrayList<>();
     private final int[] ab4Coefficients = new int[]{-9,37,-59,55};
 
     @Override

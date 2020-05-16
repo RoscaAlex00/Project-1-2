@@ -44,7 +44,7 @@ public class Ball {
     }
 
     public void update(float z) {
-        position.z = z;
+        position.z = z - diameter/2;
         ball.transform.setTranslation(position.x, position.y, position.z);
     }
 
@@ -68,8 +68,8 @@ public class Ball {
 
     public void updateInstance(float z, float displacement) {
         if (displacement != 0) colliding = false;
-        position.z = z;
-        ball.transform.setTranslation(position.x, position.y, position.z + (diameter));
+        position.z = z ;
+        ball.transform.setTranslation(position.x, position.y, position.z + (diameter/2));
     }
 
     public float getMass() {

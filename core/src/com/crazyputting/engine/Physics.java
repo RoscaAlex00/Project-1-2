@@ -19,6 +19,7 @@ public class Physics {
     private Hole hole;
     private float mass;
     private float radius;
+    private final float WALL_HIT_FRICTION = -0.95f;
 
 
     public Physics(Ball yourBall, Terrain yourTerrain, Hole newHole, PhysicsSolver solver) {
@@ -95,17 +96,11 @@ public class Physics {
         if (velocity.len() < SPVELOCITY && calcGravity(position).len() < SPACCELERATION) {
             ball.setStopped();
         }
-        if(position.x <= 0.2f){
-            ball.hit(new Vector3(4f,0,0));
+        if(position.x <= 0.2f || position.x >= terrain.getWidth()-0.3f){
+            ball.getVelocity().x *= WALL_HIT_FRICTION;
         }
-        if(position.y <= 0.2f){
-            ball.hit(new Vector3(0,4f,0));
-        }
-        if(position.x >= terrain.getWidth()-0.3f){
-            ball.hit(new Vector3(-4f,0,0));
-        }
-        if(position.y >= terrain.getHeight()-0.3f){
-            ball.hit(new Vector3(0,-4f,0));
+        if(position.y <= 0.2f || position.y >= terrain.getHeight()-0.3f){
+            ball.getVelocity().y *= WALL_HIT_FRICTION;
         }
         ball.getPosition().z = terrain.getFunction().evaluateF(position.x, position.y);
     }
