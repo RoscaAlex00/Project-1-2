@@ -42,7 +42,7 @@ public class CreatorMenu extends GameState {
     public void init() {
         final String[] SOLVER_STRING = new String[]{"Euler", "Verlet", "Runge-Kutta", "Adams-Bashforth"};
         final Array<String> SOLVERS = new Array<>(SOLVER_STRING);
-        final String[] PLAYER_STRING = new String[]{"Human","AI","AlexAI","StefanAI"};
+        final String[] PLAYER_STRING = new String[]{"Human","AI","AlexAI","StefanAI","FrunzAI"};
         final Array<String> PLAYERS = new Array<>(PLAYER_STRING);
 
         spriteBatch = new SpriteBatch();

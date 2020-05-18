@@ -1,16 +1,11 @@
-package com.crazyputting.player;
+package com.crazyputting.player.AI;
 
 import com.badlogic.gdx.math.Vector3;
 import com.crazyputting.function.Function;
 import com.crazyputting.objects.Ball;
 import com.crazyputting.objects.Hole;
 import com.crazyputting.objects.Terrain;
-import com.crazyputting.player.Individual;
 import com.crazyputting.player.Player;
-import com.crazyputting.player.Population;
-
-import java.util.Map;
-import java.util.Random;
 
 public class AI implements Player {
 

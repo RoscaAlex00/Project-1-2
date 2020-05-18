@@ -1,6 +1,8 @@
 package com.crazyputting.player;
 
-import com.crazyputting.engine.*;
+import com.crazyputting.player.AI.AI;
+import com.crazyputting.player.AI.AlexAI;
+import com.crazyputting.player.AI.FrunzAI;
 
 public class PlayerFactory {
 
@@ -21,6 +23,8 @@ public class PlayerFactory {
                 return new AlexAI();
             /*case "AIStefan":
                 return new AIStefan();*/
+            case "FrunzAI":
+                return new FrunzAI();
             default:
                 return new Human(maximumVelocity);
         }

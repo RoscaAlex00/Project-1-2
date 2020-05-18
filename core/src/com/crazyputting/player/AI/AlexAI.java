@@ -1,10 +1,11 @@
-package com.crazyputting.player;
+package com.crazyputting.player.AI;
 
 import com.badlogic.gdx.math.Vector;
 import com.badlogic.gdx.math.Vector3;
 import com.crazyputting.objects.Ball;
 import com.crazyputting.objects.Hole;
 import com.crazyputting.objects.Terrain;
+import com.crazyputting.player.Player;
 
 public class AlexAI implements Player {
     private Hole hole;

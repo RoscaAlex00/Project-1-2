@@ -1,6 +1,5 @@
-package com.crazyputting.player;
+package com.crazyputting.player.AI;
 
-import com.badlogic.gdx.math.Vector3;
 import com.crazyputting.objects.Terrain;
 
 public class Population {

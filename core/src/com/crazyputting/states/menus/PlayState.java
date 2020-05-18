@@ -21,6 +21,10 @@ import com.crazyputting.managers.GameStateManager;
 import com.crazyputting.objects.Ball;
 import com.crazyputting.objects.Hole;
 import com.crazyputting.objects.Terrain;
+import com.crazyputting.player.AI.AI;
+import com.crazyputting.player.AI.AlexAI;
+import com.crazyputting.player.AI.FrunzAI;
+import com.crazyputting.player.AI.Population;
 
 public class PlayState extends ThreeDimensional {
     private Physics physics;
@@ -146,6 +150,9 @@ public class PlayState extends ThreeDimensional {
                 ball.setPosition(new Vector3(10, 10, 0));
             }
             if (player instanceof AlexAI) {
+                player.shot_velocity(terrain);
+            }
+            if(player instanceof FrunzAI){
                 player.shot_velocity(terrain);
             }
             if (physics.isGoal()) {

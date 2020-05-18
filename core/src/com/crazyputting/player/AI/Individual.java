@@ -1,4 +1,4 @@
-package com.crazyputting.player;
+package com.crazyputting.player.AI;
 
 import java.util.Random;
 
