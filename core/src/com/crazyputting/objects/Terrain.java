@@ -1,31 +1,32 @@
 package com.crazyputting.objects;
 
 import com.badlogic.gdx.math.Vector3;
+import com.crazyputting.player.Human;
 import com.crazyputting.player.Player;
 import com.crazyputting.engine.PhysicsSolver;
 import com.crazyputting.function.Function;
 
+import java.util.List;
+
 
 public class Terrain {
-    private float height;
-    private float width;
-    private Vector3 startPos;
+    private final float height;
+    private final float width;
+    private final Vector3 startPos;
+    private final Hole hole;
+    private final String name;
+    private final Function yourFunction;
+    private final float frictionCoefficient;
+    private final float maximumVelocity;
+    private final PhysicsSolver solver;
+    private final Player player;
     private Ball ball;
-    private Hole hole;
-    private String name;
-    private Function yourFunction;
-    private final float HOLE_DIAMETER = 1.10f;
-    private float frictionCoefficient;
-    private float maximumVelocity;
-    private PhysicsSolver solver;
-    private Player player;
 
-    public Terrain(float ourHeight, float ourWidth, Ball ball, Hole endHole, Function function, float MU,
+    public Terrain(float ourHeight, float ourWidth, Vector3 teeVector, Hole endHole, Function function, float MU,
                    float maxSpeed, String name, PhysicsSolver solver, Player player) {
         this.height = ourHeight;
         this.width = ourWidth;
-        this.startPos = ball.getPosition().cpy();
-        this.ball = ball;
+        this.startPos = teeVector;
         this.hole = endHole;
         this.name = name;
         this.yourFunction = function;
@@ -33,8 +34,8 @@ public class Terrain {
         this.maximumVelocity = maxSpeed;
         this.solver = solver;
         this.player = player;
+        this.ball = new Ball(teeVector);
     }
-
 
     public float getHeight() {
         return height;
@@ -52,8 +53,6 @@ public class Terrain {
         return startPos;
     }
 
-    public Ball getBall(){ return ball; }
-
     public Hole getHole() {
         return hole;
     }
@@ -62,14 +61,16 @@ public class Terrain {
         return frictionCoefficient;
     }
 
-    public float getMaximumVelocity(){ return maximumVelocity; }
+    public float getMaximumVelocity(){
+        return maximumVelocity;
+    }
 
     public String getName() {
         return name;
     }
 
     public float getHoleDiameter() {
-        return HOLE_DIAMETER;
+        return 1.10f;
     }
 
     public PhysicsSolver getSolver(){
@@ -78,5 +79,18 @@ public class Terrain {
 
     public Player getPlayer(){
         return player;
+    }
+
+    public Ball getBall(){
+        return ball;
+    }
+
+    public Ball setBall(){
+        this.ball = new Ball(startPos.cpy());
+        return ball;
+    }
+
+    public void setBall(Ball ball){
+        this.ball = ball;
     }
 }
