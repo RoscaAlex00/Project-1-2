@@ -11,18 +11,24 @@ import java.util.Map;
  * Node for a graph
  */
 public class Node {
+    private Vector3 accumulatedValues;
+    private Vector3 heuristicValue;
     private Node parent;
     private final Map<Node, Vector3> children = new HashMap<>();
     private final String id;
 
-    public Node(String id){
+    public Node(String id, Vector3 heuristicValue){
         this.id = id;
+        this.accumulatedValues = new Vector3(0,0,0);
+        this.heuristicValue = heuristicValue;
     }
 
-    public Node(String id, Node parent, Vector3 value){
+    public Node(String id, Node parent, Vector3 value, Vector3 heuristicValue){
         this.id = id;
         parent.addChild(this, value);
         this.parent = parent;
+        this.accumulatedValues = parent.accumulatedValues.cpy().add(value);
+        this.heuristicValue = heuristicValue;
     }
 
     public Node root(){
@@ -48,6 +54,26 @@ public class Node {
 
     public String getId() {
         return id;
+    }
+
+    public Vector3 getAccumulatedValues(){
+        return accumulatedValues;
+    }
+
+    public void setAccumulatedValues(Vector3 accumulatedValues) {
+        this.accumulatedValues = accumulatedValues;
+    }
+
+    public Vector3 getHeuristicValue() {
+        return heuristicValue;
+    }
+
+    public void setHeuristicValue(Vector3 heuristicValue) {
+        this.heuristicValue = heuristicValue;
+    }
+
+    public Vector3 getTotalNodeValue(){
+        return accumulatedValues.cpy().add(heuristicValue);
     }
 
     @Override
