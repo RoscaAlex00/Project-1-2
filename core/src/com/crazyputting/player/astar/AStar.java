@@ -27,8 +27,8 @@ public class AStar implements Player {
         Vector3 startToHoleDistance = holePos.sub(startPos);
         startToHoleDistance.z = 0;
         
-    	Node startNode = new Node("", startToHoleDistance);
-    	Node endNode = new Node("", new Vector3(0, 0, 0));
+        Node startNode = new Node("", startPos, startToHoleDistance);
+    	Node endNode = new Node("", holePos, new Vector3(0, 0, 0));
     	return null;
     }
 	
