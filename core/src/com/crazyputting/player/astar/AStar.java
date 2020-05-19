@@ -12,6 +12,11 @@ public class AStar implements Player {
     private Ball ball;
     private Terrain terrain;
     private Vector3 velocity;
+    private float maximumVelocity;
+
+    public AStar(float maximumVelocity){
+        this.maximumVelocity = maximumVelocity;
+    }
 
     @Override
     public Vector3 shot_velocity(Vector3 camera_direction, float charge) throws IllegalAccessException {
