@@ -23,10 +23,24 @@ public class Node {
         this.position = position;
     }
 
+    public Node(String id, Vector3 position, Node parent){
+        this.id = id;
+        this.position = position;
+        this.parent = parent;
+        this.accumulatedValues = parent.getAccumulatedValues().cpy();
+    }
+
     public Node(String id, Vector3 position, Vector3 heuristicValue){
         this.id = id;
         this.position = position;
         this.heuristicValue = heuristicValue;
+    }
+
+    public Node(String id, Vector3 position, Vector3 heuristicValue, Vector3 value){
+        this.id = id;
+        this.accumulatedValues = value;
+        this.heuristicValue = heuristicValue;
+        this.position = position;
     }
 
     public Node(String id, Vector3 position, Vector3 heuristicValue, Vector3 value, Node parent){
@@ -49,6 +63,10 @@ public class Node {
 
     public boolean isParent(Node node){
         return parent.equals(node);
+    }
+
+    public Node getParent() {
+        return parent;
     }
 
     public boolean isChild(Node node){

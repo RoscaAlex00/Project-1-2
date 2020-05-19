@@ -145,14 +145,11 @@ public class PlayState extends ThreeDimensional {
                     hitCounter++;
                 }
             }
-            if (player instanceof AI) {
+            else if (player instanceof AI) {
                 player.runLoop();
                 ball.setPosition(new Vector3(10, 10, 0));
             }
-            if (player instanceof AlexAI) {
-                player.shot_velocity(terrain);
-            }
-            if(player instanceof FrunzAI){
+            else{
                 player.shot_velocity(terrain);
             }
             if (physics.isGoal()) {
