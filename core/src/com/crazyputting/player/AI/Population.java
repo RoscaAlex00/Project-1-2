@@ -4,12 +4,13 @@ import com.crazyputting.objects.Terrain;
 
 public class Population {
 
-	private Terrain terrain;
     public Individual[] individuals = new Individual[100];
+    private Terrain terrain;
+
     public Population(Terrain terrain) {
-    	this.terrain = terrain;
+        this.terrain = terrain;
     }
-    
+
     //Initialize population
     public void initializePopulation(int size) {
         for (int i = 0; i < individuals.length; i++) {
@@ -18,20 +19,23 @@ public class Population {
 
 
     }
+
     //Calculate fitness of each individual
    /* public void calculateFitness() {
         for (int i = 0; i < individuals.length; i++) {
             individuals[i].calcFitness();
         }
     }*/
-    public Individual[] getIndividuals(){
+    public Individual[] getIndividuals() {
         return individuals;
     }
-    public Terrain getTerrain(){
-        return terrain;
-    }
-    public void setIndividuals(Individual[] newIndividuals){
+
+    public void setIndividuals(Individual[] newIndividuals) {
         this.individuals = newIndividuals;
+    }
+
+    public Terrain getTerrain() {
+        return terrain;
     }
 }
 

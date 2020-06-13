@@ -1,7 +1,12 @@
 package com.crazyputting.managers;
 
 import com.crazyputting.objects.Terrain;
-import com.crazyputting.states.menus.*;
+import com.crazyputting.states.menus.CreatorMenu;
+import com.crazyputting.states.menus.MainMenu;
+import com.crazyputting.states.menus.SettingsMenu;
+import com.crazyputting.states.gamestates.EndState;
+import com.crazyputting.states.gamestates.GameState;
+import com.crazyputting.states.gamestates.PlayState;
 
 public class GameStateManager {
     public static final int MENU = 0;
@@ -46,10 +51,12 @@ public class GameStateManager {
         gameState.draw();
     }
 
-    public void setTerrain(Terrain newTerrain){
-        this.terrain = newTerrain;
+    public Terrain getTerrain() {
+        return terrain;
     }
 
-    public Terrain getTerrain(){ return terrain; }
+    public void setTerrain(Terrain newTerrain) {
+        this.terrain = newTerrain;
+    }
 
 }

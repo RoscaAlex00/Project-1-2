@@ -1,12 +1,9 @@
 package com.crazyputting.objects;
 
 import com.badlogic.gdx.math.Vector3;
-import com.crazyputting.player.Human;
 import com.crazyputting.player.Player;
-import com.crazyputting.engine.PhysicsSolver;
+import com.crazyputting.physicsengine.PhysicsSolver;
 import com.crazyputting.function.Function;
-
-import java.util.List;
 
 
 public class Terrain {
@@ -16,10 +13,10 @@ public class Terrain {
     private final Hole hole;
     private final String name;
     private final Function yourFunction;
-    private final float frictionCoefficient;
     private final float maximumVelocity;
     private final PhysicsSolver solver;
     private final Player player;
+    private float frictionCoefficient;
     private Ball ball;
 
     public Terrain(float ourHeight, float ourWidth, Vector3 teeVector, Hole endHole, Function function, float MU,
@@ -41,7 +38,7 @@ public class Terrain {
         return height;
     }
 
-    public Function getFunction(){
+    public Function getFunction() {
         return yourFunction;
     }
 
@@ -61,7 +58,7 @@ public class Terrain {
         return frictionCoefficient;
     }
 
-    public float getMaximumVelocity(){
+    public float getMaximumVelocity() {
         return maximumVelocity;
     }
 
@@ -73,24 +70,32 @@ public class Terrain {
         return 1.10f;
     }
 
-    public PhysicsSolver getSolver(){
+    public PhysicsSolver getSolver() {
         return solver;
     }
 
-    public Player getPlayer(){
+    public Player getPlayer() {
         return player;
     }
 
-    public Ball getBall(){
+    public Ball getBall() {
         return ball;
     }
 
-    public Ball setBall(){
+    public void setBall(Ball ball) {
+        this.ball = ball;
+    }
+
+    public Ball setBall() {
         this.ball = new Ball(startPos.cpy());
         return ball;
     }
 
-    public void setBall(Ball ball){
-        this.ball = ball;
+    public float getFrictionCoefficient() {
+        return frictionCoefficient;
+    }
+
+    public void setFrictionCoefficient(float frictionCoefficient) {
+        this.frictionCoefficient = frictionCoefficient;
     }
 }

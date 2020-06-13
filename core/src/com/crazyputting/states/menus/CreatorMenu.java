@@ -19,13 +19,15 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.crazyputting.managers.GameStateManager;
+import com.crazyputting.physicsengine.PhysicsSolver;
+import com.crazyputting.physicsengine.SolverFactory;
 import com.crazyputting.player.*;
 import com.crazyputting.CrazyPutting;
-import com.crazyputting.engine.*;
 import com.crazyputting.function.Derivatives;
 import com.crazyputting.function.Function;
 import com.crazyputting.objects.Hole;
 import com.crazyputting.objects.Terrain;
+import com.crazyputting.states.gamestates.GameState;
 
 public class CreatorMenu extends GameState {
 
@@ -42,7 +44,7 @@ public class CreatorMenu extends GameState {
     public void init() {
         final String[] SOLVER_STRING = new String[]{"Euler", "Verlet", "Runge-Kutta", "Adams-Bashforth"};
         final Array<String> SOLVERS = new Array<>(SOLVER_STRING);
-        final String[] PLAYER_STRING = new String[]{"Human","AI","AlexAI","FrunzAI","AStar"};
+        final String[] PLAYER_STRING = new String[]{"Human", "AI", "AlexAI", "FrunzAI", "AStar"};
         final Array<String> PLAYERS = new Array<>(PLAYER_STRING);
 
         spriteBatch = new SpriteBatch();
@@ -67,7 +69,7 @@ public class CreatorMenu extends GameState {
         HorizontalGroup constants = new HorizontalGroup();
         HorizontalGroup solverAndPlayer = new HorizontalGroup();
 
-        Label startXLabel = new Label("                       Start X = ",skin);
+        Label startXLabel = new Label("                       Start X = ", skin);
         final TextField startXField = new TextField("10", skin);
         Label startYLabel = new Label("        Start Y = ", skin);
         final TextField startYField = new TextField("10", skin);
@@ -127,8 +129,7 @@ public class CreatorMenu extends GameState {
                     length = Integer.parseInt(courseLengthField.getText().replaceAll(" ", ""));
                     /*MU = Float.parseFloat(frictionField.getText().replaceAll(" ", ""));
                     vMax = Float.parseFloat(speedField.getText().replaceAll(" ", ""));*/
-                }
-                catch (Exception e) {
+                } catch (Exception e) {
                     TextButton buttonOK = new TextButton("Ok", skin);
                     Label labelError0 = new Label("Not all fields contain real values.", skin);
                     labelError0.setColor(Color.RED);
@@ -162,7 +163,7 @@ public class CreatorMenu extends GameState {
                     Hole hole = new Hole(goalRadius, holeVector);
 
                     Terrain newTerrain = new Terrain(length, width, teeVector, hole, function, MU,
-                            vMax,"newTerrain", solver, player);
+                            vMax, "newTerrain", solver, player);
                     gsm.setTerrain(newTerrain);
                     gsm.setState(GameStateManager.PLAY);
                 }
@@ -211,7 +212,7 @@ public class CreatorMenu extends GameState {
         main.add(fieldSize).fillY().align(Align.left);
         /*main.row().pad(5, 0, 5, 0);
         main.add(constants).fillY().align(Align.left);*/
-        main.row().pad(20,0,20,0);
+        main.row().pad(20, 0, 20, 0);
         main.add(solverAndPlayer).fillY().align(Align.center);
         main.row().pad(20, 0, 20, 0);
         main.add(playButton).align(Align.center);

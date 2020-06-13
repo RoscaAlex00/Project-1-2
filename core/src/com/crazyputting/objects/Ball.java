@@ -12,12 +12,11 @@ import com.badlogic.gdx.math.Vector3;
 
 public class Ball {
     public final float DIAMETER = 0.62f; //in meters
+    private final Texture TEXTURE = new Texture("ball.jpg");
     private Vector3 position;
     private boolean colliding = false;
     private boolean stopped = false;
     private boolean isHit = false;
-
-    private final Texture TEXTURE = new Texture("ball.jpg");
     private Vector3 velocity;
     private ModelInstance ball;
     private Vector3 initialPosition;
@@ -37,7 +36,7 @@ public class Ball {
     }
 
     public void update(float z) {
-        position.z = z - (DIAMETER/2);
+        position.z = z - (DIAMETER / 2);
         ball.transform.setTranslation(position);
     }
 
@@ -54,14 +53,14 @@ public class Ball {
     }
 
     public void setStopped() {
-        velocity.set(0,0,0);
+        velocity.set(0, 0, 0);
         this.isHit = false;
         this.stopped = true;
     }
 
     public void updateInstance(float z, float displacement) {
         if (displacement != 0) colliding = false;
-        position.z = z + (DIAMETER/2);
+        position.z = z + (DIAMETER / 2);
         ball.transform.setTranslation(position);
     }
 
@@ -78,7 +77,7 @@ public class Ball {
         return stopped;
     }
 
-    public boolean isHit(){
+    public boolean isHit() {
         return isHit;
     }
 
@@ -94,14 +93,15 @@ public class Ball {
         return position;
     }
 
-    public ModelInstance getModel() {
-        return ball;
-    }
-    public void setPosition(Vector3 pos){
+    public void setPosition(Vector3 pos) {
         this.position = pos;
     }
 
-    public void setPositionToInitial(){
+    public ModelInstance getModel() {
+        return ball;
+    }
+
+    public void setPositionToInitial() {
         this.position = initialPosition;
     }
 }

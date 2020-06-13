@@ -26,27 +26,27 @@ public class FrunzAI implements Player {
     public Vector3 shot_velocity(Terrain terrain) {
         this.ball = terrain.getBall();
         this.hole = terrain.getHole();
-        this.start= terrain.getStartPos();
+        this.start = terrain.getStartPos();
 
         float subX = hole.getPosition().cpy().sub(terrain.getBall().getPosition().cpy()).x;
         float subY = hole.getPosition().cpy().sub(terrain.getBall().getPosition().cpy()).y;
 
-        Point [] pointCollection=new Point[10];
-        for(int i=0;i<pointCollection.length;i++){
-            float generated1=randFloat();
-            float generated2=randFloat();
-            pointCollection[i]=new Point(generated1,generated2);
-            float holeDis=pointCollection[i].holeDisCalc(pointCollection[i],hole);
-            float startDis=pointCollection[i].startDisCalc(pointCollection[i],start);
+        Point[] pointCollection = new Point[10];
+        for (int i = 0; i < pointCollection.length; i++) {
+            float generated1 = randFloat();
+            float generated2 = randFloat();
+            pointCollection[i] = new Point(generated1, generated2);
+            float holeDis = pointCollection[i].holeDisCalc(pointCollection[i], hole);
+            float startDis = pointCollection[i].startDisCalc(pointCollection[i], start);
             pointCollection[i].setDisHole(holeDis);
             pointCollection[i].setDisStart(startDis);
-            pointCollection[i].setCumDis(holeDis+4*startDis);
+            pointCollection[i].setCumDis(holeDis + 4 * startDis);
             System.out.println(pointCollection[i].getCumDis());
         }
 
         float minDis = pointCollection[0].getCumDis();
-        for(int i=1;i<pointCollection.length;i++){
-            if(pointCollection[i].getCumDis() < minDis){
+        for (int i = 1; i < pointCollection.length; i++) {
+            if (pointCollection[i].getCumDis() < minDis) {
                 minDis = pointCollection[i].getCumDis();
                 System.out.println(minDis);
                 System.out.println("best");
@@ -58,28 +58,28 @@ public class FrunzAI implements Player {
                 vec = point.getPointPosition();
             }
         }
-        if(subX < 2f && subY < 2f && subX > -2f && subY > -2){
+        if (subX < 2f && subY < 2f && subX > -2f && subY > -2) {
             velocity = hole.getPosition().cpy().sub(terrain.getBall().getPosition().cpy());
             ball.hit(velocity);
         }
-        if(vec.dst(hole.getPosition())<(terrain.getBall().getPosition().dst(hole.getPosition()))){
+        if (vec.dst(hole.getPosition()) < (terrain.getBall().getPosition().dst(hole.getPosition()))) {
             velocity = vec.sub(terrain.getBall().getPosition().cpy());
             velocity.scl(0.8f);
             ball.hit(velocity);
         }
-        return  null;
+        return null;
     }
 
-    public  float randFloat() {
+    public float randFloat() {
         Random rand = new Random();
-        return (rand.nextFloat() * (35- 0f) + 0f);
+        return (rand.nextFloat() * (35 - 0f) + 0f);
 
     }
 
-    public float getMin(float[] inputArray){
+    public float getMin(float[] inputArray) {
         float minVal = inputArray[0];
-        for(int i=1;i<inputArray.length;i++){
-            if(inputArray[i] > minVal){
+        for (int i = 1; i < inputArray.length; i++) {
+            if (inputArray[i] > minVal) {
                 minVal = inputArray[i];
             }
         }

@@ -9,15 +9,15 @@ public class PlayerFactory {
 
     private static PlayerFactory factory = null;
 
-    public static PlayerFactory get(){
-        if (factory == null){
+    public static PlayerFactory get() {
+        if (factory == null) {
             factory = new PlayerFactory();
         }
         return factory;
     }
 
-    public Player makePlayer(String solverString, float maximumVelocity){
-        switch (solverString){
+    public Player makePlayer(String solverString, float maximumVelocity) {
+        switch (solverString) {
             case "AI":
                 return new AI(maximumVelocity);
             case "AlexAI":

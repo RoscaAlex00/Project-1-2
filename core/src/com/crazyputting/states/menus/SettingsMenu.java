@@ -15,6 +15,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.crazyputting.CrazyPutting;
 import com.crazyputting.managers.GameStateManager;
+import com.crazyputting.states.gamestates.GameState;
 
 public class SettingsMenu extends GameState {
     SpriteBatch myBatch;

@@ -13,13 +13,13 @@ import java.util.PriorityQueue;
 
 public class AStar implements Player {
 
-	private Hole hole;
+    private Hole hole;
     private Ball ball;
     private Terrain terrain;
     private Vector3 velocity;
     private float maximumVelocity;
 
-    public AStar(float maximumVelocity){
+    public AStar(float maximumVelocity) {
         this.maximumVelocity = maximumVelocity;
     }
 
@@ -30,7 +30,7 @@ public class AStar implements Player {
 
     @Override
     public Vector3 shot_velocity(Terrain terrain) {
-    	this.ball = terrain.getBall();
+        this.ball = terrain.getBall();
         this.hole = terrain.getHole();
 
         //TODO: Remove for test, otherwise Nullpointer
@@ -38,27 +38,29 @@ public class AStar implements Player {
 
         List<Vector3> path = getPath();
         Vector3 shot = new Vector3();
-        for (Vector3 vector3 : path){
+        assert path != null;
+        for (Vector3 vector3 : path) {
             shot.add(vector3);
         }
+        ball.hit(shot);
 
-        return shot;
+        return null;
     }
 
-    private List<Vector3> getPath(){
+    private List<Vector3> getPath() {
         Vector3 holePos = hole.getPosition().cpy();
         Vector3 startPos = terrain.getStartPos();
         Vector3 startToHoleDistance = holePos.sub(startPos);
         startToHoleDistance.z = 0;
 
-        Node startNode = new Node("", startPos, startToHoleDistance, new Vector3(0,0,0));
+        Node startNode = new Node("", startPos, startToHoleDistance, new Vector3(0, 0, 0));
         Node endNode = new Node("", holePos, new Vector3(0, 0, 0));
 
         List<Node> openList = new ArrayList<>();
         List<Node> closedList = new ArrayList<>();
         openList.add(startNode);
 
-        while (openList.size() > 0) {
+        while (openList.get(0) != null) {
             boolean skip = false;
             Node currentNode = openList.get(0);
             int currentIndex = 0;
@@ -67,11 +69,13 @@ public class AStar implements Player {
                 if (openList.get(i).getTotalNodeValue().len() < currentNode.getTotalNodeValue().len()) {
                     currentNode = openList.get(i);
                     currentIndex = i;
+                    System.out.println("mee");
                 }
             }
 
             openList.remove(currentIndex);
             closedList.add(currentNode);
+            System.out.println("mees");
 
             if (currentNode.equals(endNode)) {
                 List<Vector3> path = new ArrayList<>();
@@ -79,15 +83,16 @@ public class AStar implements Player {
                 while (current != null) {
                     path.add(current.getPosition());
                     current = current.getParent();
+                    System.out.println("meeee");
                 }
                 Collections.reverse(path);
                 return path;
             }
 
             List<Node> children = new ArrayList<>();
-            for (int i = 0; i < 4; i++){
+            for (int i = 0; i < 4; i++) {
                 Vector3 newNodeVector = new Vector3(currentNode.getPosition().cpy());
-                switch (i){
+                switch (i) {
                     case 0:
                         newNodeVector.x++;
                         break;
@@ -101,7 +106,7 @@ public class AStar implements Player {
                         newNodeVector.y--;
                         break;
                 }
-                if (outOfBounds(newNodeVector)){
+                if (outOfBounds(newNodeVector)) {
                     skip = true;
                     break;
                 }
@@ -112,6 +117,7 @@ public class AStar implements Player {
             for (Node child : children) {
                 for (Node closedNode : closedList) {
                     if (child.equals(closedNode)) {
+                        System.out.println("meeere");
                         skip = true;
                         break;
                     }
@@ -120,8 +126,8 @@ public class AStar implements Player {
                 child.getAccumulatedValues().add(child.getPosition().cpy().sub(currentNode.getPosition()));
                 child.setHeuristicValue(endNode.getPosition().cpy().sub(child.getPosition()));
 
-                for (Node openNode : openList){
-                    if (child.equals(openNode) && child.getAccumulatedValues().len() > openNode.getAccumulatedValues().len()){
+                for (Node openNode : openList) {
+                    if (child.equals(openNode) && child.getAccumulatedValues().len() > openNode.getAccumulatedValues().len()) {
                         skip = true;
                         break;
                     }
@@ -134,16 +140,11 @@ public class AStar implements Player {
         return null;
     }
 
-    private boolean outOfBounds(Vector3 vector3){
-        if (vector3.x < 0 || vector3.y < 0 || vector3.x > terrain.getWidth() || vector3.y > terrain.getHeight()){
-            return true;
-        }
-        else {
-            return false;
-        }
+    private boolean outOfBounds(Vector3 vector3) {
+        return vector3.x < 0 || vector3.y < 0 || vector3.x > terrain.getWidth() || vector3.y > terrain.getHeight();
     }
 
-	@Override
+    @Override
     public void runLoop() {
     }
 

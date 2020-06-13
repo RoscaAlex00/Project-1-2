@@ -12,38 +12,38 @@ import java.util.Map;
  */
 public class Node {
     private final Vector3 position;
+    private final Map<Node, Vector3> children = new HashMap<>();
+    private final String id;
     private Vector3 accumulatedValues;
     private Vector3 heuristicValue;
     private Node parent;
-    private final Map<Node, Vector3> children = new HashMap<>();
-    private final String id;
 
-    public Node(String id, Vector3 position){
+    public Node(String id, Vector3 position) {
         this.id = id;
         this.position = position;
     }
 
-    public Node(String id, Vector3 position, Node parent){
+    public Node(String id, Vector3 position, Node parent) {
         this.id = id;
         this.position = position;
         this.parent = parent;
         this.accumulatedValues = parent.getAccumulatedValues().cpy();
     }
 
-    public Node(String id, Vector3 position, Vector3 heuristicValue){
+    public Node(String id, Vector3 position, Vector3 heuristicValue) {
         this.id = id;
         this.position = position;
         this.heuristicValue = heuristicValue;
     }
 
-    public Node(String id, Vector3 position, Vector3 heuristicValue, Vector3 value){
+    public Node(String id, Vector3 position, Vector3 heuristicValue, Vector3 value) {
         this.id = id;
         this.accumulatedValues = value;
         this.heuristicValue = heuristicValue;
         this.position = position;
     }
 
-    public Node(String id, Vector3 position, Vector3 heuristicValue, Vector3 value, Node parent){
+    public Node(String id, Vector3 position, Vector3 heuristicValue, Vector3 value, Node parent) {
         this.id = id;
         parent.addChild(this, value);
         this.parent = parent;
@@ -52,16 +52,15 @@ public class Node {
         this.position = position;
     }
 
-    public Node root(){
-        if (parent != null){
+    public Node root() {
+        if (parent != null) {
             return parent.root();
-        }
-        else{
+        } else {
             return this;
         }
     }
 
-    public boolean isParent(Node node){
+    public boolean isParent(Node node) {
         return parent.equals(node);
     }
 
@@ -69,11 +68,11 @@ public class Node {
         return parent;
     }
 
-    public boolean isChild(Node node){
+    public boolean isChild(Node node) {
         return children.containsKey(node);
     }
 
-    private void addChild(Node childKey, Vector3 childValue){
+    private void addChild(Node childKey, Vector3 childValue) {
         children.put(childKey, childValue);
     }
 
@@ -81,7 +80,7 @@ public class Node {
         return id;
     }
 
-    public Vector3 getAccumulatedValues(){
+    public Vector3 getAccumulatedValues() {
         return accumulatedValues;
     }
 
@@ -97,7 +96,7 @@ public class Node {
         this.heuristicValue = heuristicValue;
     }
 
-    public Vector3 getTotalNodeValue(){
+    public Vector3 getTotalNodeValue() {
         return accumulatedValues.cpy().add(heuristicValue);
     }
 
@@ -106,7 +105,7 @@ public class Node {
         StringBuilder nodeToString = new StringBuilder("Node ");
         nodeToString.append(id).append(": \n");
         nodeToString.append("Parent: ").append("node ").append(parent.getId()).append(": \n").append("Childnodes:");
-        for (Node node : children.keySet()){
+        for (Node node : children.keySet()) {
             nodeToString.append(" ").append(node.getId());
         }
         return nodeToString.toString();

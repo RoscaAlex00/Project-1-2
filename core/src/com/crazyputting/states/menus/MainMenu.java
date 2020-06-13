@@ -11,11 +11,11 @@ import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.utils.viewport.FitViewport;
-import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.crazyputting.CrazyPutting;
 import com.crazyputting.managers.GameKeys;
 import com.crazyputting.managers.GameStateManager;
+import com.crazyputting.states.gamestates.GameState;
 
 public class MainMenu extends GameState {
     private final String title = "Crazy Putting";
@@ -52,7 +52,7 @@ public class MainMenu extends GameState {
         skin = new Skin(Gdx.files.internal("cloud-form/skin/cloud-form-ui.json"));
         CrazyPutting.cam.update();
         Gdx.input.setInputProcessor(stage);
-        ourColor = new Color(178f/255f,223f/255f,182f/255f,1f);
+        ourColor = new Color(178f / 255f, 223f / 255f, 182f / 255f, 1f);
 
 
     }

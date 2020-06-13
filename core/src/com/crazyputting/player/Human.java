@@ -7,7 +7,7 @@ public class Human implements Player {
 
     private float maximumVelocity;
 
-    public Human(float maximumVelocity){
+    public Human(float maximumVelocity) {
         this.maximumVelocity = maximumVelocity;
     }
 
@@ -23,6 +23,7 @@ public class Human implements Player {
 
     /**
      * Only used for the AI classes
+     *
      * @return null
      */
     @Override
