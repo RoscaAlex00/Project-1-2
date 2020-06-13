@@ -6,9 +6,11 @@ import com.crazyputting.objects.Ball;
 import com.crazyputting.objects.Hole;
 import com.crazyputting.objects.Terrain;
 
+import java.util.ArrayList;
+
 
 public class Physics {
-    protected final double SPVELOCITY = 0.2;
+    protected final double SPVELOCITY = 0.25;
     protected final double SPACCELERATION = 0.9;
     protected final float GRAVITY = 9.81f;
     private final float GOAL_TOLERANCE = 2f;
@@ -20,6 +22,7 @@ public class Physics {
     private Hole hole;
     private float mass;
     private float radius;
+    private ArrayList<ArrayList<Float>> treeCoordinates;
 
 
     public Physics(Ball yourBall, Terrain yourTerrain, Hole newHole, PhysicsSolver solver) {
@@ -101,14 +104,34 @@ public class Physics {
     }
 
     protected void updateBall(Vector3 position, Vector3 velocity) {
-        if (velocity.len() < SPVELOCITY && calcGravity(position).len() < SPACCELERATION) {
-            ball.setStopped();
+        treeCoordinates = terrain.getTreeCoordinates();
+        for (ArrayList<Float> treeCoordinate : treeCoordinates) {
+            if (treeCoordinate.get(0) - 0.7f <= position.x && position.x <= treeCoordinate.get(0) + 0.7f &&
+                    treeCoordinate.get(1) - 0.8f <= position.y && position.y <= treeCoordinate.get(1) + 0.8f) {
+                System.out.println(position.x);
+                System.out.println(position.y);
+                ball.getVelocity().x *= -0.60f;
+                ball.getVelocity().y *= -0.60f;
+            } else if (treeCoordinate.get(0) - 0.7f <= position.x && position.x <= treeCoordinate.get(0) + 0.7f) {
+                if (treeCoordinate.get(1) - 1f <= position.y && position.y <= treeCoordinate.get(1) + 1f) {
+                    ball.getVelocity().x *= -0.60f;
+                    ball.getVelocity().y *= -0.60f;
+                } else if (treeCoordinate.get(1) - 0.7f <= position.y && position.y <= treeCoordinate.get(1) + 0.7f) {
+                    if (treeCoordinate.get(0) - 1f <= position.x && position.x <= treeCoordinate.get(0) + 1f) {
+                        ball.getVelocity().x *= -0.60f;
+                        ball.getVelocity().y *= -0.60f;
+                    }
+                }
+            }
         }
         if (position.x <= 0.2f || position.x >= terrain.getWidth() - 0.3f) {
             ball.getVelocity().x *= WALL_HIT_FRICTION;
         }
         if (position.y <= 0.2f || position.y >= terrain.getHeight() - 0.3f) {
             ball.getVelocity().y *= WALL_HIT_FRICTION;
+        }
+        if (velocity.len() < SPVELOCITY && calcGravity(position).len() < SPACCELERATION) {
+            ball.setStopped();
         }
         ball.getPosition().z = terrain.getFunction().evaluateF(position.x, position.y);
     }

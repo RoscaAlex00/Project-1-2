@@ -5,6 +5,8 @@ import com.crazyputting.player.Player;
 import com.crazyputting.physicsengine.PhysicsSolver;
 import com.crazyputting.function.Function;
 
+import java.util.ArrayList;
+
 
 public class Terrain {
     private final float height;
@@ -18,6 +20,7 @@ public class Terrain {
     private final Player player;
     private float frictionCoefficient;
     private Ball ball;
+    private ArrayList<ArrayList<Float>> treeCoordinates;
 
     public Terrain(float ourHeight, float ourWidth, Vector3 teeVector, Hole endHole, Function function, float MU,
                    float maxSpeed, String name, PhysicsSolver solver, Player player) {
@@ -32,6 +35,7 @@ public class Terrain {
         this.solver = solver;
         this.player = player;
         this.ball = new Ball(teeVector);
+        treeCoordinates = new ArrayList<>();
     }
 
     public float getHeight() {
@@ -93,6 +97,12 @@ public class Terrain {
 
     public float getFrictionCoefficient() {
         return frictionCoefficient;
+    }
+    public void setTreeCoordinates(ArrayList<ArrayList<Float>> newCoords){
+        this.treeCoordinates = newCoords;
+    }
+    public ArrayList<ArrayList<Float>> getTreeCoordinates(){
+        return treeCoordinates;
     }
 
     public void setFrictionCoefficient(float frictionCoefficient) {

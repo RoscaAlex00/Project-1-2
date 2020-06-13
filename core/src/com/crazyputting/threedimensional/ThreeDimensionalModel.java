@@ -1,12 +1,17 @@
 package com.crazyputting.threedimensional;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.assets.loaders.ModelLoader;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.VertexAttributes;
 import com.badlogic.gdx.graphics.g3d.Material;
 import com.badlogic.gdx.graphics.g3d.Model;
 import com.badlogic.gdx.graphics.g3d.ModelInstance;
 import com.badlogic.gdx.graphics.g3d.attributes.TextureAttribute;
+import com.badlogic.gdx.graphics.g3d.loader.ObjLoader;
 import com.badlogic.gdx.graphics.g3d.utils.ModelBuilder;
+import com.badlogic.gdx.math.Matrix4;
+import com.badlogic.gdx.math.Quaternion;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
 import com.crazyputting.objects.Ball;
@@ -25,6 +30,9 @@ public class ThreeDimensionalModel {
     private Terrain terrain;
     private int attr;
     private ModelInstance water;
+    private ArrayList<ModelInstance> tree;
+    private final ModelLoader loader;
+    private ArrayList<ArrayList<Float>> treeCoordinates;
 
 
     public ThreeDimensionalModel(Terrain terrain) {
@@ -34,6 +42,9 @@ public class ThreeDimensionalModel {
 
         edges = new ArrayList<>();
         map = new Array<>();
+        loader = new ObjLoader();
+        tree = new ArrayList<>();
+        treeCoordinates = new ArrayList<>();
 
         attr = VertexAttributes.Usage.Position | VertexAttributes.Usage.Normal | VertexAttributes.Usage.TextureCoordinates;
 
@@ -65,6 +76,28 @@ public class ThreeDimensionalModel {
                 new Material(TextureAttribute.createDiffuse(brick)), attr);
         edges.add(new ModelInstance(border_d, -(width_border / 2), terrain.getHeight() / 2, (-height_border / 2) + 5.5f));
         edges.add(new ModelInstance(border_d, terrain.getWidth() + (width_border / 2), terrain.getHeight() / 2, (-height_border / 2) + 5.5f));
+        Model model = loader.loadModel(Gdx.files.internal("cartontree.obj"));
+
+        for (int i = 0; i < Math.random() * 10; i++) {
+            this.tree.add(new ModelInstance(model));
+        }
+        for (int i = 0; i < tree.size(); i++) {
+            float x = (float) Math.random() * (terrain.getWidth() - 2);
+            float y = (float) Math.random() * (terrain.getHeight() - 2);
+
+            if (terrain.getFunction().evaluateF(x, y) >= 0) {
+                ArrayList<Float> xyCoordinates = new ArrayList<>();
+                xyCoordinates.add(x);
+                xyCoordinates.add(y);
+                treeCoordinates.add(xyCoordinates);
+                tree.get(i).transform = new Matrix4(new Vector3(x, y, 0), new Quaternion(new Vector3(1, 1, 1), 120),
+                        new Vector3(1.65f, 1.65f, 1.65f));
+            } else {
+                tree.remove(i);
+                i--;
+            }
+        }
+        terrain.setTreeCoordinates(treeCoordinates);
 
     }
 
@@ -111,6 +144,10 @@ public class ThreeDimensionalModel {
 
     public ModelInstance getWater() {
         return water;
+    }
+
+    public ArrayList<ModelInstance> getTree() {
+        return tree;
     }
 }
 
