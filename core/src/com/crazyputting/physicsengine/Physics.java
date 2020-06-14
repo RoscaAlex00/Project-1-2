@@ -106,18 +106,18 @@ public class Physics {
     protected void updateBall(Vector3 position, Vector3 velocity) {
         treeCoordinates = terrain.getTreeCoordinates();
         for (Vector3 treeCoordinate : treeCoordinates) {
-            if (treeCoordinate.x - 0.45f <= position.x && position.x <= treeCoordinate.x + 0.45f &&
-                    treeCoordinate.y - 0.48f <= position.y && position.y <= treeCoordinate.y + 0.48f) {
+            if (treeCoordinate.x - 0.65f <= position.x && position.x <= treeCoordinate.x + 0.65f &&
+                    treeCoordinate.y - 0.60f <= position.y && position.y <= treeCoordinate.y + 0.60f) {
                 System.out.println(position.x);
                 System.out.println(position.y);
                 ball.getVelocity().x *= -0.60f;
                 ball.getVelocity().y *= -0.60f;
-            } else if (treeCoordinate.x - 0.5f <= position.x && position.x <= treeCoordinate.x + 0.5f) {
-                if (treeCoordinate.y - 0.7f <= position.y && position.y <= treeCoordinate.y + 0.7f) {
+            } else if (treeCoordinate.x - 0.2f <= position.x && position.x <= treeCoordinate.x + 0.2f) {
+                if (treeCoordinate.y - 0.75f <= position.y && position.y <= treeCoordinate.y + 0.75f) {
                     ball.getVelocity().x *= -0.60f;
                     ball.getVelocity().y *= -0.60f;
-                } else if (treeCoordinate.y - 0.5f <= position.y && position.y <= treeCoordinate.y + 0.5f) {
-                    if (treeCoordinate.x - 0.7f <= position.x && position.x <= treeCoordinate.x + 0.7f) {
+                } else if (treeCoordinate.y - 0.2f <= position.y && position.y <= treeCoordinate.y + 0.2f) {
+                    if (treeCoordinate.x - 0.75f <= position.x && position.x <= treeCoordinate.x + 0.75f) {
                         ball.getVelocity().x *= -0.60f;
                         ball.getVelocity().y *= -0.60f;
                     }
