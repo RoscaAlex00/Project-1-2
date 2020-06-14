@@ -23,7 +23,7 @@ public class Physics {
     private Hole hole;
     private float mass;
     private float radius;
-    private ArrayList<ArrayList<Float>> treeCoordinates;
+    private ArrayList<Vector3> treeCoordinates;
 
 
     public Physics(Ball yourBall, Terrain yourTerrain, Hole newHole, PhysicsSolver solver) {
@@ -105,24 +105,21 @@ public class Physics {
     }
 
     protected void updateBall(Vector3 position, Vector3 velocity) {
-        List<Vector3> treeCoordinates = terrain.getTreeCoordinates();
+        treeCoordinates = terrain.getTreeCoordinates();
         for (Vector3 treeCoordinate : treeCoordinates) {
-            if (treeCoordinate.x - 0.7f <= position.x && position.x <= treeCoordinate.x + 0.7f &&
-                    treeCoordinate.y - 0.8f <= position.y && position.y <= treeCoordinate.y + 0.8f) {
-                System.out.println(position.x);
-                System.out.println(position.y);
-                ball.getVelocity().x *= -0.60f;
-                ball.getVelocity().y *= -0.60f;
-            } else if (treeCoordinate.x - 0.7f <= position.x && position.x <= treeCoordinate.x + 0.7f) {
-                if (treeCoordinate.y - 1f <= position.y && position.y <= treeCoordinate.y + 1f) {
-                    ball.getVelocity().x *= -0.60f;
-                    ball.getVelocity().y *= -0.60f;
-                } else if (treeCoordinate.y - 0.7f <= position.y && position.y <= treeCoordinate.y + 0.7f) {
-                    if (treeCoordinate.x - 1f <= position.x && position.x <= treeCoordinate.x + 1f) {
-                        ball.getVelocity().x *= -0.60f;
-                        ball.getVelocity().y *= -0.60f;
-                    }
-                }
+            if (treeCoordinate.x - 0.58f <= position.x && position.x <= treeCoordinate.x + 0.58f &&
+                    treeCoordinate.y <= position.y && position.y <= treeCoordinate.y + 0.58f) {
+                Vector3 storage = new Vector3(ball.getVelocity().x * -0.8f, ball.getVelocity().y * -0.80f, 0);
+                System.out.println("here11");
+                ball.setStopped();
+                ball.hit(storage);
+            }
+            if (treeCoordinate.x - 0.58f <= position.x && position.x <= treeCoordinate.x + 0.58f &&
+                    treeCoordinate.y >= position.y && position.y >= treeCoordinate.y - 0.58f) {
+                Vector3 storage = new Vector3(ball.getVelocity().x * -0.8f, ball.getVelocity().y * -0.80f, 0);
+                System.out.println("here22");
+                ball.setStopped();
+                ball.hit(storage);
             }
         }
         if (position.x <= 0.2f || position.x >= terrain.getWidth() - 0.3f) {

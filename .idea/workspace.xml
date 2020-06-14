@@ -19,43 +19,20 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8f2b995d-3fd3-4cd5-81e0-99edc8c0e739" name="Default Changelist" comment="add water and change walls to wood">
+    <list default="true" id="8f2b995d-3fd3-4cd5-81e0-99edc8c0e739" name="Default Changelist" comment="Vector3 for treeCoordinates and collider improvement">
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/resourceHashesCache.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/classAnalysis.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/jarAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/jarAnalysis.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/javaCompile.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/taskHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/assets/LiA-chp08-en(2).pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/assets/badlogic.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/assets/blue.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/assets/brick.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/assets/brickinverted.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/assets/grasstexture.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/assets/water.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/assets/whitebrick.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/build/classes/java/main/com/crazyputting/objects/Terrain.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/build/classes/java/main/com/crazyputting/objects/Terrain.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/build/classes/java/main/com/crazyputting/physicsengine/Physics.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/build/classes/java/main/com/crazyputting/physicsengine/Physics.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/build/classes/java/main/com/crazyputting/states/gamestates/ThreeDimensional.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/build/classes/java/main/com/crazyputting/states/gamestates/ThreeDimensional.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/build/classes/java/main/com/crazyputting/threedimensional/ThreeDimensionalModel.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/build/classes/java/main/com/crazyputting/threedimensional/ThreeDimensionalModel.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/build/libs/core-1.0.jar" beforeDir="false" afterPath="$PROJECT_DIR$/core/build/libs/core-1.0.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/com/crazyputting/objects/Terrain.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/com/crazyputting/objects/Terrain.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/src/com/crazyputting/physicsengine/Physics.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/com/crazyputting/physicsengine/Physics.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/com/crazyputting/states/gamestates/ThreeDimensional.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/com/crazyputting/states/gamestates/ThreeDimensional.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/com/crazyputting/threedimensional/ThreeDimensionalModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/com/crazyputting/threedimensional/ThreeDimensionalModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/desktop/build/resources/main/LiA-chp08-en(2).pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/desktop/build/resources/main/badlogic.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/desktop/build/resources/main/blue.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/desktop/build/resources/main/brick.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/desktop/build/resources/main/brickinverted.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/desktop/build/resources/main/grasstexture.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/desktop/build/resources/main/water.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/desktop/build/resources/main/whitebrick.jpg" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -108,8 +85,10 @@
   </component>
   <component name="RunManager">
     <configuration name="DesktopLauncher" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="ALTERNATIVE_JRE_PATH" value="12" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
       <option name="MAIN_CLASS_NAME" value="com.crazyputting.desktop.DesktopLauncher" />
-      <module name="Game.desktop.main" />
+      <module name="Project_1-2.desktop.main" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="com.crazyputting.desktop.*" />
@@ -125,6 +104,18 @@
         <item itemvalue="Application.DesktopLauncher" />
       </list>
     </recent_temporary>
+  </component>
+  <component name="ServiceViewManager">
+    <option name="viewStates">
+      <list>
+        <serviceView>
+          <treeState>
+            <expand />
+            <select />
+          </treeState>
+        </serviceView>
+      </list>
+    </option>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -158,18 +149,44 @@
       <workItem from="1592063052727" duration="1763000" />
       <workItem from="1592066653021" duration="72000" />
       <workItem from="1592067046808" duration="2448000" />
+      <workItem from="1592131494415" duration="449000" />
+      <workItem from="1592145145913" duration="4851000" />
     </task>
+    <task id="LOCAL-00001" summary="Vector3 for treeCoordinates and collider improvement">
+      <created>1592131218032</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1592131218032</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Vector3 for treeCoordinates and collider improvement">
+      <created>1592131257852</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1592131257852</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Vector3 for treeCoordinates and collider improvement">
+      <created>1592131917793</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1592131917793</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="2" />
+    <option name="version" value="1" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>
@@ -177,12 +194,14 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="add water and change walls to wood" />
-    <option name="LAST_COMMIT_MESSAGE" value="add water and change walls to wood" />
+    <MESSAGE value="Vector3 for treeCoordinates and collider improvement" />
+    <option name="LAST_COMMIT_MESSAGE" value="Vector3 for treeCoordinates and collider improvement" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="657" y="139" key="#DesktopLauncher" timestamp="1592055349692">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state x="526" y="110" key="#DesktopLauncher" timestamp="1592129997748">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
+    <state x="526" y="110" key="#DesktopLauncher/0.0.1536.824@0.0.1536.824" timestamp="1592129997748" />
     <state x="657" y="139" key="#DesktopLauncher/0.0.1920.1040@0.0.1920.1040" timestamp="1592055349692" />
     <state x="440" y="94" key="#Project_Structure" timestamp="1592055341187">
       <screen x="0" y="0" width="1920" height="1040" />
@@ -204,37 +223,45 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="298" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1536.824@0.0.1536.824" timestamp="1591536437658" />
-    <state x="294" y="8" key="CommitChangelistDialog2" timestamp="1592045069120">
+    <state x="294" y="8" key="CommitChangelistDialog2" timestamp="1592149443746">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="294" y="8" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1592045069120" />
+    <state x="294" y="8" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1592149443746" />
     <state x="549" y="168" key="FileChooserDialogImpl" timestamp="1591555636999">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="549" y="168" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1591555636999" />
-    <state width="1877" height="298" key="GridCell.Tab.0.bottom" timestamp="1592069634979">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1493" height="210" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1592045174277" />
-    <state width="1877" height="298" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1592069634979" />
-    <state width="1877" height="298" key="GridCell.Tab.0.center" timestamp="1592069634979">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1493" height="210" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1592045174277" />
-    <state width="1877" height="298" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1592069634979" />
-    <state width="1877" height="298" key="GridCell.Tab.0.left" timestamp="1592069634979">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1493" height="210" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1592045174276" />
-    <state width="1877" height="298" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1592069634979" />
-    <state width="1877" height="298" key="GridCell.Tab.0.right" timestamp="1592069634979">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1493" height="210" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1592045174277" />
-    <state width="1877" height="298" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1592069634979" />
-    <state x="465" y="238" key="com.intellij.ide.util.TipDialog" timestamp="1592042968996">
+    <state width="1493" height="210" key="GridCell.Tab.0.bottom" timestamp="1592149926660">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="465" y="238" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1592042968996" />
+    <state width="1493" height="210" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1592149926660" />
+    <state width="1877" height="298" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1592069634979" />
+    <state width="1493" height="210" key="GridCell.Tab.0.center" timestamp="1592149926656">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="210" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1592149926656" />
+    <state width="1877" height="298" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1592069634979" />
+    <state width="1493" height="210" key="GridCell.Tab.0.left" timestamp="1592149926656">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="210" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1592149926656" />
+    <state width="1877" height="298" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1592069634979" />
+    <state width="1493" height="210" key="GridCell.Tab.0.right" timestamp="1592149926660">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="210" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1592149926660" />
+    <state width="1877" height="298" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1592069634979" />
+    <state x="361" y="146" key="Vcs.Push.Dialog.v2" timestamp="1592131921464">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="361" y="146" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1592131921464" />
+    <state x="465" y="238" key="com.intellij.ide.util.TipDialog" timestamp="1592145148435">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="465" y="238" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1592145148435" />
+    <state x="499" y="179" key="extract.method.dialog" timestamp="1592146536896">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="499" y="179" key="extract.method.dialog/0.0.1536.824@0.0.1536.824" timestamp="1592146536896" />
   </component>
 </project>

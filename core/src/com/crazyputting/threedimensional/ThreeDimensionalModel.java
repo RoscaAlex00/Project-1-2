@@ -88,8 +88,7 @@ public class ThreeDimensionalModel {
             float y = (float) Math.random() * (terrain.getHeight() - 2);
 
             if (terrain.getFunction().evaluateF(x, y) >= 0) {
-                Vector3 newTree = new Vector3(x, y, 0);
-                treeCoordinates.add(newTree);
+                treeCoordinates.add(new Vector3(x,y,0));
                 tree.get(i).transform = new Matrix4(new Vector3(x, y, 0), new Quaternion(new Vector3(1, 1, 1), 120),
                         new Vector3(1.65f, 1.65f, 1.65f));
             } else {

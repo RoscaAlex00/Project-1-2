@@ -58,7 +58,7 @@ public abstract class ThreeDimensional extends GameState {
         camera.position.set(10f, 0f, 12f);
         camera.lookAt(10, 10, 0);
         camera.near = 0.1f;
-        camera.far = 1000f;
+        camera.far = 100f;
         camera.update();
 
         Gdx.input.setInputProcessor(controller = new GameCamera(camera));
