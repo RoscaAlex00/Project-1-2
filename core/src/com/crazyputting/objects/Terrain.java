@@ -20,7 +20,7 @@ public class Terrain {
     private final Player player;
     private float frictionCoefficient;
     private Ball ball;
-    private ArrayList<ArrayList<Float>> treeCoordinates;
+    private ArrayList<Vector3> treeCoordinates;
 
     public Terrain(float ourHeight, float ourWidth, Vector3 teeVector, Hole endHole, Function function, float MU,
                    float maxSpeed, String name, PhysicsSolver solver, Player player) {
@@ -98,10 +98,12 @@ public class Terrain {
     public float getFrictionCoefficient() {
         return frictionCoefficient;
     }
-    public void setTreeCoordinates(ArrayList<ArrayList<Float>> newCoords){
+
+    public void setTreeCoordinates(ArrayList<Vector3> newCoords){
         this.treeCoordinates = newCoords;
     }
-    public ArrayList<ArrayList<Float>> getTreeCoordinates(){
+
+    public ArrayList<Vector3> getTreeCoordinates(){
         return treeCoordinates;
     }
 

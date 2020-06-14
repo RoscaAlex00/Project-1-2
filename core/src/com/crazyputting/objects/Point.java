@@ -6,7 +6,7 @@ public class Point {
     private Vector3 pointPosition;
     private float disHole;
     private float disStart;
-    private float cumDis;
+    private float cumulativeDistance;
     private float x;
     private float y;
 
@@ -43,12 +43,12 @@ public class Point {
         this.disHole = disHole;
     }
 
-    public float getCumDis() {
-        return cumDis;
+    public float getCumulativeDistance() {
+        return cumulativeDistance;
     }
 
-    public void setCumDis(float cumDis) {
-        this.cumDis = cumDis;
+    public void setCumulativeDistance(float cumulativeDistance) {
+        this.cumulativeDistance = cumulativeDistance;
     }
 
 

@@ -7,6 +7,7 @@ import com.crazyputting.objects.Hole;
 import com.crazyputting.objects.Terrain;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class Physics {
@@ -104,20 +105,20 @@ public class Physics {
     }
 
     protected void updateBall(Vector3 position, Vector3 velocity) {
-        treeCoordinates = terrain.getTreeCoordinates();
-        for (ArrayList<Float> treeCoordinate : treeCoordinates) {
-            if (treeCoordinate.get(0) - 0.7f <= position.x && position.x <= treeCoordinate.get(0) + 0.7f &&
-                    treeCoordinate.get(1) - 0.8f <= position.y && position.y <= treeCoordinate.get(1) + 0.8f) {
+        List<Vector3> treeCoordinates = terrain.getTreeCoordinates();
+        for (Vector3 treeCoordinate : treeCoordinates) {
+            if (treeCoordinate.x - 0.7f <= position.x && position.x <= treeCoordinate.x + 0.7f &&
+                    treeCoordinate.y - 0.8f <= position.y && position.y <= treeCoordinate.y + 0.8f) {
                 System.out.println(position.x);
                 System.out.println(position.y);
                 ball.getVelocity().x *= -0.60f;
                 ball.getVelocity().y *= -0.60f;
-            } else if (treeCoordinate.get(0) - 0.7f <= position.x && position.x <= treeCoordinate.get(0) + 0.7f) {
-                if (treeCoordinate.get(1) - 1f <= position.y && position.y <= treeCoordinate.get(1) + 1f) {
+            } else if (treeCoordinate.x - 0.7f <= position.x && position.x <= treeCoordinate.x + 0.7f) {
+                if (treeCoordinate.y - 1f <= position.y && position.y <= treeCoordinate.y + 1f) {
                     ball.getVelocity().x *= -0.60f;
                     ball.getVelocity().y *= -0.60f;
-                } else if (treeCoordinate.get(1) - 0.7f <= position.y && position.y <= treeCoordinate.get(1) + 0.7f) {
-                    if (treeCoordinate.get(0) - 1f <= position.x && position.x <= treeCoordinate.get(0) + 1f) {
+                } else if (treeCoordinate.y - 0.7f <= position.y && position.y <= treeCoordinate.y + 0.7f) {
+                    if (treeCoordinate.x - 1f <= position.x && position.x <= treeCoordinate.x + 1f) {
                         ball.getVelocity().x *= -0.60f;
                         ball.getVelocity().y *= -0.60f;
                     }

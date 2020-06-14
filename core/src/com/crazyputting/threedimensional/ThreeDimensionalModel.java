@@ -32,7 +32,7 @@ public class ThreeDimensionalModel {
     private ModelInstance water;
     private ArrayList<ModelInstance> tree;
     private final ModelLoader loader;
-    private ArrayList<ArrayList<Float>> treeCoordinates;
+    private ArrayList<Vector3> treeCoordinates;
 
 
     public ThreeDimensionalModel(Terrain terrain) {
@@ -62,10 +62,12 @@ public class ThreeDimensionalModel {
         ModelBuilder modelBuilder = new ModelBuilder();
         float height_border = 20f;
         float width_border = 1f;
+
         Model water = modelBuilder.createRect(0, 0, 0, terrain.getWidth(), 0, 0, terrain.getWidth(), terrain.getHeight(), 0,
                 0, terrain.getHeight(), 0, 0, 0, 1,
                 new Material(TextureAttribute.createDiffuse(new Texture("water.png"))), attr);
         this.water = new ModelInstance(water, 0, 0, -0.12f);
+
         Texture brick = new Texture("wood.jpg");
         Model border_w = modelBuilder.createBox(terrain.getWidth() + (2 * width_border), width_border, height_border,
                 new Material(TextureAttribute.createDiffuse(brick)), attr);
@@ -86,10 +88,8 @@ public class ThreeDimensionalModel {
             float y = (float) Math.random() * (terrain.getHeight() - 2);
 
             if (terrain.getFunction().evaluateF(x, y) >= 0) {
-                ArrayList<Float> xyCoordinates = new ArrayList<>();
-                xyCoordinates.add(x);
-                xyCoordinates.add(y);
-                treeCoordinates.add(xyCoordinates);
+                Vector3 newTree = new Vector3(x, y, 0);
+                treeCoordinates.add(newTree);
                 tree.get(i).transform = new Matrix4(new Vector3(x, y, 0), new Quaternion(new Vector3(1, 1, 1), 120),
                         new Vector3(1.65f, 1.65f, 1.65f));
             } else {

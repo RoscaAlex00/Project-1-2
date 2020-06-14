@@ -88,7 +88,10 @@ public class PlayState extends ThreeDimensional {
             hud.addActor(chargeMeter);
             hud.addActor(chargeBar);
         }
-        if (player instanceof AI) {
+        else{
+            player.setTerrain(terrain);
+        }
+        /*if (player instanceof AI) {
             player.setTerrain(terrain);
         }
         if (player instanceof AlexAI) {
@@ -96,7 +99,7 @@ public class PlayState extends ThreeDimensional {
         }
         if (player instanceof AStar) {
             player.setTerrain(terrain);
-        }
+        }*/
 
         setProcessors();
     }

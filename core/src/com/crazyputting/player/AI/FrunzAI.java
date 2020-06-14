@@ -40,21 +40,21 @@ public class FrunzAI implements Player {
             float startDis = pointCollection[i].startDisCalc(pointCollection[i], start);
             pointCollection[i].setDisHole(holeDis);
             pointCollection[i].setDisStart(startDis);
-            pointCollection[i].setCumDis(holeDis + 4 * startDis);
-            System.out.println(pointCollection[i].getCumDis());
+            pointCollection[i].setCumulativeDistance(holeDis + 4 * startDis);
+            System.out.println(pointCollection[i].getCumulativeDistance());
         }
 
-        float minDis = pointCollection[0].getCumDis();
+        float minDis = pointCollection[0].getCumulativeDistance();
         for (int i = 1; i < pointCollection.length; i++) {
-            if (pointCollection[i].getCumDis() < minDis) {
-                minDis = pointCollection[i].getCumDis();
+            if (pointCollection[i].getCumulativeDistance() < minDis) {
+                minDis = pointCollection[i].getCumulativeDistance();
                 System.out.println(minDis);
                 System.out.println("best");
             }
         }
 
         for (Point point : pointCollection) {
-            if (point.getCumDis() == minDis) {
+            if (point.getCumulativeDistance() == minDis) {
                 vec = point.getPointPosition();
             }
         }
