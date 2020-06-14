@@ -32,7 +32,7 @@ public class ThreeDimensionalModel {
     private ModelInstance water;
     private ArrayList<ModelInstance> tree;
     private final ModelLoader loader;
-    private ArrayList<ArrayList<Float>> treeCoordinates;
+    private ArrayList<Vector3> treeCoordinates;
 
 
     public ThreeDimensionalModel(Terrain terrain) {
@@ -86,10 +86,7 @@ public class ThreeDimensionalModel {
             float y = (float) Math.random() * (terrain.getHeight() - 2);
 
             if (terrain.getFunction().evaluateF(x, y) >= 0) {
-                ArrayList<Float> xyCoordinates = new ArrayList<>();
-                xyCoordinates.add(x);
-                xyCoordinates.add(y);
-                treeCoordinates.add(xyCoordinates);
+                treeCoordinates.add(new Vector3(x,y,terrain.getFunction().evaluateF(x, y)));
                 tree.get(i).transform = new Matrix4(new Vector3(x, y, 0), new Quaternion(new Vector3(1, 1, 1), 120),
                         new Vector3(1.65f, 1.65f, 1.65f));
             } else {
