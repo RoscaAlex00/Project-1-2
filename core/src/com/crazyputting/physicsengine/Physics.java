@@ -16,6 +16,7 @@ public class Physics {
     protected final float GRAVITY = 9.81f;
     private final float GOAL_TOLERANCE = 2f;
     private final float WALL_HIT_FRICTION = -0.95f;
+    private final float TREE_HIT_FRICTION = -0.80f;
     float dt = Gdx.graphics.getDeltaTime();
     private Ball ball;
     private Terrain terrain;
@@ -90,10 +91,24 @@ public class Physics {
         Vector3 position = ball.getPosition();
         Vector3 velocity = ball.getVelocity();
 
+        treeCoordinates = terrain.getTreeCoordinates();
+
         Vector3 newVel = solver.getSpeed(position.cpy(), velocity.cpy());
         ball.getVelocity().set(newVel.cpy());
         Vector3 newPos = solver.getPosition(position.cpy(), velocity.cpy());
         ball.getPosition().set(newPos);
+        treeCoordinates = terrain.getTreeCoordinates();
+        for(Vector3 treeCoordinate : treeCoordinates) {
+            if (treeCoordinate.x - 0.66f <= newPos.x && newPos.x <= treeCoordinate.x + 0.66f &&
+                    treeCoordinate.y - 0.66f <= newPos.y && newPos.y <= treeCoordinate.y + 0.66f) {
+                Vector3 storage = new Vector3(ball.getVelocity().x * TREE_HIT_FRICTION ,
+                        ball.getVelocity().y * TREE_HIT_FRICTION, 0);
+                System.out.println("here11");
+                ball.setStopped();
+                ball.hit(storage);
+            }
+        }
+
 
         if (newPos.z < -0.04f) {
             terrain.setFrictionCoefficient(3.5f);
@@ -105,23 +120,6 @@ public class Physics {
     }
 
     protected void updateBall(Vector3 position, Vector3 velocity) {
-        treeCoordinates = terrain.getTreeCoordinates();
-        for (Vector3 treeCoordinate : treeCoordinates) {
-            if (treeCoordinate.x - 0.58f <= position.x && position.x <= treeCoordinate.x + 0.58f &&
-                    treeCoordinate.y <= position.y && position.y <= treeCoordinate.y + 0.58f) {
-                Vector3 storage = new Vector3(ball.getVelocity().x * -0.8f, ball.getVelocity().y * -0.80f, 0);
-                System.out.println("here11");
-                ball.setStopped();
-                ball.hit(storage);
-            }
-            if (treeCoordinate.x - 0.58f <= position.x && position.x <= treeCoordinate.x + 0.58f &&
-                    treeCoordinate.y >= position.y && position.y >= treeCoordinate.y - 0.58f) {
-                Vector3 storage = new Vector3(ball.getVelocity().x * -0.8f, ball.getVelocity().y * -0.80f, 0);
-                System.out.println("here22");
-                ball.setStopped();
-                ball.hit(storage);
-            }
-        }
         if (position.x <= 0.2f || position.x >= terrain.getWidth() - 0.3f) {
             ball.getVelocity().x *= WALL_HIT_FRICTION;
         }
