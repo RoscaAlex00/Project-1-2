@@ -106,29 +106,33 @@ public class Physics {
     protected void updateBall(Vector3 position, Vector3 velocity) {
         treeCoordinates = terrain.getTreeCoordinates();
         for (Vector3 treeCoordinate : treeCoordinates) {
-            if (treeCoordinate.x - 0.65f <= position.x && position.x <= treeCoordinate.x + 0.65f &&
-                    treeCoordinate.y - 0.60f <= position.y && position.y <= treeCoordinate.y + 0.60f) {
-                System.out.println(position.x);
-                System.out.println(position.y);
-                ball.getVelocity().x *= -0.60f;
-                ball.getVelocity().y *= -0.60f;
-            } else if (treeCoordinate.x - 0.2f <= position.x && position.x <= treeCoordinate.x + 0.2f) {
-                if (treeCoordinate.y - 0.75f <= position.y && position.y <= treeCoordinate.y + 0.75f) {
-                    ball.getVelocity().x *= -0.60f;
-                    ball.getVelocity().y *= -0.60f;
-                } else if (treeCoordinate.y - 0.2f <= position.y && position.y <= treeCoordinate.y + 0.2f) {
-                    if (treeCoordinate.x - 0.75f <= position.x && position.x <= treeCoordinate.x + 0.75f) {
-                        ball.getVelocity().x *= -0.60f;
-                        ball.getVelocity().y *= -0.60f;
-                    }
-                }
+            if (treeCoordinate.x - 0.58f <= position.x && position.x <= treeCoordinate.x + 0.58f &&
+                    treeCoordinate.y <= position.y && position.y <= treeCoordinate.y + 0.58f) {
+                Vector3 storage = new Vector3(ball.getVelocity().x * -0.8f, ball.getVelocity().y * -0.80f, 0);
+                System.out.println("here11");
+                ball.setStopped();
+                ball.hit(storage);
+            }
+            if (treeCoordinate.x - 0.58f <= position.x && position.x <= treeCoordinate.x + 0.58f &&
+                    treeCoordinate.y >= position.y && position.y >= treeCoordinate.y - 0.58f) {
+                Vector3 storage = new Vector3(ball.getVelocity().x * -0.8f, ball.getVelocity().y * -0.80f, 0);
+                System.out.println("here22");
+                ball.setStopped();
+                ball.hit(storage);
             }
         }
+
         if (position.x <= 0.2f || position.x >= terrain.getWidth() - 0.3f) {
-            ball.getVelocity().x *= WALL_HIT_FRICTION;
+            Vector3 storage = new Vector3(ball.getVelocity().x * WALL_HIT_FRICTION,ball.getVelocity().y,
+                    ball.getVelocity().z);
+            ball.setStopped();
+            ball.hit(storage);
         }
         if (position.y <= 0.2f || position.y >= terrain.getHeight() - 0.3f) {
-            ball.getVelocity().y *= WALL_HIT_FRICTION;
+            Vector3 storage = new Vector3(ball.getVelocity().x,ball.getVelocity().y * WALL_HIT_FRICTION,
+                    ball.getVelocity().z);
+            ball.setStopped();
+            ball.hit(storage);
         }
         if (velocity.len() < SPVELOCITY && calcGravity(position).len() < SPACCELERATION) {
             ball.setStopped();
