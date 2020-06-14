@@ -207,10 +207,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="298" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1536.824@0.0.1536.824" timestamp="1591536437658" />
-    <state x="294" y="8" key="CommitChangelistDialog2" timestamp="1592045069120">
+    <state x="294" y="8" key="CommitChangelistDialog2" timestamp="1592131216496">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="294" y="8" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1592045069120" />
+    <state x="294" y="8" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1592131216496" />
     <state x="549" y="168" key="FileChooserDialogImpl" timestamp="1591555636999">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -235,6 +235,10 @@
     </state>
     <state width="1493" height="210" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1592131134368" />
     <state width="1877" height="298" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1592069634979" />
+    <state x="361" y="146" key="Vcs.Push.Dialog.v2" timestamp="1592131222119">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="361" y="146" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1592131222119" />
     <state x="465" y="238" key="com.intellij.ide.util.TipDialog" timestamp="1592042968996">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
