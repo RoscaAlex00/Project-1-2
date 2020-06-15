@@ -118,7 +118,12 @@ public abstract class ThreeDimensional extends GameState {
             field.meshPart.offset = 0;
             field.meshPart.size = hf.get(i).mesh.getNumIndices();
             field.meshPart.update();
-            field.material = new Material(TextureAttribute.createDiffuse(new Texture("grass.jpg")));
+            if(Math.random()<= 0.80) {
+                field.material = new Material(TextureAttribute.createDiffuse(new Texture("grass.jpg")));
+            }
+            else{
+                field.material = new Material(TextureAttribute.createDiffuse(new Texture("sand.jpg")));
+            }
             fields.add(field);
         }
     }
