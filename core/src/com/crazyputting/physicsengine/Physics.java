@@ -98,10 +98,10 @@ public class Physics {
         Vector3 newPos = solver.getPosition(position.cpy(), velocity.cpy());
         ball.getPosition().set(newPos);
         treeCoordinates = terrain.getTreeCoordinates();
-        for(Vector3 treeCoordinate : treeCoordinates) {
+        for (Vector3 treeCoordinate : treeCoordinates) {
             if (treeCoordinate.x - 0.66f <= newPos.x && newPos.x <= treeCoordinate.x + 0.66f &&
                     treeCoordinate.y - 0.66f <= newPos.y && newPos.y <= treeCoordinate.y + 0.66f) {
-                Vector3 storage = new Vector3(ball.getVelocity().x * TREE_HIT_FRICTION ,
+                Vector3 storage = new Vector3(ball.getVelocity().x * TREE_HIT_FRICTION,
                         ball.getVelocity().y * TREE_HIT_FRICTION, 0);
                 System.out.println("here11");
                 ball.setStopped();
