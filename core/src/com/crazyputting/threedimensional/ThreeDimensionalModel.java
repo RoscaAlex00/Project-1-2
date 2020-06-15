@@ -78,10 +78,10 @@ public class ThreeDimensionalModel {
                 new Material(TextureAttribute.createDiffuse(brick)), attr);
         edges.add(new ModelInstance(border_d, -(width_border / 2), terrain.getHeight() / 2, (-height_border / 2) + 5.5f));
         edges.add(new ModelInstance(border_d, terrain.getWidth() + (width_border / 2), terrain.getHeight() / 2, (-height_border / 2) + 5.5f));
-        Model model = loader.loadModel(Gdx.files.internal("cartontree.obj"));
 
+        Model treeModel = loader.loadModel(Gdx.files.internal("cartontree.obj"));
         for (int i = 0; i < Math.random() * 10; i++) {
-            this.tree.add(new ModelInstance(model));
+            this.tree.add(new ModelInstance(treeModel));
         }
         for (int i = 0; i < tree.size(); i++) {
             float x = (float) Math.random() * (terrain.getWidth() - 2);

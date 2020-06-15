@@ -1,6 +1,6 @@
 package com.crazyputting.function;
-package DhbInterpolation;
-import DhbInterfaces.OneVariableFunction;
+//package DhbInterpolation;
+/*import DhbInterfaces.OneVariableFunction;
 import DhbInterfaces.PointSeries;
 
 
@@ -82,3 +82,4 @@ public class cubicspline extends NewtonInterpolator implements DhbInterfaces.One
    }
 
 }
+*/
