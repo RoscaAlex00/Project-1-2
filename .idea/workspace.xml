@@ -30,12 +30,12 @@
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/javaCompile.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/taskHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/build/classes/java/main/com/crazyputting/physicsengine/Physics.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/build/classes/java/main/com/crazyputting/physicsengine/Physics.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/build/classes/java/main/com/crazyputting/states/gamestates/ThreeDimensional.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/build/classes/java/main/com/crazyputting/states/gamestates/ThreeDimensional.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/build/libs/core-1.0.jar" beforeDir="false" afterPath="$PROJECT_DIR$/core/build/libs/core-1.0.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/com/crazyputting/function/Derivatives.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/com/crazyputting/function/Derivatives.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/src/com/crazyputting/physicsengine/Physics.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/com/crazyputting/physicsengine/Physics.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/com/crazyputting/states/gamestates/ThreeDimensional.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/com/crazyputting/states/gamestates/ThreeDimensional.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -167,6 +167,7 @@
       <workItem from="1592221968217" duration="259000" />
       <workItem from="1592222315104" duration="279000" />
       <workItem from="1592223704099" duration="1351000" />
+      <workItem from="1592228192124" duration="3159000" />
     </task>
     <task id="LOCAL-00001" summary="Vector3 for treeCoordinates and collider improvement">
       <created>1592131218032</created>
@@ -274,46 +275,46 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="298" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1536.824@0.0.1536.824" timestamp="1591536437658" />
-    <state x="294" y="8" key="CommitChangelistDialog2" timestamp="1592222103565">
+    <state x="294" y="8" key="CommitChangelistDialog2" timestamp="1592231938775">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="294" y="8" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1592222103565" />
+    <state x="294" y="8" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1592231938775" />
     <state x="549" y="168" key="FileChooserDialogImpl" timestamp="1591555636999">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="549" y="168" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1591555636999" />
-    <state width="1493" height="210" key="GridCell.Tab.0.bottom" timestamp="1592225062675">
+    <state width="1493" height="210" key="GridCell.Tab.0.bottom" timestamp="1592231938860">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="210" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1592225062675" />
+    <state width="1493" height="210" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1592231938860" />
     <state width="1877" height="298" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1592069634979" />
-    <state width="1493" height="210" key="GridCell.Tab.0.center" timestamp="1592225062675">
+    <state width="1493" height="210" key="GridCell.Tab.0.center" timestamp="1592231938859">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="210" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1592225062675" />
+    <state width="1493" height="210" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1592231938859" />
     <state width="1877" height="298" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1592069634979" />
-    <state width="1493" height="210" key="GridCell.Tab.0.left" timestamp="1592225062675">
+    <state width="1493" height="210" key="GridCell.Tab.0.left" timestamp="1592231938859">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="210" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1592225062675" />
+    <state width="1493" height="210" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1592231938859" />
     <state width="1877" height="298" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1592069634979" />
-    <state width="1493" height="210" key="GridCell.Tab.0.right" timestamp="1592225062675">
+    <state width="1493" height="210" key="GridCell.Tab.0.right" timestamp="1592231938859">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="210" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1592225062675" />
+    <state width="1493" height="210" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1592231938859" />
     <state width="1877" height="298" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1592069634979" />
     <state x="481" y="129" key="MultipleFileMergeDialog" timestamp="1592169610728">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="481" y="129" key="MultipleFileMergeDialog/0.0.1536.824@0.0.1536.824" timestamp="1592169610728" />
-    <state x="361" y="146" key="Vcs.Push.Dialog.v2" timestamp="1592222119861">
+    <state x="361" y="146" key="Vcs.Push.Dialog.v2" timestamp="1592225262020">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="361" y="146" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1592222119861" />
-    <state x="465" y="238" key="com.intellij.ide.util.TipDialog" timestamp="1592223711936">
+    <state x="361" y="146" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1592225262020" />
+    <state x="465" y="238" key="com.intellij.ide.util.TipDialog" timestamp="1592228195247">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="465" y="238" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1592223711936" />
+    <state x="465" y="238" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1592228195247" />
     <state x="578" y="330" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1592169599831">
       <screen x="0" y="0" width="1536" height="824" />
     </state>

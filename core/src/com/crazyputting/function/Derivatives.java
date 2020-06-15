@@ -5,7 +5,7 @@ import com.badlogic.gdx.math.Vector3;
 import java.io.Serializable;
 import java.util.Stack;
 
-public class Derivatives implements Function, Serializable {
+public class Derivatives implements Function {
 
     private Node root;
     private Node xDeriv;
@@ -444,7 +444,7 @@ public class Derivatives implements Function, Serializable {
         return infix == null ? post.toString() : infix;
     }
 
-    private class Node implements Serializable {
+    private class Node {
         String value; //Each node has a value (either a number or an operator)
         Node left, right; //Each node has 2 children
 

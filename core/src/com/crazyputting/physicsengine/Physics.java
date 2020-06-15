@@ -15,8 +15,8 @@ public class Physics {
     protected final double SPACCELERATION = 0.9;
     protected final float GRAVITY = 9.81f;
     private final float GOAL_TOLERANCE = 2f;
-    private final float WALL_HIT_FRICTION = -0.95f;
-    private final float TREE_HIT_FRICTION = -0.80f;
+    private final float WALL_POWER_LOSS = -0.80f;
+    private final float TREE_POWER_LOSS = -0.65f;
     float dt = Gdx.graphics.getDeltaTime();
     private Ball ball;
     private Terrain terrain;
@@ -25,6 +25,8 @@ public class Physics {
     private float mass;
     private float radius;
     private ArrayList<Vector3> treeCoordinates;
+    private int treeHitCounter = 0;
+    private int wallHitCounter = 0;
 
 
     public Physics(Ball yourBall, Terrain yourTerrain, Hole newHole, PhysicsSolver solver) {
@@ -97,7 +99,7 @@ public class Physics {
         ball.getVelocity().set(newVel.cpy());
         Vector3 newPos = solver.getPosition(position.cpy(), velocity.cpy());
         ball.getPosition().set(newPos);
-        if (terrain.getFunction().evaluateF(newPos.x,newPos.y) < -0.10f) {
+        if (terrain.getFunction().evaluateF(newPos.x, newPos.y) < -0.10f) {
             terrain.setFrictionCoefficient(4.5f);
         } else {
             terrain.setFrictionCoefficient(1.5f);
@@ -111,28 +113,72 @@ public class Physics {
         for (Vector3 treeCoordinate : treeCoordinates) {
             if (treeCoordinate.x - 0.66f <= position.x && position.x <= treeCoordinate.x + 0.66f &&
                     treeCoordinate.y - 0.66f <= position.y && position.y <= treeCoordinate.y + 0.66f) {
-                Vector3 storage = new Vector3(ball.getVelocity().x * TREE_HIT_FRICTION,
-                        ball.getVelocity().y * TREE_HIT_FRICTION, 0);
+                setTreeHitCounter(getTreeHitCounter() + 1);
+                if (getTreeHitCounter() == 1) {
+                    Vector3 storage = new Vector3(ball.getVelocity().x * TREE_POWER_LOSS,
+                            ball.getVelocity().y * TREE_POWER_LOSS, 0);
+                    ball.setStopped();
+                    ball.hit(storage);
+                }
+            }
+        }
+        if (position.x <= 0.2f || position.x >= terrain.getWidth() - 0.3f) {
+            setWallHitCounter(getWallHitCounter() + 1);
+            if (getWallHitCounter() == 1) {
+                Vector3 storage = new Vector3(ball.getVelocity().x * WALL_POWER_LOSS,
+                        ball.getVelocity().y, 0);
                 ball.setStopped();
                 ball.hit(storage);
             }
         }
-        if (position.x <= 0.2f || position.x >= terrain.getWidth() - 0.3f) {
-            Vector3 storage = new Vector3(ball.getVelocity().x * WALL_HIT_FRICTION,
-                    ball.getVelocity().y, 0);
-            ball.setStopped();
-            ball.hit(storage);
-        }
         if (position.y <= 0.2f || position.y >= terrain.getHeight() - 0.3f) {
-            Vector3 storage = new Vector3(ball.getVelocity().x,
-                    ball.getVelocity().y * WALL_HIT_FRICTION, 0);
-            ball.setStopped();
-            ball.hit(storage);
+            setWallHitCounter(getWallHitCounter() + 1);
+            if (getWallHitCounter() == 1) {
+                Vector3 storage = new Vector3(ball.getVelocity().x,
+                        ball.getVelocity().y * WALL_POWER_LOSS, 0);
+                ball.setStopped();
+                ball.hit(storage);
+            }
         }
         if (velocity.len() < SPVELOCITY && calcGravity(position).len() < SPACCELERATION) {
             ball.setStopped();
         }
+        if (getWallHitCounter() >= 1){
+            setWallHitCounter(getWallHitCounter() + 1);
+        }
+        if(getWallHitCounter() == 4){
+            resetWallHitCounter();
+        }
+        if (getTreeHitCounter() >= 1) {
+            setTreeHitCounter(getTreeHitCounter() + 1);
+        }
+        if (getTreeHitCounter() == 15) {
+            resetTreeHitCounter();
+        }
         ball.getPosition().z = terrain.getFunction().evaluateF(position.x, position.y);
     }
 
+    public int getTreeHitCounter() {
+        return treeHitCounter;
+    }
+
+    public void setTreeHitCounter(int counter) {
+        this.treeHitCounter = counter;
+    }
+
+    public void resetTreeHitCounter() {
+        this.treeHitCounter = 0;
+    }
+
+    public int getWallHitCounter() {
+        return wallHitCounter;
+    }
+
+    public void setWallHitCounter(int counter) {
+        this.wallHitCounter = counter;
+    }
+
+    public void resetWallHitCounter() {
+        this.wallHitCounter = 0;
+    }
 }
