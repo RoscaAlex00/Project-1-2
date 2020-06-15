@@ -15,8 +15,6 @@ public class Physics {
     protected final double SPACCELERATION = 0.9;
     protected final float GRAVITY = 9.81f;
     private final float GOAL_TOLERANCE = 2f;
-    private final float WALL_HIT_FRICTION = -0.95f;
-    private final float TREE_HIT_FRICTION = -0.80f;
     private final float TREE_RADIUS = 0.66f;
 
     private final float WALL_POWER_LOSS = -0.80f;
@@ -142,7 +140,6 @@ public class Physics {
                 ball.setStopped();
                 ball.hit(storage);
             }
-            ball.getVelocity().x *= WALL_HIT_FRICTION;
         }
         if (position.y <= 0.2f || position.y >= terrain.getHeight() - 0.3f) {
             setWallHitCounter(getWallHitCounter() + 1);
@@ -152,7 +149,6 @@ public class Physics {
                 ball.setStopped();
                 ball.hit(storage);
             }
-            ball.getVelocity().y *= WALL_HIT_FRICTION;
         }
         if (velocity.len() < SPVELOCITY && calcGravity(position).len() < SPACCELERATION) {
             ball.setStopped();
@@ -186,7 +182,7 @@ public class Physics {
     private Vector3 findReflection(Ball ball, Vector3 tree){
         Vector3 normal = findNormalOfCircleCollision(ball, tree);
         Vector3 ballVelocity = ball.getVelocity().cpy();
-        return ballVelocity.sub(normal.scl(2 * normal.dot(ballVelocity))).scl(-TREE_HIT_FRICTION);
+        return ballVelocity.sub(normal.scl(2 * normal.dot(ballVelocity))).scl(-TREE_POWER_LOSS);
     }
 
     private Vector3 findNormalOfCircleCollision(Ball ball, Vector3 tree){
