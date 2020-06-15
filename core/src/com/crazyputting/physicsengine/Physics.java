@@ -6,7 +6,6 @@ import com.crazyputting.objects.Ball;
 import com.crazyputting.objects.Hole;
 import com.crazyputting.objects.Terrain;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -19,6 +18,7 @@ public class Physics {
     private final float TREE_POWER_LOSS = -0.65f;
 
     public static final float TREE_RADIUS = 0.5f;
+    public static final float FIELD_SQUARE_WIDTH = 5;
 
     float dt = Gdx.graphics.getDeltaTime();
     private Ball ball;
@@ -195,9 +195,10 @@ public class Physics {
         float ballRadius = Ball.DIAMETER/2f;
         return distance <= (ballRadius + TREE_RADIUS);
     }
+
     private boolean ballIsInSand(Vector3 ball, Vector3 sand){
-        return sand.x - 2.5f <= ball.x && ball.x <= sand.x + 2.5f &&
-                sand.y - 2.5f <= ball.y && ball.y <= sand.y + 2.5f;
+        return sand.x - FIELD_SQUARE_WIDTH/2 <= ball.x && ball.x <= sand.x + FIELD_SQUARE_WIDTH/2 &&
+                sand.y - FIELD_SQUARE_WIDTH/2 <= ball.y && ball.y <= sand.y + FIELD_SQUARE_WIDTH/2;
     }
 
     private boolean checkInSand(List<Vector3> sandCoordinates,Vector3 ballPos){
