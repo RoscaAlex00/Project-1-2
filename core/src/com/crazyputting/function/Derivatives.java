@@ -27,7 +27,7 @@ public class Derivatives implements Function, Serializable {
         for (String fix : postFix) {
             tempRoot = new Node(fix);
 
-            if (!isOperator(fix)) {
+            if (isOperator(fix)) {
                 nodeStack.push(tempRoot);
             } else {
                 tempRight = nodeStack.pop();
@@ -57,8 +57,8 @@ public class Derivatives implements Function, Serializable {
     }
 
     private static boolean isOperator(String s) {
-        return s.equals("(") || s.equals(")") || s.equals("+") || s.equals("-") || s.equals("*") || s.equals("/") ||
-                s.equals("^") || s.equals("ln") || s.equals("sin") || s.equals("cos");
+        return !s.equals("(") && !s.equals(")") && !s.equals("+") && !s.equals("-") && !s.equals("*") && !s.equals("/") &&
+                !s.equals("^") && !s.equals("ln") && !s.equals("sin") && !s.equals("cos");
     }
 
     private static int getPriority(String op) {
@@ -85,7 +85,7 @@ public class Derivatives implements Function, Serializable {
         Stack<String> postfixStack = new Stack();
 
         for (String currentSymbol : infix) {
-            if (!isOperator(currentSymbol)) {
+            if (isOperator(currentSymbol)) {
                 postfixStack.push(currentSymbol);
             } else {
                 while (!operatorStack.isEmpty() && (getPriority(currentSymbol) < getPriority(operatorStack.peek())) &&
@@ -137,7 +137,7 @@ public class Derivatives implements Function, Serializable {
     }
 
     private float evaluate(Node root, float xValue, float yValue) {
-        if (!isOperator(root.value)) {
+        if (isOperator(root.value)) {
             if (root.value.equals("x")) {
                 return xValue;
             } else if (root.value.equals("y")) {
@@ -202,7 +202,7 @@ public class Derivatives implements Function, Serializable {
     }
 
     private Node xDerive(Node root) {
-        if (!isOperator(root.value)) {
+        if (isOperator(root.value)) {
             if (root.value.equals("x")) {
                 return new Node("1");
             }
@@ -319,7 +319,7 @@ public class Derivatives implements Function, Serializable {
     }
 
     private Node yDerive(Node root) {
-        if (!isOperator(root.value)) {
+        if (isOperator(root.value)) {
             if (root.value.equals("y")) {
                 return new Node("1");
             }

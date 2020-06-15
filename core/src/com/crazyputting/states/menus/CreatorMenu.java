@@ -15,19 +15,19 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.Align;
+import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.crazyputting.player.AI;
-import com.crazyputting.player.Human;
-import com.crazyputting.player.Player;
+import com.crazyputting.managers.GameStateManager;
+import com.crazyputting.physicsengine.PhysicsSolver;
+import com.crazyputting.physicsengine.SolverFactory;
+import com.crazyputting.player.*;
 import com.crazyputting.CrazyPutting;
-import com.crazyputting.engine.*;
 import com.crazyputting.function.Derivatives;
 import com.crazyputting.function.Function;
-import com.crazyputting.managers.GameStateManager;
-import com.crazyputting.objects.Ball;
 import com.crazyputting.objects.Hole;
 import com.crazyputting.objects.Terrain;
+import com.crazyputting.states.gamestates.GameState;
 
 public class CreatorMenu extends GameState {
 
@@ -36,10 +36,16 @@ public class CreatorMenu extends GameState {
     private Skin skin;
     private BitmapFont comicFont;
 
-    public CreatorMenu(GameStateManager gsm) { super(gsm); }
+    public CreatorMenu(GameStateManager gsm) {
+        super(gsm);
+    }
 
     @Override
     public void init() {
+        final String[] SOLVER_STRING = new String[]{"Euler", "Verlet", "Runge-Kutta", "Adams-Bashforth"};
+        final Array<String> SOLVERS = new Array<>(SOLVER_STRING);
+        final String[] PLAYER_STRING = new String[]{"Human", "AI", "AlexAI", "FrunzAI", "AStar"};
+        final Array<String> PLAYERS = new Array<>(PLAYER_STRING);
 
         spriteBatch = new SpriteBatch();
         Viewport viewport = new FitViewport(CrazyPutting.width, CrazyPutting.height, CrazyPutting.cam);
@@ -63,7 +69,7 @@ public class CreatorMenu extends GameState {
         HorizontalGroup constants = new HorizontalGroup();
         HorizontalGroup solverAndPlayer = new HorizontalGroup();
 
-        Label startXLabel = new Label("                       Start X = ",skin);
+        Label startXLabel = new Label("                       Start X = ", skin);
         final TextField startXField = new TextField("10", skin);
         Label startYLabel = new Label("        Start Y = ", skin);
         final TextField startYField = new TextField("10", skin);
@@ -85,10 +91,10 @@ public class CreatorMenu extends GameState {
 
         Label solverLabel = new Label("        Solver:  ", skin);
         final SelectBox<String> solverSelect = new SelectBox<>(skin);
-        solverSelect.setItems("Euler", "Verlet", "Runge-Kutta", "Adams-Bashforth");
+        solverSelect.setItems(SOLVERS);
         Label playerLabel = new Label("                    Player: ", skin);
         final SelectBox<String> playerSelect = new SelectBox<>(skin);
-        playerSelect.setItems("Human","AI");
+        playerSelect.setItems(PLAYERS);
 
         /*Label frictionLabel = new Label("Friction coefficient: ", skin);
         final TextField frictionField = new TextField("5", skin);
@@ -123,8 +129,7 @@ public class CreatorMenu extends GameState {
                     length = Integer.parseInt(courseLengthField.getText().replaceAll(" ", ""));
                     /*MU = Float.parseFloat(frictionField.getText().replaceAll(" ", ""));
                     vMax = Float.parseFloat(speedField.getText().replaceAll(" ", ""));*/
-                }
-                catch (Exception e) {
+                } catch (Exception e) {
                     TextButton buttonOK = new TextButton("Ok", skin);
                     Label labelError0 = new Label("Not all fields contain real values.", skin);
                     labelError0.setColor(Color.RED);
@@ -151,37 +156,14 @@ public class CreatorMenu extends GameState {
                     error = true;
                 }
                 if (!error) {
-                    PhysicsSolver solver;
-                    switch (selectedSolver) {
-                        case "Verlet":
-                            solver = new Verlet();
-                            break;
-                        case "Runge-Kutta":
-                            solver = new RungeKutta();
-                            break;
-                        case "Adams-Bashforth":
-                            solver = new AdamsBashforth();
-                            break;
-                        default:
-                            solver = new Euler();
-                            break;
-                    }
-
-                    Player player;
-                    switch (selectedPlayer){
-                        case "AI":
-                            player = new AI(vMax);
-                            break;
-                        default:
-                            player = new Human(vMax);
-                    }
-
-                    Vector3 ballVector = new Vector3(startX, startY, 0);
-                    Ball ball = new Ball(ballVector);
+                    PhysicsSolver solver = SolverFactory.get().makeSolver(selectedSolver);
+                    Player player = PlayerFactory.get().makePlayer(selectedPlayer, vMax);
+                    Vector3 teeVector = new Vector3(startX, startY, 0);
                     Vector3 holeVector = new Vector3(goalX, goalY, 0);
                     Hole hole = new Hole(goalRadius, holeVector);
-                    Terrain newTerrain = new Terrain(length, width, ball, hole, function, MU,
-                            vMax,"newTerrain", solver, player);
+
+                    Terrain newTerrain = new Terrain(length, width, teeVector, hole, function, MU,
+                            vMax, "newTerrain", solver, player);
                     gsm.setTerrain(newTerrain);
                     gsm.setState(GameStateManager.PLAY);
                 }
@@ -230,7 +212,7 @@ public class CreatorMenu extends GameState {
         main.add(fieldSize).fillY().align(Align.left);
         /*main.row().pad(5, 0, 5, 0);
         main.add(constants).fillY().align(Align.left);*/
-        main.row().pad(20,0,20,0);
+        main.row().pad(20, 0, 20, 0);
         main.add(solverAndPlayer).fillY().align(Align.center);
         main.row().pad(20, 0, 20, 0);
         main.add(playButton).align(Align.center);

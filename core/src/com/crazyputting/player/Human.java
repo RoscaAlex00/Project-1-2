@@ -7,7 +7,7 @@ public class Human implements Player {
 
     private float maximumVelocity;
 
-    public Human(float maximumVelocity){
+    public Human(float maximumVelocity) {
         this.maximumVelocity = maximumVelocity;
     }
 
@@ -23,10 +23,21 @@ public class Human implements Player {
 
     /**
      * Only used for the AI classes
+     *
      * @return null
      */
     @Override
     public Vector3 shot_velocity(Terrain terrain) throws IllegalAccessException {
         throw new IllegalAccessException("This is the wrong class");
     }
+
+    @Override
+    public void runLoop() {
+    }
+
+    @Override
+    public void setTerrain(Terrain terrain) {
+
+    }
+
 }

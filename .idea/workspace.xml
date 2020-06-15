@@ -19,17 +19,28 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d282317d-79fa-4578-8d00-2b6d745c632f" name="Default Changelist" comment="add hitCounter">
+    <list default="true" id="8f2b995d-3fd3-4cd5-81e0-99edc8c0e739" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/resourceHashesCache.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/classAnalysis.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/jarAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/jarAnalysis.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/javaCompile.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/taskHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/com/crazyputting/function/cubicspline.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/com/crazyputting/function/cubicspline.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/build/classes/java/main/com/crazyputting/physicsengine/Physics.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/build/classes/java/main/com/crazyputting/physicsengine/Physics.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/build/libs/core-1.0.jar" beforeDir="false" afterPath="$PROJECT_DIR$/core/build/libs/core-1.0.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/com/crazyputting/physicsengine/Physics.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/com/crazyputting/physicsengine/Physics.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/com/crazyputting/states/gamestates/ThreeDimensional.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/com/crazyputting/states/gamestates/ThreeDimensional.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
-  </component>
-  <component name="CodeStyleSettingsInfer">
-    <option name="done" value="true" />
   </component>
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
@@ -59,437 +70,257 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="UPDATE_TYPE" value="MERGE" />
   </component>
-  <component name="ProjectCodeStyleSettingsMigration">
-    <option name="version" value="1" />
-  </component>
-  <component name="ProjectId" id="1ZJIE0DhocPJJmruFDwvQRits1X" />
+  <component name="ProjectId" id="1caDnFrKheRMt9TCHioxb4y6wK5" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
-    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$USER_HOME$/IdeaProjects" />
-    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
-    <property name="show.unlinked.gradle.project.popup" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/core/assets" />
+    <property name="project.structure.last.edited" value="SDKs" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.2" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\dolbi\Desktop\Our Project\core\src\com\crazyputting\player" />
-      <recent name="C:\Users\dolbi\Desktop\Our Project\core\assets\comic\raw" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Alex\Desktop\Game\core\assets" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Alex\Desktop\Game\core\assets" />
     </key>
   </component>
   <component name="RunManager">
-    <configuration name="Launcher" type="Application" factoryName="Application">
+    <configuration name="DesktopLauncher" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="ALTERNATIVE_JRE_PATH" value="12" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
       <option name="MAIN_CLASS_NAME" value="com.crazyputting.desktop.DesktopLauncher" />
-      <module name="Our_Project.desktop.main" />
+      <module name="Project_1-2.desktop.main" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.crazyputting.desktop.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.DesktopLauncher" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="ServiceViewManager">
+    <option name="viewStates">
+      <list>
+        <serviceView>
+          <treeState>
+            <expand />
+            <select />
+          </treeState>
+        </serviceView>
+      </list>
+    </option>
   </component>
   <component name="SvnConfiguration">
     <configuration />
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="d282317d-79fa-4578-8d00-2b6d745c632f" name="Default Changelist" comment="small update" />
-      <created>1584550655525</created>
+      <changelist id="8f2b995d-3fd3-4cd5-81e0-99edc8c0e739" name="Default Changelist" comment="" />
+      <created>1590757976085</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1584550655525</updated>
-      <workItem from="1585574395751" duration="61000" />
-      <workItem from="1585574495949" duration="1219000" />
-      <workItem from="1585576392577" duration="316000" />
-      <workItem from="1585576749628" duration="213000" />
-      <workItem from="1585580081566" duration="453000" />
-      <workItem from="1585696453434" duration="1185000" />
-      <workItem from="1585727581948" duration="1696000" />
-      <workItem from="1585730254111" duration="840000" />
-      <workItem from="1585850285566" duration="443000" />
-      <workItem from="1585918329595" duration="40000" />
-      <workItem from="1586006465643" duration="1725000" />
-      <workItem from="1586093846844" duration="63000" />
-      <workItem from="1586169645596" duration="1407000" />
-      <workItem from="1586545617244" duration="9542000" />
-      <workItem from="1586859864197" duration="926000" />
-      <workItem from="1588967402610" duration="4195000" />
+      <updated>1590757976085</updated>
+      <workItem from="1590757979761" duration="93000" />
+      <workItem from="1591372974279" duration="274000" />
+      <workItem from="1591534535920" duration="2078000" />
+      <workItem from="1591537282229" duration="419000" />
+      <workItem from="1591550544434" duration="1425000" />
+      <workItem from="1591552029374" duration="15000" />
+      <workItem from="1591552147487" duration="987000" />
+      <workItem from="1591553221387" duration="940000" />
+      <workItem from="1591554203732" duration="668000" />
+      <workItem from="1591555059566" duration="578000" />
+      <workItem from="1591555672636" duration="139000" />
+      <workItem from="1591956839176" duration="1035000" />
+      <workItem from="1592042954993" duration="2198000" />
+      <workItem from="1592055333391" duration="3460000" />
+      <workItem from="1592059657319" duration="28000" />
+      <workItem from="1592059966619" duration="367000" />
+      <workItem from="1592060447698" duration="1016000" />
+      <workItem from="1592061492961" duration="54000" />
+      <workItem from="1592061637525" duration="823000" />
+      <workItem from="1592063052727" duration="1763000" />
+      <workItem from="1592066653021" duration="72000" />
+      <workItem from="1592067046808" duration="2448000" />
+      <workItem from="1592131494415" duration="449000" />
+      <workItem from="1592145145913" duration="4893000" />
+      <workItem from="1592164579153" duration="5488000" />
+      <workItem from="1592221754164" duration="190000" />
+      <workItem from="1592221968217" duration="259000" />
+      <workItem from="1592222315104" duration="279000" />
+      <workItem from="1592223704099" duration="1351000" />
     </task>
-    <task id="LOCAL-00001" summary="new CreatorMenu">
-      <created>1584558969369</created>
+    <task id="LOCAL-00001" summary="Vector3 for treeCoordinates and collider improvement">
+      <created>1592131218032</created>
       <option name="number" value="00001" />
       <option name="presentableId" value="LOCAL-00001" />
       <option name="project" value="LOCAL" />
-      <updated>1584558969369</updated>
+      <updated>1592131218032</updated>
     </task>
-    <task id="LOCAL-00002" summary="better CreatorMenu">
-      <created>1584571765966</created>
+    <task id="LOCAL-00002" summary="Vector3 for treeCoordinates and collider improvement">
+      <created>1592131257852</created>
       <option name="number" value="00002" />
       <option name="presentableId" value="LOCAL-00002" />
       <option name="project" value="LOCAL" />
-      <updated>1584571765966</updated>
+      <updated>1592131257852</updated>
     </task>
-    <task id="LOCAL-00003" summary="visualisation works better">
-      <created>1584576774007</created>
+    <task id="LOCAL-00003" summary="Vector3 for treeCoordinates and collider improvement">
+      <created>1592131917793</created>
       <option name="number" value="00003" />
       <option name="presentableId" value="LOCAL-00003" />
       <option name="project" value="LOCAL" />
-      <updated>1584576774007</updated>
+      <updated>1592131917793</updated>
     </task>
-    <task id="LOCAL-00004" summary="ball position from CreatorMenu">
-      <created>1584616296391</created>
+    <task id="LOCAL-00004" summary="Collider kind of improvement">
+      <created>1592150026906</created>
       <option name="number" value="00004" />
       <option name="presentableId" value="LOCAL-00004" />
       <option name="project" value="LOCAL" />
-      <updated>1584616296391</updated>
+      <updated>1592150026907</updated>
     </task>
-    <task id="LOCAL-00005" summary="ball displayed on the screen">
-      <created>1584616970664</created>
+    <task id="LOCAL-00005" summary="coll update">
+      <created>1592170061270</created>
       <option name="number" value="00005" />
       <option name="presentableId" value="LOCAL-00005" />
       <option name="project" value="LOCAL" />
-      <updated>1584616970664</updated>
+      <updated>1592170061270</updated>
     </task>
-    <task id="LOCAL-00006" summary="ball in terrain">
-      <created>1584620260437</created>
+    <task id="LOCAL-00006" summary="add spline class">
+      <created>1592221925190</created>
       <option name="number" value="00006" />
       <option name="presentableId" value="LOCAL-00006" />
       <option name="project" value="LOCAL" />
-      <updated>1584620260437</updated>
+      <updated>1592221925190</updated>
     </task>
-    <task id="LOCAL-00007" summary="moving ball">
-      <created>1584620975010</created>
+    <task id="LOCAL-00007" summary="add spline class">
+      <created>1592222104567</created>
       <option name="number" value="00007" />
       <option name="presentableId" value="LOCAL-00007" />
       <option name="project" value="LOCAL" />
-      <updated>1584620975010</updated>
+      <updated>1592222104567</updated>
     </task>
-    <task id="LOCAL-00008" summary="winning screen">
-      <created>1584627562192</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1584627562192</updated>
-    </task>
-    <task id="LOCAL-00009" summary="charging shots with bar and slider">
-      <created>1584821189978</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1584821189978</updated>
-    </task>
-    <task id="LOCAL-00010" summary="setiings menu">
-      <created>1585576906972</created>
-      <option name="number" value="00010" />
-      <option name="presentableId" value="LOCAL-00010" />
-      <option name="project" value="LOCAL" />
-      <updated>1585576906972</updated>
-    </task>
-    <task id="LOCAL-00011" summary="ball update">
-      <created>1585580313508</created>
-      <option name="number" value="00011" />
-      <option name="presentableId" value="LOCAL-00011" />
-      <option name="project" value="LOCAL" />
-      <updated>1585580313508</updated>
-    </task>
-    <task id="LOCAL-00012" summary="Added background in game. (light gray)">
-      <created>1585697543734</created>
-      <option name="number" value="00012" />
-      <option name="presentableId" value="LOCAL-00012" />
-      <option name="project" value="LOCAL" />
-      <updated>1585697543734</updated>
-    </task>
-    <task id="LOCAL-00013" summary="Added background in game. (light gray)">
-      <created>1585697552210</created>
-      <option name="number" value="00013" />
-      <option name="presentableId" value="LOCAL-00013" />
-      <option name="project" value="LOCAL" />
-      <updated>1585697552210</updated>
-    </task>
-    <task id="LOCAL-00014" summary="Added background in game. (light blue)">
-      <created>1585729276659</created>
-      <option name="number" value="00014" />
-      <option name="presentableId" value="LOCAL-00014" />
-      <option name="project" value="LOCAL" />
-      <updated>1585729276659</updated>
-    </task>
-    <task id="LOCAL-00015" summary="DirectionalLight Update">
-      <created>1585730488790</created>
-      <option name="number" value="00015" />
-      <option name="presentableId" value="LOCAL-00015" />
-      <option name="project" value="LOCAL" />
-      <updated>1585730488791</updated>
-    </task>
-    <task id="LOCAL-00016" summary="Add AI + Solvers to framework.">
-      <created>1585850690987</created>
-      <option name="number" value="00016" />
-      <option name="presentableId" value="LOCAL-00016" />
-      <option name="project" value="LOCAL" />
-      <updated>1585850690987</updated>
-    </task>
-    <task id="LOCAL-00017" summary="Small framework update.">
-      <created>1586008020714</created>
-      <option name="number" value="00017" />
-      <option name="presentableId" value="LOCAL-00017" />
-      <option name="project" value="LOCAL" />
-      <updated>1586008020714</updated>
-    </task>
-    <task id="LOCAL-00018" summary="Verlet solver.">
-      <created>1586028791167</created>
-      <option name="number" value="00018" />
-      <option name="presentableId" value="LOCAL-00018" />
-      <option name="project" value="LOCAL" />
-      <updated>1586028791167</updated>
-    </task>
-    <task id="LOCAL-00019" summary="Verlet solver.">
-      <created>1586028818029</created>
-      <option name="number" value="00019" />
-      <option name="presentableId" value="LOCAL-00019" />
-      <option name="project" value="LOCAL" />
-      <updated>1586028818029</updated>
-    </task>
-    <task id="LOCAL-00020" summary="Big Design Update + 1st ed Runge Kutta">
-      <created>1586554524943</created>
-      <option name="number" value="00020" />
-      <option name="presentableId" value="LOCAL-00020" />
-      <option name="project" value="LOCAL" />
-      <updated>1586554524943</updated>
-    </task>
-    <task id="LOCAL-00021" summary="Typo">
-      <created>1586555098881</created>
-      <option name="number" value="00021" />
-      <option name="presentableId" value="LOCAL-00021" />
-      <option name="project" value="LOCAL" />
-      <updated>1586555098881</updated>
-    </task>
-    <task id="LOCAL-00022" summary="Drop-down menu for human player and AI. Human and AI in one interface">
-      <created>1587217850537</created>
-      <option name="number" value="00022" />
-      <option name="presentableId" value="LOCAL-00022" />
-      <option name="project" value="LOCAL" />
-      <updated>1587217850537</updated>
-    </task>
-    <task id="LOCAL-00023" summary="Exceptions added for Player and the first version of fitness function">
-      <created>1587638152931</created>
-      <option name="number" value="00023" />
-      <option name="presentableId" value="LOCAL-00023" />
-      <option name="project" value="LOCAL" />
-      <updated>1587638152931</updated>
-    </task>
-    <task id="LOCAL-00024" summary="ball stops at borders">
-      <created>1588968159648</created>
-      <option name="number" value="00024" />
-      <option name="presentableId" value="LOCAL-00024" />
-      <option name="project" value="LOCAL" />
-      <updated>1588968159648</updated>
-    </task>
-    <task id="LOCAL-00025" summary="some kind of collisions">
-      <created>1588968807123</created>
-      <option name="number" value="00025" />
-      <option name="presentableId" value="LOCAL-00025" />
-      <option name="project" value="LOCAL" />
-      <updated>1588968807123</updated>
-    </task>
-    <task id="LOCAL-00026" summary="add hitCounter">
-      <created>1588970027312</created>
-      <option name="number" value="00026" />
-      <option name="presentableId" value="LOCAL-00026" />
-      <option name="project" value="LOCAL" />
-      <updated>1588970027312</updated>
-    </task>
-    <task id="LOCAL-00027" summary="add hitCounter">
-      <created>1592088505280</created>
-      <option name="number" value="00027" />
-      <option name="presentableId" value="LOCAL-00027" />
-      <option name="project" value="LOCAL" />
-      <updated>1592088505280</updated>
-    </task>
-    <option name="localTasksCounter" value="28" />
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="2" />
+    <option name="version" value="1" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>
     </option>
-    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="visualisation works better" />
-    <MESSAGE value="ball position from CreatorMenu" />
-    <MESSAGE value="ball displayed on the screen" />
-    <MESSAGE value="ball in terrain" />
-    <MESSAGE value="moving ball" />
-    <MESSAGE value="winnig screen" />
-    <MESSAGE value="winning screen" />
-    <MESSAGE value="charging shots with bar and slider" />
-    <MESSAGE value="setiings menu" />
-    <MESSAGE value="ball update" />
-    <MESSAGE value="Added background in game. (light gray)" />
-    <MESSAGE value="Added background in game. (light blue)" />
-    <MESSAGE value="DirectionalLight Update" />
-    <MESSAGE value="Add AI + Solvers to framework." />
-    <MESSAGE value="Small framework update." />
-    <MESSAGE value="Verlet solver." />
-    <MESSAGE value="Big Design Update + 1st ed Runge Kutta" />
-    <MESSAGE value="Typo" />
-    <MESSAGE value="small update" />
-    <MESSAGE value="Drop-down menu for human player and AI. Human and AI in one interface" />
-    <MESSAGE value="Exceptions added for Player and the first version of fitness function" />
-    <MESSAGE value="AB4 implemented" />
-    <MESSAGE value="ball stops at borders" />
-    <MESSAGE value="some kind of collisions" />
-    <MESSAGE value="add hitCounter" />
-    <option name="LAST_COMMIT_MESSAGE" value="add hitCounter" />
+    <MESSAGE value="add water and change walls to wood" />
+    <MESSAGE value="Vector3 for treeCoordinates and collider improvement" />
+    <MESSAGE value="Collider kind of improvement" />
+    <MESSAGE value="coll update" />
+    <MESSAGE value="add spline class" />
+    <option name="LAST_COMMIT_MESSAGE" value="add spline class" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="485" y="64" key="#Launcher" timestamp="1589828307720">
+    <state x="526" y="110" key="#DesktopLauncher" timestamp="1592129997748">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="485" y="64" key="#Launcher/0.0.1536.824@0.0.1536.824" timestamp="1589828307720" />
-    <state x="606" y="91" key="#Launcher/0.0.1920.1040@0.0.1920.1040" timestamp="1588967525054" />
-    <state x="96" y="0" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1586960497883">
-      <screen x="0" y="0" width="1280" height="680" />
-    </state>
-    <state x="96" y="0" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1280.680@0.0.1280.680" timestamp="1586960497883" />
-    <state x="115" y="0" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824@0.0.1536.824" timestamp="1585574618308" />
-    <state x="496" y="221" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1589826738709">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="496" y="221" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1536.824@0.0.1536.824" timestamp="1589826738709" />
-    <state x="535" y="61" key="#com.intellij.ide.util.MemberChooser" timestamp="1589117588686">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="446" y="50" key="#com.intellij.ide.util.MemberChooser/0.0.1280.680@0.0.1280.680" timestamp="1588421199122" />
-    <state x="535" y="61" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824@0.0.1536.824" timestamp="1589117588686" />
-    <state x="445" y="150" key="#com.intellij.ide.util.TreeClassChooserDialog" timestamp="1589828022166">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="371" y="124" key="#com.intellij.ide.util.TreeClassChooserDialog/0.0.1280.680@0.0.1280.680" timestamp="1584550736693" />
-    <state x="445" y="150" key="#com.intellij.ide.util.TreeClassChooserDialog/0.0.1536.824@0.0.1536.824" timestamp="1589828022166" />
-    <state x="551" y="275" width="433" height="267" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1589829151217">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="551" y="275" width="433" height="267" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/0.0.1536.824@0.0.1536.824" timestamp="1589829151217" />
-    <state x="270" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1586006496559">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="270" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1536.824@0.0.1536.824" timestamp="1586006496559" />
-    <state x="292" y="0" key="CommitChangelistDialog2" timestamp="1589118067197">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="243" y="0" key="CommitChangelistDialog2/0.0.1280.680@0.0.1280.680" timestamp="1588423689679" />
-    <state x="292" y="0" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1589118067197" />
-    <state x="505" y="70" key="FileChooserDialogImpl" timestamp="1589819233803">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="421" y="58" key="FileChooserDialogImpl/0.0.1280.680@0.0.1280.680" timestamp="1588247861115" />
-    <state x="505" y="70" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1589819233803" />
-    <state width="1478" height="210" key="GridCell.Tab.0.bottom" timestamp="1589118139461">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state width="1237" height="133" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1588423879837" />
-    <state width="1478" height="210" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1589118139461" />
-    <state width="1340" height="266" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1588971581855" />
-    <state width="1478" height="210" key="GridCell.Tab.0.center" timestamp="1589118139461">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state width="1237" height="133" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1588423879836" />
-    <state width="1478" height="210" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1589118139461" />
-    <state width="1340" height="266" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1588971581855" />
-    <state width="1478" height="210" key="GridCell.Tab.0.left" timestamp="1589118139461">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state width="1237" height="133" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1588423879836" />
-    <state width="1478" height="210" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1589118139461" />
-    <state width="1340" height="266" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1588971581855" />
-    <state width="1478" height="210" key="GridCell.Tab.0.right" timestamp="1589118139461">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state width="1237" height="133" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1588423879837" />
-    <state width="1478" height="210" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1589118139461" />
-    <state width="1340" height="266" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1588971581855" />
-    <state width="1493" height="261" key="GridCell.Tab.1.bottom" timestamp="1585575616128">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state width="1493" height="261" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1585575616128" />
-    <state width="1493" height="261" key="GridCell.Tab.1.center" timestamp="1585575616128">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state width="1493" height="261" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1585575616128" />
-    <state width="1493" height="261" key="GridCell.Tab.1.left" timestamp="1585575616128">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state width="1493" height="261" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1585575616128" />
-    <state width="1493" height="261" key="GridCell.Tab.1.right" timestamp="1585575616128">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state width="1493" height="261" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1585575616128" />
-    <state x="223" y="11" width="745" height="602" key="NewModule_or_Project.wizard" timestamp="1588247873741">
-      <screen x="0" y="0" width="1280" height="680" />
-    </state>
-    <state x="223" y="11" width="745" height="602" key="NewModule_or_Project.wizard/0.0.1280.680@0.0.1280.680" timestamp="1588247873741" />
-    <state x="508" y="127" key="RollbackChangesDialog" timestamp="1589826697402">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="508" y="127" key="RollbackChangesDialog/0.0.1536.824@0.0.1536.824" timestamp="1589826697402" />
-    <state x="461" y="165" key="SettingsEditor" timestamp="1588969046412">
+    <state x="526" y="110" key="#DesktopLauncher/0.0.1536.824@0.0.1536.824" timestamp="1592129997748" />
+    <state x="657" y="139" key="#DesktopLauncher/0.0.1920.1040@0.0.1920.1040" timestamp="1592055349692" />
+    <state x="440" y="94" key="#Project_Structure" timestamp="1592055341187">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="461" y="165" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1588969046412" />
-    <state x="549" y="182" key="Vcs.Push.Dialog.v2" timestamp="1589118090140">
+    <state x="440" y="94" key="#Project_Structure/0.0.1920.1040@0.0.1920.1040" timestamp="1592055341187" />
+    <state x="223" y="68" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1590757998511">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="301" y="120" key="Vcs.Push.Dialog.v2/0.0.1280.680@0.0.1280.680" timestamp="1587638160489" />
-    <state x="549" y="182" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1589118090140" />
-    <state x="452" y="184" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1588970029955" />
-    <state x="465" y="238" key="com.intellij.ide.util.TipDialog" timestamp="1586935204647">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="465" y="238" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1586935204647" />
-    <state x="450" y="257" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1588423646673">
-      <screen x="0" y="0" width="1280" height="680" />
-    </state>
-    <state x="450" y="257" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1280.680@0.0.1280.680" timestamp="1588423646673" />
-    <state x="540" y="311" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1536.824@0.0.1536.824" timestamp="1586935220204" />
-    <state x="483" y="195" key="git4idea.merge.GitPullDialog" timestamp="1592083465596">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="483" y="195" key="git4idea.merge.GitPullDialog/0.0.1536.824@0.0.1536.824" timestamp="1592083465596" />
-    <state x="91" y="0" key="new project wizard" timestamp="1586971890148">
-      <screen x="0" y="0" width="1280" height="680" />
-    </state>
-    <state x="91" y="0" key="new project wizard/0.0.1280.680@0.0.1280.680" timestamp="1586971890148" />
-    <state x="282" y="67" width="700" height="530" key="recent.locations.popup" timestamp="1584813000540">
-      <screen x="0" y="0" width="1280" height="680" />
-    </state>
-    <state x="282" y="67" width="700" height="530" key="recent.locations.popup/0.0.1280.680@0.0.1280.680" timestamp="1584813000540" />
-    <state x="297" y="151" key="run.anything.popup" timestamp="1584812269017">
-      <screen x="0" y="0" width="1280" height="680" />
-    </state>
-    <state x="297" y="151" key="run.anything.popup/0.0.1280.680@0.0.1280.680" timestamp="1584812269017" />
-    <state x="455" y="2" width="1008" height="1037" key="search.everywhere.popup" timestamp="1588969034868">
+    <state x="223" y="68" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824@0.0.1536.824" timestamp="1590757998511" />
+    <state x="1167" y="428" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1592055453428">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="303" y="1" width="672" height="678" key="search.everywhere.popup/0.0.1280.680@0.0.1280.680" timestamp="1584817042637" />
-    <state x="455" y="2" width="1008" height="1037" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1588969034868" />
+    <state x="1167" y="428" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1592055453428" />
+    <state x="574" y="123" key="#com.intellij.ide.util.MemberChooser" timestamp="1592221839369">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="574" y="123" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824@0.0.1536.824" timestamp="1592221839369" />
+    <state x="418" y="339" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog" timestamp="1591537523631">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="418" y="339" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog/0.0.1536.824@0.0.1536.824" timestamp="1591537523631" />
+    <state x="298" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1591536437658">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="298" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1536.824@0.0.1536.824" timestamp="1591536437658" />
+    <state x="294" y="8" key="CommitChangelistDialog2" timestamp="1592222103565">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="294" y="8" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1592222103565" />
+    <state x="549" y="168" key="FileChooserDialogImpl" timestamp="1591555636999">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="549" y="168" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1591555636999" />
+    <state width="1493" height="210" key="GridCell.Tab.0.bottom" timestamp="1592225062675">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="210" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1592225062675" />
+    <state width="1877" height="298" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1592069634979" />
+    <state width="1493" height="210" key="GridCell.Tab.0.center" timestamp="1592225062675">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="210" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1592225062675" />
+    <state width="1877" height="298" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1592069634979" />
+    <state width="1493" height="210" key="GridCell.Tab.0.left" timestamp="1592225062675">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="210" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1592225062675" />
+    <state width="1877" height="298" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1592069634979" />
+    <state width="1493" height="210" key="GridCell.Tab.0.right" timestamp="1592225062675">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="210" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1592225062675" />
+    <state width="1877" height="298" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1592069634979" />
+    <state x="481" y="129" key="MultipleFileMergeDialog" timestamp="1592169610728">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="481" y="129" key="MultipleFileMergeDialog/0.0.1536.824@0.0.1536.824" timestamp="1592169610728" />
+    <state x="361" y="146" key="Vcs.Push.Dialog.v2" timestamp="1592222119861">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="361" y="146" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1592222119861" />
+    <state x="465" y="238" key="com.intellij.ide.util.TipDialog" timestamp="1592223711936">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="465" y="238" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1592223711936" />
+    <state x="578" y="330" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1592169599831">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="578" y="330" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1536.824@0.0.1536.824" timestamp="1592169599831" />
+    <state x="499" y="179" key="extract.method.dialog" timestamp="1592146536896">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="499" y="179" key="extract.method.dialog/0.0.1536.824@0.0.1536.824" timestamp="1592146536896" />
   </component>
 </project>
