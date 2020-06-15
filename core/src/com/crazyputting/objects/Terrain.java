@@ -6,6 +6,7 @@ import com.crazyputting.physicsengine.PhysicsSolver;
 import com.crazyputting.function.Function;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Vector;
 
 
@@ -20,9 +21,9 @@ public class Terrain {
     private final PhysicsSolver solver;
     private final Player player;
     private float frictionCoefficient;
-    private ArrayList<Vector3> sandCoordinates;
     private Ball ball;
-    private ArrayList<Vector3> treeCoordinates;
+    private List<Vector3> sandCoordinates;
+    private List<Vector3> treeCoordinates;
 
     public Terrain(float ourHeight, float ourWidth, Vector3 teeVector, Hole endHole, Function function, float MU,
                    float maxSpeed, String name, PhysicsSolver solver, Player player) {
@@ -34,7 +35,7 @@ public class Terrain {
         this.yourFunction = function;
         this.frictionCoefficient = MU;
         this.maximumVelocity = maxSpeed;
-        sandCoordinates = new ArrayList<>();
+        this.sandCoordinates = new ArrayList<>();
         this.solver = solver;
         this.player = player;
         this.ball = new Ball(teeVector);
@@ -101,16 +102,19 @@ public class Terrain {
     public float getFrictionCoefficient() {
         return frictionCoefficient;
     }
-    public void setTreeCoordinates(ArrayList<Vector3> newCoords){
+    public void setTreeCoordinates(List<Vector3> newCoords){
         this.treeCoordinates = newCoords;
     }
-    public ArrayList<Vector3> getTreeCoordinates(){
+
+    public List<Vector3> getTreeCoordinates(){
         return treeCoordinates;
     }
-    public void setSandCoordinates(ArrayList<Vector3> newCoordinates){
+
+    public void setSandCoordinates(List<Vector3> newCoordinates){
         this.sandCoordinates = newCoordinates;
     }
-    public ArrayList<Vector3> getSandCoordinates(){
+
+    public List<Vector3> getSandCoordinates(){
         return sandCoordinates;
     }
 

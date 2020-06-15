@@ -27,8 +27,6 @@ public class Physics {
     private Hole hole;
     private float mass;
     private float radius;
-    private ArrayList<Vector3> treeCoordinates;
-    private ArrayList<Vector3> sandCoordinates;
     private int wallHitCounter;
     private int treeHitCounter;
 
@@ -97,16 +95,13 @@ public class Physics {
         Vector3 position = ball.getPosition();
         Vector3 velocity = ball.getVelocity();
 
-        treeCoordinates = terrain.getTreeCoordinates();
-
         Vector3 newVel = solver.getSpeed(position.cpy(), velocity.cpy());
         ball.getVelocity().set(newVel.cpy());
         Vector3 newPos = solver.getPosition(position.cpy(), velocity.cpy());
         ball.getPosition().set(newPos.cpy());
 
         //Check if the ball is in sand or water
-        sandCoordinates = terrain.getSandCoordinates();
-        if(checkInSand(sandCoordinates,newPos)){
+        if(checkInSand(terrain.getSandCoordinates(), newPos)){
             terrain.setFrictionCoefficient(10f);
         }
         else if(terrain.getFunction().evaluateF(newPos.x,newPos.y) <= -0.10f){
@@ -115,8 +110,6 @@ public class Physics {
         else{
             terrain.setFrictionCoefficient(1.5f);
         }
-
-        treeCoordinates = terrain.getTreeCoordinates();
         updateBall(newPos, newVel);
         return position.dst(newPos);
     }
@@ -125,7 +118,7 @@ public class Physics {
         /*
         Check all trees to see if the ball hits the trees. The ball bounces off the tree in a realistic angle losing some speed.
          */
-        for (Vector3 treeCoordinate : treeCoordinates) {
+        for (Vector3 treeCoordinate : terrain.getTreeCoordinates()) {
             //The ball collides with the tree if the next position of the ball is within the bounds of the tree.
             if (ballIsCollidingWithCircle(ball, treeCoordinate)) {
                 setTreeHitCounter(getTreeHitCounter() + 1);
@@ -202,12 +195,12 @@ public class Physics {
         float ballRadius = Ball.DIAMETER/2f;
         return distance <= (ballRadius + TREE_RADIUS);
     }
-    private boolean ballIsInSand(Vector3 ball,Vector3 sand){
+    private boolean ballIsInSand(Vector3 ball, Vector3 sand){
         return sand.x - 2.5f <= ball.x && ball.x <= sand.x + 2.5f &&
-                sand.y - 2.5f <= ball.y && ball.y <= sand.x + 2.5f;
+                sand.y - 2.5f <= ball.y && ball.y <= sand.y + 2.5f;
     }
 
-    private boolean checkInSand(ArrayList<Vector3> sandCoordinates,Vector3 ballPos){
+    private boolean checkInSand(List<Vector3> sandCoordinates,Vector3 ballPos){
         boolean check = false;
         for(Vector3 sandCoordinate: sandCoordinates) {
             if (ballIsInSand(ballPos, sandCoordinate)) {

@@ -24,6 +24,7 @@ import com.crazyputting.objects.Ball;
 import com.crazyputting.objects.Terrain;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public abstract class ThreeDimensional extends GameState {
     public GameCamera controller;
@@ -40,7 +41,7 @@ public abstract class ThreeDimensional extends GameState {
     private Stage stage;
     private Texture img;
     private Image background;
-    private ArrayList<Vector3> sandCoords;
+    private List<Vector3> sandCoords;
 
     private boolean current = false;
 
