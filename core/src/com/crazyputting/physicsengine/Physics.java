@@ -15,10 +15,11 @@ public class Physics {
     protected final double SPACCELERATION = 0.9;
     protected final float GRAVITY = 9.81f;
     private final float GOAL_TOLERANCE = 2f;
-    private final float TREE_RADIUS = 0.66f;
-
     private final float WALL_POWER_LOSS = -0.80f;
     private final float TREE_POWER_LOSS = -0.65f;
+
+    public static final float TREE_RADIUS = 0.5f;
+
     float dt = Gdx.graphics.getDeltaTime();
     private Ball ball;
     private Terrain terrain;
@@ -100,7 +101,7 @@ public class Physics {
         Vector3 newVel = solver.getSpeed(position.cpy(), velocity.cpy());
         ball.getVelocity().set(newVel.cpy());
         Vector3 newPos = solver.getPosition(position.cpy(), velocity.cpy());
-        ball.getPosition().set(newPos);
+        ball.getPosition().set(newPos.cpy());
 
         if (terrain.getFunction().evaluateF(newPos.x, newPos.y) < -0.10f) {
             terrain.setFrictionCoefficient(4.5f);
@@ -118,8 +119,7 @@ public class Physics {
          */
         for (Vector3 treeCoordinate : treeCoordinates) {
             //The ball collides with the tree if the next position of the ball is within the bounds of the tree.
-            if (treeCoordinate.x - TREE_RADIUS <= position.x && position.x <= treeCoordinate.x + TREE_RADIUS &&
-                    treeCoordinate.y - TREE_RADIUS <= position.y && position.y <= treeCoordinate.y + TREE_RADIUS) {
+            if (ballIsCollidingWithCircle(ball, treeCoordinate)) {
                 setTreeHitCounter(getTreeHitCounter() + 1);
                 if (getTreeHitCounter() == 1) {
                     ball.setVelocity(findReflection(ball, treeCoordinate));
@@ -187,6 +187,12 @@ public class Physics {
 
     private Vector3 findNormalOfCircleCollision(Ball ball, Vector3 tree){
         return ball.getPosition().cpy().sub(tree.cpy()).nor();
+    }
+
+    private boolean ballIsCollidingWithCircle(Ball ball, Vector3 tree){
+        float distance = ball.getPosition().dst(tree);
+        float ballRadius = Ball.DIAMETER/2f;
+        return distance <= (ballRadius + TREE_RADIUS);
     }
 
     public int getTreeHitCounter() {

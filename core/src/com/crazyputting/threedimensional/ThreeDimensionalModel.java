@@ -53,7 +53,6 @@ public class ThreeDimensionalModel {
 
 
     private void createWorld() {
-
         for (int i = 0; i < terrain.getWidth(); i += CHUNK_SIZE) {
             for (int j = 0; j < terrain.getHeight(); j += CHUNK_SIZE) {
                 map.add(createField(i, j));
@@ -97,7 +96,6 @@ public class ThreeDimensionalModel {
             }
         }
         terrain.setTreeCoordinates(treeCoordinates);
-
     }
 
 

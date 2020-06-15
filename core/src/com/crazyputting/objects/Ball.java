@@ -11,7 +11,8 @@ import com.badlogic.gdx.math.Vector3;
 
 
 public class Ball {
-    public final float DIAMETER = 0.62f; //in meters
+    public static final float DIAMETER = 0.62f; //in meters
+
     private final Texture TEXTURE = new Texture("ball.jpg");
     private Vector3 position;
     private boolean colliding = false;
