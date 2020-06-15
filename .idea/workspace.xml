@@ -20,8 +20,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d282317d-79fa-4578-8d00-2b6d745c632f" name="Default Changelist" comment="add hitCounter">
-      <change afterPath="$PROJECT_DIR$/core/src/com/crazyputting/function/cubicspline.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/com/crazyputting/function/cubicspline.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/com/crazyputting/function/cubicspline.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -307,7 +307,14 @@
       <option name="project" value="LOCAL" />
       <updated>1588970027312</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="add hitCounter">
+      <created>1592088505280</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1592088505280</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
