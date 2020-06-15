@@ -22,8 +22,8 @@ public class cubicspline extends NewtonInterpolator implements DhbInterfaces.One
    {
       int n = points.size();
       double w,s;
-      double[]u= new diuble[n-1];
-      coefficients= new diuble[n];
+      double[]u= new double[n-1];
+      coefficients= new double[n];
       if(Double.isNaN(startPointDerivative))
       {
           coefficients[0]=u[0]=0;
@@ -33,7 +33,7 @@ public class cubicspline extends NewtonInterpolator implements DhbInterfaces.One
           coefficients[0]=-0.5;
           u[0]=3.0/(points.xValueAt(1)-points.xValueAt(0))
                   *((points.yValueAt(1) -mpoints.yValueAt(0))
-                  /(points.xValueAt(1)-points.xValueAt(0))-startPointDerivative;
+                  /(points.xValueAt(1)-points.xValueAt(0))-startPointDerivative);
       }
      for(int i=1;i<n-1;i++) {
          double invStep2 = 1 / (points.xValueAt(i + 1) - points.xValueAt(i - 1));
@@ -43,7 +43,7 @@ public class cubicspline extends NewtonInterpolator implements DhbInterfaces.One
          u[i] = (6 * invStep2 * ((points.yValueAt(i + 1) - points.yValueAt(i))
                  / (points.xValueAt(i + 1) - points.xValueAt(i))
                  - (points.yValueAt(i) - points.yValueAt(i - 1))
-                 / (points.xValueAt(i)) - points.xValueAt(i - 1)) - s * u[i - 1]) * w;
+                 / (points.xValueAt(i) - points.xValueAt(i - 1))) - s * u[i - 1]) * w;
      }
      if(Double.isNaN(endPointDerivative))
          w=s=0;
