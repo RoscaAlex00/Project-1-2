@@ -28,6 +28,7 @@ public class Physics {
     private float mass;
     private float radius;
     private ArrayList<Vector3> treeCoordinates;
+    private ArrayList<Vector3> sandCoordinates;
     private int wallHitCounter;
     private int treeHitCounter;
 
@@ -103,11 +104,18 @@ public class Physics {
         Vector3 newPos = solver.getPosition(position.cpy(), velocity.cpy());
         ball.getPosition().set(newPos.cpy());
 
-        if (terrain.getFunction().evaluateF(newPos.x, newPos.y) < -0.10f) {
+        //Check if the ball is in sand or water
+        sandCoordinates = terrain.getSandCoordinates();
+        if(checkInSand(sandCoordinates,newPos)){
+            terrain.setFrictionCoefficient(10f);
+        }
+        else if(terrain.getFunction().evaluateF(newPos.x,newPos.y) <= -0.10f){
             terrain.setFrictionCoefficient(4.5f);
-        } else {
+        }
+        else{
             terrain.setFrictionCoefficient(1.5f);
         }
+
         treeCoordinates = terrain.getTreeCoordinates();
         updateBall(newPos, newVel);
         return position.dst(newPos);
@@ -193,6 +201,21 @@ public class Physics {
         float distance = ball.getPosition().dst(tree);
         float ballRadius = Ball.DIAMETER/2f;
         return distance <= (ballRadius + TREE_RADIUS);
+    }
+    private boolean ballIsInSand(Vector3 ball,Vector3 sand){
+        return sand.x - 2.5f <= ball.x && ball.x <= sand.x + 2.5f &&
+                sand.y - 2.5f <= ball.y && ball.y <= sand.x + 2.5f;
+    }
+
+    private boolean checkInSand(ArrayList<Vector3> sandCoordinates,Vector3 ballPos){
+        boolean check = false;
+        for(Vector3 sandCoordinate: sandCoordinates) {
+            if (ballIsInSand(ballPos, sandCoordinate)) {
+                check = true;
+                break;
+            }
+        }
+        return check;
     }
 
     public int getTreeHitCounter() {

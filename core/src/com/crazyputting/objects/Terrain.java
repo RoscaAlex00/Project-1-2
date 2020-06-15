@@ -20,7 +20,7 @@ public class Terrain {
     private final PhysicsSolver solver;
     private final Player player;
     private float frictionCoefficient;
-    private ArrayList<Vector3> rockCoordinates;
+    private ArrayList<Vector3> sandCoordinates;
     private Ball ball;
     private ArrayList<Vector3> treeCoordinates;
 
@@ -34,7 +34,7 @@ public class Terrain {
         this.yourFunction = function;
         this.frictionCoefficient = MU;
         this.maximumVelocity = maxSpeed;
-        this.rockCoordinates = new ArrayList<>();
+        sandCoordinates = new ArrayList<>();
         this.solver = solver;
         this.player = player;
         this.ball = new Ball(teeVector);
@@ -106,6 +106,12 @@ public class Terrain {
     }
     public ArrayList<Vector3> getTreeCoordinates(){
         return treeCoordinates;
+    }
+    public void setSandCoordinates(ArrayList<Vector3> newCoordinates){
+        this.sandCoordinates = newCoordinates;
+    }
+    public ArrayList<Vector3> getSandCoordinates(){
+        return sandCoordinates;
     }
 
     public void setFrictionCoefficient(float frictionCoefficient) {

@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.g3d.*;
 import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
 import com.badlogic.gdx.graphics.g3d.attributes.TextureAttribute;
 import com.badlogic.gdx.graphics.g3d.environment.DirectionalLight;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.utils.Array;
@@ -39,6 +40,7 @@ public abstract class ThreeDimensional extends GameState {
     private Stage stage;
     private Texture img;
     private Image background;
+    private ArrayList<Vector3> sandCoords;
 
     private boolean current = false;
 
@@ -51,6 +53,7 @@ public abstract class ThreeDimensional extends GameState {
         stage = new Stage(new FitViewport(CrazyPutting.width, CrazyPutting.height, CrazyPutting.cam), back);
         img = new Texture("newGame.png");
         background = new Image(img);
+        sandCoords = new ArrayList<>();
 
         batch = new ModelBatch();
 
@@ -118,11 +121,15 @@ public abstract class ThreeDimensional extends GameState {
             field.meshPart.offset = 0;
             field.meshPart.size = hf.get(i).mesh.getNumIndices();
             field.meshPart.update();
-            if(Math.random()<= 0.80) {
+            if(Math.random()<= 0.90) {
                 field.material = new Material(TextureAttribute.createDiffuse(new Texture("grass.jpg")));
             }
             else{
+                float x = field.meshPart.center.x;
+                float y = field.meshPart.center.y;
+                sandCoords.add(new Vector3(x,y,0));
                 field.material = new Material(TextureAttribute.createDiffuse(new Texture("sand.jpg")));
+                terrain.setSandCoordinates(sandCoords);
             }
             fields.add(field);
         }
