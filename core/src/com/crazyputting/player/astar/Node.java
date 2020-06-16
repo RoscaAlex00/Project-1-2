@@ -2,10 +2,7 @@ package com.crazyputting.player.astar;
 
 import com.badlogic.gdx.math.Vector3;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Node for a graph
@@ -113,5 +110,14 @@ public class Node {
 
     public Vector3 getPosition() {
         return position;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Node node = (Node) o;
+        return this.position.x == node.position.x &&
+                this.position.y == node.position.y;
     }
 }

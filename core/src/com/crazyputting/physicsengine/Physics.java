@@ -201,7 +201,7 @@ public class Physics {
                 sand.y - FIELD_SQUARE_WIDTH/2 <= ball.y && ball.y <= sand.y + FIELD_SQUARE_WIDTH/2;
     }
 
-    private boolean checkInSand(List<Vector3> sandCoordinates,Vector3 ballPos){
+    private boolean checkInSand(List<Vector3> sandCoordinates, Vector3 ballPos){
         boolean check = false;
         for(Vector3 sandCoordinate: sandCoordinates) {
             if (ballIsInSand(ballPos, sandCoordinate)) {

@@ -6,10 +6,7 @@ import com.crazyputting.objects.Hole;
 import com.crazyputting.objects.Terrain;
 import com.crazyputting.player.Player;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.PriorityQueue;
+import java.util.*;
 
 public class AStar implements Player {
 
@@ -18,6 +15,9 @@ public class AStar implements Player {
     private Terrain terrain;
     private Vector3 velocity;
     private float maximumVelocity;
+
+    private List<Node> openList;
+    private List<Node> closedList;
 
     public AStar(float maximumVelocity) {
         this.maximumVelocity = maximumVelocity;
@@ -38,7 +38,7 @@ public class AStar implements Player {
 
         List<Vector3> path = getPath();
         Vector3 shot = new Vector3();
-        assert path != null;
+        if (path == null) return null;
         for (Vector3 vector3 : path) {
             shot.add(vector3);
         }
@@ -49,39 +49,40 @@ public class AStar implements Player {
 
     private List<Vector3> getPath() {
         Vector3 holePos = hole.getPosition().cpy();
-        Vector3 startPos = terrain.getStartPos();
+        Vector3 startPos = ball.getPosition().cpy();
         Vector3 startToHoleDistance = holePos.sub(startPos);
         startToHoleDistance.z = 0;
 
         Node startNode = new Node("", startPos, startToHoleDistance, new Vector3(0, 0, 0));
         Node endNode = new Node("", holePos, new Vector3(0, 0, 0));
 
-        List<Node> openList = new ArrayList<>();
-        List<Node> closedList = new ArrayList<>();
+        openList = new ArrayList<>();
+        closedList = new ArrayList<>();
         openList.add(startNode);
 
-        while (openList.get(0) != null) {
-            boolean skip = false;
+        //First while loop has a first odd shot
+        //while (openList.size() > 0) {
+        while (openList.get(0) != null){
+            System.out.println("List size: " + openList.size());
             Node currentNode = openList.get(0);
-            int currentIndex = 0;
 
-            for (int i = 0; i < openList.size(); i++) {
-                if (openList.get(i).getTotalNodeValue().len() < currentNode.getTotalNodeValue().len()) {
-                    currentNode = openList.get(i);
-                    currentIndex = i;
+            for (Node node : openList) {
+                if (node.getTotalNodeValue().len() < currentNode.getTotalNodeValue().len()) {
+                    currentNode = node;
                     System.out.println("mee");
                 }
             }
 
-            openList.remove(currentIndex);
+            openList.remove(currentNode);
             closedList.add(currentNode);
             System.out.println("mees");
 
+            //found a path
             if (currentNode.equals(endNode)) {
                 List<Vector3> path = new ArrayList<>();
                 Node current = currentNode;
                 while (current != null) {
-                    path.add(current.getPosition());
+                    path.add(current.getPosition().cpy());
                     current = current.getParent();
                     System.out.println("meeee");
                 }
@@ -89,7 +90,8 @@ public class AStar implements Player {
                 return path;
             }
 
-            List<Node> children = new ArrayList<>();
+            //add new children
+            List<Node> children = new LinkedList<>();
             for (int i = 0; i < 4; i++) {
                 Vector3 newNodeVector = new Vector3(currentNode.getPosition().cpy());
                 switch (i) {
@@ -106,33 +108,16 @@ public class AStar implements Player {
                         newNodeVector.y--;
                         break;
                 }
-                if (outOfBounds(newNodeVector)) {
-                    skip = true;
-                    break;
+                if (outOfBounds(newNodeVector) || positionIsVisited(newNodeVector)) {
+                    continue;
                 }
                 children.add(new Node("", newNodeVector, currentNode));
             }
-            if (skip) continue;
 
+            //add correct children to the open list
             for (Node child : children) {
-                for (Node closedNode : closedList) {
-                    if (child.equals(closedNode)) {
-                        System.out.println("meeere");
-                        skip = true;
-                        break;
-                    }
-                }
-                if (skip) continue;
-                child.getAccumulatedValues().add(child.getPosition().cpy().sub(currentNode.getPosition()));
-                child.setHeuristicValue(endNode.getPosition().cpy().sub(child.getPosition()));
-
-                for (Node openNode : openList) {
-                    if (child.equals(openNode) && child.getAccumulatedValues().len() > openNode.getAccumulatedValues().len()) {
-                        skip = true;
-                        break;
-                    }
-                }
-                if (skip) continue;
+                child.getAccumulatedValues().add(child.getPosition().cpy().sub(currentNode.getPosition().cpy()));
+                child.setHeuristicValue(endNode.getPosition().cpy().sub(child.getPosition().cpy()));
                 openList.add(child);
             }
         }
@@ -142,6 +127,18 @@ public class AStar implements Player {
 
     private boolean outOfBounds(Vector3 vector3) {
         return vector3.x < 0 || vector3.y < 0 || vector3.x > terrain.getWidth() || vector3.y > terrain.getHeight();
+    }
+
+    private boolean positionIsVisited(Vector3 nodeVector){
+        List<Node> visitedList = new LinkedList<>();
+        visitedList.addAll(openList);
+        visitedList.addAll(closedList);
+        for (Node visitedNode : visitedList) {
+            if (visitedNode.getPosition().x == nodeVector.x && visitedNode.getPosition().y == nodeVector.y){
+                return false;
+            }
+        }
+        return true;
     }
 
     @Override
