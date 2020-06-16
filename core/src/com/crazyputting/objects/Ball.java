@@ -7,6 +7,8 @@ import com.badlogic.gdx.graphics.g3d.Model;
 import com.badlogic.gdx.graphics.g3d.ModelInstance;
 import com.badlogic.gdx.graphics.g3d.attributes.TextureAttribute;
 import com.badlogic.gdx.graphics.g3d.utils.ModelBuilder;
+import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.math.Quaternion;
 import com.badlogic.gdx.math.Vector3;
 
 
@@ -15,7 +17,6 @@ public class Ball {
 
     private final Texture TEXTURE = new Texture("ball.jpg");
     private Vector3 position;
-    private boolean colliding = false;
     private boolean stopped = false;
     private boolean isHit = false;
     private Vector3 velocity;
@@ -31,7 +32,6 @@ public class Ball {
 
     public void hit(Vector3 initialHit) {
         this.stopped = false;
-        this.colliding = true;
         this.isHit = true;
         this.velocity = initialHit.cpy();
     }
@@ -41,7 +41,6 @@ public class Ball {
         ball.transform.setTranslation(position);
     }
 
-
     private void ballCreator() {
         ModelBuilder builder = new ModelBuilder();
         Model sphere = builder.createSphere(DIAMETER, DIAMETER, DIAMETER,
@@ -49,7 +48,6 @@ public class Ball {
                 new Material(TextureAttribute.createDiffuse(TEXTURE)),
                 VertexAttributes.Usage.Position | VertexAttributes.Usage.Normal | VertexAttributes.Usage.TextureCoordinates
         );
-
         ball = new ModelInstance(sphere, position.x, position.y, position.z + (DIAMETER / 2));
     }
 
@@ -60,9 +58,15 @@ public class Ball {
     }
 
     public void updateInstance(float z, float displacement) {
-        if (displacement != 0) colliding = false;
         position.z = z + (DIAMETER / 2);
         ball.transform.setTranslation(position);
+        Vector3 temp = new Vector3();
+        float speed = velocity.len();
+        float angle = speed * displacement * MathUtils.radiansToDegrees;
+        Vector3 axis = temp.set(velocity).scl(-1f / speed).scl(displacement).crs(Vector3.Z);
+        if (speed > 0.2f) {
+            ball.transform.rotate(new Quaternion(axis, angle / 50));
+        }
     }
 
     public float getMass() {
@@ -70,9 +74,6 @@ public class Ball {
         return 0.15f;
     }
 
-    public boolean isColliding() {
-        return colliding;
-    }
 
     public boolean isStopped() {
         return stopped;

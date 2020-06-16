@@ -1,6 +1,9 @@
 package com.crazyputting.physicsengine;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.math.Matrix4;
+import com.badlogic.gdx.math.Quaternion;
 import com.badlogic.gdx.math.Vector3;
 import com.crazyputting.objects.Ball;
 import com.crazyputting.objects.Hole;
@@ -100,14 +103,13 @@ public class Physics {
         Vector3 newPos = solver.getPosition(position.cpy(), velocity.cpy());
         ball.getPosition().set(newPos.cpy());
 
+
         //Check if the ball is in sand or water
-        if(checkInSand(terrain.getSandCoordinates(), newPos)){
+        if (checkInSand(terrain.getSandCoordinates(), newPos)) {
             terrain.setFrictionCoefficient(10f);
-        }
-        else if(terrain.getFunction().evaluateF(newPos.x,newPos.y) <= -0.10f){
+        } else if (terrain.getFunction().evaluateF(newPos.x, newPos.y) <= -0.10f) {
             terrain.setFrictionCoefficient(4.5f);
-        }
-        else{
+        } else {
             terrain.setFrictionCoefficient(1.5f);
         }
         updateBall(newPos, newVel);
@@ -127,6 +129,7 @@ public class Physics {
                 }
             }
         }
+
 
         /*
         If the ball goes out of bounds (outside of the playing field),
@@ -154,10 +157,10 @@ public class Physics {
         if (velocity.len() < SPVELOCITY && calcGravity(position).len() < SPACCELERATION) {
             ball.setStopped();
         }
-        if (getWallHitCounter() >= 1){
+        if (getWallHitCounter() >= 1) {
             setWallHitCounter(getWallHitCounter() + 1);
         }
-        if(getWallHitCounter() == 4){
+        if (getWallHitCounter() == 4) {
             resetWallHitCounter();
         }
         if (getTreeHitCounter() >= 1) {
@@ -172,38 +175,38 @@ public class Physics {
     /**
      * The reflection at a point can be calculated with the equation r = d - 2(d.n)*n. Where n is the normalized normal vector
      * and d.n is the dot-product between the incoming vector d and n.
-     *
+     * <p>
      * This equation can be found with the following:
      * d = (d.n)*n + (d - (d.n)*n), d.n is the angle between d and n, thus is a scaled n.
      * r = -(d.n)*n + (d - (d.n)*n) = d - 2(d.n)*n
-     *
+     * <p>
      * A more detailed explanation can be found on https://math.stackexchange.com/questions/13261/how-to-get-a-reflection-vector
      * and https://www.fabrizioduroni.it/2017/08/25/how-to-calculate-reflection-vector.html
      */
-    private Vector3 findReflection(Ball ball, Vector3 tree){
+    private Vector3 findReflection(Ball ball, Vector3 tree) {
         Vector3 normal = findNormalOfCircleCollision(ball, tree);
         Vector3 ballVelocity = ball.getVelocity().cpy();
         return ballVelocity.sub(normal.scl(2 * normal.dot(ballVelocity))).scl(-TREE_POWER_LOSS);
     }
 
-    private Vector3 findNormalOfCircleCollision(Ball ball, Vector3 tree){
+    private Vector3 findNormalOfCircleCollision(Ball ball, Vector3 tree) {
         return ball.getPosition().cpy().sub(tree.cpy()).nor();
     }
 
-    private boolean ballIsCollidingWithCircle(Ball ball, Vector3 tree){
+    private boolean ballIsCollidingWithCircle(Ball ball, Vector3 tree) {
         float distance = ball.getPosition().dst(tree);
-        float ballRadius = Ball.DIAMETER/2f;
+        float ballRadius = Ball.DIAMETER / 2f;
         return distance <= (ballRadius + TREE_RADIUS);
     }
 
-    private boolean ballIsInSand(Vector3 ball, Vector3 sand){
-        return sand.x - FIELD_SQUARE_WIDTH/2 <= ball.x && ball.x <= sand.x + FIELD_SQUARE_WIDTH/2 &&
-                sand.y - FIELD_SQUARE_WIDTH/2 <= ball.y && ball.y <= sand.y + FIELD_SQUARE_WIDTH/2;
+    private boolean ballIsInSand(Vector3 ball, Vector3 sand) {
+        return sand.x - FIELD_SQUARE_WIDTH / 2 <= ball.x && ball.x <= sand.x + FIELD_SQUARE_WIDTH / 2 &&
+                sand.y - FIELD_SQUARE_WIDTH / 2 <= ball.y && ball.y <= sand.y + FIELD_SQUARE_WIDTH / 2;
     }
 
-    private boolean checkInSand(List<Vector3> sandCoordinates, Vector3 ballPos){
+    private boolean checkInSand(List<Vector3> sandCoordinates, Vector3 ballPos) {
         boolean check = false;
-        for(Vector3 sandCoordinate: sandCoordinates) {
+        for (Vector3 sandCoordinate : sandCoordinates) {
             if (ballIsInSand(ballPos, sandCoordinate)) {
                 check = true;
                 break;

@@ -34,13 +34,13 @@
       <change beforePath="$PROJECT_DIR$/core/build/classes/java/main/com/crazyputting/objects/Ball.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/build/classes/java/main/com/crazyputting/objects/Ball.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/build/classes/java/main/com/crazyputting/objects/Terrain.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/build/classes/java/main/com/crazyputting/objects/Terrain.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/build/classes/java/main/com/crazyputting/physicsengine/Physics.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/build/classes/java/main/com/crazyputting/physicsengine/Physics.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/build/classes/java/main/com/crazyputting/player/astar/AStar.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/build/classes/java/main/com/crazyputting/player/astar/AStar.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/build/classes/java/main/com/crazyputting/player/astar/Node.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/build/classes/java/main/com/crazyputting/player/astar/Node.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/build/classes/java/main/com/crazyputting/states/gamestates/ThreeDimensional.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/build/classes/java/main/com/crazyputting/states/gamestates/ThreeDimensional.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/build/classes/java/main/com/crazyputting/threedimensional/ThreeDimensionalModel.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/build/classes/java/main/com/crazyputting/threedimensional/ThreeDimensionalModel.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/build/libs/core-1.0.jar" beforeDir="false" afterPath="$PROJECT_DIR$/core/build/libs/core-1.0.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/com/crazyputting/function/cubicspline.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/com/crazyputting/objects/Terrain.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/com/crazyputting/objects/Terrain.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/com/crazyputting/objects/Ball.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/com/crazyputting/objects/Ball.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/src/com/crazyputting/physicsengine/Physics.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/com/crazyputting/physicsengine/Physics.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/com/crazyputting/states/gamestates/ThreeDimensional.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/com/crazyputting/states/gamestates/ThreeDimensional.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -104,7 +104,7 @@
       <option name="ALTERNATIVE_JRE_PATH" value="12" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
       <option name="MAIN_CLASS_NAME" value="com.crazyputting.desktop.DesktopLauncher" />
-      <module name="Project_1-2.desktop.main" />
+      <module name="Game.desktop.main" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="com.crazyputting.desktop.*" />
@@ -120,18 +120,6 @@
         <item itemvalue="Application.DesktopLauncher" />
       </list>
     </recent_temporary>
-  </component>
-  <component name="ServiceViewManager">
-    <option name="viewStates">
-      <list>
-        <serviceView>
-          <treeState>
-            <expand />
-            <select />
-          </treeState>
-        </serviceView>
-      </list>
-    </option>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -175,6 +163,8 @@
       <workItem from="1592228192124" duration="7646000" />
       <workItem from="1592237077343" duration="3883000" />
       <workItem from="1592241982983" duration="726000" />
+      <workItem from="1592339594641" duration="4069000" />
+      <workItem from="1592344722642" duration="667000" />
     </task>
     <task id="LOCAL-00001" summary="Vector3 for treeCoordinates and collider improvement">
       <created>1592131218032</created>
@@ -243,20 +233,19 @@
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="1" />
+    <option name="version" value="2" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
       <map>
         <entry key="MAIN">
           <value>
-            <State>
-              <option name="COLUMN_ORDER" />
-            </State>
+            <State />
           </value>
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="add water and change walls to wood" />
@@ -269,11 +258,11 @@
     <option name="LAST_COMMIT_MESSAGE" value="naming + fix conflicts" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="526" y="110" key="#DesktopLauncher" timestamp="1592129997748">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state x="657" y="139" key="#DesktopLauncher" timestamp="1592340039347">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="526" y="110" key="#DesktopLauncher/0.0.1536.824@0.0.1536.824" timestamp="1592129997748" />
-    <state x="657" y="139" key="#DesktopLauncher/0.0.1920.1040@0.0.1920.1040" timestamp="1592055349692" />
+    <state x="657" y="139" key="#DesktopLauncher/0.0.1920.1040@0.0.1920.1040" timestamp="1592340039347" />
     <state x="440" y="94" key="#Project_Structure" timestamp="1592055341187">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -306,26 +295,26 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="549" y="168" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1591555636999" />
-    <state width="1493" height="210" key="GridCell.Tab.0.bottom" timestamp="1592242487602">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state width="1877" height="315" key="GridCell.Tab.0.bottom" timestamp="1592345506529">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1493" height="210" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1592242487602" />
-    <state width="1877" height="298" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1592069634979" />
-    <state width="1493" height="210" key="GridCell.Tab.0.center" timestamp="1592242487602">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state width="1877" height="315" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1592345506529" />
+    <state width="1877" height="315" key="GridCell.Tab.0.center" timestamp="1592345506529">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1493" height="210" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1592242487602" />
-    <state width="1877" height="298" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1592069634979" />
-    <state width="1493" height="210" key="GridCell.Tab.0.left" timestamp="1592242487602">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state width="1877" height="315" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1592345506529" />
+    <state width="1877" height="315" key="GridCell.Tab.0.left" timestamp="1592345506529">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1493" height="210" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1592242487602" />
-    <state width="1877" height="298" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1592069634979" />
-    <state width="1493" height="210" key="GridCell.Tab.0.right" timestamp="1592242487602">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state width="1877" height="315" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1592345506529" />
+    <state width="1877" height="315" key="GridCell.Tab.0.right" timestamp="1592345506529">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1493" height="210" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1592242487602" />
-    <state width="1877" height="298" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1592069634979" />
+    <state width="1877" height="315" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1592345506529" />
     <state x="481" y="129" key="MultipleFileMergeDialog" timestamp="1592169610728">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
