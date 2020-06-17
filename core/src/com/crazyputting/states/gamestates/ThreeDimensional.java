@@ -87,6 +87,7 @@ public abstract class ThreeDimensional extends GameState {
         batch.render(threeDimensionalModel.getWater(), environment);
         batch.render(threeDimensionalModel.getBallModel(), environment);
         batch.render(threeDimensionalModel.getTree(),environment);
+        batch.render(threeDimensionalModel.getRock(), environment); //*******************
         batch.end();
     }
 

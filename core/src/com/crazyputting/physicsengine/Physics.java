@@ -1,6 +1,9 @@
 package com.crazyputting.physicsengine;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.math.Matrix4;
+import com.badlogic.gdx.math.Quaternion;
 import com.badlogic.gdx.math.Vector3;
 import com.crazyputting.objects.Ball;
 import com.crazyputting.objects.Hole;
@@ -16,9 +19,13 @@ public class Physics {
     private final float GOAL_TOLERANCE = 2f;
     private final float WALL_POWER_LOSS = -0.80f;
     private final float TREE_POWER_LOSS = -0.65f;
+    private final float ROCK_POWER_LOSS = -0.65f; //*************
+
 
     public static final float TREE_RADIUS = 0.5f;
+    public static final float ROCK_RADIUS = 0.5f; //*************
     public static final float FIELD_SQUARE_WIDTH = 5;
+
 
     float dt = Gdx.graphics.getDeltaTime();
     private Ball ball;
@@ -29,6 +36,8 @@ public class Physics {
     private float radius;
     private int wallHitCounter;
     private int treeHitCounter;
+    private int rockHitCounter; //*****************
+
 
 
     public Physics(Ball yourBall, Terrain yourTerrain, Hole newHole, PhysicsSolver solver) {
@@ -127,6 +136,15 @@ public class Physics {
             }
         }
 
+        for (Vector3 rockCoordinate : terrain.getRockCoordinates()) { //**********************
+            if (ballIsCollidingWithCircleRock(ball, rockCoordinate)) {
+                setRockHitCounter(getRockHitCounter() + 1);
+                if (getRockHitCounter() == 1) {
+                    ball.setVelocity(findReflectionRock(ball, rockCoordinate));
+                }
+            }
+        }
+
 
         /*
         If the ball goes out of bounds (outside of the playing field),
@@ -157,7 +175,7 @@ public class Physics {
         if (getWallHitCounter() >= 1) {
             setWallHitCounter(getWallHitCounter() + 1);
         }
-        if (getWallHitCounter() == 3) {
+        if (getWallHitCounter() == 4) {
             resetWallHitCounter();
         }
         if (getTreeHitCounter() >= 1) {
@@ -165,6 +183,12 @@ public class Physics {
         }
         if (getTreeHitCounter() == 15) {
             resetTreeHitCounter();
+        }
+        if (getRockHitCounter() >= 1) { //********************
+            setRockHitCounter(getRockHitCounter() + 1);
+        }
+        if (getRockHitCounter() == 15) { //****************
+            resetRockHitCounter();
         }
         ball.getPosition().z = terrain.getFunction().evaluateHeight(position.x, position.y);
     }
@@ -186,14 +210,32 @@ public class Physics {
         return ballVelocity.sub(normal.scl(2 * normal.dot(ballVelocity))).scl(-TREE_POWER_LOSS);
     }
 
+    private Vector3 findReflectionRock(Ball ball, Vector3 rock) { //************************************
+        Vector3 normal = findNormalOfCircleCollisionRock(ball, rock);
+        Vector3 ballVelocity = ball.getVelocity().cpy();
+        return ballVelocity.sub(normal.scl(2 * normal.dot(ballVelocity))).scl(-ROCK_POWER_LOSS);
+    }
+
+
+
     private Vector3 findNormalOfCircleCollision(Ball ball, Vector3 tree) {
         return ball.getPosition().cpy().sub(tree.cpy()).nor();
+    }
+
+    private Vector3 findNormalOfCircleCollisionRock(Ball ball, Vector3 rock) { //***********************
+        return ball.getPosition().cpy().sub(rock.cpy()).nor();
     }
 
     private boolean ballIsCollidingWithCircle(Ball ball, Vector3 tree) {
         float distance = ball.getPosition().dst(tree);
         float ballRadius = Ball.DIAMETER / 2f;
         return distance <= (ballRadius + TREE_RADIUS);
+    }
+
+    private boolean ballIsCollidingWithCircleRock(Ball ball, Vector3 rock) { //********************
+        float distance = ball.getPosition().dst(rock);
+        float ballRadius = Ball.DIAMETER / 2f;
+        return distance <= (ballRadius + ROCK_RADIUS);
     }
 
     private boolean ballIsInSand(Vector3 ball, Vector3 sand) {
@@ -216,13 +258,23 @@ public class Physics {
         return treeHitCounter;
     }
 
+    public int getRockHitCounter() {
+        return rockHitCounter;
+    } //******************
+
+
     public void setTreeHitCounter(int counter) {
         this.treeHitCounter = counter;
     }
+    public void setRockHitCounter(int counter) {
+        this.rockHitCounter = counter;
+    } //************
 
-    public void resetTreeHitCounter() {
-        this.treeHitCounter = 0;
-    }
+
+    public void resetTreeHitCounter() { this.treeHitCounter = 0; }
+    public void resetRockHitCounter() { this.rockHitCounter = 0; } //***************
+
+
 
     public int getWallHitCounter() {
         return wallHitCounter;

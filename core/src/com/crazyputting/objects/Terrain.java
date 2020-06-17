@@ -24,6 +24,9 @@ public class Terrain {
     private Ball ball;
     private List<Vector3> sandCoordinates;
     private List<Vector3> treeCoordinates;
+    //**********
+    private List<Vector3> rockCoordinates;
+
 
     public Terrain(float ourHeight, float ourWidth, Vector3 teeVector, Hole endHole, Function function, float MU,
                    float maxSpeed, String name, PhysicsSolver solver, Player player) {
@@ -40,6 +43,7 @@ public class Terrain {
         this.player = player;
         this.ball = new Ball(teeVector);
         treeCoordinates = new ArrayList<>();
+        rockCoordinates = new ArrayList<>(); //****************
     }
 
     public float getHeight() {
@@ -109,6 +113,16 @@ public class Terrain {
     public List<Vector3> getTreeCoordinates(){
         return treeCoordinates;
     }
+
+    //***********************
+    public void setRockCoordinates(List<Vector3> newCoordi){
+        this.rockCoordinates = newCoordi;
+    }
+
+    public List<Vector3> getRockCoordinates(){
+        return rockCoordinates;
+    }
+
 
     public void setSandCoordinates(List<Vector3> newCoordinates){
         this.sandCoordinates = newCoordinates;
