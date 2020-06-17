@@ -86,9 +86,9 @@ public class ThreeDimensionalModel {
             float x = (float) Math.random() * (terrain.getWidth() - 2);
             float y = (float) Math.random() * (terrain.getHeight() - 2);
 
-            if (terrain.getFunction().evaluateF(x, y) >= 0) {
+            if (terrain.getFunction().evaluateHeight(x, y) >= 0) {
                 treeCoordinates.add(new Vector3(x,y,0));
-                tree.get(i).transform = new Matrix4(new Vector3(x, y, 0), new Quaternion(new Vector3(1, 1, 1), 120),
+                tree.get(i).transform = new Matrix4(new Vector3(x, y, terrain.getFunction().evaluateHeight(x, y)), new Quaternion(new Vector3(1, 1, 1), 120),
                         new Vector3(1.65f, 1.65f, 1.65f));
             } else {
                 tree.remove(i);
@@ -123,8 +123,8 @@ public class ThreeDimensionalModel {
         for (float i = 0; i <= 5 * DIV_SIZE; i++) {
             for (float j = 0; j <= 5 * DIV_SIZE; j++) {
                 if (terrain.getHole().getPosition().dst(new Vector3(x0 + (i / DIV_SIZE), y0 + (j / DIV_SIZE), 0)) <= hole_rad) {
-                    heights[ih] = terrain.getFunction().evaluateF(x0 + (i / DIV_SIZE), y0 + (j / DIV_SIZE)) - hole_depth;
-                } else heights[ih] = terrain.getFunction().evaluateF(x0 + (i / DIV_SIZE), y0 + (j / DIV_SIZE));
+                    heights[ih] = terrain.getFunction().evaluateHeight(x0 + (i / DIV_SIZE), y0 + (j / DIV_SIZE)) - hole_depth;
+                } else heights[ih] = terrain.getFunction().evaluateHeight(x0 + (i / DIV_SIZE), y0 + (j / DIV_SIZE));
                 ih++;
             }
         }

@@ -21,13 +21,13 @@ public class Ball {
     private boolean isHit = false;
     private Vector3 velocity;
     private ModelInstance ball;
-    private Vector3 initialPosition;
+    private final Vector3 initialPosition;
 
     public Ball(Vector3 initPosition) {
         position = initPosition.cpy();
         this.initialPosition = initPosition.cpy();
         velocity = new Vector3(0, 0, 0);
-        ballCreator();
+        ballModelCreator();
     }
 
     public void hit(Vector3 initialHit) {
@@ -41,10 +41,9 @@ public class Ball {
         ball.transform.setTranslation(position);
     }
 
-    private void ballCreator() {
+    private void ballModelCreator() {
         ModelBuilder builder = new ModelBuilder();
-        Model sphere = builder.createSphere(DIAMETER, DIAMETER, DIAMETER,
-                50, 50,
+        Model sphere = builder.createSphere(DIAMETER, DIAMETER, DIAMETER, 50, 50,
                 new Material(TextureAttribute.createDiffuse(TEXTURE)),
                 VertexAttributes.Usage.Position | VertexAttributes.Usage.Normal | VertexAttributes.Usage.TextureCoordinates
         );
@@ -61,8 +60,8 @@ public class Ball {
         position.z = z + (DIAMETER / 2);
         ball.transform.setTranslation(position);
         Vector3 temp = new Vector3();
-        float speed = velocity.len();
-        float angle = speed * displacement * MathUtils.radiansToDegrees;
+        final float speed = velocity.len();
+        final float angle = speed * displacement * MathUtils.radiansToDegrees;
         Vector3 axis = temp.set(velocity).scl(-1f / speed).scl(displacement).crs(Vector3.Z);
         if (speed > 0.2f) {
             ball.transform.rotate(new Quaternion(axis, angle / 50));

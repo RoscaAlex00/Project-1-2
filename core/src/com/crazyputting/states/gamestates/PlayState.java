@@ -22,9 +22,6 @@ import com.crazyputting.objects.Ball;
 import com.crazyputting.objects.Hole;
 import com.crazyputting.objects.Terrain;
 import com.crazyputting.player.AI.AI;
-import com.crazyputting.player.AI.AlexAI;
-import com.crazyputting.player.AI.Population;
-import com.crazyputting.player.astar.AStar;
 
 public class PlayState extends ThreeDimensional {
     protected Terrain terrain;
@@ -68,7 +65,7 @@ public class PlayState extends ThreeDimensional {
         comicFont.setColor(Color.WHITE);
         skin = new Skin(Gdx.files.internal("comic/skin/comic-ui.json"));
 
-        ball.update(terrain.getFunction().evaluateF(ball.getPosition().x, ball.getPosition().y));
+        ball.update(terrain.getFunction().evaluateHeight(ball.getPosition().x, ball.getPosition().y));
         controller.initFocus(ball.getPosition());
 
         physics = new Physics(ball, terrain, hole, solver);
@@ -122,7 +119,7 @@ public class PlayState extends ThreeDimensional {
             if (!moving) {
                 moving = true;
             }
-            ball.updateInstance(terrain.getFunction().evaluateF(ball.getPosition().x, ball.getPosition().y),
+            ball.updateInstance(terrain.getFunction().evaluateHeight(ball.getPosition().x, ball.getPosition().y),
                     physics.updateBall(dt));
         } else {
             if (moving) {

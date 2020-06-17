@@ -10,5 +10,5 @@ public interface Function {
 
     double evaluate(Vector3 pos);
 
-    float evaluateF(float f, float g);
+    float evaluateHeight(float f, float g);
 }

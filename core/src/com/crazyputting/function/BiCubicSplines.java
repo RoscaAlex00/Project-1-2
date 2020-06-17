@@ -23,7 +23,7 @@ public class BiCubicSplines implements Function {
     }
 
     @Override
-    public float evaluateF(float f, float g) {
+    public float evaluateHeight(float f, float g) {
         return 0;
     }
 }

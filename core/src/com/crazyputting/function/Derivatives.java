@@ -7,12 +7,12 @@ import java.util.Stack;
 
 public class Derivatives implements Function {
 
-    private Node root;
+    private final Node root;
     private Node xDeriv;
     private Node yDeriv;
 
     private String infix;
-    private String[] postfix;
+    private final String[] postfix;
 
     public Derivatives(String inFix) {
         this(convert(inFix.split("\\s+")));
@@ -119,7 +119,7 @@ public class Derivatives implements Function {
         return postfix;
     }
 
-    public float evaluateF(float x, float y) {
+    public float evaluateHeight(float x, float y) {
         return evaluate(root, x, y);
     }
 

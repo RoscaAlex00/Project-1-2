@@ -1,9 +1,6 @@
 package com.crazyputting.physicsengine;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.math.MathUtils;
-import com.badlogic.gdx.math.Matrix4;
-import com.badlogic.gdx.math.Quaternion;
 import com.badlogic.gdx.math.Vector3;
 import com.crazyputting.objects.Ball;
 import com.crazyputting.objects.Hole;
@@ -107,7 +104,7 @@ public class Physics {
         //Check if the ball is in sand or water
         if (checkInSand(terrain.getSandCoordinates(), newPos)) {
             terrain.setFrictionCoefficient(10f);
-        } else if (terrain.getFunction().evaluateF(newPos.x, newPos.y) <= -0.10f) {
+        } else if (terrain.getFunction().evaluateHeight(newPos.x, newPos.y) <= -0.10f) {
             terrain.setFrictionCoefficient(4.5f);
         } else {
             terrain.setFrictionCoefficient(1.5f);
@@ -160,7 +157,7 @@ public class Physics {
         if (getWallHitCounter() >= 1) {
             setWallHitCounter(getWallHitCounter() + 1);
         }
-        if (getWallHitCounter() == 4) {
+        if (getWallHitCounter() == 3) {
             resetWallHitCounter();
         }
         if (getTreeHitCounter() >= 1) {
@@ -169,7 +166,7 @@ public class Physics {
         if (getTreeHitCounter() == 15) {
             resetTreeHitCounter();
         }
-        ball.getPosition().z = terrain.getFunction().evaluateF(position.x, position.y);
+        ball.getPosition().z = terrain.getFunction().evaluateHeight(position.x, position.y);
     }
 
     /**
