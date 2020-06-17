@@ -8,11 +8,10 @@ import java.util.Stack;
 public class Derivatives implements Function {
 
     private final Node root;
+    private final String[] postfix;
     private Node xDeriv;
     private Node yDeriv;
-
     private String infix;
-    private final String[] postfix;
 
     public Derivatives(String inFix) {
         this(convert(inFix.split("\\s+")));
@@ -444,7 +443,7 @@ public class Derivatives implements Function {
         return infix == null ? post.toString() : infix;
     }
 
-    private class Node {
+    private static class Node {
         String value; //Each node has a value (either a number or an operator)
         Node left, right; //Each node has 2 children
 

@@ -24,6 +24,7 @@ public class ThreeDimensionalModel {
 
     private final int DIV_SIZE = 10;
     private final int CHUNK_SIZE = 5;
+    private final ModelLoader loader;
     public Array<HeightField> map;
     private Ball ball;
     private ArrayList<ModelInstance> edges;
@@ -32,7 +33,6 @@ public class ThreeDimensionalModel {
     private ModelInstance water;
     private ArrayList<ModelInstance> tree;
     private ArrayList<ModelInstance> rock; //***********
-    private final ModelLoader loader;
     private ArrayList<Vector3> treeCoordinates;
     private ArrayList<Vector3> rockCoordinates; //***********
 
@@ -47,8 +47,8 @@ public class ThreeDimensionalModel {
         loader = new ObjLoader();
         tree = new ArrayList<>();
         treeCoordinates = new ArrayList<>();
-        rock = new ArrayList<>(); //***************************
-        rockCoordinates = new ArrayList<>(); //*****************
+        rock = new ArrayList<>();
+        rockCoordinates = new ArrayList<>();
 
         attr = VertexAttributes.Usage.Position | VertexAttributes.Usage.Normal | VertexAttributes.Usage.TextureCoordinates;
 
@@ -91,7 +91,7 @@ public class ThreeDimensionalModel {
             float y = (float) Math.random() * (terrain.getHeight() - 2);
 
             if (terrain.getFunction().evaluateHeight(x, y) >= 0) {
-                treeCoordinates.add(new Vector3(x,y,0));
+                treeCoordinates.add(new Vector3(x, y, 0));
                 tree.get(i).transform = new Matrix4(new Vector3(x, y, terrain.getFunction().evaluateHeight(x, y)), new Quaternion(new Vector3(1, 1, 1), 120),
                         new Vector3(1.65f, 1.65f, 1.65f));
             } else {
@@ -102,7 +102,7 @@ public class ThreeDimensionalModel {
         terrain.setTreeCoordinates(treeCoordinates);
 
         Model rockModel = loader.loadModel(Gdx.files.internal("Rock_1.obj"));
-        for (int i = 0; i < Math.random() * 10; i++) {
+        for (int i = 0; i < Math.random() * 15; i++) {
             this.rock.add(new ModelInstance(rockModel));
         }
         for (int i = 0; i < rock.size(); i++) {
@@ -110,8 +110,9 @@ public class ThreeDimensionalModel {
             float y = (float) Math.random() * (terrain.getHeight() - 2);
 
             if (terrain.getFunction().evaluateHeight(x, y) >= 0) {
-                rockCoordinates.add(new Vector3(x,y,0));
-                rock.get(i).transform = new Matrix4(new Vector3(x, y, terrain.getFunction().evaluateHeight(x, y)), new Quaternion(new Vector3(1, 1, 1), 0),
+                rockCoordinates.add(new Vector3(x, y, 0));
+                rock.get(i).transform = new Matrix4(new Vector3(x, y, terrain.getFunction().evaluateHeight(x, y)),
+                        new Quaternion(new Vector3(0, 0, 1), (int) (Math.random() * 180)),
                         new Vector3(0.5f, 0.5f, 0.5f));
             } else {
                 rock.remove(i);
@@ -121,8 +122,6 @@ public class ThreeDimensionalModel {
         terrain.setRockCoordinates(rockCoordinates);
 
     }
-
-
 
 
     private HeightField createField(int x, int y) {
@@ -172,6 +171,7 @@ public class ThreeDimensionalModel {
     public ArrayList<ModelInstance> getTree() {
         return tree;
     }
+
     public ArrayList<ModelInstance> getRock() {
         return rock;
     }
