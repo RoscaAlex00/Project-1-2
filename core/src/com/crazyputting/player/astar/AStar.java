@@ -13,15 +13,8 @@ public class AStar implements Player {
     private Hole hole;
     private Ball ball;
     private Terrain terrain;
-    private Vector3 velocity;
-    private float maximumVelocity;
-
     private List<Node> openList;
     private List<Node> closedList;
-
-    public AStar(float maximumVelocity) {
-        this.maximumVelocity = maximumVelocity;
-    }
 
     @Override
     public Vector3 shot_velocity(Vector3 camera_direction, float charge) throws IllegalAccessException {
@@ -32,92 +25,142 @@ public class AStar implements Player {
     public Vector3 shot_velocity(Terrain terrain) {
         this.ball = terrain.getBall();
         this.hole = terrain.getHole();
-
-        //TODO: Remove for test, otherwise Nullpointer
-        //this.terrain = terrain;
-
-        List<Vector3> path = getPath();
+        this.terrain = terrain;
+        
+        ArrayList<Node> path = getPath();
+        
+        ArrayList<Node> turningNodes = new ArrayList<>();
+        turningNodes.add(path.get(0));      
+        for (int i = 2; i < path.size(); i++) {
+        	Node node = path.get(i);
+        	if (i == path.size() - 1)
+        		turningNodes.add(node);
+        	else if (node.getOrientation() != node.getParent().getOrientation())
+        		turningNodes.add(node.getParent());
+        }
+        
+        // Used for testing
+        System.out.println(path);
+        System.out.println("Hole position: " + hole.getPosition());
+        System.out.println(turningNodes);
+        System.exit(0);
+        
+        //TODO: Shoot the ball following the given path
+        /*
         Vector3 shot = new Vector3();
         if (path == null) return null;
         for (Vector3 vector3 : path) {
             shot.add(vector3);
         }
         ball.hit(shot);
-
+        */     
+        
         return null;
     }
 
-    private List<Vector3> getPath() {
+    private ArrayList<Node> getPath() {
+    	int idCounter = 0;
         Vector3 holePos = hole.getPosition().cpy();
-        Vector3 startPos = ball.getPosition().cpy();
-        Vector3 startToHoleDistance = holePos.sub(startPos);
-        startToHoleDistance.z = 0;
+        Vector3 startPos = terrain.getStartPos().cpy();
 
-        Node startNode = new Node("", startPos, startToHoleDistance, new Vector3(0, 0, 0));
-        Node endNode = new Node("", holePos, new Vector3(0, 0, 0));
+        Node startNode = new Node(idCounter, startPos);
+        idCounter++;
+        Node endNode = new Node(idCounter, holePos);
+        idCounter++;
 
         openList = new ArrayList<>();
         closedList = new ArrayList<>();
+        
         openList.add(startNode);
 
-        //First while loop has a first odd shot
-        //while (openList.size() > 0) {
-        while (openList.get(0) != null){
-            System.out.println("List size: " + openList.size());
+        while (openList.size() > 0) {
             Node currentNode = openList.get(0);
+            int currentIndex = 0;
 
-            for (Node node : openList) {
-                if (node.getTotalNodeValue().len() < currentNode.getTotalNodeValue().len()) {
+            for (int i = 0; i < openList.size(); i++) {
+            	Node node = openList.get(i);         	
+                if (node.getTotalCost() < currentNode.getTotalCost()) {
                     currentNode = node;
-                    System.out.println("mee");
+                    currentIndex = i; 
                 }
             }
 
-            openList.remove(currentNode);
+            openList.remove(currentIndex);
             closedList.add(currentNode);
-            System.out.println("mees");
 
-            //found a path
+            // Found a path
             if (currentNode.equals(endNode)) {
-                List<Vector3> path = new ArrayList<>();
-                Node current = currentNode;
-                while (current != null) {
-                    path.add(current.getPosition().cpy());
-                    current = current.getParent();
-                    System.out.println("meeee");
+                ArrayList<Node> path = new ArrayList<>();
+                while (currentNode != null) {
+                    path.add(currentNode);
+                    currentNode = currentNode.getParent();
                 }
                 Collections.reverse(path);
                 return path;
             }
 
-            //add new children
-            List<Node> children = new LinkedList<>();
-            for (int i = 0; i < 4; i++) {
-                Vector3 newNodeVector = new Vector3(currentNode.getPosition().cpy());
+            // Add new children
+            List<Node> children = new ArrayList<>();
+            for (int i = 0; i < 8; i++) {
+                Vector3 newPosition = currentNode.getPosition().cpy();
                 switch (i) {
                     case 0:
-                        newNodeVector.x++;
+                    	newPosition.x++;
                         break;
                     case 1:
-                        newNodeVector.y++;
+                    	newPosition.y++;
                         break;
                     case 2:
-                        newNodeVector.x--;
+                    	newPosition.x--;
                         break;
                     case 3:
-                        newNodeVector.y--;
+                    	newPosition.y--;
                         break;
+                    case 4:
+                    	newPosition.x++;
+                    	newPosition.y++;
+                    	break;
+                    case 5:
+                    	newPosition.x++;
+                    	newPosition.y--;
+                    	break;
+                    case 6:
+                    	newPosition.x--;
+                    	newPosition.y--;
+                    	break;
+                    case 7:
+                    	newPosition.x--;
+                    	newPosition.y++;           	
                 }
-                if (outOfBounds(newNodeVector) || positionIsVisited(newNodeVector)) {
+                
+                if (outOfBounds(newPosition)) {
                     continue;
                 }
-                children.add(new Node("", newNodeVector, currentNode));
+                
+                //TODO: Make sure the terrain is walkable (how to recognize obstacles?)
+                
+                Node child = new Node(idCounter, newPosition, currentNode);
+                child.setOrientation(i);
+                idCounter++;
+                children.add(child);
             }
 
-            //add correct children to the open list
+            // Add correct children to the open list
             for (Node child : children) {
-                child.getAccumulatedValues().add(child.getPosition().cpy().sub(currentNode.getPosition().cpy()));
-                child.setHeuristicValue(endNode.getPosition().cpy().sub(child.getPosition().cpy()));
+            	for (Node closedChild : closedList) {
+            		if (child == closedChild)
+            			continue;
+            	}
+            	
+            	// Create the cost and the heuristic values
+            	child.setCost(currentNode.getCost() + 1);
+            	child.setHeuristic(endNode.getPosition().cpy().sub(child.getPosition()).len());
+            	
+            	for (Node openNode : openList) {
+            		if (child == openNode && child.getCost() > openNode.getCost())
+            			continue;
+            	}
+            	
                 openList.add(child);
             }
         }
@@ -127,18 +170,6 @@ public class AStar implements Player {
 
     private boolean outOfBounds(Vector3 vector3) {
         return vector3.x < 0 || vector3.y < 0 || vector3.x > terrain.getWidth() || vector3.y > terrain.getHeight();
-    }
-
-    private boolean positionIsVisited(Vector3 nodeVector){
-        List<Node> visitedList = new LinkedList<>();
-        visitedList.addAll(openList);
-        visitedList.addAll(closedList);
-        for (Node visitedNode : visitedList) {
-            if (visitedNode.getPosition().x == nodeVector.x && visitedNode.getPosition().y == nodeVector.y){
-                return false;
-            }
-        }
-        return true;
     }
 
     @Override

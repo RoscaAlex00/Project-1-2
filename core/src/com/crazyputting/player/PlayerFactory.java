@@ -25,7 +25,7 @@ public class PlayerFactory {
             case "FrunzAI":
                 return new FrunzAI();
             case "AStar":
-                return new AStar(maximumVelocity);
+                return new AStar();
             default:
                 return new Human(maximumVelocity);
         }
