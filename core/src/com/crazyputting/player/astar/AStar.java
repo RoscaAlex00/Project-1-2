@@ -4,6 +4,7 @@ import com.badlogic.gdx.math.Vector3;
 import com.crazyputting.objects.Ball;
 import com.crazyputting.objects.Hole;
 import com.crazyputting.objects.Terrain;
+import com.crazyputting.physicsengine.Physics;
 import com.crazyputting.player.Player;
 
 import java.util.*;
@@ -17,6 +18,14 @@ public class AStar implements Player {
     private List<Node> closedList;
     private int index = 1;
 
+    /* Map with positions of objects as keys, the values correspond to the radius.
+    *  It is meant for objects such as trees and rocks. */
+    private Map<Vector3, Float> circularObstacles = new HashMap<>();
+
+    /* Map where the keys are lists which contain the beginning and end coordinate of the rectangular obstacle,
+    *  the values correspond to the width of the obstacle. It is meant for objects such as walls. */
+    private Map<List<Vector3>, Float> rectangularObstacles = new HashMap<>();
+
     @Override
     public Vector3 shot_velocity(Vector3 camera_direction, float charge) throws IllegalAccessException {
         throw new IllegalAccessException("This is the wrong class");
@@ -27,6 +36,15 @@ public class AStar implements Player {
         this.ball = terrain.getBall();
         this.hole = terrain.getHole();
         this.terrain = terrain;
+
+        //Adding the trees to the circularObstacles map
+        for (Vector3 obstaclePos : terrain.getTreeCoordinates()) {
+            circularObstacles.put(obstaclePos, Physics.TREE_RADIUS);
+        }
+        //Adding the rocks to the circularObstacles map
+        for (Vector3 obstaclePos : terrain.getRockCoordinates()) {
+            circularObstacles.put(obstaclePos, Physics.ROCK_RADIUS);
+        }
         
         // Get the path found by A*
         ArrayList<Node> path = getPath();
@@ -154,7 +172,7 @@ public class AStar implements Player {
                     	newPosition.y++;           	
                 }
                 
-                if (outOfBounds(newPosition)) {
+                if (outOfBounds(newPosition) || !walkable(newPosition)) {
                     continue;
                 }
                 
@@ -200,6 +218,23 @@ public class AStar implements Player {
 
     private boolean outOfBounds(Vector3 vector3) {
         return vector3.x < 0 || vector3.y < 0 || vector3.x > terrain.getWidth() || vector3.y > terrain.getHeight();
+    }
+
+    private boolean walkable(Vector3 pos){
+        //TODO: check circular obstacles
+        for (Map.Entry<Vector3, Float> circularObstacle : circularObstacles.entrySet()){
+            float radiusSum = circularObstacle.getValue() + Ball.DIAMETER /2f;
+            if (pos.dst(circularObstacle.getKey()) <= radiusSum){
+                return false;
+            }
+        }
+
+        //TODO: check rectangular obstacles
+        for (Map.Entry<List<Vector3>, Float> rectangularObstacle : rectangularObstacles.entrySet()){
+
+        }
+
+        return true;
     }
 
     private boolean equals(float a, float b) {

@@ -17,14 +17,18 @@ public class Physics {
     public static final float TREE_RADIUS = 0.5f;
     public static final float ROCK_RADIUS = 0.35f;
     public static final float FIELD_SQUARE_WIDTH = 5;
+
     protected final double SPVELOCITY = 0.20;
     protected final double SPACCELERATION = 0.9;
     protected final float GRAVITY = 9.81f;
+
     private final float GOAL_TOLERANCE = 2f;
     private final float WALL_POWER_LOSS = -0.80f;
     private final float TREE_POWER_LOSS = -0.65f;
     private final float ROCK_POWER_LOSS = -0.50f;
+
     float dt = Gdx.graphics.getDeltaTime();
+
     private Ball ball;
     private Terrain terrain;
     private PhysicsSolver solver;
