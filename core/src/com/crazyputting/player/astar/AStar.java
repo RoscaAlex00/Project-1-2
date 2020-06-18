@@ -51,8 +51,8 @@ public class AStar implements Player {
         if (index < turningNodes.size()) {
         	Node node = turningNodes.get(index);
         	if (!equals(ball.getPosition().x, node.getPosition().x) || !equals(ball.getPosition().y, node.getPosition().y)) {
-        		int THRESHOLD_X = 5;
-        		int THRESHOLD_Y = 5;
+        		int THRESHOLD_X = 6;
+        		int THRESHOLD_Y = 6;
         		Vector3 velocity = node.getPosition().cpy().sub(ball.getPosition().cpy());
         		float subX = velocity.x;
                 float subY = velocity.y;
@@ -61,22 +61,22 @@ public class AStar implements Player {
                 if (subX < THRESHOLD_X && subY < THRESHOLD_Y && subX > -THRESHOLD_X && subY > -THRESHOLD_Y) {
                     //System.out.println("threshold: " + subX + " y: " + subY);
                     velocity.scl(1.07f);
+                    System.out.println("1");
                 } else if (subX < 15f && subY < 15f && subX > -15f && subY > -15f) {
                     // System.out.println("regular: " + subX + " y: " + subY);
-                    velocity.scl(0.65f);
+                    velocity.scl(0.59f);
+                    System.out.println("2");
                 } else {
                     //System.out.println("regula22: " + subX + " y: " + subY);
                     velocity.scl(0.325f);
+                    System.out.println("3");
                 }
                 ball.hit(velocity);
         		System.out.println("Ball hit!");
-        		//ball.hit(velocity);
         	} else {
         		index++;
         	}
         }
-        //ball.hit(shot);
-
         
         return null;
     }
