@@ -252,7 +252,6 @@ public class Physics {
         this.rockHitCounter = counter;
     }
 
-
     public void resetTreeHitCounter() {
         this.treeHitCounter = 0;
     }
@@ -260,7 +259,6 @@ public class Physics {
     public void resetRockHitCounter() {
         this.rockHitCounter = 0;
     }
-
 
     public int getWallHitCounter() {
         return wallHitCounter;

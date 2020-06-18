@@ -114,6 +114,11 @@ public abstract class ThreeDimensional extends GameState {
 
         fields = new Array<>();
         for (int i = 0; i < hf.size; i++) {
+
+            //used for testing
+            float xTest = 1;
+            float yTest = 1;
+
             Renderable field = new Renderable();
             field.environment = environment;
             field.meshPart.mesh = hf.get(i).mesh;
@@ -121,6 +126,7 @@ public abstract class ThreeDimensional extends GameState {
             field.meshPart.offset = 0;
             field.meshPart.size = hf.get(i).mesh.getNumIndices();
             field.meshPart.update();
+
             if(Math.random()<= 0.90) {
                 field.material = new Material(TextureAttribute.createDiffuse(new Texture("grass.jpg")));
             }
