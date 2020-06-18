@@ -25,20 +25,20 @@ public class AlexAI implements Player {
         this.hole = terrain.getHole();
         velocity = new Vector3();
 
-        float subX = hole.getPosition().cpy().sub(terrain.getBall().getPosition().cpy()).x;
-        float subY = hole.getPosition().cpy().sub(terrain.getBall().getPosition().cpy()).y;
+        float subX = hole.getPosition().cpy().sub(ball.getPosition().cpy()).x;
+        float subY = hole.getPosition().cpy().sub(ball.getPosition().cpy()).y;
 
         if (subX < threshold.x && subY < threshold.y && subX > -threshold.x && subY > -threshold.y) {
             //System.out.println("threshold: " + subX + " y: " + subY);
-            velocity = hole.getPosition().cpy().sub(terrain.getBall().getPosition().cpy());
+            velocity = hole.getPosition().cpy().sub(ball.getPosition().cpy());
             velocity.scl(1.07f);
         } else if (subX < 15f && subY < 15f && subX > -15f && subY > -15f) {
             // System.out.println("regular: " + subX + " y: " + subY);
-            velocity = hole.getPosition().cpy().sub(terrain.getBall().getPosition().cpy());
+            velocity = hole.getPosition().cpy().sub(ball.getPosition().cpy());
             velocity.scl(0.65f);
         } else {
             //System.out.println("regula22: " + subX + " y: " + subY);
-            velocity = hole.getPosition().cpy().sub(terrain.getBall().getPosition().cpy());
+            velocity = hole.getPosition().cpy().sub(ball.getPosition().cpy());
             velocity.scl(0.325f);
         }
         ball.hit(velocity);
