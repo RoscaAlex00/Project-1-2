@@ -15,6 +15,7 @@ public class AStar implements Player {
     private Terrain terrain;
     private List<Node> openList;
     private List<Node> closedList;
+    private int index = 1;
 
     @Override
     public Vector3 shot_velocity(Vector3 camera_direction, float charge) throws IllegalAccessException {
@@ -27,37 +28,59 @@ public class AStar implements Player {
         this.hole = terrain.getHole();
         this.terrain = terrain;
         
+        // Get the path found by A*
         ArrayList<Node> path = getPath();
         
+        // Construct a simplified path only containing the start and the end, as well as any turning node(s)
         ArrayList<Node> turningNodes = new ArrayList<>();
         turningNodes.add(path.get(0));      
-        for (int i = 2; i < path.size(); i++) {
+        for (int i = 1; i < path.size(); i++) {
         	Node node = path.get(i);
         	if (i == path.size() - 1)
         		turningNodes.add(node);
-        	else if (node.getOrientation() != node.getParent().getOrientation())
+        	else if (i != 1 && node.getOrientation() != node.getParent().getOrientation())
         		turningNodes.add(node.getParent());
         }
         
-        // Used for testing
+        // Use for testing
         System.out.println(path);
         System.out.println("Hole position: " + hole.getPosition());
         System.out.println(turningNodes);
-        System.exit(0);
         
-        //TODO: Shoot the ball following the given path
-        /*
-        Vector3 shot = new Vector3();
-        if (path == null) return null;
-        for (Vector3 vector3 : path) {
-            shot.add(vector3);
+        // Shoot the ball following the given path           
+        if (index < turningNodes.size()) {
+        	Node node = turningNodes.get(index);
+        	if (!equals(ball.getPosition().x, node.getPosition().x) || !equals(ball.getPosition().y, node.getPosition().y)) {
+        		Vector3 threshold = new Vector3(5f, 5f, 0);
+        		Vector3 velocity = node.getPosition().cpy().sub(ball.getPosition().cpy());
+        		float subX = node.getPosition().cpy().sub(ball.getPosition().cpy()).x;
+                float subY = node.getPosition().cpy().sub(ball.getPosition().cpy()).y;
+
+                if (subX < threshold.x && subY < threshold.y && subX > -threshold.x && subY > -threshold.y) {
+                    //System.out.println("threshold: " + subX + " y: " + subY);
+                    velocity = node.getPosition().cpy().sub(ball.getPosition().cpy());
+                    velocity.scl(1.07f);
+                } else if (subX < 15f && subY < 15f && subX > -15f && subY > -15f) {
+                    // System.out.println("regular: " + subX + " y: " + subY);
+                    velocity = node.getPosition().cpy().sub(ball.getPosition().cpy());
+                    velocity.scl(0.65f);
+                } else {
+                    //System.out.println("regula22: " + subX + " y: " + subY);
+                    velocity = node.getPosition().cpy().sub(ball.getPosition().cpy());
+                    velocity.scl(0.325f);
+                }
+                ball.hit(velocity);
+        		System.out.println("Ball hit!");
+        		ball.hit(velocity);
+        	} else { 
+        		index++;
+        	}
         }
-        ball.hit(shot);
-        */     
         
         return null;
     }
 
+    // Perform A* search and return the shortest path
     private ArrayList<Node> getPath() {
     	int idCounter = 0;
         Vector3 holePos = hole.getPosition().cpy();
@@ -164,7 +187,7 @@ public class AStar implements Player {
                 openList.add(child);
             }
         }
-
+        
         return null;
     }
 
@@ -172,6 +195,12 @@ public class AStar implements Player {
         return vector3.x < 0 || vector3.y < 0 || vector3.x > terrain.getWidth() || vector3.y > terrain.getHeight();
     }
 
+    private boolean equals(float a, float b) {
+    	if (Math.abs(a - b) < 0.3f)
+    		return true;
+    	return false;
+    }
+    
     @Override
     public void runLoop() {
     }
