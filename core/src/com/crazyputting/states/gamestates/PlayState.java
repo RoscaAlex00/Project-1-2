@@ -10,7 +10,6 @@ import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Scaling;
 import com.badlogic.gdx.utils.viewport.ScalingViewport;
@@ -31,19 +30,13 @@ public class PlayState extends ThreeDimensional {
     private Player player;
     private SpriteBatch spriteBatch;
     private Stage hud;
-    private Skin skin;
+    //private Skin skin;
     private BitmapFont comicFont;
     private Image chargeBar;
     private Image chargeMeter;
-    private boolean isPushed = false;
-    private boolean moving = false;
-    private boolean playerIsHuman = false;
-
     private boolean isSpacePressed = false;
     private long startChargeTime;
     private int hitCounter = 0;
-
-    private GameStateManager manager;
 
     public PlayState(GameStateManager manager, Terrain terrain) {
         super(manager, terrain);
@@ -63,7 +56,7 @@ public class PlayState extends ThreeDimensional {
         parameter.size = 20;
         comicFont = gen.generateFont(parameter);
         comicFont.setColor(Color.WHITE);
-        skin = new Skin(Gdx.files.internal("comic/skin/comic-ui.json"));
+        //skin = new Skin(Gdx.files.internal("comic/skin/comic-ui.json"));
 
         ball.update(terrain.getFunction().evaluateHeight(ball.getPosition().x, ball.getPosition().y));
         controller.initFocus(ball.getPosition());
@@ -111,22 +104,11 @@ public class PlayState extends ThreeDimensional {
     public void update(float dt) throws IllegalAccessException {
         handleInput();
         super.update(dt);
-        if (isPushed) {
-            isPushed = false;
-            setProcessors();
-        }
+        
         if (!ball.isStopped()) {
-            if (!moving) {
-                moving = true;
-            }
             ball.updateInstance(terrain.getFunction().evaluateHeight(ball.getPosition().x, ball.getPosition().y),
                     physics.updateBall(dt));
-        } else {
-            if (moving) {
-                moving = false;
-                setProcessors();
-            }
-        }
+        }            
         if (ball.isStopped()) {
             if (player instanceof Human) {
                 if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
