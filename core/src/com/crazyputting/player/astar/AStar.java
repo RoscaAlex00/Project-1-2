@@ -47,35 +47,36 @@ public class AStar implements Player {
         System.out.println("Hole position: " + hole.getPosition());
         System.out.println(turningNodes);
         
-        // Shoot the ball following the given path           
+        // Shoot the ball following the given path
         if (index < turningNodes.size()) {
         	Node node = turningNodes.get(index);
         	if (!equals(ball.getPosition().x, node.getPosition().x) || !equals(ball.getPosition().y, node.getPosition().y)) {
-        		Vector3 threshold = new Vector3(5f, 5f, 0);
+        		int THRESHOLD_X = 5;
+        		int THRESHOLD_Y = 5;
         		Vector3 velocity = node.getPosition().cpy().sub(ball.getPosition().cpy());
-        		float subX = node.getPosition().cpy().sub(ball.getPosition().cpy()).x;
-                float subY = node.getPosition().cpy().sub(ball.getPosition().cpy()).y;
+        		float subX = velocity.x;
+                float subY = velocity.y;
 
-                if (subX < threshold.x && subY < threshold.y && subX > -threshold.x && subY > -threshold.y) {
+                //Scale the velocity in different ways depending on the conditions
+                if (subX < THRESHOLD_X && subY < THRESHOLD_Y && subX > -THRESHOLD_X && subY > -THRESHOLD_Y) {
                     //System.out.println("threshold: " + subX + " y: " + subY);
-                    velocity = node.getPosition().cpy().sub(ball.getPosition().cpy());
                     velocity.scl(1.07f);
                 } else if (subX < 15f && subY < 15f && subX > -15f && subY > -15f) {
                     // System.out.println("regular: " + subX + " y: " + subY);
-                    velocity = node.getPosition().cpy().sub(ball.getPosition().cpy());
                     velocity.scl(0.65f);
                 } else {
                     //System.out.println("regula22: " + subX + " y: " + subY);
-                    velocity = node.getPosition().cpy().sub(ball.getPosition().cpy());
                     velocity.scl(0.325f);
                 }
                 ball.hit(velocity);
         		System.out.println("Ball hit!");
-        		ball.hit(velocity);
-        	} else { 
+        		//ball.hit(velocity);
+        	} else {
         		index++;
         	}
         }
+        //ball.hit(shot);
+
         
         return null;
     }
@@ -98,17 +99,14 @@ public class AStar implements Player {
 
         while (openList.size() > 0) {
             Node currentNode = openList.get(0);
-            int currentIndex = 0;
 
-            for (int i = 0; i < openList.size(); i++) {
-            	Node node = openList.get(i);         	
+            for (Node node : openList) {
                 if (node.getTotalCost() < currentNode.getTotalCost()) {
                     currentNode = node;
-                    currentIndex = i; 
                 }
             }
 
-            openList.remove(currentIndex);
+            openList.remove(currentNode);
             closedList.add(currentNode);
 
             // Found a path
@@ -170,24 +168,33 @@ public class AStar implements Player {
 
             // Add correct children to the open list
             for (Node child : children) {
+                boolean skip = false;
             	for (Node closedChild : closedList) {
-            		if (child == closedChild)
-            			continue;
+                    if (child.equals(closedChild)) {
+                        skip = true;
+                        break;
+                    }
             	}
-            	
+            	if (skip) continue;
+
+            	//TODO: add check for sand and water?
+
             	// Create the cost and the heuristic values
             	child.setCost(currentNode.getCost() + 1);
             	child.setHeuristic(endNode.getPosition().cpy().sub(child.getPosition()).len());
             	
             	for (Node openNode : openList) {
-            		if (child == openNode && child.getCost() > openNode.getCost())
-            			continue;
-            	}
-            	
+            		if (child.equals(openNode) && child.getCost() > openNode.getCost()){
+                        skip = true;
+                        break;
+                    }
+                }
+                if (skip) continue;
+
                 openList.add(child);
             }
         }
-        
+
         return null;
     }
 
@@ -196,11 +203,9 @@ public class AStar implements Player {
     }
 
     private boolean equals(float a, float b) {
-    	if (Math.abs(a - b) < 0.3f)
-    		return true;
-    	return false;
+        return Math.abs(a - b) < 0.3f;
     }
-    
+
     @Override
     public void runLoop() {
     }
