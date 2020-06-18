@@ -84,8 +84,12 @@ public abstract class ThreeDimensional extends GameState {
         batch.render(threeDimensionalModel.getEdges(), environment);
         batch.render(threeDimensionalModel.getWater(), environment);
         batch.render(threeDimensionalModel.getBallModel(), environment);
-        batch.render(threeDimensionalModel.getTree(),environment);
-        batch.render(threeDimensionalModel.getRock(), environment); //*******************
+        if (!terrain.getMazeEnabled()) {
+            batch.render(threeDimensionalModel.getTree(), environment);
+            batch.render(threeDimensionalModel.getRock(), environment);
+        } else {
+            batch.render(threeDimensionalModel.getMaze(), environment);
+        }
         batch.end();
     }
 
@@ -121,15 +125,18 @@ public abstract class ThreeDimensional extends GameState {
             field.meshPart.offset = 0;
             field.meshPart.size = hf.get(i).mesh.getNumIndices();
             field.meshPart.update();
-            if(Math.random()<= 0.90) {
+            if (!terrain.getMazeEnabled()) {
+                if (Math.random() <= 0.90) {
+                    field.material = new Material(TextureAttribute.createDiffuse(new Texture("grass.jpg")));
+                } else {
+                    float x = field.meshPart.center.x;
+                    float y = field.meshPart.center.y;
+                    sandCoords.add(new Vector3(x, y, 0));
+                    field.material = new Material(TextureAttribute.createDiffuse(new Texture("sand.jpg")));
+                    terrain.setSandCoordinates(sandCoords);
+                }
+            } else {
                 field.material = new Material(TextureAttribute.createDiffuse(new Texture("grass.jpg")));
-            }
-            else{
-                float x = field.meshPart.center.x;
-                float y = field.meshPart.center.y;
-                sandCoords.add(new Vector3(x,y,0));
-                field.material = new Material(TextureAttribute.createDiffuse(new Texture("sand.jpg")));
-                terrain.setSandCoordinates(sandCoords);
             }
             fields.add(field);
         }

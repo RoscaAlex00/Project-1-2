@@ -44,7 +44,7 @@ public class CreatorMenu extends GameState {
     public void init() {
         final String[] SOLVER_STRING = new String[]{"Euler", "Verlet", "Runge-Kutta", "Adams-Bashforth"};
         final Array<String> SOLVERS = new Array<>(SOLVER_STRING);
-        final String[] PLAYER_STRING = new String[]{"Human", "AI", "AlexAI", "FrunzAI", "AStar"};
+        final String[] PLAYER_STRING = new String[]{"Human", "AI", "AlexAI", "FrunzAI", "AStar","WindAi"};
         final Array<String> PLAYERS = new Array<>(PLAYER_STRING);
 
         spriteBatch = new SpriteBatch();
@@ -68,6 +68,7 @@ public class CreatorMenu extends GameState {
         HorizontalGroup fieldSize = new HorizontalGroup();
         HorizontalGroup constants = new HorizontalGroup();
         HorizontalGroup solverAndPlayer = new HorizontalGroup();
+        HorizontalGroup checkBoxes = new HorizontalGroup();
 
         Label startXLabel = new Label("                       Start X = ", skin);
         final TextField startXField = new TextField("10", skin);
@@ -95,6 +96,11 @@ public class CreatorMenu extends GameState {
         Label playerLabel = new Label("                    Player: ", skin);
         final SelectBox<String> playerSelect = new SelectBox<>(skin);
         playerSelect.setItems(PLAYERS);
+        Label windEnabled = new Label("          Wind Enabled: ",skin);
+        final CheckBox windCheck = new CheckBox("",skin);
+        Label mazeEnabled = new Label("          Maze Enabled: ",skin);
+        final CheckBox mazeCheck = new CheckBox("",skin);
+
 
         /*Label frictionLabel = new Label("Friction coefficient: ", skin);
         final TextField frictionField = new TextField("5", skin);
@@ -110,6 +116,8 @@ public class CreatorMenu extends GameState {
                 float goalX = 0, goalY = 0, goalRadius = 0, startX = 0, startY = 0, MU = 0, vMax = 0;
                 Function function = new Derivatives(functionField.getText());
                 int length = 0, width = 0;
+                boolean windEnabled = false;
+                boolean mazeEnabled = false;
                 String selectedSolver = solverSelect.getSelected();
                 String selectedPlayer = playerSelect.getSelected();
                 MU = 1.5f;
@@ -120,6 +128,8 @@ public class CreatorMenu extends GameState {
                         functionField.toString().isEmpty() || courseWidthField.toString().isEmpty() ||
                         courseLengthField.toString().isEmpty();
                 try {
+                    windEnabled = windCheck.isChecked();
+                    mazeEnabled = mazeCheck.isChecked();
                     startX = Float.parseFloat(startXField.getText().replaceAll(" ", ""));
                     startY = Float.parseFloat(startYField.getText().replaceAll(" ", ""));
                     goalX = Float.parseFloat(goalXField.getText().replaceAll(" ", ""));
@@ -163,7 +173,7 @@ public class CreatorMenu extends GameState {
                     Hole hole = new Hole(goalRadius, holeVector);
 
                     Terrain newTerrain = new Terrain(length, width, teeVector, hole, function, MU,
-                            vMax, "newTerrain", solver, player);
+                            vMax, "newTerrain", solver, player,windEnabled,mazeEnabled);
                     gsm.setTerrain(newTerrain);
                     gsm.setState(GameStateManager.PLAY);
                 }
@@ -200,6 +210,11 @@ public class CreatorMenu extends GameState {
         solverAndPlayer.addActor(solverLabel);
         solverAndPlayer.addActor(solverSelect);
 
+        checkBoxes.addActor(mazeEnabled);
+        checkBoxes.addActor(mazeCheck);
+        checkBoxes.addActor(windEnabled);
+        checkBoxes.addActor(windCheck);
+
         main.row();
         main.add(start).fillY().align(Align.left);
         main.row().pad(20, 0, 20, 0);
@@ -214,6 +229,8 @@ public class CreatorMenu extends GameState {
         main.add(constants).fillY().align(Align.left);*/
         main.row().pad(20, 0, 20, 0);
         main.add(solverAndPlayer).fillY().align(Align.center);
+        main.row().pad(20, 0, 20, 0);
+        main.add(checkBoxes).fillY().align(Align.center);
         main.row().pad(20, 0, 20, 0);
         main.add(playButton).align(Align.center);
         main.setY(main.getY());

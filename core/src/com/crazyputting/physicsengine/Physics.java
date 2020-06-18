@@ -11,6 +11,7 @@ import com.crazyputting.objects.Terrain;
 
 import javax.swing.*;
 import java.util.List;
+import java.util.Random;
 
 
 public class Physics {
@@ -26,6 +27,7 @@ public class Physics {
     private final float WALL_POWER_LOSS = -0.80f;
     private final float TREE_POWER_LOSS = -0.65f;
     private final float ROCK_POWER_LOSS = -0.50f;
+    private final float DRAG_COEFFICIENT = 0.50f;
 
     float dt = Gdx.graphics.getDeltaTime();
 
@@ -38,6 +40,8 @@ public class Physics {
     private int wallHitCounter;
     private int treeHitCounter;
     private int rockHitCounter;
+    private int mazeWallHitCounter;
+    private Vector3 windForce;
 
 
     public Physics(Ball yourBall, Terrain yourTerrain, Hole newHole, PhysicsSolver solver) {
@@ -48,6 +52,11 @@ public class Physics {
         this.hole = newHole;
         radius = hole.getHoleRadius() - 0.5f;
         mass = yourBall.getMass();
+        float random1 = randSmallFloat();
+        float random2 = randSmallFloat();
+        float x = (float) (Math.cos(random1 * Math.PI));
+        float y = (float) (Math.sin(random2 * Math.PI));
+        this.windForce = new Vector3(x,y,0);
     }
 
     public float getGRAVITY() {
@@ -75,10 +84,22 @@ public class Physics {
         v.scl(-terrain.getMU() * mass * GRAVITY);
         return v;
     }
+    private Vector3 calcWind(Vector3 velocity){
+        float windForceX =  windForce.x * 0.5f  * DRAG_COEFFICIENT
+                 * matPower(Ball.DIAMETER / 2.0f, 2);
+        float windForceY = windForce.y * 0.5f  * DRAG_COEFFICIENT
+                * matPower(Ball.DIAMETER / 2.0f, 2) ;
+        Vector3 windForceNew = new Vector3(windForceX, windForceY, 0f);
+        windForceNew.scl((float) (-1f*velocity.len()*Math.PI) * 5);
+        return windForceNew;
+    }
 
     public Vector3 getAcceleration(Vector3 position, Vector3 velocity) {
         Vector3 acc = calcGravity(position);
         acc.add(calcFriction(velocity));
+        if(terrain.getWindEnabled()) {
+            acc.add(calcWind(velocity));
+        }
         return acc;
     }
 
@@ -144,6 +165,22 @@ public class Physics {
             }
         }
 
+        //Collisions for maze walls
+        if(terrain.getMazeEnabled()){
+            for(Vector3 mazeWallCoordinate: terrain.getMazeWallCoordinates()){
+                if(mazeWallCoordinate.x - 0.65f <= position.x && position.x <= mazeWallCoordinate.x + 0.75f
+                && mazeWallCoordinate.y - 24.2f <= position.y && position.y <= mazeWallCoordinate.x + 24.2f){
+                    setMazeWallHitCounter(getMazeWallHitCounter() + 1);
+                    if(getMazeWallHitCounter() == 1){
+                        Vector3 storage = new Vector3(ball.getVelocity().x * WALL_POWER_LOSS,
+                                ball.getVelocity().y * WALL_POWER_LOSS, 0);
+                        ball.setStopped();
+                        ball.hit(storage);
+                    }
+                }
+            }
+        }
+
 
         /*
         If the ball goes out of bounds (outside of the playing field),
@@ -176,6 +213,12 @@ public class Physics {
         }
         if (getWallHitCounter() == 4) {
             resetWallHitCounter();
+        }
+        if (getMazeWallHitCounter() >= 1) {
+            setMazeWallHitCounter(getMazeWallHitCounter() + 1);
+        }
+        if (getMazeWallHitCounter() == 7) {
+            resetMazeWallHitCounter();
         }
         if (getTreeHitCounter() >= 1) {
             setTreeHitCounter(getTreeHitCounter() + 1);
@@ -251,7 +294,15 @@ public class Physics {
     public void setRockHitCounter(int counter) {
         this.rockHitCounter = counter;
     }
-
+    public void setMazeWallHitCounter(int counter){
+        this.mazeWallHitCounter = counter;
+    }
+    public int getMazeWallHitCounter(){
+        return mazeWallHitCounter;
+    }
+    public void resetMazeWallHitCounter(){
+        this.mazeWallHitCounter = 0;
+    }
 
     public void resetTreeHitCounter() {
         this.treeHitCounter = 0;
@@ -272,5 +323,24 @@ public class Physics {
 
     public void resetWallHitCounter() {
         this.wallHitCounter = 0;
+    }
+
+    public float randSmallFloat() {
+        Random rand = new Random();
+        return (rand.nextFloat() * (1.5f - 0.5f) + 0.5f);
+    }
+    public float matPower(float base, int power) {
+        float matPower = 1f;
+        for (int i = 0; i < power; i++) {
+            matPower *= base;
+        }
+        return matPower;
+    }
+
+    public Vector3 getWindForce() {
+        return windForce;
+    }
+    public void setWindForce(Vector3 windForce1){
+        this.windForce = windForce1;
     }
 }

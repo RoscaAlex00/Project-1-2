@@ -3,6 +3,7 @@ package com.crazyputting.player;
 import com.crazyputting.player.AI.AI;
 import com.crazyputting.player.AI.AlexAI;
 import com.crazyputting.player.AI.FrunzAI;
+import com.crazyputting.player.AI.WindAI;
 import com.crazyputting.player.astar.AStar;
 
 public class PlayerFactory {
@@ -26,6 +27,8 @@ public class PlayerFactory {
                 return new FrunzAI();
             case "AStar":
                 return new AStar();
+            case "WindAi":
+                return new WindAI();
             default:
                 return new Human(maximumVelocity);
         }
