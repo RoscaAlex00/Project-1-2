@@ -169,7 +169,7 @@ public class Physics {
         if(terrain.getMazeEnabled()){
             for(Vector3 mazeWallCoordinate: terrain.getMazeWallCoordinates()){
                 if(mazeWallCoordinate.x - 0.65f <= position.x && position.x <= mazeWallCoordinate.x + 0.75f
-                && mazeWallCoordinate.y - 24.2f <= position.y && position.y <= mazeWallCoordinate.x + 24.2f){
+                && mazeWallCoordinate.y - 24.2f <= position.y && position.y <= mazeWallCoordinate.y + 24.2f){
                     setMazeWallHitCounter(getMazeWallHitCounter() + 1);
                     if(getMazeWallHitCounter() == 1){
                         Vector3 storage = new Vector3(ball.getVelocity().x * WALL_POWER_LOSS,
