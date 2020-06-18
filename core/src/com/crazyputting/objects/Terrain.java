@@ -24,12 +24,14 @@ public class Terrain {
     private Ball ball;
     private List<Vector3> sandCoordinates;
     private List<Vector3> treeCoordinates;
-    //**********
     private List<Vector3> rockCoordinates;
+    private List<Vector3> mazeWallCoordinates;
+    private boolean windEnabled;
+    private boolean mazeEnabled;
 
 
     public Terrain(float ourHeight, float ourWidth, Vector3 teeVector, Hole endHole, Function function, float MU,
-                   float maxSpeed, String name, PhysicsSolver solver, Player player) {
+                   float maxSpeed, String name, PhysicsSolver solver, Player player,boolean windEnabled,boolean mazeEnabled) {
         this.height = ourHeight;
         this.width = ourWidth;
         this.startPos = teeVector;
@@ -43,7 +45,10 @@ public class Terrain {
         this.player = player;
         this.ball = new Ball(teeVector);
         treeCoordinates = new ArrayList<>();
-        rockCoordinates = new ArrayList<>(); //****************
+        rockCoordinates = new ArrayList<>();
+        mazeWallCoordinates = new ArrayList<>();
+        this.windEnabled = windEnabled;
+        this.mazeEnabled = mazeEnabled;
     }
 
     public float getHeight() {
@@ -114,9 +119,8 @@ public class Terrain {
         return treeCoordinates;
     }
 
-    //***********************
-    public void setRockCoordinates(List<Vector3> newCoordi){
-        this.rockCoordinates = newCoordi;
+    public void setRockCoordinates(List<Vector3> newCoords){
+        this.rockCoordinates = newCoords;
     }
 
     public List<Vector3> getRockCoordinates(){
@@ -132,7 +136,21 @@ public class Terrain {
         return sandCoordinates;
     }
 
+    public void setMazeWallCoordinates(List<Vector3> newCoords){
+        this.mazeWallCoordinates = newCoords;
+    }
+    public List<Vector3> getMazeWallCoordinates(){
+        return mazeWallCoordinates;
+    }
+
     public void setFrictionCoefficient(float frictionCoefficient) {
         this.frictionCoefficient = frictionCoefficient;
+    }
+
+    public boolean getWindEnabled(){
+        return windEnabled;
+    }
+    public boolean getMazeEnabled(){
+        return mazeEnabled;
     }
 }

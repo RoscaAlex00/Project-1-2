@@ -32,9 +32,11 @@ public class ThreeDimensionalModel {
     private int attr;
     private ModelInstance water;
     private ArrayList<ModelInstance> tree;
-    private ArrayList<ModelInstance> rock; //***********
+    private ArrayList<ModelInstance> rock;
+    private ArrayList<ModelInstance> maze;
     private ArrayList<Vector3> treeCoordinates;
-    private ArrayList<Vector3> rockCoordinates; //***********
+    private ArrayList<Vector3> rockCoordinates;
+    private ArrayList<Vector3> mazeWallsCoordinates;
 
 
     public ThreeDimensionalModel(Terrain terrain) {
@@ -49,6 +51,8 @@ public class ThreeDimensionalModel {
         treeCoordinates = new ArrayList<>();
         rock = new ArrayList<>();
         rockCoordinates = new ArrayList<>();
+        maze = new ArrayList<>();
+        mazeWallsCoordinates = new ArrayList<>();
 
         attr = VertexAttributes.Usage.Position | VertexAttributes.Usage.Normal | VertexAttributes.Usage.TextureCoordinates;
 
@@ -71,55 +75,76 @@ public class ThreeDimensionalModel {
                 new Material(TextureAttribute.createDiffuse(new Texture("water.png"))), attr);
         this.water = new ModelInstance(water, 0, 0, -0.12f);
 
-        Texture brick = new Texture("wood.jpg");
+        Texture wood = new Texture("wood.jpg");
         Model border_w = modelBuilder.createBox(terrain.getWidth() + (2 * width_border), width_border, height_border,
-                new Material(TextureAttribute.createDiffuse(brick)), attr);
+                new Material(TextureAttribute.createDiffuse(wood)), attr);
         edges.add(new ModelInstance(border_w, terrain.getWidth() / 2, -width_border / 2, (-height_border / 2) + 5.5f));
         edges.add(new ModelInstance(border_w, terrain.getWidth() / 2, terrain.getHeight() + width_border / 2, (-height_border / 2) + 5.5f));
 
         Model border_d = modelBuilder.createBox(width_border, terrain.getHeight(), height_border,
-                new Material(TextureAttribute.createDiffuse(brick)), attr);
+                new Material(TextureAttribute.createDiffuse(wood)), attr);
         edges.add(new ModelInstance(border_d, -(width_border / 2), terrain.getHeight() / 2, (-height_border / 2) + 5.5f));
         edges.add(new ModelInstance(border_d, terrain.getWidth() + (width_border / 2), terrain.getHeight() / 2, (-height_border / 2) + 5.5f));
 
-        Model treeModel = loader.loadModel(Gdx.files.internal("cartontree.obj"));
-        for (int i = 0; i < Math.random() * 10; i++) {
-            this.tree.add(new ModelInstance(treeModel));
-        }
-        for (int i = 0; i < tree.size(); i++) {
-            float x = (float) Math.random() * (terrain.getWidth() - 2);
-            float y = (float) Math.random() * (terrain.getHeight() - 2);
-
-            if (terrain.getFunction().evaluateHeight(x, y) >= 0) {
-                treeCoordinates.add(new Vector3(x, y, 0));
-                tree.get(i).transform = new Matrix4(new Vector3(x, y, terrain.getFunction().evaluateHeight(x, y)), new Quaternion(new Vector3(1, 1, 1), 120),
-                        new Vector3(1.65f, 1.65f, 1.65f));
-            } else {
-                tree.remove(i);
-                i--;
+        if (!terrain.getMazeEnabled()) {
+            Model treeModel = loader.loadModel(Gdx.files.internal("cartontree.obj"));
+            for (int i = 0; i < Math.random() * 10; i++) {
+                this.tree.add(new ModelInstance(treeModel));
             }
-        }
-        terrain.setTreeCoordinates(treeCoordinates);
+            for (int i = 0; i < tree.size(); i++) {
+                float x = (float) Math.random() * (terrain.getWidth() - 2);
+                float y = (float) Math.random() * (terrain.getHeight() - 2);
 
-        Model rockModel = loader.loadModel(Gdx.files.internal("Rock_1.obj"));
-        for (int i = 0; i < Math.random() * 15; i++) {
-            this.rock.add(new ModelInstance(rockModel));
-        }
-        for (int i = 0; i < rock.size(); i++) {
-            float x = (float) Math.random() * (terrain.getWidth() - 2);
-            float y = (float) Math.random() * (terrain.getHeight() - 2);
-
-            if (terrain.getFunction().evaluateHeight(x, y) >= 0) {
-                rockCoordinates.add(new Vector3(x, y, 0));
-                rock.get(i).transform = new Matrix4(new Vector3(x, y, terrain.getFunction().evaluateHeight(x, y)),
-                        new Quaternion(new Vector3(0, 0, 1), (int) (Math.random() * 180)),
-                        new Vector3(0.5f, 0.5f, 0.5f));
-            } else {
-                rock.remove(i);
-                i--;
+                if (terrain.getFunction().evaluateHeight(x, y) >= 0) {
+                    treeCoordinates.add(new Vector3(x, y, 0));
+                    tree.get(i).transform = new Matrix4(new Vector3(x, y, terrain.getFunction().evaluateHeight(x, y)), new Quaternion(new Vector3(1, 1, 1), 120),
+                            new Vector3(1.65f, 1.65f, 1.65f));
+                } else {
+                    tree.remove(i);
+                    i--;
+                }
             }
+            terrain.setTreeCoordinates(treeCoordinates);
+
+            Model rockModel = loader.loadModel(Gdx.files.internal("Rock_1.obj"));
+            for (int i = 0; i < Math.random() * 15; i++) {
+                this.rock.add(new ModelInstance(rockModel));
+            }
+            for (int i = 0; i < rock.size(); i++) {
+                float x = (float) Math.random() * (terrain.getWidth() - 2);
+                float y = (float) Math.random() * (terrain.getHeight() - 2);
+
+                if (terrain.getFunction().evaluateHeight(x, y) >= 0) {
+                    rockCoordinates.add(new Vector3(x, y, 0));
+                    rock.get(i).transform = new Matrix4(new Vector3(x, y, terrain.getFunction().evaluateHeight(x, y)),
+                            new Quaternion(new Vector3(0, 0, 1), (int) (Math.random() * 180)),
+                            new Vector3(0.5f, 0.5f, 0.5f));
+                } else {
+                    rock.remove(i);
+                    i--;
+                }
+            }
+            terrain.setRockCoordinates(rockCoordinates);
         }
-        terrain.setRockCoordinates(rockCoordinates);
+        //Create a maze
+        else {
+            Texture brick = new Texture("brick.jpg");
+            Model wall1 = modelBuilder.createBox(1.4f, 48, 10,
+                    new Material(TextureAttribute.createDiffuse(brick)), attr);
+            maze.add(new ModelInstance(wall1, 7, 24, 0));
+            mazeWallsCoordinates.add(new Vector3(7,24,0));
+            maze.add(new ModelInstance(wall1, 14, 26, 0));
+            mazeWallsCoordinates.add(new Vector3(14,26,0));
+            maze.add(new ModelInstance(wall1, 21, 26, 0));
+            mazeWallsCoordinates.add(new Vector3(21,26,0));
+            maze.add(new ModelInstance(wall1, 28, 24, 0));
+            mazeWallsCoordinates.add(new Vector3(28,24,0));
+            maze.add(new ModelInstance(wall1, 35, 26, 0));
+            mazeWallsCoordinates.add(new Vector3(35,26,0));
+            maze.add(new ModelInstance(wall1, 42, 24, 0));
+            mazeWallsCoordinates.add(new Vector3(42,24,0));
+            terrain.setMazeWallCoordinates(mazeWallsCoordinates);
+        }
 
     }
 
@@ -174,6 +199,10 @@ public class ThreeDimensionalModel {
 
     public ArrayList<ModelInstance> getRock() {
         return rock;
+    }
+
+    public ArrayList<ModelInstance> getMaze() {
+        return maze;
     }
 
 }

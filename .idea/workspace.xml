@@ -19,7 +19,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8f2b995d-3fd3-4cd5-81e0-99edc8c0e739" name="Default Changelist" comment="buggy sand collider">
+    <list default="true" id="8f2b995d-3fd3-4cd5-81e0-99edc8c0e739" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.bin" afterDir="false" />
@@ -31,18 +31,25 @@
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/taskHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/build/classes/java/main/com/crazyputting/function/Derivatives$Node.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/build/classes/java/main/com/crazyputting/function/Derivatives$Node.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/build/classes/java/main/com/crazyputting/function/Derivatives.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/build/classes/java/main/com/crazyputting/function/Derivatives.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/build/classes/java/main/com/crazyputting/objects/Terrain.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/build/classes/java/main/com/crazyputting/objects/Terrain.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/build/classes/java/main/com/crazyputting/physicsengine/Physics.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/build/classes/java/main/com/crazyputting/physicsengine/Physics.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/build/classes/java/main/com/crazyputting/player/AI/AlexAI.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/build/classes/java/main/com/crazyputting/player/AI/AlexAI.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/build/classes/java/main/com/crazyputting/player/PlayerFactory.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/build/classes/java/main/com/crazyputting/player/PlayerFactory.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/build/classes/java/main/com/crazyputting/player/astar/AStar.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/build/classes/java/main/com/crazyputting/player/astar/AStar.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/build/classes/java/main/com/crazyputting/player/astar/Node.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/build/classes/java/main/com/crazyputting/player/astar/Node.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/build/classes/java/main/com/crazyputting/states/gamestates/PlayState.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/build/classes/java/main/com/crazyputting/states/gamestates/PlayState.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/build/classes/java/main/com/crazyputting/states/gamestates/ThreeDimensional.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/build/classes/java/main/com/crazyputting/states/gamestates/ThreeDimensional.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/build/classes/java/main/com/crazyputting/states/menus/CreatorMenu$1$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/build/classes/java/main/com/crazyputting/states/menus/CreatorMenu$1$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/build/classes/java/main/com/crazyputting/states/menus/CreatorMenu$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/build/classes/java/main/com/crazyputting/states/menus/CreatorMenu$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/build/classes/java/main/com/crazyputting/states/menus/CreatorMenu.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/build/classes/java/main/com/crazyputting/states/menus/CreatorMenu.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/build/classes/java/main/com/crazyputting/threedimensional/ThreeDimensionalModel.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/build/classes/java/main/com/crazyputting/threedimensional/ThreeDimensionalModel.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/build/libs/core-1.0.jar" beforeDir="false" afterPath="$PROJECT_DIR$/core/build/libs/core-1.0.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/com/crazyputting/function/Derivatives.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/com/crazyputting/function/Derivatives.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/com/crazyputting/objects/Terrain.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/com/crazyputting/objects/Terrain.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/src/com/crazyputting/physicsengine/Physics.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/com/crazyputting/physicsengine/Physics.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/com/crazyputting/player/PlayerFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/com/crazyputting/player/PlayerFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/com/crazyputting/states/gamestates/PlayState.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/com/crazyputting/states/gamestates/PlayState.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/com/crazyputting/states/gamestates/ThreeDimensional.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/com/crazyputting/states/gamestates/ThreeDimensional.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/com/crazyputting/states/menus/CreatorMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/com/crazyputting/states/menus/CreatorMenu.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/src/com/crazyputting/threedimensional/ThreeDimensionalModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/com/crazyputting/threedimensional/ThreeDimensionalModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/desktop/build/resources/main/cartontree.mtl" beforeDir="false" afterPath="$PROJECT_DIR$/desktop/build/resources/main/cartontree.mtl" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -180,6 +187,10 @@
       <workItem from="1592339594641" duration="4069000" />
       <workItem from="1592344722642" duration="860000" />
       <workItem from="1592394593015" duration="1908000" />
+      <workItem from="1592431644009" duration="197000" />
+      <workItem from="1592470813919" duration="1202000" />
+      <workItem from="1592473912073" duration="577000" />
+      <workItem from="1592500020216" duration="8601000" />
     </task>
     <task id="LOCAL-00001" summary="Vector3 for treeCoordinates and collider improvement">
       <created>1592131218032</created>
@@ -251,11 +262,18 @@
       <option name="project" value="LOCAL" />
       <updated>1592345563079</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="rocks now have random rotation + fixes">
+      <created>1592431569436</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1592431569436</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="2" />
+    <option name="version" value="1" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -280,7 +298,8 @@
     <MESSAGE value="naming + fix conflicts" />
     <MESSAGE value="ball rotates but not final" />
     <MESSAGE value="naming" />
-    <option name="LAST_COMMIT_MESSAGE" value="naming" />
+    <MESSAGE value="rocks now have random rotation + fixes" />
+    <option name="LAST_COMMIT_MESSAGE" value="rocks now have random rotation + fixes" />
   </component>
   <component name="WindowStateProjectService">
     <state x="526" y="110" key="#DesktopLauncher" timestamp="1592429634028">
@@ -312,67 +331,67 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="298" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1536.824@0.0.1536.824" timestamp="1591536437658" />
-    <state x="650" y="17" key="CommitChangelistDialog2" timestamp="1592431537014">
+    <state x="650" y="17" key="CommitChangelistDialog2" timestamp="1592431567711">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="650" y="17" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1592431537014" />
+    <state x="650" y="17" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1592431567711" />
     <state x="549" y="168" key="FileChooserDialogImpl" timestamp="1591555636999">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="549" y="168" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1591555636999" />
-    <state width="1493" height="210" key="GridCell.Tab.0.bottom" timestamp="1592431360545">
+    <state width="1493" height="210" key="GridCell.Tab.0.bottom" timestamp="1592508547290">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="210" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1592431360545" />
+    <state width="1493" height="210" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1592508547290" />
     <state width="1877" height="236" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1592396499899" />
-    <state width="1493" height="210" key="GridCell.Tab.0.center" timestamp="1592431360544">
+    <state width="1493" height="210" key="GridCell.Tab.0.center" timestamp="1592508547289">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="210" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1592431360544" />
+    <state width="1493" height="210" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1592508547289" />
     <state width="1877" height="236" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1592396499899" />
-    <state width="1493" height="210" key="GridCell.Tab.0.left" timestamp="1592431360544">
+    <state width="1493" height="210" key="GridCell.Tab.0.left" timestamp="1592508547289">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="210" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1592431360544" />
+    <state width="1493" height="210" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1592508547289" />
     <state width="1877" height="236" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1592396499899" />
-    <state width="1493" height="210" key="GridCell.Tab.0.right" timestamp="1592431360544">
+    <state width="1493" height="210" key="GridCell.Tab.0.right" timestamp="1592508547289">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="210" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1592431360544" />
+    <state width="1493" height="210" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1592508547289" />
     <state width="1877" height="236" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1592396499899" />
-    <state width="1493" height="261" key="GridCell.Tab.1.bottom" timestamp="1592431095106">
+    <state width="1493" height="261" key="GridCell.Tab.1.bottom" timestamp="1592431594192">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="261" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1592431095106" />
-    <state width="1493" height="261" key="GridCell.Tab.1.center" timestamp="1592431095106">
+    <state width="1493" height="261" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1592431594192" />
+    <state width="1493" height="261" key="GridCell.Tab.1.center" timestamp="1592431594191">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="261" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1592431095106" />
-    <state width="1493" height="261" key="GridCell.Tab.1.left" timestamp="1592431095106">
+    <state width="1493" height="261" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1592431594191" />
+    <state width="1493" height="261" key="GridCell.Tab.1.left" timestamp="1592431594191">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="261" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1592431095106" />
-    <state width="1493" height="261" key="GridCell.Tab.1.right" timestamp="1592431095106">
+    <state width="1493" height="261" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1592431594191" />
+    <state width="1493" height="261" key="GridCell.Tab.1.right" timestamp="1592431594192">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="261" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1592431095106" />
-    <state x="481" y="129" key="MultipleFileMergeDialog" timestamp="1592430216498">
+    <state width="1493" height="261" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1592431594192" />
+    <state x="481" y="129" key="MultipleFileMergeDialog" timestamp="1592471588331">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="481" y="129" key="MultipleFileMergeDialog/0.0.1536.824@0.0.1536.824" timestamp="1592430216498" />
-    <state x="451" y="184" key="Vcs.Push.Dialog.v2" timestamp="1592345564710">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state x="481" y="129" key="MultipleFileMergeDialog/0.0.1536.824@0.0.1536.824" timestamp="1592471588331" />
+    <state x="361" y="146" key="Vcs.Push.Dialog.v2" timestamp="1592431573094">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="361" y="146" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1592233279388" />
+    <state x="361" y="146" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1592431573094" />
     <state x="451" y="184" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1592345564710" />
-    <state x="465" y="238" key="com.intellij.ide.util.TipDialog" timestamp="1592242022469">
+    <state x="465" y="238" key="com.intellij.ide.util.TipDialog" timestamp="1592500036081">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="465" y="238" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1592242022469" />
-    <state x="578" y="330" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1592431496061">
+    <state x="465" y="238" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1592500036081" />
+    <state x="578" y="330" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1592508664104">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="578" y="330" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1536.824@0.0.1536.824" timestamp="1592431496061" />
+    <state x="578" y="330" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1536.824@0.0.1536.824" timestamp="1592508664104" />
     <state x="499" y="179" key="extract.method.dialog" timestamp="1592146536896">
       <screen x="0" y="0" width="1536" height="824" />
     </state>

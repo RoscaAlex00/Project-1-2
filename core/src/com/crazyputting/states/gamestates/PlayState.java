@@ -21,6 +21,7 @@ import com.crazyputting.objects.Ball;
 import com.crazyputting.objects.Hole;
 import com.crazyputting.objects.Terrain;
 import com.crazyputting.player.AI.AI;
+import com.crazyputting.player.AI.WindAI;
 
 public class PlayState extends ThreeDimensional {
     protected Terrain terrain;
@@ -77,19 +78,12 @@ public class PlayState extends ThreeDimensional {
 
             hud.addActor(chargeMeter);
             hud.addActor(chargeBar);
-        }
-        else{
+        } else if (player instanceof WindAI) {
+            player.setTerrain(terrain);
+            ((WindAI) player).setWind(physics.getWindForce());
+        } else {
             player.setTerrain(terrain);
         }
-        /*if (player instanceof AI) {
-            player.setTerrain(terrain);
-        }
-        if (player instanceof AlexAI) {
-            player.setTerrain(terrain);
-        }
-        if (player instanceof AStar) {
-            player.setTerrain(terrain);
-        }*/
 
         setProcessors();
     }
@@ -104,11 +98,11 @@ public class PlayState extends ThreeDimensional {
     public void update(float dt) throws IllegalAccessException {
         handleInput();
         super.update(dt);
-        
+
         if (!ball.isStopped()) {
             ball.updateInstance(terrain.getFunction().evaluateHeight(ball.getPosition().x, ball.getPosition().y),
                     physics.updateBall(dt));
-        }            
+        }
         if (ball.isStopped()) {
             if (player instanceof Human) {
                 if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
