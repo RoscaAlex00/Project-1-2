@@ -177,7 +177,7 @@ public class AStar implements Player {
             	}
             	if (skip) continue;
 
-            	//TODO: add check for sand and water?
+            	//TODO: add check for sand
 
             	// Create the cost and the heuristic values
             	child.setCost(currentNode.getCost() + 1);
