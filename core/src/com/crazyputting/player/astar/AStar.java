@@ -51,7 +51,8 @@ public class AStar implements Player {
         
         // Construct a simplified path only containing the start and the end, as well as any turning node(s)
         ArrayList<Node> turningNodes = new ArrayList<>();
-        turningNodes.add(path.get(0));      
+        assert path != null;
+        turningNodes.add(path.get(0));
         for (int i = 1; i < path.size(); i++) {
         	Node node = path.get(i);
         	if (i == path.size() - 1)
@@ -195,8 +196,6 @@ public class AStar implements Player {
             	}
             	if (skip) continue;
 
-            	//TODO: add check for sand
-
             	// Create the cost and the heuristic values
             	child.setCost(currentNode.getCost() + 1);
             	child.setHeuristic(endNode.getPosition().cpy().sub(child.getPosition()).len());
@@ -220,21 +219,46 @@ public class AStar implements Player {
         return vector3.x < 0 || vector3.y < 0 || vector3.x > terrain.getWidth() || vector3.y > terrain.getHeight();
     }
 
+    /**
+     * Checks if the ball can be on the given point.
+     * I.e. whether the ball would not be colliding with obstacles or in the water.
+     * For rectangular objects it only works for straight rectangles. So rotated in 0 or 90 degrees.
+     * Also, it is not checked whether the ball passes through an object
+     */
     private boolean walkable(Vector3 pos){
-        //TODO: check circular obstacles
         for (Map.Entry<Vector3, Float> circularObstacle : circularObstacles.entrySet()){
-            float radiusSum = circularObstacle.getValue() + Ball.DIAMETER /2f;
-            if (pos.dst(circularObstacle.getKey()) <= radiusSum){
+            float radiiSum = circularObstacle.getValue() + Ball.DIAMETER /2f;
+
+            //checks if the given position is in an obstacle
+            if (pos.dst(circularObstacle.getKey()) <= radiiSum){
                 return false;
             }
         }
 
-        //TODO: check rectangular obstacles
         for (Map.Entry<List<Vector3>, Float> rectangularObstacle : rectangularObstacles.entrySet()){
+            Vector3 firstPos = rectangularObstacle.getKey().get(0);
+            Vector3 secondPos = rectangularObstacle.getKey().get(1);
+            float width = rectangularObstacle.getValue();
+            float radiiSum = width + Ball.DIAMETER/2f;
+            boolean rotated90 = (firstPos.x == secondPos.x);
+
+            //checks if the given position is inside of the rectangular object.
+            if (rotated90){
+                float xDst = Math.abs(pos.x - firstPos.x);
+                if (xDst >= radiiSum && firstPos.y <= pos.y && pos.y <= secondPos.y){
+                    return false;
+                }
+            }
+            else {
+                float yDst = Math.abs(pos.y - firstPos.y);
+                if (yDst >= radiiSum && firstPos.x <= pos.x && pos.x <= secondPos.x){
+                    return false;
+                }
+            }
 
         }
 
-        return true;
+        return !(ball.getPosition().z < 0);
     }
 
     private boolean equals(float a, float b) {

@@ -1,15 +1,13 @@
 package com.crazyputting.states.gamestates;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.PerspectiveCamera;
-import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g3d.*;
 import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
 import com.badlogic.gdx.graphics.g3d.attributes.TextureAttribute;
 import com.badlogic.gdx.graphics.g3d.environment.DirectionalLight;
+import com.badlogic.gdx.graphics.g3d.utils.ModelBuilder;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
@@ -45,6 +43,8 @@ public abstract class ThreeDimensional extends GameState {
 
     private boolean current = false;
 
+    private ModelInstance extraBall;
+
     public ThreeDimensional(GameStateManager manager, Terrain terrain) {
         super(manager, terrain);
     }
@@ -76,6 +76,14 @@ public abstract class ThreeDimensional extends GameState {
         environment.add(light);
 
         createTerrain();
+
+        ModelBuilder builder = new ModelBuilder();
+        Model sphere = builder.createSphere(Ball.DIAMETER, Ball.DIAMETER, Ball.DIAMETER, 50, 50,
+                new Material(TextureAttribute.createDiffuse(new Texture("ball.jpg"))),
+                VertexAttributes.Usage.Position | VertexAttributes.Usage.Normal | VertexAttributes.Usage.TextureCoordinates
+        );
+        extraBall = new ModelInstance(sphere, terrain.getStartPos().x, terrain.getStartPos().y,
+                terrain.getStartPos().z + (Ball.DIAMETER / 2));
     }
 
     public void render(final ArrayList<ModelInstance> instances) {
@@ -85,6 +93,9 @@ public abstract class ThreeDimensional extends GameState {
         else for (Renderable r : fields) batch.render(r);
         batch.render(threeDimensionalModel.getEdges(), environment);
         batch.render(threeDimensionalModel.getWater(), environment);
+
+        batch.render(extraBall, environment);
+
         batch.render(threeDimensionalModel.getBallModel(), environment);
         batch.render(threeDimensionalModel.getTree(),environment);
         batch.render(threeDimensionalModel.getRock(), environment); //*******************
