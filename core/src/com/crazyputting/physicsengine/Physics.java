@@ -180,10 +180,6 @@ public class Physics {
                 && mazeWallCoordinate.y - WALL_LENGTH/2f <= position.y && position.y <= mazeWallCoordinate.y + WALL_LENGTH/2f){
                     setMazeWallHitCounter(getMazeWallHitCounter() + 1);
                     if(getMazeWallHitCounter() == 1){
-                        Vector3 storage = ball.getVelocity().cpy();
-
-                        //WIP
-                        /*
                         // Create the four coordinates that make up the rectangle
                         Vector3 a = new Vector3(mazeWallCoordinate.x - WALL_WIDTH/2f, mazeWallCoordinate.y - WALL_LENGTH/2f, mazeWallCoordinate.z);
                         Vector3 b = new Vector3(mazeWallCoordinate.x - WALL_WIDTH/2f, mazeWallCoordinate.y + WALL_LENGTH/2f, mazeWallCoordinate.z);
@@ -192,19 +188,13 @@ public class Physics {
 
                         //Collisions with correct side
                         if (ballCollidesWithLine(position, a, b) || ballCollidesWithLine(position, c, d)) {
-                            System.out.println("y");
-                            storage = findReflection(ball, WALL_POWER_LOSS, normalOfLine(a,b));
+                            System.out.println("x");
+                            ball.setVelocity(findReflection(ball, WALL_POWER_LOSS, normalOfLine(a,b)));
                         }
                         if (ballCollidesWithLine(position, a, c) || ballCollidesWithLine(position, b, d)){
-                            System.out.println("x");
-                            storage = findReflection(ball, WALL_POWER_LOSS, normalOfLine(a,c));
-                        }*/
-
-                        storage.x *= WALL_POWER_LOSS;
-                        storage.y *= WALL_POWER_LOSS;
-
-                        ball.setStopped();
-                        ball.hit(storage);
+                            System.out.println("y");
+                            ball.setVelocity(findReflection(ball, WALL_POWER_LOSS, normalOfLine(a,c)));
+                        }
                     }
                 }
             }
@@ -239,7 +229,7 @@ public class Physics {
         if (getWallHitCounter() >= 1) {
             setWallHitCounter(getWallHitCounter() + 1);
         }
-        if (getWallHitCounter() == 2) {
+        if (getWallHitCounter() == 4) {
             resetWallHitCounter();
         }
         if (getMazeWallHitCounter() >= 1) {
@@ -279,7 +269,6 @@ public class Physics {
         return ballVelocity.sub(normal.scl(2 * normal.dot(ballVelocity))).scl(-powerLoss);
     }
 
-
     private Vector3 findNormalOfCircleCollision(Ball ball, Vector3 obstacle) {
         return ball.getPosition().cpy().sub(obstacle.cpy()).nor();
     }
@@ -306,19 +295,16 @@ public class Physics {
         return check;
     }
 
-
-    //WIP
     private boolean ballCollidesWithLine(Vector3 ballPos, Vector3 lineStart, Vector3 lineEnd){
         float ballRadius = Ball.DIAMETER/2f;
         Vector3 line = lineEnd.cpy().sub(lineStart.cpy());
-        float dstBallCenterToLine = Math.abs(line.y * ballPos.x - line.x * ballPos.y + lineEnd.x * lineStart.y - lineEnd.y * lineStart.x) / lineEnd.dst(lineStart);
+        float dstBallCenterToLine = Math.abs(line.y * ballPos.x - line.x * ballPos.y + lineEnd.x * lineStart.y - lineEnd.y * lineStart.x) / line.len();
         return dstBallCenterToLine <= ballRadius;
     }
 
-    //WIP
     private Vector3 normalOfLine(Vector3 lineStart, Vector3 lineEnd){
         Vector3 line = lineEnd.cpy().sub(lineStart.cpy());
-        return line.rotate(new Vector3(0,0,0), 90).nor();
+        return line.rotate(new Vector3(0,0,1), 90).nor();
     }
 
     public int getTreeHitCounter() {
