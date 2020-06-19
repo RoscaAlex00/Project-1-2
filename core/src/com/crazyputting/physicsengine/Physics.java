@@ -18,6 +18,8 @@ public class Physics {
     public static final float TREE_RADIUS = 0.5f;
     public static final float ROCK_RADIUS = 0.35f;
     public static final float FIELD_SQUARE_WIDTH = 5;
+    public static final float WALL_LENGTH = 48.4f;
+    public static final float WALL_WIDTH = 2f;
 
     protected final double SPVELOCITY = 0.20;
     protected final double SPACCELERATION = 0.9;
@@ -84,6 +86,7 @@ public class Physics {
         v.scl(-terrain.getMU() * mass * GRAVITY);
         return v;
     }
+
     private Vector3 calcWind(Vector3 velocity){
         float windForceX =  windForce.x * 0.5f  * DRAG_COEFFICIENT
                  * matPower(Ball.DIAMETER / 2.0f, 2);
@@ -144,23 +147,28 @@ public class Physics {
 
     protected void updateBall(Vector3 position, Vector3 velocity) {
         /*
-        Check all trees to see if the ball hits the trees. The ball bounces off the tree in a realistic angle losing some speed.
+        Check all trees to see if the ball hits the trees.
+        The ball bounces off the tree in a realistic angle losing some speed.
          */
         for (Vector3 treeCoordinate : terrain.getTreeCoordinates()) {
             //The ball collides with the tree if the next position of the ball is within the bounds of the tree.
             if (ballIsCollidingWithCircle(ball, treeCoordinate, TREE_RADIUS)) {
                 setTreeHitCounter(getTreeHitCounter() + 1);
                 if (getTreeHitCounter() == 1) {
-                    ball.setVelocity(findReflection(ball, treeCoordinate, TREE_POWER_LOSS));
+                    ball.setVelocity(findReflection(ball, TREE_POWER_LOSS, findNormalOfCircleCollision(ball, treeCoordinate)));
                 }
             }
         }
 
+        /*
+        Check all rocks to see if the ball hits the rocks.
+        The ball bounces off the tree in a realistic angle losing some speed.
+         */
         for (Vector3 rockCoordinate : terrain.getRockCoordinates()) {
             if (ballIsCollidingWithCircle(ball, rockCoordinate, ROCK_RADIUS)) {
                 setRockHitCounter(getRockHitCounter() + 1);
                 if (getRockHitCounter() == 1) {
-                    ball.setVelocity(findReflection(ball, rockCoordinate, ROCK_POWER_LOSS));
+                    ball.setVelocity(findReflection(ball, ROCK_POWER_LOSS, findNormalOfCircleCollision(ball, rockCoordinate)));
                 }
             }
         }
@@ -168,19 +176,39 @@ public class Physics {
         //Collisions for maze walls
         if(terrain.getMazeEnabled()){
             for(Vector3 mazeWallCoordinate: terrain.getMazeWallCoordinates()){
-                if(mazeWallCoordinate.x - 0.65f <= position.x && position.x <= mazeWallCoordinate.x + 0.75f
-                && mazeWallCoordinate.y - 24.2f <= position.y && position.y <= mazeWallCoordinate.y + 24.2f){
+                if(mazeWallCoordinate.x - WALL_WIDTH/2f <= position.x && position.x <= mazeWallCoordinate.x + WALL_WIDTH/2f
+                && mazeWallCoordinate.y - WALL_LENGTH/2f <= position.y && position.y <= mazeWallCoordinate.y + WALL_LENGTH/2f){
                     setMazeWallHitCounter(getMazeWallHitCounter() + 1);
                     if(getMazeWallHitCounter() == 1){
-                        Vector3 storage = new Vector3(ball.getVelocity().x * WALL_POWER_LOSS,
-                                ball.getVelocity().y * WALL_POWER_LOSS, 0);
+                        Vector3 storage = ball.getVelocity().cpy();
+
+                        //WIP
+                        /*
+                        // Create the four coordinates that make up the rectangle
+                        Vector3 a = new Vector3(mazeWallCoordinate.x - WALL_WIDTH/2f, mazeWallCoordinate.y - WALL_LENGTH/2f, mazeWallCoordinate.z);
+                        Vector3 b = new Vector3(mazeWallCoordinate.x - WALL_WIDTH/2f, mazeWallCoordinate.y + WALL_LENGTH/2f, mazeWallCoordinate.z);
+                        Vector3 c = new Vector3(mazeWallCoordinate.x + WALL_WIDTH/2f, mazeWallCoordinate.y - WALL_LENGTH/2f, mazeWallCoordinate.z);
+                        Vector3 d = new Vector3(mazeWallCoordinate.x + WALL_WIDTH/2f, mazeWallCoordinate.y + WALL_LENGTH/2f, mazeWallCoordinate.z);
+
+                        //Collisions with correct side
+                        if (ballCollidesWithLine(position, a, b) || ballCollidesWithLine(position, c, d)) {
+                            System.out.println("y");
+                            storage = findReflection(ball, WALL_POWER_LOSS, normalOfLine(a,b));
+                        }
+                        if (ballCollidesWithLine(position, a, c) || ballCollidesWithLine(position, b, d)){
+                            System.out.println("x");
+                            storage = findReflection(ball, WALL_POWER_LOSS, normalOfLine(a,c));
+                        }*/
+
+                        storage.x *= WALL_POWER_LOSS;
+                        storage.y *= WALL_POWER_LOSS;
+
                         ball.setStopped();
                         ball.hit(storage);
                     }
                 }
             }
         }
-
 
         /*
         If the ball goes out of bounds (outside of the playing field),
@@ -211,7 +239,7 @@ public class Physics {
         if (getWallHitCounter() >= 1) {
             setWallHitCounter(getWallHitCounter() + 1);
         }
-        if (getWallHitCounter() == 4) {
+        if (getWallHitCounter() == 2) {
             resetWallHitCounter();
         }
         if (getMazeWallHitCounter() >= 1) {
@@ -246,8 +274,7 @@ public class Physics {
      * A more detailed explanation can be found on https://math.stackexchange.com/questions/13261/how-to-get-a-reflection-vector
      * and https://www.fabrizioduroni.it/2017/08/25/how-to-calculate-reflection-vector.html
      */
-    private Vector3 findReflection(Ball ball, Vector3 obstacle, float powerLoss) {
-        Vector3 normal = findNormalOfCircleCollision(ball, obstacle);
+    private Vector3 findReflection(Ball ball, float powerLoss, Vector3 normal) {
         Vector3 ballVelocity = ball.getVelocity().cpy();
         return ballVelocity.sub(normal.scl(2 * normal.dot(ballVelocity))).scl(-powerLoss);
     }
@@ -279,21 +306,41 @@ public class Physics {
         return check;
     }
 
+
+    //WIP
+    private boolean ballCollidesWithLine(Vector3 ballPos, Vector3 lineStart, Vector3 lineEnd){
+        float ballRadius = Ball.DIAMETER/2f;
+        Vector3 line = lineEnd.cpy().sub(lineStart.cpy());
+        float dstBallCenterToLine = Math.abs(line.y * ballPos.x - line.x * ballPos.y + lineEnd.x * lineStart.y - lineEnd.y * lineStart.x) / lineEnd.dst(lineStart);
+        return dstBallCenterToLine <= ballRadius;
+    }
+
+    //WIP
+    private Vector3 normalOfLine(Vector3 lineStart, Vector3 lineEnd){
+        Vector3 line = lineEnd.cpy().sub(lineStart.cpy());
+        return line.rotate(new Vector3(0,0,0), 90).nor();
+    }
+
     public int getTreeHitCounter() {
         return treeHitCounter;
     }
-
     public void setTreeHitCounter(int counter) {
         this.treeHitCounter = counter;
+    }
+    public void resetTreeHitCounter() {
+        this.treeHitCounter = 0;
     }
 
     public int getRockHitCounter() {
         return rockHitCounter;
     }
-
     public void setRockHitCounter(int counter) {
         this.rockHitCounter = counter;
     }
+    public void resetRockHitCounter() {
+        this.rockHitCounter = 0;
+    }
+
     public void setMazeWallHitCounter(int counter){
         this.mazeWallHitCounter = counter;
     }
@@ -304,22 +351,12 @@ public class Physics {
         this.mazeWallHitCounter = 0;
     }
 
-    public void resetTreeHitCounter() {
-        this.treeHitCounter = 0;
-    }
-
-    public void resetRockHitCounter() {
-        this.rockHitCounter = 0;
-    }
-
     public int getWallHitCounter() {
         return wallHitCounter;
     }
-
     public void setWallHitCounter(int counter) {
         this.wallHitCounter = counter;
     }
-
     public void resetWallHitCounter() {
         this.wallHitCounter = 0;
     }

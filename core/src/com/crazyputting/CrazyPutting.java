@@ -21,7 +21,7 @@ public class CrazyPutting extends ApplicationAdapter {
     public static OrthographicCamera cam;
     private GameStateManager gsm;
     private Music music;
-    private float volume = 0.25f;
+    private float volume = 0f;
 
 
     @Override

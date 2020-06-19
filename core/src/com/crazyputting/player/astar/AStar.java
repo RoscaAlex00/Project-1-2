@@ -20,9 +20,9 @@ public class AStar implements Player {
     private int index = 1;
     private int idCounter;
 
-    private final boolean printPath = false;
-    private final boolean printShot = false;
-    private final boolean printSandCoords = true;
+    private final boolean PRINT_PATH = true;
+    private final boolean PRINT_SHOT = true;
+    private final boolean PRINT_SAND = false;
 
     /* Map with positions of objects as keys, the values correspond to the radius.
     *  It is meant for objects such as trees and rocks. */
@@ -39,7 +39,7 @@ public class AStar implements Player {
 
     @Override
     public Vector3 shot_velocity(Terrain terrain) {
-        //TODO: fix error with sand, where ball goes out of bounds
+        //TODO: fix error with sand, where ball goes out of bounds, happens when ball starts in sand
         this.ball = terrain.getBall();
         this.hole = terrain.getHole();
         this.terrain = terrain;
@@ -69,7 +69,7 @@ public class AStar implements Player {
         }
         
         // Use for testing
-        if (printPath) {
+        if (PRINT_PATH) {
             System.out.println(path);
             System.out.println("Hole position: " + hole.getPosition());
             System.out.println(turningNodes);
@@ -103,13 +103,13 @@ public class AStar implements Player {
                 ball.hit(velocity);
 
                 //print shot info
-                if (printShot) {
+                if (PRINT_SHOT) {
                     System.out.println("Shottype: " + shotType);
                     System.out.println("Ball hit! " + "velocity: " + velocity);
                 }
 
                 //print sand info
-                if (printSandCoords){
+                if (PRINT_SAND){
                     System.out.print("Sand coords: ");
                     for (int i = 0; i < terrain.getSandCoordinates().size(); i++) {
                         Vector3 sandCoordinate = terrain.getSandCoordinates().get(i).cpy();
@@ -214,11 +214,9 @@ public class AStar implements Player {
                     newPosition.y++;
             }
 
-            if (outOfBounds(newPosition) /*|| !walkable(newPosition)*/) {
+            if (outOfBounds(newPosition) || !walkable(newPosition)) {
                 continue;
             }
-
-            //TODO: Make sure the terrain is walkable (how to recognize obstacles?)
 
             Node child = new Node(idCounter, newPosition, node);
             child.setOrientation(i);
