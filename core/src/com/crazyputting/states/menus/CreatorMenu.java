@@ -64,7 +64,7 @@ public class CreatorMenu extends GameState {
 
         Table main = new Table();
         HorizontalGroup start = new HorizontalGroup();
-        HorizontalGroup goal = new HorizontalGroup();
+        final HorizontalGroup goal = new HorizontalGroup();
         HorizontalGroup fieldSize = new HorizontalGroup();
         HorizontalGroup constants = new HorizontalGroup();
         HorizontalGroup solverAndPlayer = new HorizontalGroup();
@@ -165,7 +165,7 @@ public class CreatorMenu extends GameState {
                     parseError.show(stage).setPosition(200, 200);
                     error = true;
                 }
-                if(function.evaluateHeight(startX,startY) < -0.10f){
+                if(function.evaluateHeight(startX,startY) < -0.10f || function.evaluateHeight(goalX,goalY) < -0.10f ){
                     TextButton buttonOK = new TextButton("Ok", skin);
                     Label labelError0 = new Label("Ball or Hole in WATER!", skin);
                     labelError0.setColor(Color.RED);
