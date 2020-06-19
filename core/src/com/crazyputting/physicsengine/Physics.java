@@ -137,7 +137,6 @@ public class Physics {
         }
 
         if (terrain.getFunction().evaluateHeight(newPos.x, newPos.y) <= -0.1f){
-            //TODO: update ball-model
             //Option 1
             if (terrain.getPlayer() instanceof Human){
                 ball.setStopped();
@@ -151,6 +150,8 @@ public class Physics {
                 Vector3 outOfWaterPos = newPos.cpy().add(position.cpy().sub(newPos.cpy()).nor().scl(3));
                 ball.getPosition().set(outOfWaterPos);
             }
+            //update ball for debugging
+            ball.hit(new Vector3(0, 0, 0.001f));
         }
 
         updateBall(newPos, newVel);
