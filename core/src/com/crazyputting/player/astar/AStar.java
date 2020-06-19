@@ -43,6 +43,8 @@ public class AStar implements Player {
         this.hole = terrain.getHole();
         this.terrain = terrain;
 
+        System.out.println("Friction: " + terrain.getFrictionCoefficient());
+
         if (!(circularObstacles.size() > 0)) {
             circularObstacles = new HashMap<>();
             //Adding the trees to the circularObstacles map
@@ -146,7 +148,6 @@ public class AStar implements Player {
         openList.add(startNode);
 
         while (openList.size() > 0) {
-            System.out.println(openList.size());
             Node currentNode = openList.get(0);
 
             for (Node node : openList) {
