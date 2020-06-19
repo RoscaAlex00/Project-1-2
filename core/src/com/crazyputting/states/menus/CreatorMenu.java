@@ -113,15 +113,15 @@ public class CreatorMenu extends GameState {
                 /*TODO: add sth that checks if the function has been correctly formatted
                     Or alternatively, sth like a scientific calculator, so the user always puts in a
                     correct value*/
-                float goalX = 0, goalY = 0, goalRadius = 0, startX = 0, startY = 0, MU = 0, vMax = 0;
+                float goalX = 0, goalY = 0, goalRadius = 0, startX = 0, startY = 0;
                 Function function = new Derivatives(functionField.getText());
                 int length = 0, width = 0;
                 boolean windEnabled = false;
                 boolean mazeEnabled = false;
                 String selectedSolver = solverSelect.getSelected();
                 String selectedPlayer = playerSelect.getSelected();
-                MU = 1.5f;
-                vMax = 15;
+                float MU = 1.5f;
+                float vMax = 15;
 
                 boolean error;
                 error = goalXField.toString().isEmpty() || goalYField.toString().isEmpty() ||
@@ -142,6 +142,32 @@ public class CreatorMenu extends GameState {
                 } catch (Exception e) {
                     TextButton buttonOK = new TextButton("Ok", skin);
                     Label labelError0 = new Label("Not all fields contain real values.", skin);
+                    labelError0.setColor(Color.RED);
+
+                    final Dialog parseError = new Dialog("", skin);
+                    parseError.setWidth(300);
+                    parseError.setHeight(200);
+                    parseError.setModal(true);
+
+                    buttonOK.addListener(new InputListener() {
+                        @Override
+                        public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                            parseError.hide();
+                            parseError.cancel();
+                            parseError.remove();
+                            return true;
+                        }
+                    });
+
+                    parseError.getContentTable().add(labelError0).pad(20, 20, 20, 20);
+                    parseError.getButtonTable().add(buttonOK).width(50).height(50).pad(20, 20,
+                            20, 20);
+                    parseError.show(stage).setPosition(200, 200);
+                    error = true;
+                }
+                if(function.evaluateHeight(startX,startY) < -0.10f){
+                    TextButton buttonOK = new TextButton("Ok", skin);
+                    Label labelError0 = new Label("Ball or Hole in WATER!", skin);
                     labelError0.setColor(Color.RED);
 
                     final Dialog parseError = new Dialog("", skin);
