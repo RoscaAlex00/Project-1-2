@@ -1,15 +1,11 @@
 package com.crazyputting.physicsengine;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.math.MathUtils;
-import com.badlogic.gdx.math.Matrix4;
-import com.badlogic.gdx.math.Quaternion;
 import com.badlogic.gdx.math.Vector3;
 import com.crazyputting.objects.Ball;
 import com.crazyputting.objects.Hole;
 import com.crazyputting.objects.Terrain;
 
-import javax.swing.*;
 import java.util.List;
 import java.util.Random;
 
@@ -83,7 +79,7 @@ public class Physics {
     private Vector3 calcFriction(Vector3 velocity) {
         Vector3 v = new Vector3(velocity);
         if (v.len() != 0.0) v.scl(1 / v.len());
-        v.scl(-terrain.getMU() * mass * GRAVITY);
+        v.scl(-terrain.getFrictionCoefficient() * mass * GRAVITY);
         return v;
     }
 
@@ -125,22 +121,37 @@ public class Physics {
 
         solver.setHit(ball.isHit());
 
-        Vector3 position = ball.getPosition();
-        Vector3 velocity = ball.getVelocity();
+        Vector3 position = ball.getPosition().cpy();
+        Vector3 velocity = ball.getVelocity().cpy();
         Vector3 newVel = solver.getSpeed(position.cpy(), velocity.cpy());
         ball.getVelocity().set(newVel.cpy());
         Vector3 newPos = solver.getPosition(position.cpy(), velocity.cpy());
         ball.getPosition().set(newPos.cpy());
 
-
         //Check if the ball is in sand or water
         if (checkInSand(terrain.getSandCoordinates(), newPos)) {
             terrain.setFrictionCoefficient(10f);
-        } else if (terrain.getFunction().evaluateHeight(newPos.x, newPos.y) <= -0.10f) {
-            terrain.setFrictionCoefficient(4.5f);
         } else {
             terrain.setFrictionCoefficient(1.5f);
         }
+
+        /*
+        //option1
+        if (terrain.getFunction().evaluateHeight(newPos.x, newPos.y) <= -0.1f){
+            ball.setStopped();
+            ball.getPosition().set(ball.getHitPosition());
+            ball.update(terrain.getFunction().evaluateHeight(ball.getPosition().x, ball.getPosition().y));
+        }
+        */
+
+
+        //option 2
+        if (terrain.getFunction().evaluateHeight(newPos.x, newPos.y) <= -0.1f){
+            ball.setStopped();
+            ball.getPosition().set(position.cpy());
+        }
+
+
         updateBall(newPos, newVel);
         return position.dst(newPos);
     }
@@ -188,11 +199,9 @@ public class Physics {
 
                         //Collisions with correct side
                         if (ballCollidesWithLine(position, a, b) || ballCollidesWithLine(position, c, d)) {
-                            System.out.println("x");
                             ball.setVelocity(findReflection(ball, WALL_POWER_LOSS, normalOfLine(a,b)));
                         }
                         if (ballCollidesWithLine(position, a, c) || ballCollidesWithLine(position, b, d)){
-                            System.out.println("y");
                             ball.setVelocity(findReflection(ball, WALL_POWER_LOSS, normalOfLine(a,c)));
                         }
                     }
@@ -285,14 +294,12 @@ public class Physics {
     }
 
     private boolean checkInSand(List<Vector3> sandCoordinates, Vector3 ballPos) {
-        boolean check = false;
         for (Vector3 sandCoordinate : sandCoordinates) {
             if (ballIsInSand(ballPos, sandCoordinate)) {
-                check = true;
-                break;
+                return true;
             }
         }
-        return check;
+        return false;
     }
 
     private boolean ballCollidesWithLine(Vector3 ballPos, Vector3 lineStart, Vector3 lineEnd){

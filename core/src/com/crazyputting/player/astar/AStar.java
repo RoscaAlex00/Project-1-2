@@ -22,7 +22,6 @@ public class AStar implements Player {
 
     private final boolean PRINT_PATH = true;
     private final boolean PRINT_SHOT = true;
-    private final boolean PRINT_SAND = false;
 
     /* Map with positions of objects as keys, the values correspond to the radius.
     *  It is meant for objects such as trees and rocks. */
@@ -39,7 +38,7 @@ public class AStar implements Player {
 
     @Override
     public Vector3 shot_velocity(Terrain terrain) {
-        //TODO: fix error with sand, where ball goes out of bounds, happens when ball starts in sand
+        //TODO: fix error with sand, where ball goes out of bounds, happens when ball's center starting position is in sand
         this.ball = terrain.getBall();
         this.hole = terrain.getHole();
         this.terrain = terrain;
@@ -121,19 +120,6 @@ public class AStar implements Player {
                 if (PRINT_SHOT) {
                     System.out.println("Shottype: " + shotType);
                     System.out.println("Ball hit! " + "velocity: " + velocity);
-                }
-
-                //print sand info
-                if (PRINT_SAND){
-                    System.out.print("Sand coords: ");
-                    for (int i = 0; i < terrain.getSandCoordinates().size(); i++) {
-                        Vector3 sandCoordinate = terrain.getSandCoordinates().get(i).cpy();
-                        System.out.print("[x: " + sandCoordinate.x/2.5f + ", y: " + sandCoordinate.y/2.5f + "]");
-                        if (i % 5 == 0 && i != 0) {
-                            System.out.print("\n");
-                        }
-                    }
-                    System.out.println("\n");
                 }
         	} else {
         		index++;
@@ -296,7 +282,7 @@ public class AStar implements Player {
             }
         }
 
-        return !(ball.getPosition().z < 0);
+        return !(terrain.getFunction().evaluateHeight(pos.x, pos.y) < 0);
     }
 
     private boolean listContains(List<Node> nodeList, Node node){

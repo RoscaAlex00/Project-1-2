@@ -56,7 +56,6 @@ public class Node {
     public float getCost() {
     	return cost;
     }
-    
     public void setCost(float cost) {
     	this.cost = cost;
     }
@@ -64,7 +63,6 @@ public class Node {
     public float getHeurisitc() {
     	return heuristic;
     }
-    
     public void setHeuristic(float heuristic) {
     	this.heuristic = heuristic;
     }
@@ -80,7 +78,6 @@ public class Node {
 	public int getOrientation() {
 		return orientation;
 	}
-	
 	public void setOrientation(int orientation) {
 		this.orientation = orientation;	
 	}

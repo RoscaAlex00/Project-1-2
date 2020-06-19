@@ -21,16 +21,17 @@ public class Ball {
     private boolean isHit = false;
     private Vector3 velocity;
     private ModelInstance ball;
-    private final Vector3 initialPosition;
+    private Vector3 hitPosition;
 
     public Ball(Vector3 initPosition) {
         position = initPosition.cpy();
-        this.initialPosition = initPosition.cpy();
+        this.hitPosition = initPosition.cpy();
         velocity = new Vector3(0, 0, 0);
         ballModelCreator();
     }
 
     public void hit(Vector3 initialHit) {
+        this.hitPosition = position.cpy();
         this.stopped = false;
         this.isHit = true;
         this.velocity = initialHit.cpy();
@@ -85,7 +86,6 @@ public class Ball {
     public Vector3 getVelocity() {
         return velocity;
     }
-
     public void setVelocity(Vector3 newVelocity) {
         this.velocity = newVelocity;
     }
@@ -93,7 +93,6 @@ public class Ball {
     public Vector3 getPosition() {
         return position;
     }
-
     public void setPosition(Vector3 pos) {
         this.position = pos;
     }
@@ -102,7 +101,11 @@ public class Ball {
         return ball;
     }
 
-    public void setPositionToInitial() {
-        this.position = initialPosition;
+    public void setPositionToHit() {
+        this.position.set(hitPosition);
+    }
+
+    public Vector3 getHitPosition(){
+        return this.hitPosition;
     }
 }

@@ -44,9 +44,9 @@ public class Terrain {
         this.solver = solver;
         this.player = player;
         this.ball = new Ball(teeVector);
-        treeCoordinates = new ArrayList<>();
-        rockCoordinates = new ArrayList<>();
-        mazeWallCoordinates = new ArrayList<>();
+        this.treeCoordinates = new ArrayList<>();
+        this.rockCoordinates = new ArrayList<>();
+        this.mazeWallCoordinates = new ArrayList<>();
         this.windEnabled = windEnabled;
         this.mazeEnabled = mazeEnabled;
     }
@@ -69,10 +69,6 @@ public class Terrain {
 
     public Hole getHole() {
         return hole;
-    }
-
-    public float getMU() {
-        return frictionCoefficient;
     }
 
     public float getMaximumVelocity() {
@@ -98,7 +94,6 @@ public class Terrain {
     public Ball getBall() {
         return ball;
     }
-
     public void setBall(Ball ball) {
         this.ball = ball;
     }
@@ -108,13 +103,9 @@ public class Terrain {
         return ball;
     }
 
-    public float getFrictionCoefficient() {
-        return frictionCoefficient;
-    }
     public void setTreeCoordinates(List<Vector3> newCoords){
         this.treeCoordinates = newCoords;
     }
-
     public List<Vector3> getTreeCoordinates(){
         return treeCoordinates;
     }
@@ -122,16 +113,13 @@ public class Terrain {
     public void setRockCoordinates(List<Vector3> newCoords){
         this.rockCoordinates = newCoords;
     }
-
     public List<Vector3> getRockCoordinates(){
         return rockCoordinates;
     }
 
-
     public void setSandCoordinates(List<Vector3> newCoordinates){
         this.sandCoordinates = newCoordinates;
     }
-
     public List<Vector3> getSandCoordinates(){
         return sandCoordinates;
     }
@@ -146,10 +134,14 @@ public class Terrain {
     public void setFrictionCoefficient(float frictionCoefficient) {
         this.frictionCoefficient = frictionCoefficient;
     }
+    public float getFrictionCoefficient() {
+        return frictionCoefficient;
+    }
 
     public boolean getWindEnabled(){
         return windEnabled;
     }
+
     public boolean getMazeEnabled(){
         return mazeEnabled;
     }
