@@ -5,6 +5,7 @@ import com.badlogic.gdx.math.Vector3;
 import com.crazyputting.objects.Ball;
 import com.crazyputting.objects.Hole;
 import com.crazyputting.objects.Terrain;
+import com.crazyputting.player.Human;
 
 import java.util.List;
 import java.util.Random;
@@ -48,8 +49,8 @@ public class Physics {
         this.solver = solver;
         solver.setPhysics(this);
         this.hole = newHole;
-        radius = hole.getHoleRadius() - 0.5f;
-        mass = yourBall.getMass();
+        this.radius = hole.getHoleRadius() - 0.5f;
+        this.mass = yourBall.getMass();
         float random1 = randSmallFloat();
         float random2 = randSmallFloat();
         float x = (float) (Math.cos(random1 * Math.PI));
@@ -64,7 +65,6 @@ public class Physics {
     public float getDt() {
         return dt;
     }
-
     protected void setDt(float dt) {
         this.dt = dt;
     }
@@ -131,26 +131,25 @@ public class Physics {
         //Check if the ball is in sand or water
         if (checkInSand(terrain.getSandCoordinates(), newPos)) {
             terrain.setFrictionCoefficient(10f);
-        } else {
+        }
+        else {
             terrain.setFrictionCoefficient(1.5f);
         }
 
-        /*
-        //option1
         if (terrain.getFunction().evaluateHeight(newPos.x, newPos.y) <= -0.1f){
-            ball.setStopped();
-            ball.getPosition().set(ball.getHitPosition());
-            ball.update(terrain.getFunction().evaluateHeight(ball.getPosition().x, ball.getPosition().y));
+            //Option 1
+            if (terrain.getPlayer() instanceof Human){
+                ball.setStopped();
+                ball.getPosition().set(ball.getHitPosition());
+                ball.update(ball.getHitPosition().z);
+                //TODO: update ball-model
+            }
+            //option 2
+            else {
+                ball.setStopped();
+                ball.getPosition().set(position.cpy());
+            }
         }
-        */
-
-
-        //option 2
-        if (terrain.getFunction().evaluateHeight(newPos.x, newPos.y) <= -0.1f){
-            ball.setStopped();
-            ball.getPosition().set(position.cpy());
-        }
-
 
         updateBall(newPos, newVel);
         return position.dst(newPos);
