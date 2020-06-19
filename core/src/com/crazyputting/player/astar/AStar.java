@@ -26,11 +26,11 @@ public class AStar implements Player {
 
     /* Map with positions of objects as keys, the values correspond to the radius.
     *  It is meant for objects such as trees and rocks. */
-    private final Map<Vector3, Float> circularObstacles = new HashMap<>();
+    private Map<Vector3, Float> circularObstacles = new HashMap<>();
 
     /* Map where the keys are lists which contain the beginning and end coordinate of the rectangular obstacle,
-    *  the values correspond to the width of the obstacle. It is meant for objects such as walls. */
-    private final Map<List<Vector3>, Float> rectangularObstacles = new HashMap<>();
+    *  the values correspond to the width and length of the obstacle. It is meant for objects such as walls. */
+    private Map<Vector3, List<Float>> rectangularObstacles = new HashMap<>();
 
     @Override
     public Vector3 shot_velocity(Vector3 camera_direction, float charge) throws IllegalAccessException {
@@ -44,15 +44,30 @@ public class AStar implements Player {
         this.hole = terrain.getHole();
         this.terrain = terrain;
 
-        //Adding the trees to the circularObstacles map
-        for (Vector3 obstaclePos : terrain.getTreeCoordinates()) {
-            circularObstacles.put(obstaclePos, Physics.TREE_RADIUS);
+        if (!(circularObstacles.size() > 0)) {
+            circularObstacles = new HashMap<>();
+            //Adding the trees to the circularObstacles map
+            for (Vector3 obstaclePos : terrain.getTreeCoordinates()) {
+                circularObstacles.put(obstaclePos, Physics.TREE_RADIUS);
+            }
+
+            //Adding the rocks to the circularObstacles map
+            for (Vector3 obstaclePos : terrain.getRockCoordinates()) {
+                circularObstacles.put(obstaclePos, Physics.ROCK_RADIUS);
+            }
         }
-        //Adding the rocks to the circularObstacles map
-        for (Vector3 obstaclePos : terrain.getRockCoordinates()) {
-            circularObstacles.put(obstaclePos, Physics.ROCK_RADIUS);
+
+        if (!(rectangularObstacles.size() > 0)) {
+            rectangularObstacles = new HashMap<>();
+            //Adding the maze walls
+            for (Vector3 obstaclePosCenter : terrain.getMazeWallCoordinates()) {
+                List<Float> wallInfo = new ArrayList<>();
+                wallInfo.add(Physics.WALL_LENGTH);
+                wallInfo.add(Physics.WALL_WIDTH);
+                rectangularObstacles.put(obstaclePosCenter, wallInfo);
+            }
         }
-        
+
         // Get the path found by A*
         ArrayList<Node> path = getPath();
         
@@ -145,6 +160,7 @@ public class AStar implements Player {
         openList.add(startNode);
 
         while (openList.size() > 0) {
+            System.out.println(openList.size());
             Node currentNode = openList.get(0);
 
             for (Node node : openList) {
@@ -222,7 +238,7 @@ public class AStar implements Player {
             child.setOrientation(i);
             idCounter++;
 
-            if (!listContains(openList, child) || !listContains(closedList, child)) {
+            if (!listContains(openList, child) && !listContains(closedList, child)) {
                 children.add(child);
             }
         }
@@ -257,7 +273,6 @@ public class AStar implements Player {
      * I.e. whether the ball would not be colliding with obstacles or in the water.
      * For rectangular objects it only works for straight rectangles. So rotated in 0 or 90 degrees.
      * Also, it is not checked whether the ball passes through an object for circular obstacles
-     * TODO: fix infinite loop
      */
     private boolean walkable(Vector3 pos){
         for (Map.Entry<Vector3, Float> circularObstacle : circularObstacles.entrySet()){
@@ -269,27 +284,16 @@ public class AStar implements Player {
             }
         }
 
-        for (Map.Entry<List<Vector3>, Float> rectangularObstacle : rectangularObstacles.entrySet()){
-            Vector3 firstPos = rectangularObstacle.getKey().get(0);
-            Vector3 secondPos = rectangularObstacle.getKey().get(1);
-            float width = rectangularObstacle.getValue();
-            float radiiSum = (width + Ball.DIAMETER)/2f;
-            boolean rotated90 = (firstPos.x == secondPos.x);
+        for (Map.Entry<Vector3, List<Float>> rectangularObstacle : rectangularObstacles.entrySet()){
+            Vector3 rectangleCenter = rectangularObstacle.getKey().cpy();
+            float length = rectangularObstacle.getValue().get(0);
+            float width = rectangularObstacle.getValue().get(1);
 
             //checks if the given position is inside of the rectangular object.
-            if (rotated90){
-                float xDst = Math.abs(pos.x - firstPos.x);
-                if (xDst <= radiiSum && firstPos.y <= pos.y && pos.y <= secondPos.y){
-                    return false;
-                }
+            if (rectangleCenter.x - width/2f <= pos.x && pos.x <= rectangleCenter.x + width/2f
+                    && rectangleCenter.y - length/2f <= pos.y && pos.y <= rectangleCenter.y + length/2f){
+                return false;
             }
-            else {
-                float yDst = Math.abs(pos.y - firstPos.y);
-                if (yDst <= radiiSum && firstPos.x <= pos.x && pos.x <= secondPos.x){
-                    return false;
-                }
-            }
-
         }
 
         return !(ball.getPosition().z < 0);
@@ -297,7 +301,7 @@ public class AStar implements Player {
 
     private boolean listContains(List<Node> nodeList, Node node){
         for (Node nodeInList: nodeList) {
-            if (node.equals(nodeInList)){
+            if (equals(nodeInList.getPosition(), node.getPosition())){
                 return true;
             }
         }
