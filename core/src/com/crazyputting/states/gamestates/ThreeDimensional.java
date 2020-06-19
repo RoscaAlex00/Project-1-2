@@ -126,29 +126,24 @@ public abstract class ThreeDimensional extends GameState {
             field.meshPart.size = hf.get(i).mesh.getNumIndices();
             field.meshPart.update();
             if (!terrain.getMazeEnabled()) {
-                Vector3 sandCoord = new Vector3(field.meshPart.center.x, field.meshPart.center.y, 0);
-                if (Math.random() <= 0.10 && !restrictedTile(sandCoord.cpy(), terrain.getStartPos().cpy())) {
-                    sandCoords.add(sandCoord);
+                Vector3 ballStartPos = terrain.getStartPos();
+                if (Math.random() <= 0.90 || field.meshPart.center.x - 2.5f <= ballStartPos.x  && ballStartPos.x <= field.meshPart.center.x
+                        + 2.5f && field.meshPart.center.y - 2.5f <= ballStartPos.y && ballStartPos.y <= field.meshPart.center.y + 2.5f) {
+                    field.material = new Material(TextureAttribute.createDiffuse(new Texture("grass.jpg")));
+                } else {
+                    float x = field.meshPart.center.x;
+                    float y = field.meshPart.center.y;
+                    sandCoords.add(new Vector3(x, y, 0));
                     field.material = new Material(TextureAttribute.createDiffuse(new Texture("sand.jpg")));
                     terrain.setSandCoordinates(sandCoords);
-                } else {
-                    field.material = new Material(TextureAttribute.createDiffuse(new Texture("grass.jpg")));
                 }
-            }
-            else {
+            } else {
                 field.material = new Material(TextureAttribute.createDiffuse(new Texture("grass.jpg")));
             }
             fields.add(field);
         }
     }
 
-    private boolean restrictedTile(Vector3 tileCenterPosition, Vector3 objectPosition){
-        float TILE_WIDTH = 5;
-        return tileCenterPosition.x - TILE_WIDTH/2f <= objectPosition.x &&
-                objectPosition.x <= tileCenterPosition.x + TILE_WIDTH/2f &&
-                tileCenterPosition.y - TILE_WIDTH/2f <= objectPosition.y &&
-                objectPosition.y <= tileCenterPosition.y + TILE_WIDTH/2f;
-    }
 
     public void update(float dt) throws IllegalAccessException {
         camera.update();

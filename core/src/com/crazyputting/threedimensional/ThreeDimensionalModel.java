@@ -94,14 +94,15 @@ public class ThreeDimensionalModel {
             for (int i = 0; i < tree.size(); i++) {
                 float x = (float) Math.random() * (terrain.getWidth() - 2);
                 float y = (float) Math.random() * (terrain.getHeight() - 2);
-
-                if (terrain.getFunction().evaluateHeight(x, y) >= 0) {
-                    treeCoordinates.add(new Vector3(x, y, terrain.getFunction().evaluateHeight(x,y)));
-                    tree.get(i).transform = new Matrix4(new Vector3(x, y, terrain.getFunction().evaluateHeight(x, y)), new Quaternion(new Vector3(1, 1, 1), 120),
-                            new Vector3(1.65f, 1.65f, 1.65f));
-                } else {
-                    tree.remove(i);
-                    i--;
+                if (ball.getPosition().cpy().x != x || ball.getPosition().cpy().y != y) {
+                    if (terrain.getFunction().evaluateHeight(x, y) >= 0) {
+                        treeCoordinates.add(new Vector3(x, y, terrain.getFunction().evaluateHeight(x, y)));
+                        tree.get(i).transform = new Matrix4(new Vector3(x, y, terrain.getFunction().evaluateHeight(x, y)), new Quaternion(new Vector3(1, 1, 1), 120),
+                                new Vector3(1.65f, 1.65f, 1.65f));
+                    } else {
+                        tree.remove(i);
+                        i--;
+                    }
                 }
             }
             terrain.setTreeCoordinates(treeCoordinates);
@@ -113,15 +114,16 @@ public class ThreeDimensionalModel {
             for (int i = 0; i < rock.size(); i++) {
                 float x = (float) Math.random() * (terrain.getWidth() - 2);
                 float y = (float) Math.random() * (terrain.getHeight() - 2);
-
-                if (terrain.getFunction().evaluateHeight(x, y) >= 0) {
-                    rockCoordinates.add(new Vector3(x, y, terrain.getFunction().evaluateHeight(x,y)));
-                    rock.get(i).transform = new Matrix4(new Vector3(x, y, terrain.getFunction().evaluateHeight(x, y)),
-                            new Quaternion(new Vector3(0, 0, 1), (int) (Math.random() * 180)),
-                            new Vector3(0.5f, 0.5f, 0.5f));
-                } else {
-                    rock.remove(i);
-                    i--;
+                if (ball.getPosition().cpy().x != x || ball.getPosition().cpy().y != y) {
+                    if (terrain.getFunction().evaluateHeight(x, y) >= 0) {
+                        rockCoordinates.add(new Vector3(x, y, terrain.getFunction().evaluateHeight(x, y)));
+                        rock.get(i).transform = new Matrix4(new Vector3(x, y, terrain.getFunction().evaluateHeight(x, y)),
+                                new Quaternion(new Vector3(0, 0, 1), (int) (Math.random() * 180)),
+                                new Vector3(0.5f, 0.5f, 0.5f));
+                    } else {
+                        rock.remove(i);
+                        i--;
+                    }
                 }
             }
             terrain.setRockCoordinates(rockCoordinates);

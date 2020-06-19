@@ -121,8 +121,9 @@ public class Physics {
 
         solver.setHit(ball.isHit());
 
-        Vector3 position = ball.getPosition().cpy();
-        Vector3 velocity = ball.getVelocity().cpy();
+        Vector3 position = ball.getPosition();
+        Vector3 velocity = ball.getVelocity();
+
         Vector3 newVel = solver.getSpeed(position.cpy(), velocity.cpy());
         ball.getVelocity().set(newVel.cpy());
         Vector3 newPos = solver.getPosition(position.cpy(), velocity.cpy());
@@ -141,7 +142,6 @@ public class Physics {
             if (terrain.getPlayer() instanceof Human){
                 ball.setStopped();
                 ball.getPosition().set(ball.getHitPosition());
-                ball.update(ball.getHitPosition().z);
             }
             //option 2
             else {

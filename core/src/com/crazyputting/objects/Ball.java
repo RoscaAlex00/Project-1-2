@@ -65,7 +65,7 @@ public class Ball {
         final float angle = speed * displacement * MathUtils.radiansToDegrees;
         Vector3 axis = temp.set(velocity).scl(-1f / speed).scl(displacement).crs(Vector3.Z);
         if (speed > 0.2f) {
-            ball.transform.rotate(new Quaternion(axis, angle / 50));
+            ball.transform.rotate(new Quaternion(axis, angle/50));
         }
     }
 
