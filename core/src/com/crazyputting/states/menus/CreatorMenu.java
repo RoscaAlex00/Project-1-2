@@ -100,6 +100,8 @@ public class CreatorMenu extends GameState {
         final CheckBox windCheck = new CheckBox("",skin);
         Label mazeEnabled = new Label("          Maze Enabled: ",skin);
         final CheckBox mazeCheck = new CheckBox("",skin);
+        Label seasonsEnabled = new Label("          Seasons Enabled: ",skin);
+        final CheckBox seasonsCheck = new CheckBox("",skin);
 
 
         /*Label frictionLabel = new Label("Friction coefficient: ", skin);
@@ -118,6 +120,7 @@ public class CreatorMenu extends GameState {
                 int length = 0, width = 0;
                 boolean windEnabled = false;
                 boolean mazeEnabled = false;
+                boolean seasonsEnabled = false;
                 String selectedSolver = solverSelect.getSelected();
                 String selectedPlayer = playerSelect.getSelected();
                 float MU = 1.5f;
@@ -130,6 +133,7 @@ public class CreatorMenu extends GameState {
                 try {
                     windEnabled = windCheck.isChecked();
                     mazeEnabled = mazeCheck.isChecked();
+                    seasonsEnabled = seasonsCheck.isChecked();
                     startX = Float.parseFloat(startXField.getText().replaceAll(" ", ""));
                     startY = Float.parseFloat(startYField.getText().replaceAll(" ", ""));
                     goalX = Float.parseFloat(goalXField.getText().replaceAll(" ", ""));
@@ -199,7 +203,7 @@ public class CreatorMenu extends GameState {
                     Hole hole = new Hole(goalRadius, holeVector);
 
                     Terrain newTerrain = new Terrain(length, width, teeVector, hole, function, MU,
-                            vMax, "newTerrain", solver, player,windEnabled,mazeEnabled);
+                            vMax, "newTerrain", solver, player,windEnabled,mazeEnabled,seasonsEnabled);
                     gsm.setTerrain(newTerrain);
                     gsm.setState(GameStateManager.PLAY);
                 }
@@ -240,6 +244,8 @@ public class CreatorMenu extends GameState {
         checkBoxes.addActor(mazeCheck);
         checkBoxes.addActor(windEnabled);
         checkBoxes.addActor(windCheck);
+        checkBoxes.addActor(seasonsEnabled);
+        checkBoxes.addActor(seasonsCheck);
 
         main.row();
         main.add(start).fillY().align(Align.left);
