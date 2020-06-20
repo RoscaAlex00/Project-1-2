@@ -18,9 +18,14 @@ public class Physics {
     public static final float WALL_LENGTH = 48.4f;
     public static final float WALL_WIDTH = 2f;
 
+    public static final float SAND_FRICTION_COEFFICIENT = 10;
+    public static final float DIRT_FRICTION_COEFFICIENT = 6;
+    public static final float DARK_GRASS_FRICTION_COEFFICIENT = 2.5f;
+    public static final float GRASS_FRICTION_COEFFICIENT = 1.5f;
+    public static final float GRAVITY = 9.81f;
+
     protected final double SPVELOCITY = 0.20;
     protected final double SPACCELERATION = 0.9;
-    protected final float GRAVITY = 9.81f;
 
     private final float GOAL_TOLERANCE = 2f;
     private final float WALL_POWER_LOSS = -0.80f;
@@ -34,7 +39,6 @@ public class Physics {
     private Terrain terrain;
     private PhysicsSolver solver;
     private Hole hole;
-    private float mass;
     private float radius;
     private int wallHitCounter;
     private int treeHitCounter;
@@ -50,16 +54,13 @@ public class Physics {
         solver.setPhysics(this);
         this.hole = newHole;
         this.radius = hole.getHoleRadius() - 0.5f;
-        this.mass = yourBall.getMass();
-        float random1 = randSmallFloat();
-        float random2 = randSmallFloat();
-        float x = (float) (Math.cos(random1 * Math.PI));
-        float y = (float) (Math.sin(random2 * Math.PI));
-        this.windForce = new Vector3(x, y, 0);
-    }
-
-    public float getGRAVITY() {
-        return GRAVITY;
+        if (terrain.getWindEnabled()) {
+            float random1 = randSmallFloat();
+            float random2 = randSmallFloat();
+            float x = (float) (Math.cos(random1 * Math.PI));
+            float y = (float) (Math.sin(random2 * Math.PI));
+            this.windForce = new Vector3(x, y, 0);
+        }
     }
 
     public float getDt() {
@@ -72,15 +73,17 @@ public class Physics {
 
     private Vector3 calcGravity(Vector3 position) {
         Vector3 grav = new Vector3();
-        grav.x = (-mass * GRAVITY * terrain.getFunction().calcXDeriv(position.x, position.y));
-        grav.y = (-mass * GRAVITY * terrain.getFunction().calcYDeriv(position.x, position.y));
+        grav.x = (-Ball.MASS * GRAVITY * terrain.getFunction().calcXDeriv(position.x, position.y));
+        grav.y = (-Ball.MASS * GRAVITY * terrain.getFunction().calcYDeriv(position.x, position.y));
         return grav;
     }
 
     private Vector3 calcFriction(Vector3 velocity) {
-        Vector3 v = new Vector3(velocity);
-        if (v.len() != 0.0) v.scl(1 / v.len());
-        v.scl(-terrain.getFrictionCoefficient() * mass * GRAVITY);
+        Vector3 v = velocity.cpy();
+        if (v.len() != 0.0) {
+            v.scl(1 / v.len());
+        }
+        v.scl(-terrain.getFrictionCoefficient() * Ball.MASS * GRAVITY);
         return v;
     }
 
@@ -130,22 +133,27 @@ public class Physics {
         Vector3 newPos = solver.getPosition(position.cpy(), velocity.cpy());
         ball.getPosition().set(newPos.cpy());
 
-        //Check if the ball is in sand or water
+        //Alter the friction coefficients according to the terrain
         if (!terrain.getSeasonsEnabled()) {
             if (checkInGroundType(terrain.getSandCoordinates(), newPos)) {
-                terrain.setFrictionCoefficient(10f);
-            } else {
-                terrain.setFrictionCoefficient(1.5f);
+                terrain.setFrictionCoefficient(SAND_FRICTION_COEFFICIENT);
             }
-        } else {
+            else {
+                terrain.setFrictionCoefficient(GRASS_FRICTION_COEFFICIENT);
+            }
+        }
+        else {
             if (checkInGroundType(terrain.getSandCoordinates(), newPos)) {
-                terrain.setFrictionCoefficient(10f);
-            } else if (checkInGroundType(terrain.getDirtCoordinates(), newPos)) {
-                terrain.setFrictionCoefficient(6f);
-            } else if (checkInGroundType(terrain.getDarkGrassCoordinates(), newPos)) {
-                terrain.setFrictionCoefficient(2.5f);
-            } else {
-                terrain.setFrictionCoefficient(1.5f);
+                terrain.setFrictionCoefficient(SAND_FRICTION_COEFFICIENT);
+            }
+            else if (checkInGroundType(terrain.getDirtCoordinates(), newPos)) {
+                terrain.setFrictionCoefficient(DIRT_FRICTION_COEFFICIENT);
+            }
+            else if (checkInGroundType(terrain.getDarkGrassCoordinates(), newPos)) {
+                terrain.setFrictionCoefficient(DARK_GRASS_FRICTION_COEFFICIENT);
+            }
+            else {
+                terrain.setFrictionCoefficient(GRASS_FRICTION_COEFFICIENT);
             }
         }
 
@@ -162,7 +170,7 @@ public class Physics {
                 Vector3 outOfWaterPos = newPos.cpy().add(position.cpy().sub(newPos.cpy()).nor().scl(3));
                 ball.getPosition().set(outOfWaterPos);
             }
-            //update ball for debugging
+            //update ball for debugging reasons
             ball.hit(new Vector3(0, 0, 0.001f));
         }
 
@@ -178,7 +186,7 @@ public class Physics {
         for (Vector3 treeCoordinate : terrain.getTreeCoordinates()) {
             //The ball collides with the tree if the next position of the ball is within the bounds of the tree.
             if (ballIsCollidingWithCircle(ball, treeCoordinate, TREE_RADIUS)) {
-                setTreeHitCounter(getTreeHitCounter() + 1);
+                treeHitCounter++;
                 if (getTreeHitCounter() == 1) {
                     ball.setVelocity(findReflection(ball, TREE_POWER_LOSS, findNormalOfCircleCollision(ball, treeCoordinate)));
                 }
@@ -191,7 +199,7 @@ public class Physics {
          */
         for (Vector3 rockCoordinate : terrain.getRockCoordinates()) {
             if (ballIsCollidingWithCircle(ball, rockCoordinate, ROCK_RADIUS)) {
-                setRockHitCounter(getRockHitCounter() + 1);
+                rockHitCounter++;
                 if (getRockHitCounter() == 1) {
                     ball.setVelocity(findReflection(ball, ROCK_POWER_LOSS, findNormalOfCircleCollision(ball, rockCoordinate)));
                 }
@@ -203,7 +211,7 @@ public class Physics {
             for (Vector3 mazeWallCoordinate : terrain.getMazeWallCoordinates()) {
                 if (mazeWallCoordinate.x - WALL_WIDTH / 2f <= position.x && position.x <= mazeWallCoordinate.x + WALL_WIDTH / 2f
                         && mazeWallCoordinate.y - WALL_LENGTH / 2f <= position.y && position.y <= mazeWallCoordinate.y + WALL_LENGTH / 2f) {
-                    setMazeWallHitCounter(getMazeWallHitCounter() + 1);
+                    mazeWallHitCounter++;
                     if (getMazeWallHitCounter() == 1) {
                         // Create the four coordinates that make up the rectangle
                         Vector3 a = new Vector3(mazeWallCoordinate.x - WALL_WIDTH / 2f, mazeWallCoordinate.y - WALL_LENGTH / 2f, mazeWallCoordinate.z);
@@ -229,7 +237,7 @@ public class Physics {
         This way it appears as if the ball bounces off the wall and losing a bit of speed.
          */
         if (position.x <= 0.2f || position.x >= terrain.getWidth() - 0.3f) {
-            setWallHitCounter(getWallHitCounter() + 1);
+            wallHitCounter++;
             if (getWallHitCounter() == 1) {
                 Vector3 storage = new Vector3(ball.getVelocity().x * WALL_POWER_LOSS,
                         ball.getVelocity().y, 0);
@@ -238,7 +246,7 @@ public class Physics {
             }
         }
         if (position.y <= 0.2f || position.y >= terrain.getHeight() - 0.3f) {
-            setWallHitCounter(getWallHitCounter() + 1);
+            wallHitCounter++;
             if (getWallHitCounter() == 1) {
                 Vector3 storage = new Vector3(ball.getVelocity().x,
                         ball.getVelocity().y * WALL_POWER_LOSS, 0);
@@ -252,13 +260,13 @@ public class Physics {
         if (getWallHitCounter() >= 1) {
             setWallHitCounter(getWallHitCounter() + 1);
         }
-        if (getWallHitCounter() == 4) {
+        if (getWallHitCounter() == 2) {
             resetWallHitCounter();
         }
         if (getMazeWallHitCounter() >= 1) {
             setMazeWallHitCounter(getMazeWallHitCounter() + 1);
         }
-        if (getMazeWallHitCounter() == 7) {
+        if (getMazeWallHitCounter() == 2) {
             resetMazeWallHitCounter();
         }
         if (getTreeHitCounter() >= 1) {

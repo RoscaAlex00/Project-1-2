@@ -14,6 +14,7 @@ import com.badlogic.gdx.math.Vector3;
 
 public class Ball {
     public static final float DIAMETER = 0.62f; //in meters
+    public static final float MASS = 0.15f;
 
     private final Texture TEXTURE = new Texture("ball.jpg");
     private Vector3 position;
@@ -70,8 +71,7 @@ public class Ball {
     }
 
     public float getMass() {
-        //in kilograms
-        return 0.15f;
+        return MASS;
     }
 
 
