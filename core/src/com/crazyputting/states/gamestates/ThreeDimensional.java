@@ -16,6 +16,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.crazyputting.CrazyPutting;
 import com.crazyputting.camera.GameCamera;
 import com.crazyputting.managers.GameStateManager;
+import com.crazyputting.states.menus.MainMenu;
 import com.crazyputting.threedimensional.HeightField;
 import com.crazyputting.threedimensional.ThreeDimensionalModel;
 import com.crazyputting.objects.Ball;
@@ -23,6 +24,7 @@ import com.crazyputting.objects.Terrain;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Vector;
 
 public abstract class ThreeDimensional extends GameState {
     public GameCamera controller;
@@ -40,6 +42,8 @@ public abstract class ThreeDimensional extends GameState {
     private Texture img;
     private Image background;
     private List<Vector3> sandCoords;
+    private List<Vector3> dirtCoords;
+    private List<Vector3> darkGrassCoords;
 
     private boolean current = false;
 
@@ -53,6 +57,8 @@ public abstract class ThreeDimensional extends GameState {
         img = new Texture("newGame.png");
         background = new Image(img);
         sandCoords = new ArrayList<>();
+        dirtCoords = new ArrayList<>();
+        darkGrassCoords = new ArrayList<>();
 
         batch = new ModelBatch();
 
@@ -125,9 +131,9 @@ public abstract class ThreeDimensional extends GameState {
             field.meshPart.offset = 0;
             field.meshPart.size = hf.get(i).mesh.getNumIndices();
             field.meshPart.update();
-            if (!terrain.getMazeEnabled()) {
+            if (!terrain.getMazeEnabled() && !terrain.getSeasonsEnabled()) {
                 Vector3 ballStartPos = terrain.getStartPos();
-                if (Math.random() <= 0.90 || field.meshPart.center.x - 2.5f <= ballStartPos.x  && ballStartPos.x <= field.meshPart.center.x
+                if (Math.random() <= 0.85 || field.meshPart.center.x - 2.5f <= ballStartPos.x && ballStartPos.x <= field.meshPart.center.x
                         + 2.5f && field.meshPart.center.y - 2.5f <= ballStartPos.y && ballStartPos.y <= field.meshPart.center.y + 2.5f) {
                     field.material = new Material(TextureAttribute.createDiffuse(new Texture("grass.jpg")));
                 } else {
@@ -137,13 +143,35 @@ public abstract class ThreeDimensional extends GameState {
                     field.material = new Material(TextureAttribute.createDiffuse(new Texture("sand.jpg")));
                     terrain.setSandCoordinates(sandCoords);
                 }
+            } else if (!terrain.getMazeEnabled() && terrain.getSeasonsEnabled()) {
+                double check = Math.random();
+                if (check <= 0.25) {
+                    float x = field.meshPart.center.x;
+                    float y = field.meshPart.center.y;
+                    sandCoords.add(new Vector3(x, y, 0));
+                    field.material = new Material(TextureAttribute.createDiffuse(new Texture("sand.jpg")));
+                    terrain.setSandCoordinates(sandCoords);
+                } else if (check <= 0.50) {
+                    float x = field.meshPart.center.x;
+                    float y = field.meshPart.center.y;
+                    dirtCoords.add(new Vector3(x, y, 0));
+                    field.material = new Material(TextureAttribute.createDiffuse(new Texture("dirt.jpg")));
+                    terrain.setDirtCoordinates(dirtCoords);
+                } else if (check <= 0.75) {
+                    float x = field.meshPart.center.x;
+                    float y = field.meshPart.center.y;
+                    darkGrassCoords.add(new Vector3(x, y, 0));
+                    field.material = new Material(TextureAttribute.createDiffuse(new Texture("darkGrass.png")));
+                    terrain.setDarkGrassCoordinates(darkGrassCoords);
+                } else {
+                    field.material = new Material(TextureAttribute.createDiffuse(new Texture("grass.jpg")));
+                }
             } else {
                 field.material = new Material(TextureAttribute.createDiffuse(new Texture("grass.jpg")));
             }
             fields.add(field);
         }
     }
-
 
     public void update(float dt) throws IllegalAccessException {
         camera.update();
