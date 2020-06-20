@@ -89,13 +89,14 @@ public class AStar implements Player {
                 if (!equals(ball.getPosition().cpy(), node.getPosition().cpy())) {
                     Vector3 velocity = node.getPosition().cpy().sub(ball.getPosition().cpy());
 
-
-                    //Scale the velocity based on the current friction.
-                    float frictionCoefficient = estimateFriction();
-                    /* Here the formula for the stopping distance is used: s = v^2 / (2 * Mu * g). Rewriting gives:
-                     * v = sqrt(a * Mu) where a = s * 2 * g. Since a is a constant, and the variable is Mu in this case,
-                     * v depends on Mu. So the velocity needs to be scaled by: v2 / v1 = sqrt(Mu2) / sqrt(Mu1) = sqrt(Mu2 / Mu1). */
-                    velocity.scl((float) Math.sqrt(frictionCoefficient / Physics.GRASS_FRICTION_COEFFICIENT));
+                    if (!terrain.getMazeEnabled()) {
+                        //Scale the velocity based on the current friction.
+                        float frictionCoefficient = estimateFriction();
+                        /* Here the formula for the stopping distance is used: s = v^2 / (2 * Mu * g). Rewriting gives:
+                         * v = sqrt(a * Mu) where a = s * 2 * g. Since a is a constant, and the variable is Mu in this case,
+                         * v depends on Mu. So the velocity needs to be scaled by: v2 / v1 = sqrt(Mu2) / sqrt(Mu1) = sqrt(Mu2 / Mu1). */
+                        velocity.scl((float) Math.sqrt(frictionCoefficient / Physics.GRASS_FRICTION_COEFFICIENT));
+                    }
 
                     scaleVelocity(velocity);
 
@@ -211,7 +212,7 @@ public class AStar implements Player {
             child.setOrientation(i);
             idCounter++;
 
-            if (!listContains(openList, child) && !listContains(closedList, child)) {
+            if (listHasSimilarElement(openList, child) && listHasSimilarElement(closedList, child)) {
                 children.add(child);
             }
         }
@@ -293,13 +294,13 @@ public class AStar implements Player {
         return (terrain.getFunction().evaluateHeight(pos.x, pos.y) >= 0);
     }
 
-    private boolean listContains(List<Node> nodeList, Node node){
+    private boolean listHasSimilarElement(List<Node> nodeList, Node node){
         for (Node nodeInList: nodeList) {
             if (equals(nodeInList.getPosition(), node.getPosition())){
-                return true;
+                return false;
             }
         }
-        return false;
+        return true;
     }
 
     private boolean equals(Vector3 a, Vector3 b) {
@@ -330,6 +331,8 @@ public class AStar implements Player {
         //return terrain.getFrictionCoefficient();
     }
 
+    //unused now
+    /*
     private Vector3 estimateAcceleration(Ball ball){
         //TODO
         Vector3 currentVelocity = ball.getVelocity().cpy();
@@ -355,6 +358,7 @@ public class AStar implements Player {
         }
         return Physics.GRASS_FRICTION_COEFFICIENT;
     }
+    */
 
     private void scaleVelocity(Vector3 velocity){
         int THRESHOLD_X = 6;
