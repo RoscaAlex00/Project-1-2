@@ -7,7 +7,6 @@ import com.badlogic.gdx.graphics.g3d.*;
 import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
 import com.badlogic.gdx.graphics.g3d.attributes.TextureAttribute;
 import com.badlogic.gdx.graphics.g3d.environment.DirectionalLight;
-import com.badlogic.gdx.graphics.g3d.utils.ModelBuilder;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
@@ -16,7 +15,6 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.crazyputting.CrazyPutting;
 import com.crazyputting.camera.GameCamera;
 import com.crazyputting.managers.GameStateManager;
-import com.crazyputting.states.menus.MainMenu;
 import com.crazyputting.threedimensional.HeightField;
 import com.crazyputting.threedimensional.ThreeDimensionalModel;
 import com.crazyputting.objects.Ball;
@@ -24,7 +22,7 @@ import com.crazyputting.objects.Terrain;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Vector;
+import java.util.Random;
 
 public abstract class ThreeDimensional extends GameState {
     public GameCamera controller;
@@ -131,46 +129,55 @@ public abstract class ThreeDimensional extends GameState {
             field.meshPart.offset = 0;
             field.meshPart.size = hf.get(i).mesh.getNumIndices();
             field.meshPart.update();
+
+            Vector3 tileCenter = new Vector3(field.meshPart.center.x, field.meshPart.center.y, 0);
             if (!terrain.getMazeEnabled() && !terrain.getSeasonsEnabled()) {
-                Vector3 ballStartPos = terrain.getStartPos();
-                if (Math.random() <= 0.85 || field.meshPart.center.x - 2.5f <= ballStartPos.x && ballStartPos.x <= field.meshPart.center.x
-                        + 2.5f && field.meshPart.center.y - 2.5f <= ballStartPos.y && ballStartPos.y <= field.meshPart.center.y + 2.5f) {
+                if (Math.random() <= 0.85 || teeOnTile(tileCenter)) {
                     field.material = new Material(TextureAttribute.createDiffuse(new Texture("grass.jpg")));
                 } else {
-                    float x = field.meshPart.center.x;
-                    float y = field.meshPart.center.y;
-                    sandCoords.add(new Vector3(x, y, 0));
+                    sandCoords.add(tileCenter.cpy());
                     field.material = new Material(TextureAttribute.createDiffuse(new Texture("sand.jpg")));
                     terrain.setSandCoordinates(sandCoords);
                 }
             } else if (!terrain.getMazeEnabled() && terrain.getSeasonsEnabled()) {
-                double check = Math.random();
-                if (check <= 0.25) {
-                    float x = field.meshPart.center.x;
-                    float y = field.meshPart.center.y;
-                    sandCoords.add(new Vector3(x, y, 0));
-                    field.material = new Material(TextureAttribute.createDiffuse(new Texture("sand.jpg")));
-                    terrain.setSandCoordinates(sandCoords);
-                } else if (check <= 0.50) {
-                    float x = field.meshPart.center.x;
-                    float y = field.meshPart.center.y;
-                    dirtCoords.add(new Vector3(x, y, 0));
-                    field.material = new Material(TextureAttribute.createDiffuse(new Texture("dirt.jpg")));
-                    terrain.setDirtCoordinates(dirtCoords);
-                } else if (check <= 0.75) {
-                    float x = field.meshPart.center.x;
-                    float y = field.meshPart.center.y;
-                    darkGrassCoords.add(new Vector3(x, y, 0));
-                    field.material = new Material(TextureAttribute.createDiffuse(new Texture("darkGrass.png")));
-                    terrain.setDarkGrassCoordinates(darkGrassCoords);
-                } else {
-                    field.material = new Material(TextureAttribute.createDiffuse(new Texture("grass.jpg")));
+                int BOUND = 4;
+                Random random = new Random();
+                int check = random.nextInt(BOUND);
+
+                //if the tee is on the current tile, it has to be grass.
+                if (teeOnTile(tileCenter)) {
+                    check = BOUND;
+                }
+                switch (check){
+                    case 0:
+                        sandCoords.add(tileCenter);
+                        field.material = new Material(TextureAttribute.createDiffuse(new Texture("sand.jpg")));
+                        terrain.setSandCoordinates(sandCoords);
+                        break;
+                    case 1:
+                        dirtCoords.add(tileCenter);
+                        field.material = new Material(TextureAttribute.createDiffuse(new Texture("dirt.jpg")));
+                        terrain.setDirtCoordinates(dirtCoords);
+                        break;
+                    case 2:
+                        darkGrassCoords.add(tileCenter);
+                        field.material = new Material(TextureAttribute.createDiffuse(new Texture("darkGrass.png")));
+                        terrain.setDarkGrassCoordinates(darkGrassCoords);
+                        break;
+                    default:
+                        field.material = new Material(TextureAttribute.createDiffuse(new Texture("grass.jpg")));
                 }
             } else {
                 field.material = new Material(TextureAttribute.createDiffuse(new Texture("grass.jpg")));
             }
             fields.add(field);
         }
+    }
+
+    private boolean teeOnTile(Vector3 tileCenter){
+        Vector3 teePos = terrain.getStartPos();
+        return tileCenter.x - 2.5f <= teePos.x && teePos.x <= tileCenter.x + 2.5f &&
+                tileCenter.y - 2.5f <= teePos.y && teePos.y <= tileCenter.y + 2.5f;
     }
 
     public void update(float dt) throws IllegalAccessException {
