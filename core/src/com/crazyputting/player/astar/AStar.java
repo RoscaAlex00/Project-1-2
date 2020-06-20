@@ -89,6 +89,7 @@ public class AStar implements Player {
         		System.out.println();
         		System.out.println("Simplified path:");
         		System.out.println(turningNodes);
+        		System.out.println();
         	}
         }
         
@@ -121,17 +122,13 @@ public class AStar implements Player {
                 if (PRINT_SHOT) {
                     System.out.println("Shottype: " + shotType);
                     System.out.println("Velocity: " + velocity);
+                    System.out.println("Ball hit " + hitCounter + " time(s)!");
                     System.out.println();
                 }
         	} else {
         		index++;
         	}
-        }
-        
-        // Print the number of hits when the ball is in the hole
-        if (equals(ball.getPosition().cpy(), hole.getPosition().cpy()))
-			System.out.println("Ball hit " + hitCounter + " times!");
-        
+        }     
         return null;
     }
 
