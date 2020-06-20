@@ -75,10 +75,6 @@ public class WindAI implements Player {
             }
         }
 
-
-
-
-
         if (subX < 2f && subY < 2f && subX > -2f && subY > -2f) {
             velocity = hole.getPosition().cpy().sub(terrain.getBall().getPosition().cpy());
             ball.hit(velocity);
@@ -109,10 +105,6 @@ public class WindAI implements Player {
 
     }
 
-
-
-
-
     public float getMin(float[] inputArray) {
         float minVal = inputArray[0];
         for (int i = 1; i < inputArray.length; i++) {
@@ -123,14 +115,12 @@ public class WindAI implements Player {
         return minVal;
     }
 
-
     public Vector3 estimateWind() {
-
         float x = (float) (Math.cos(0.1f * Math.PI));
         float y = (float) (Math.sin(0.1f * Math.PI));
-        float windForceX = x * 0.5f * Physics.getDRAG_COEFFICIENT()
+        float windForceX = x * 0.5f * Physics.DRAG_COEFFICIENT
                 * matPower(Ball.DIAMETER / 2.0f, 2);
-        float windForceY = y * 0.5f * Physics.getDRAG_COEFFICIENT()
+        float windForceY = y * 0.5f * Physics.DRAG_COEFFICIENT
                 * matPower(Ball.DIAMETER / 2.0f, 2);
         Vector3 windForce = new Vector3(windForceX, windForceY, 0f);
         if(terrain.getBall().getVelocity().cpy().len()<2f) {

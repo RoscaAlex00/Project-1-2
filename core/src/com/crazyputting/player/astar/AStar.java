@@ -322,10 +322,9 @@ public class AStar implements Player {
         if (prevShot != null) {
             float velocity = prevShot.len();
             float dst = ball.getHitPosition().dst(ball.getPosition());
-            float SCALING_FACTOR = 5;
+            float SCALING_FACTOR = 4.155436f;
             friction = (velocity * velocity) / (2 * dst * Physics.GRAVITY) * SCALING_FACTOR;
         }
-        System.out.println("friction: " + friction);
         return Math.min(friction, Physics.SAND_FRICTION_COEFFICIENT);
 
         //return terrain.getFrictionCoefficient();
