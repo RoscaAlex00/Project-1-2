@@ -4,11 +4,8 @@ import com.badlogic.gdx.math.Vector3;
 import com.crazyputting.player.Player;
 import com.crazyputting.physicsengine.PhysicsSolver;
 import com.crazyputting.function.Function;
-import org.graalvm.compiler.hotspot.aarch64.AArch64HotSpotRegisterAllocationConfig;
-
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Vector;
 
 
 public class Terrain {
