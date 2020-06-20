@@ -123,12 +123,15 @@ public class AStar implements Player {
                     System.out.println("Velocity: " + velocity);
                     System.out.println();
                 }
-				if (equals(ball.getPosition().cpy(), hole.getPosition().cpy()))
-					System.out.println("Ball hit " + hitCounter + " times!"); 
         	} else {
         		index++;
         	}
-        }      
+        }
+        
+        // Print the number of hits when the ball is in the hole
+        if (equals(ball.getPosition().cpy(), hole.getPosition().cpy()))
+			System.out.println("Ball hit " + hitCounter + " times!");
+        
         return null;
     }
 
