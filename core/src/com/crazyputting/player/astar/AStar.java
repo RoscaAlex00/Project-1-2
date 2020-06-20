@@ -90,6 +90,13 @@ public class AStar implements Player {
         		float subX = velocity.x;
                 float subY = velocity.y;
 
+                //Scale the velocity based on the current friction.
+                float frictionCoefficient = estimateFriction();
+                /* Here the formula for the stopping distance is used: s = v^2 / (2 * Mu * g). Rewriting gives:
+                 * v = sqrt(a * Mu) where a = s * 2 * g. Since a is a constant, and the variable is Mu in this case,
+                 * v depends on Mu. So the velocity needs to be scaled by: v2 / v1 = sqrt(Mu2) / sqrt(Mu1) = sqrt(Mu2 / Mu1). */
+                velocity.scl((float) Math.sqrt(frictionCoefficient / Physics.GRASS_FRICTION_COEFFICIENT));
+
                 // Scale the velocity in different ways depending on the distance to the next coordinate
                 int shotType;
                 if (subX < THRESHOLD_X && subY < THRESHOLD_Y && subX > -THRESHOLD_X && subY > -THRESHOLD_Y) {
@@ -102,13 +109,6 @@ public class AStar implements Player {
                     velocity.scl(0.325f);
                     shotType = 3;
                 }
-
-                //Scale the velocity based on the current friction.
-                float frictionCoefficient = estimateFriction();
-                /* Here the formula for the stopping distance is used: s = v^2 / (2 * Mu * g). Rewriting gives:
-                * v = sqrt(a * Mu) where a = s * 2 * g. Since a is a constant, and the variable is Mu in this case,
-                * v depends on Mu. So the velocity needs to be scaled by: v2 / v1 = sqrt(Mu2) / sqrt(Mu1) = sqrt(Mu2 / Mu1). */
-                velocity.scl((float) Math.sqrt(frictionCoefficient / Physics.GRASS_FRICTION_COEFFICIENT));
 
                 ball.hit(velocity);
                 hitCounter++;
@@ -123,7 +123,7 @@ public class AStar implements Player {
         	} else {
         		index++;
         	}
-        }     
+        }
         return null;
     }
 
