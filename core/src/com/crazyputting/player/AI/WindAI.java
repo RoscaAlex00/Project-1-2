@@ -5,6 +5,7 @@ import com.crazyputting.objects.Ball;
 import com.crazyputting.objects.Hole;
 import com.crazyputting.objects.Point;
 import com.crazyputting.objects.Terrain;
+import com.crazyputting.physicsengine.Physics;
 import com.crazyputting.player.Player;
 
 import java.util.Random;
@@ -17,6 +18,7 @@ public class WindAI implements Player {
     private Vector3 velocity;
     private Vector3 vec;
     private Vector3 wind;
+    public int numberOfHits=0;
 
     @Override
     public Vector3 shot_velocity(Vector3 camera_direction, float charge) throws IllegalAccessException {
@@ -32,17 +34,26 @@ public class WindAI implements Player {
         float subX = hole.getPosition().cpy().sub(terrain.getBall().getPosition().cpy()).x;
         float subY = hole.getPosition().cpy().sub(terrain.getBall().getPosition().cpy()).y;
 
+        float generated1=0f;
+        float generated2=0f;
+
         Point[] pointCollection = new Point[10];
         for (int i = 0; i < pointCollection.length; i++) {
-            float generated1 = randFloat();
-            float generated2 = randFloat();
+            if(start.dst(hole.getPosition())<25f) {
+                generated1 = randFloatSmall();
+                generated2 = randFloatSmall();
+            }
+            else{
+                generated1 = randFloatBig();
+                generated2 = randFloatBig();
+            }
             pointCollection[i] = new Point(generated1, generated2);
             float holeDis = pointCollection[i].holeDisCalc(pointCollection[i], hole);
             float startDis = pointCollection[i].startDisCalc(pointCollection[i], start);
             pointCollection[i].setDisHole(holeDis);
             pointCollection[i].setDisStart(startDis);
             pointCollection[i].setCumulativeDistance(holeDis + 4 * startDis);
-            System.out.println(pointCollection[i].getCumulativeDistance());
+
         }
 
         float minDis = pointCollection[0].getCumulativeDistance();
@@ -57,27 +68,50 @@ public class WindAI implements Player {
             if (point.getCumulativeDistance() == minDis) {
                 vec = point.getPointPosition();
                 if (terrain.getWindEnabled()) {
-                    vec.add(handleWind());
+
+                    vec.add(handleWind(estimateWind()));
+
                 }
             }
         }
-        if (subX < 2f && subY < 2f && subX > -2f && subY > -2) {
+
+
+
+
+
+        if (subX < 2f && subY < 2f && subX > -2f && subY > -2f) {
             velocity = hole.getPosition().cpy().sub(terrain.getBall().getPosition().cpy());
             ball.hit(velocity);
+            numberOfHits++;
+            System.out.println(numberOfHits);
         }
         if (vec.dst(hole.getPosition()) < (terrain.getBall().getPosition().dst(hole.getPosition()))) {
             velocity = vec.sub(terrain.getBall().getPosition().cpy());
             velocity.scl(0.8f);
             ball.hit(velocity);
+            numberOfHits++;
+            System.out.println(numberOfHits);
         }
+
+
+
         return null;
     }
 
-    public float randFloat() {
+    public float randFloatSmall() {
         Random rand = new Random();
         return (rand.nextFloat() * (35 - 0f) + 0f);
 
     }
+    public float randFloatBig() {
+        Random rand = new Random();
+        return (rand.nextFloat() * (70 - 0f) + 0f);
+
+    }
+
+
+
+
 
     public float getMin(float[] inputArray) {
         float minVal = inputArray[0];
@@ -89,6 +123,26 @@ public class WindAI implements Player {
         return minVal;
     }
 
+
+    public Vector3 estimateWind() {
+
+        float x = (float) (Math.cos(0.1f * Math.PI));
+        float y = (float) (Math.sin(0.1f * Math.PI));
+        float windForceX = x * 0.5f * Physics.getDRAG_COEFFICIENT()
+                * matPower(Ball.DIAMETER / 2.0f, 2);
+        float windForceY = y * 0.5f * Physics.getDRAG_COEFFICIENT()
+                * matPower(Ball.DIAMETER / 2.0f, 2);
+        Vector3 windForce = new Vector3(windForceX, windForceY, 0f);
+        if(terrain.getBall().getVelocity().cpy().len()<2f) {
+            windForce.scl((float) (-1f * terrain.getBall().getVelocity().cpy().len() * Math.PI) * 5);
+        }else {
+            windForce.scl((float) (-1f * 2f * Math.PI) * 5);
+        }
+
+        return windForce;
+
+    }
+
     @Override
     public void runLoop() {
     }
@@ -98,10 +152,20 @@ public class WindAI implements Player {
         this.terrain = terrain;
     }
 
-    public Vector3 handleWind() {
-        return new Vector3(wind.x, wind.y, 0);
+    public Vector3 handleWind(Vector3 wind) {
+        return new Vector3(-1 * wind.x, -1 * wind.y, 0);
     }
-    public void setWind(Vector3 wind){
+
+    public void setWind(Vector3 wind) {
         this.wind = wind;
+    }
+
+
+    public float matPower(float base, int power) {
+        float matPower = 1f;
+        for (int i = 0; i < power; i++) {
+            matPower *= base;
+        }
+        return matPower;
     }
 }
