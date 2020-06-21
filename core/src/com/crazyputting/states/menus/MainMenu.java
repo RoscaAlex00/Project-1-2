@@ -19,6 +19,9 @@ import com.crazyputting.managers.GameKeys;
 import com.crazyputting.managers.GameStateManager;
 import com.crazyputting.states.gamestates.GameState;
 
+import java.util.LinkedList;
+import java.util.List;
+
 public class MainMenu extends GameState {
     public int currentItem = 0;
     private SpriteBatch spriteBatch;
@@ -28,7 +31,7 @@ public class MainMenu extends GameState {
     private BitmapFont comicFont;
     private final Color selectColor = new Color(178f / 255f, 223f / 255f, 182f / 255f, 1f);
     private final Color unselectedColor = Color.WHITE;
-    private TextButton[] textButtons;
+    private List<TextButton> textButtons;
 
     public MainMenu(GameStateManager gsm) {
         super(gsm);
@@ -69,10 +72,13 @@ public class MainMenu extends GameState {
         TextButton newGame = new TextButton("Play", skin);
         TextButton preferences = new TextButton("Settings", skin);
         TextButton exit = new TextButton("Exit", skin);
-        textButtons = new TextButton[]{newGame, preferences, exit};
+        textButtons = new LinkedList<>();
+        textButtons.add(newGame);
+        textButtons.add(preferences);
+        textButtons.add(exit);
 
         int BUTTON_WIDTH = 250;
-        table.add(textButtons[0]).width(BUTTON_WIDTH);
+        table.add(textButtons.get(0)).width(BUTTON_WIDTH);
         int SPACE_BETWEEN_BUTTONS = 20;
         table.row().pad(SPACE_BETWEEN_BUTTONS, 0, SPACE_BETWEEN_BUTTONS, 0);
         for (TextButton textButton : textButtons) {
@@ -89,12 +95,12 @@ public class MainMenu extends GameState {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         //Sets the colours of the buttons depending on whether they are selected.
-        for (int i = 0; i < textButtons.length; i++) {
+        for (int i = 0; i < textButtons.size(); i++) {
             if (currentItem == i){
-                textButtons[i].setColor(selectColor);
+                textButtons.get(i).setColor(selectColor);
             }
             else {
-                textButtons[i].setColor(unselectedColor);
+                textButtons.get(i).setColor(unselectedColor);
             }
         }
 
@@ -119,7 +125,7 @@ public class MainMenu extends GameState {
         }
         if (GameKeys.isPressed(GameKeys.DOWN)) {
             //Prevents the currentItem from going out of bounds
-            if (currentItem < (textButtons.length - 1)) {
+            if (currentItem < (textButtons.size() - 1)) {
                 currentItem++;
             }
         }

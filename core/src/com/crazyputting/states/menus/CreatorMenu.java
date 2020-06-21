@@ -29,6 +29,10 @@ import com.crazyputting.objects.Hole;
 import com.crazyputting.objects.Terrain;
 import com.crazyputting.states.gamestates.GameState;
 
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.Map;
+
 public class CreatorMenu extends GameState {
 
     private SpriteBatch spriteBatch;
@@ -36,6 +40,9 @@ public class CreatorMenu extends GameState {
     private Skin skin;
     private BitmapFont comicFont;
     private boolean error;
+
+    public static float FRICTION_COEFFICIENT = 1.5f;
+    public static float MAXIMUM_VELOCITY = 15;
 
     public CreatorMenu(GameStateManager gsm) {
         super(gsm);
@@ -46,9 +53,10 @@ public class CreatorMenu extends GameState {
      */
     @Override
     public void init() {
+        //for debugging reasons these have to be placed inside the method
         final String[] SOLVER_STRING = new String[]{"Euler", "Verlet", "Runge-Kutta", "Adams-Bashforth"};
         final Array<String> SOLVERS = new Array<>(SOLVER_STRING);
-        final String[] PLAYER_STRING = new String[]{"Human", "AI", "AlexAI", "FrunzAI", "AStar","WindAi"};
+        final String[] PLAYER_STRING = new String[]{"Human", "AI", "AlexAI", "FrunzAI", "AStar", "WindAi"};
         final Array<String> PLAYERS = new Array<>(PLAYER_STRING);
 
         spriteBatch = new SpriteBatch();
@@ -67,143 +75,130 @@ public class CreatorMenu extends GameState {
         Gdx.input.setInputProcessor(stage);
 
         Table main = new Table();
-        HorizontalGroup start = new HorizontalGroup();
+        final HorizontalGroup start = new HorizontalGroup();
         final HorizontalGroup goal = new HorizontalGroup();
-        HorizontalGroup fieldSize = new HorizontalGroup();
-        HorizontalGroup solverAndPlayer = new HorizontalGroup();
-        HorizontalGroup checkBoxes = new HorizontalGroup();
+        final HorizontalGroup fieldSize = new HorizontalGroup();
+        final HorizontalGroup solverAndPlayer = new HorizontalGroup();
+        final HorizontalGroup checkBoxes = new HorizontalGroup();
 
-        Label startXLabel = new Label("                       Start X = ", skin);
-        final TextField startXField = new TextField("10", skin);
-        Label startYLabel = new Label("        Start Y = ", skin);
-        final TextField startYField = new TextField("10", skin);
+        LinkedList<HorizontalGroup> horizontalGroupList = new LinkedList<>();
+        horizontalGroupList.add(start);
+        horizontalGroupList.add(goal);
+        horizontalGroupList.add(fieldSize);
+        horizontalGroupList.add(solverAndPlayer);
+        horizontalGroupList.add(checkBoxes);
 
-        Label goalXLabel = new Label("    Goal X = ", skin);
-        final TextField goalXField = new TextField("20", skin);
-        Label goalYLabel = new Label("     Goal Y = ", skin);
-        final TextField goalYField = new TextField("20", skin);
-        Label goalRadiusLabel = new Label("     Goal Radius: ", skin);
-        final TextField goalRadiusField = new TextField("1", skin);
+        HashMap<String, String> labelsAndValuesStart = new HashMap<>();
+        labelsAndValuesStart.put("                       Start X = ", "10");
+        labelsAndValuesStart.put("      Start Y = ", "10");
+        addToHorizontalGroupWithField(start, labelsAndValuesStart);
+
+        HashMap<String, String> labelsAndValuesGoal = new HashMap<>();
+        labelsAndValuesGoal.put("    Goal X = ", "20");
+        labelsAndValuesGoal.put("     Goal Y = ", "20");
+        labelsAndValuesGoal.put("     Goal Radius: ", "1");
+        addToHorizontalGroupWithField(goal, labelsAndValuesGoal);
 
         Label functionLabel = new Label("Function of Terrain: ", skin);
         final TextField functionField = new TextField("0", skin);
 
-        Label courseLengthLabel = new Label("                  Field Length: ", skin);
-        final TextField courseLengthField = new TextField("50", skin);
-        Label courseWidthLabel = new Label("    Field Width: ", skin);
-        final TextField courseWidthField = new TextField("50", skin);
+        HashMap<String, String> labelsAndValuesField = new HashMap<>();
+        labelsAndValuesField.put("                  Field Length: ", "50");
+        labelsAndValuesField.put("    Field Width: ", "50");
+        addToHorizontalGroupWithField(fieldSize, labelsAndValuesField);
 
-        Label solverLabel = new Label("        Solver:  ", skin);
-        final SelectBox<String> solverSelect = new SelectBox<>(skin);
-        solverSelect.setItems(SOLVERS);
-        Label playerLabel = new Label("                    Player: ", skin);
-        final SelectBox<String> playerSelect = new SelectBox<>(skin);
-        playerSelect.setItems(PLAYERS);
-        Label windEnabled = new Label("          Wind Enabled: ",skin);
-        final CheckBox windCheck = new CheckBox("",skin);
-        Label mazeEnabled = new Label("          Maze Enabled: ",skin);
-        final CheckBox mazeCheck = new CheckBox("",skin);
-        Label seasonsEnabled = new Label("          Seasons Enabled: ",skin);
-        final CheckBox seasonsCheck = new CheckBox("",skin);
+        HashMap<String, Array<String>> labelsAndValuesSolverAndPlayer = new HashMap<>();
+        labelsAndValuesSolverAndPlayer.put("        Solver:  ", SOLVERS);
+        labelsAndValuesSolverAndPlayer.put("                    Player: ", PLAYERS);
+        addToHorizontalGroupWithSelectBox(solverAndPlayer, labelsAndValuesSolverAndPlayer);
+
+        final LinkedList<String> labelsCheckboxes = new LinkedList<>();
+        labelsCheckboxes.add("          Wind Enabled: ");
+        labelsCheckboxes.add("          Maze Enabled: ");
+        labelsCheckboxes.add("          Seasons Enabled: ");
+        addToHorizontalGroupWithCheckBox(checkBoxes, labelsCheckboxes);
 
         ChangeListener listener = new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                float goalX = 0, goalY = 0, goalRadius = 0, startX = 0, startY = 0;
-                Function function = new Derivatives(functionField.getText());
+                float goalX = 0, goalY = 0, goalRadius = 0, teeX = 0, teeY = 0;
                 int length = 0, width = 0;
-                boolean windEnabled = false;
-                boolean mazeEnabled = false;
-                boolean seasonsEnabled = false;
-                String selectedSolver = solverSelect.getSelected();
-                String selectedPlayer = playerSelect.getSelected();
-                float MU = 1.5f;
-                float vMax = 15;
 
-                //Makes sure that fields have been correctly filled in
-                error = goalXField.toString().isEmpty() || goalYField.toString().isEmpty() ||
-                        functionField.toString().isEmpty() || courseWidthField.toString().isEmpty() ||
-                        courseLengthField.toString().isEmpty();
+                String goalXString = goal.getChild(2).toString();
+                String goalYString = goal.getChild(4).toString();
+                String goalRadiusString = goal.getChild(6).toString();
+
+                String teeXString = start.getChild(2).toString();
+                String teeYString = start.getChild(4).toString();
+
+                String courseLengthString = fieldSize.getChild(2).toString();
+                String courseWidthString = fieldSize.getChild(4).toString();
+
+                String functionFieldString = functionField.toString();
+
+                String selectedSolver = ((SelectBox<String>) solverAndPlayer.getChild(2)).getSelected();
+                String selectedPlayer = ((SelectBox<String>) solverAndPlayer.getChild(4)).getSelected();
+
+                boolean windEnabled = ((CheckBox) checkBoxes.getChild(2)).isChecked();
+                boolean mazeEnabled = ((CheckBox) checkBoxes.getChild(4)).isChecked();
+                boolean seasonsEnabled = ((CheckBox) checkBoxes.getChild(6)).isChecked();
+
+                //Makes sure that fields have been filled in
+                error = goalXString.isEmpty() || goalYString.isEmpty() || goalRadiusString.isEmpty() ||
+                        functionFieldString.isEmpty() || courseWidthString.isEmpty() ||
+                        courseLengthString.isEmpty() || teeXString.isEmpty() || teeYString.isEmpty();
+
                 //Converts text to a value, otherwise the user needs to enter the values again
                 try {
-                    windEnabled = windCheck.isChecked();
-                    mazeEnabled = mazeCheck.isChecked();
-                    seasonsEnabled = seasonsCheck.isChecked();
-                    startX = Float.parseFloat(startXField.getText().replaceAll(" ", ""));
-                    startY = Float.parseFloat(startYField.getText().replaceAll(" ", ""));
-                    goalX = Float.parseFloat(goalXField.getText().replaceAll(" ", ""));
-                    goalY = Float.parseFloat(goalYField.getText().replaceAll(" ", ""));
-                    goalRadius = Float.parseFloat(goalRadiusField.getText().replaceAll(" ", ""));
-                    width = Integer.parseInt(courseWidthField.getText().replaceAll(" ", ""));
-                    length = Integer.parseInt(courseLengthField.getText().replaceAll(" ", ""));
-                } catch (Exception e) {
+                    teeX = Float.parseFloat(teeXString.replaceAll(" ", ""));
+                    teeY = Float.parseFloat(teeYString.replaceAll(" ", ""));
+                    goalX = Float.parseFloat(goalXString.replaceAll(" ", ""));
+                    goalY = Float.parseFloat(goalYString.replaceAll(" ", ""));
+                    goalRadius = Float.parseFloat(goalRadiusString.replaceAll(" ", ""));
+                    width = Integer.parseInt(courseWidthString.replaceAll(" ", ""));
+                    length = Integer.parseInt(courseLengthString.replaceAll(" ", ""));
+                }
+                catch (Exception e) {
                     errorScreen("Not all fields contain proper values (they all need to be real, and the fieldsize needs to be an integer)");
                 }
-                if(function.evaluateHeight(startX,startY) < -0.10f || function.evaluateHeight(goalX,goalY) < -0.10f ){
+                Function function = new Derivatives(functionFieldString);
+                if(function.evaluateHeight(teeX, teeY) < -0.10f || function.evaluateHeight(goalX,goalY) < -0.10f ){
                     errorScreen("Ball or Hole in WATER!");
                 }
                 if (!error) {
                     PhysicsSolver solver = SolverFactory.get().makeSolver(selectedSolver);
-                    Player player = PlayerFactory.get().makePlayer(selectedPlayer, vMax);
-                    Vector3 teeVector = new Vector3(startX, startY, 0);
+                    Player player = PlayerFactory.get().makePlayer(selectedPlayer, MAXIMUM_VELOCITY);
+                    Vector3 teeVector = new Vector3(teeX, teeY, 0);
                     Vector3 holeVector = new Vector3(goalX, goalY, 0);
                     Hole hole = new Hole(goalRadius, holeVector);
 
-                    Terrain newTerrain = new Terrain(length, width, teeVector, hole, function, MU,
-                            vMax, "newTerrain", solver, player,windEnabled,mazeEnabled,seasonsEnabled);
+                    Terrain newTerrain = new Terrain(length, width, teeVector, hole, function, FRICTION_COEFFICIENT,
+                            MAXIMUM_VELOCITY, "newTerrain", solver, player,windEnabled,mazeEnabled,seasonsEnabled);
                     gsm.setTerrain(newTerrain);
                     gsm.setState(GameStateManager.PLAY);
                 }
             }
         };
-
         TextButton playButton = new TextButton("Play", skin);
         playButton.addListener(listener);
 
-        start.addActor(startXLabel);
-        start.addActor(startXField);
-        start.addActor(startYLabel);
-        start.addActor(startYField);
-
-        goal.addActor(goalXLabel);
-        goal.addActor(goalXField);
-        goal.addActor(goalYLabel);
-        goal.addActor(goalYField);
-        goal.addActor(goalRadiusLabel);
-        goal.addActor(goalRadiusField);
-
-        fieldSize.addActor(courseLengthLabel);
-        fieldSize.addActor(courseLengthField);
-        fieldSize.addActor(courseWidthLabel);
-        fieldSize.addActor(courseWidthField);
-
-        solverAndPlayer.addActor(playerLabel);
-        solverAndPlayer.addActor(playerSelect);
-        solverAndPlayer.addActor(solverLabel);
-        solverAndPlayer.addActor(solverSelect);
-
-        checkBoxes.addActor(mazeEnabled);
-        checkBoxes.addActor(mazeCheck);
-        checkBoxes.addActor(windEnabled);
-        checkBoxes.addActor(windCheck);
-        checkBoxes.addActor(seasonsEnabled);
-        checkBoxes.addActor(seasonsCheck);
-
+        //Add all groups to the main table
+        int SPACE_BETWEEN_BUTTONS = 20;
+        int alignment = Align.left;
         main.row();
-        main.add(start).fillY().align(Align.left);
-        main.row().pad(20, 0, 20, 0);
-        main.add(goal).fillY().align(Align.left);
-        main.row().pad(20, 0, 20, 0);
-        main.add(functionLabel).fillY().align(Align.center);
-        main.row().pad(20, 0, 20, 0);
-        main.add(functionField).fillY().align(Align.center).width(300);
-        main.row().pad(20, 0, 20, 0);
-        main.add(fieldSize).fillY().align(Align.left);
-        main.row().pad(20, 0, 20, 0);
-        main.add(solverAndPlayer).fillY().align(Align.center);
-        main.row().pad(20, 0, 20, 0);
-        main.add(checkBoxes).fillY().align(Align.center);
-        main.row().pad(20, 0, 20, 0);
+        for (int i = 0; i < horizontalGroupList.size(); i++) {
+            if (i == 3){
+                alignment = Align.center;
+            }
+            main.add(horizontalGroupList.get(i)).fillY().align(alignment);
+            main.row().pad(SPACE_BETWEEN_BUTTONS, 0, SPACE_BETWEEN_BUTTONS, 0);
+            if (i == 1){
+                main.add(functionLabel).fillY().align(Align.center);
+                main.row().pad(SPACE_BETWEEN_BUTTONS, 0, SPACE_BETWEEN_BUTTONS, 0);
+                main.add(functionField).fillY().align(Align.center).width(300);
+                main.row().pad(SPACE_BETWEEN_BUTTONS, 0, SPACE_BETWEEN_BUTTONS, 0);
+            }
+        }
         main.add(playButton).align(Align.center);
         main.setY(main.getY());
 
@@ -274,5 +269,33 @@ public class CreatorMenu extends GameState {
                 20, 20);
         parseError.show(stage).setPosition(200, 200);
         error = true;
+    }
+
+    private void addToHorizontalGroupWithField(HorizontalGroup group, Map<String, String> labelStringAndInitValue){
+        for (Map.Entry<String, String> entry : labelStringAndInitValue.entrySet()) {
+            Label label = new Label(entry.getKey(), skin);
+            TextField textField = new TextField(entry.getValue(), skin);
+            group.addActor(label);
+            group.addActor(textField);
+        }
+    }
+
+    private void addToHorizontalGroupWithSelectBox(HorizontalGroup group, Map<String, Array<String>> labelStringsAndSelectBoxes){
+        for (Map.Entry<String, Array<String>> entry : labelStringsAndSelectBoxes.entrySet()){
+            Label label = new Label(entry.getKey(), skin);
+            SelectBox<String> selectBox = new SelectBox<>(skin);
+            selectBox.setItems(entry.getValue());
+            group.addActor(label);
+            group.addActor(selectBox);
+        }
+    }
+
+    private void addToHorizontalGroupWithCheckBox(HorizontalGroup group, LinkedList<String> labels){
+        for (String element : labels) {
+            Label label = new Label(element,skin);
+            CheckBox checkBox = new CheckBox("",skin);
+            group.addActor(label);
+            group.addActor(checkBox);
+        }
     }
 }
