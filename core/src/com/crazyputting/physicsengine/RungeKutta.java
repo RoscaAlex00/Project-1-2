@@ -17,7 +17,6 @@ public class RungeKutta implements PhysicsSolver {
 
     @Override
     public Vector3 getPosition(Vector3 position, Vector3 velocity) {
-
         Vector3 funK1 = getSpeed(position, velocity).cpy();
         Vector3 k1 = funK1.scl(physics.getDt());
 
@@ -46,13 +45,11 @@ public class RungeKutta implements PhysicsSolver {
         Vector3 kSum = k1.add(k2.scl(3f)).add(k3.scl(3f)).add(k4);
         Vector3 newPos = position.cpy().add(kSum.scl(1 / 8f));
         newPos.z = 0;
-
         return newPos;
     }
 
     @Override
     public Vector3 getSpeed(Vector3 position, Vector3 velocity) {
-
         Vector3 funK1 = physics.getAcceleration(position, velocity).cpy();
         Vector3 k1 = funK1.scl(physics.getDt());
 

@@ -12,6 +12,7 @@ public class AlexAI implements Player {
     private Ball ball;
     private Terrain terrain;
     private Vector3 velocity;
+    private int hitCounter;
 
     @Override
     public Vector3 shot_velocity(Vector3 camera_direction, float charge) throws IllegalAccessException {
@@ -24,7 +25,7 @@ public class AlexAI implements Player {
         Vector3 threshold = new Vector3(5f, 5f, 0);
         this.hole = terrain.getHole();
         velocity = new Vector3();
-
+        hitCounter++;
         float subX = hole.getPosition().cpy().sub(ball.getPosition().cpy()).x;
         float subY = hole.getPosition().cpy().sub(ball.getPosition().cpy()).y;
 
@@ -41,6 +42,7 @@ public class AlexAI implements Player {
             velocity = hole.getPosition().cpy().sub(ball.getPosition().cpy());
             velocity.scl(0.325f);
         }
+        System.out.println(hitCounter);
         ball.hit(velocity);
         return null;
     }
