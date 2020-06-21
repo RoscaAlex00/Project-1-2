@@ -1,8 +1,5 @@
 package com.crazyputting.states.gamestates;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.crazyputting.managers.GameStateManager;
 import com.crazyputting.objects.Terrain;
 
@@ -26,6 +23,10 @@ public abstract class GameState {
      */
     public abstract void init();
 
+    /**
+     * Makes sure that the states can constantly update
+     * @param dt step-size
+     */
     public abstract void update(float dt) throws IllegalAccessException;
 
     /**

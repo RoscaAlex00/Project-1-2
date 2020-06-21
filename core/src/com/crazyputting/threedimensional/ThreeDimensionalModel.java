@@ -24,7 +24,7 @@ import java.util.ArrayList;
 public class ThreeDimensionalModel {
 
     private final int DIV_SIZE = 10;
-    private final int CHUNK_SIZE = 5;
+    public static final int CHUNK_SIZE = 5;
     private final ModelLoader loader;
     public Array<HeightField> map;
     private final Ball ball;

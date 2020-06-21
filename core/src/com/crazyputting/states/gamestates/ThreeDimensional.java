@@ -31,28 +31,24 @@ public abstract class ThreeDimensional extends GameState {
     protected Terrain terrain;
     protected Ball ball;
     private ModelBatch batch;
-    private Color bgColor = new Color(.8f, .8f, .8f, 1f);
+    private final Color bgColor = new Color(.8f, .8f, .8f, 1f);
     private Environment environment;
     private ThreeDimensionalModel threeDimensionalModel;
     private Array<Renderable> fields;
-    private SpriteBatch back;
     private Stage stage;
-    private Texture img;
     private Image background;
     private List<Vector3> sandCoords;
     private List<Vector3> dirtCoords;
     private List<Vector3> darkGrassCoords;
-
-    private boolean current = false;
 
     public ThreeDimensional(GameStateManager manager, Terrain terrain) {
         super(manager, terrain);
     }
 
     public void init() {
-        back = new SpriteBatch();
+        SpriteBatch back = new SpriteBatch();
         stage = new Stage(new FitViewport(CrazyPutting.width, CrazyPutting.height, CrazyPutting.cam), back);
-        img = new Texture("newGame.png");
+        Texture img = new Texture("newGame.png");
         background = new Image(img);
         sandCoords = new ArrayList<>();
         dirtCoords = new ArrayList<>();
@@ -82,16 +78,20 @@ public abstract class ThreeDimensional extends GameState {
 
     public void render(final ArrayList<ModelInstance> instances) {
         batch.begin(camera);
-        if (instances != null) batch.render(instances, environment);
-        if (current) batch.render((RenderableProvider) environment);
-        else for (Renderable r : fields) batch.render(r);
+        if (instances != null) {
+            batch.render(instances, environment);
+        }
+        for (Renderable r : fields) {
+            batch.render(r);
+        }
         batch.render(threeDimensionalModel.getEdges(), environment);
         batch.render(threeDimensionalModel.getWater(), environment);
         batch.render(threeDimensionalModel.getBallModel(), environment);
         if (!terrain.getMazeEnabled()) {
             batch.render(threeDimensionalModel.getTree(), environment);
             batch.render(threeDimensionalModel.getRock(), environment);
-        } else {
+        }
+        else {
             batch.render(threeDimensionalModel.getMaze(), environment);
         }
         batch.end();
@@ -167,7 +167,8 @@ public abstract class ThreeDimensional extends GameState {
                     default:
                         field.material = new Material(TextureAttribute.createDiffuse(new Texture("grass.jpg")));
                 }
-            } else {
+            }
+            else {
                 field.material = new Material(TextureAttribute.createDiffuse(new Texture("grass.jpg")));
             }
             fields.add(field);
@@ -176,16 +177,14 @@ public abstract class ThreeDimensional extends GameState {
 
     private boolean teeOnTile(Vector3 tileCenter){
         Vector3 teePos = terrain.getStartPos();
-        return tileCenter.x - 2.5f <= teePos.x && teePos.x <= tileCenter.x + 2.5f &&
-                tileCenter.y - 2.5f <= teePos.y && teePos.y <= tileCenter.y + 2.5f;
+        return tileCenter.x - ThreeDimensionalModel.CHUNK_SIZE/2f <= teePos.x &&
+                teePos.x <= tileCenter.x + ThreeDimensionalModel.CHUNK_SIZE/2f &&
+                tileCenter.y - ThreeDimensionalModel.CHUNK_SIZE/2f <= teePos.y &&
+                teePos.y <= tileCenter.y + ThreeDimensionalModel.CHUNK_SIZE/2f;
     }
 
     public void update(float dt) throws IllegalAccessException {
         camera.update();
-    }
-
-    public PerspectiveCamera getCamera() {
-        return camera;
     }
 
     public Terrain getTerrain() {

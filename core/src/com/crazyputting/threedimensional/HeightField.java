@@ -156,12 +156,16 @@ public class HeightField implements Disposable {
 
 	public void update () {
 		if (smooth) {
-			if (norPos < 0)
+			if (norPos < 0) {
 				updateSimple();
-			else
+			}
+			else {
 				updateSmooth();
-		} else
+			}
+		}
+		else {
 			updateSharp();
+		}
 	}
 
 	private void updateSmooth () {

@@ -27,7 +27,6 @@ public class PlayState extends ThreeDimensional {
     protected Terrain terrain;
     private Physics physics;
     private Ball ball;
-    private Hole hole;
     private Player player;
     private SpriteBatch spriteBatch;
     private Stage hud;
@@ -45,7 +44,7 @@ public class PlayState extends ThreeDimensional {
     public void init() {
         super.init();
         this.terrain = super.terrain;
-        this.hole = terrain.getHole();
+        Hole hole = terrain.getHole();
         this.ball = terrain.getBall();
         this.player = terrain.getPlayer();
         PhysicsSolver solver = terrain.getSolver();
@@ -63,6 +62,7 @@ public class PlayState extends ThreeDimensional {
         physics = new Physics(ball, terrain, hole, solver);
         createHUD();
 
+        //Only if the player is human, create the charge meter
         if (player instanceof Human) {
             Texture meterImg = new Texture("chargeMeter.jpg");
             chargeMeter = new Image(meterImg);
@@ -76,11 +76,13 @@ public class PlayState extends ThreeDimensional {
 
             hud.addActor(chargeMeter);
             hud.addActor(chargeBar);
-        } else if (player instanceof WindAI) {
+        }
+        else {
             player.setTerrain(terrain);
+        }
+        //If the player is the windAI, declare the wind
+        if (player instanceof WindAI) {
             ((WindAI) player).setWind(physics.getWindForce());
-        } else {
-            player.setTerrain(terrain);
         }
 
         setProcessors();
@@ -97,11 +99,15 @@ public class PlayState extends ThreeDimensional {
         handleInput();
         super.update(dt);
 
+        //update the ball's model when it's moved
         if (!ball.isStopped()) {
             ball.updateInstance(terrain.getFunction().evaluateHeight(ball.getPosition().x, ball.getPosition().y),
                     physics.update(dt));
         }
-        if (ball.isStopped()) {
+        //Only if the ball is stopped, a ball can be shot or a goal can be scored
+        else {
+            /* The player can determine the shot-strength by pressing space twice within a certain interval.
+            * They can also determine the direction with the camera angle */
             if (player instanceof Human) {
                 if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
                     isSpacePressed = true;
@@ -116,9 +122,11 @@ public class PlayState extends ThreeDimensional {
                     ball.hit(player.shot_velocity(cameraDirection, charge));
                     hitCounter++;
                 }
-            } else if (player instanceof AI) {
+            }
+            else if (player instanceof AI) {
                 ball.setPosition(new Vector3(10, 10, 0));
-            } else {
+            }
+            else {
                 player.shot_velocity(terrain);
             }
             if (physics.isGoal()) {
@@ -135,18 +143,23 @@ public class PlayState extends ThreeDimensional {
         return ball;
     }
 
+    /**
+     * The shot-strength goes back and forth from 0 to 100% and back in 2 seconds
+     */
     public float calcMeterPercentage() {
         float chargeTime = (System.currentTimeMillis() - startChargeTime) / 1000.0f; //chargeTime in seconds
         float remainder = chargeTime % 2;
         if ((((int) chargeTime) % 2) == 0) {
             return remainder;
-        } else {
+        }
+        else {
             return (2.0f - remainder);
         }
     }
 
     @Override
     public void draw() throws IllegalAccessException {
+        //shows the shotstrength in- and decreasing
         if (isSpacePressed && player instanceof Human) {
             float barIndex = calcMeterPercentage();
             chargeBar.setX(7 + (barIndex * (chargeMeter.getWidth() - chargeBar.getWidth() * 0.055f)));
@@ -155,6 +168,7 @@ public class PlayState extends ThreeDimensional {
         hud.act();
         hud.draw();
 
+        //Only displays the hitcounter and shotcharge text if the player is human.
         if (player instanceof Human) {
             spriteBatch.begin();
             comicFont.draw(spriteBatch, "Hit Counter : " + hitCounter, 872, 760);
@@ -163,10 +177,16 @@ public class PlayState extends ThreeDimensional {
         }
     }
 
+    /**
+     * Not used yet for this state
+     */
     @Override
     public void handleInput() {
     }
 
+    /**
+     * Not used yet for this state
+     */
     @Override
     public void dispose() {
     }

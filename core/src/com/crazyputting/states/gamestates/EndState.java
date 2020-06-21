@@ -17,21 +17,12 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.crazyputting.CrazyPutting;
 import com.crazyputting.managers.GameStateManager;
 
+/**
+ * The end game screen state which informs player of a win
+ */
 public class EndState extends GameState {
 
-    /**
-     * The end game screen state which informs player of a win
-     */
-
-    private SpriteBatch spriteBatch;
     private Stage stage;
-    private Skin skin;
-    private TextureAtlas atlas;
-    private Viewport viewport;
-    private Texture img;
-    private Image background;
-    private BitmapFont comicFont;
-    private FreeTypeFontGenerator gen;
 
     public EndState(GameStateManager ourGsm) {
         super(ourGsm);
@@ -39,19 +30,16 @@ public class EndState extends GameState {
 
     @Override
     public void init() {
-        spriteBatch = new SpriteBatch();
-        viewport = new FitViewport(CrazyPutting.width, CrazyPutting.height, CrazyPutting.cam);
+        SpriteBatch spriteBatch = new SpriteBatch();
+        Viewport viewport = new FitViewport(CrazyPutting.width, CrazyPutting.height, CrazyPutting.cam);
         viewport.apply();
-        gen = new FreeTypeFontGenerator(Gdx.files.internal("comic/raw/PAC-FONT.ttf"));
-        img = new Texture("youwintemp.jpg");
-        background = new Image(img);
+        FreeTypeFontGenerator gen = new FreeTypeFontGenerator(Gdx.files.internal("comic/raw/PAC-FONT.ttf"));
+        Texture img = new Texture("youwintemp.jpg");
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
         parameter.size = 65;
-        comicFont = gen.generateFont(parameter);
+        BitmapFont comicFont = gen.generateFont(parameter);
         comicFont.setColor(Color.BLACK);
         stage = new Stage(viewport, spriteBatch);
-        atlas = new TextureAtlas("comic/skin/comic-ui.atlas");
-        skin = new Skin(Gdx.files.internal("comic/skin/comic-ui.json"));
         CrazyPutting.cam.update();
         Gdx.input.setInputProcessor(stage);
 
@@ -74,11 +62,17 @@ public class EndState extends GameState {
         stage.draw();
     }
 
+    /**
+     * Not used yet for this state
+     */
     @Override
     public void handleInput() {
 
     }
 
+    /**
+     * Not used yet for this state
+     */
     @Override
     public void dispose() {
 

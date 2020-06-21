@@ -20,14 +20,13 @@ public class CrazyPutting extends ApplicationAdapter {
     public static int height;
     public static OrthographicCamera cam;
     private GameStateManager gsm;
-    private Music music;
-    private float volume = 0.25f;
 
 
     @Override
     public void create() {
-        music = Gdx.audio.newMusic(Gdx.files.internal("golfmusic.ogg"));
+        Music music = Gdx.audio.newMusic(Gdx.files.internal("golfmusic.ogg"));
         music.setLooping(true);
+        float volume = 0.25f;
         music.setVolume(volume);
         music.play();
         width = Gdx.graphics.getWidth();
