@@ -35,11 +35,15 @@ public class CreatorMenu extends GameState {
     private Stage stage;
     private Skin skin;
     private BitmapFont comicFont;
+    private boolean error;
 
     public CreatorMenu(GameStateManager gsm) {
         super(gsm);
     }
 
+    /**
+     * Declares all the buttons, textfields etc. only once
+     */
     @Override
     public void init() {
         final String[] SOLVER_STRING = new String[]{"Euler", "Verlet", "Runge-Kutta", "Adams-Bashforth"};
@@ -66,7 +70,6 @@ public class CreatorMenu extends GameState {
         HorizontalGroup start = new HorizontalGroup();
         final HorizontalGroup goal = new HorizontalGroup();
         HorizontalGroup fieldSize = new HorizontalGroup();
-        HorizontalGroup constants = new HorizontalGroup();
         HorizontalGroup solverAndPlayer = new HorizontalGroup();
         HorizontalGroup checkBoxes = new HorizontalGroup();
 
@@ -103,18 +106,9 @@ public class CreatorMenu extends GameState {
         Label seasonsEnabled = new Label("          Seasons Enabled: ",skin);
         final CheckBox seasonsCheck = new CheckBox("",skin);
 
-
-        /*Label frictionLabel = new Label("Friction coefficient: ", skin);
-        final TextField frictionField = new TextField("5", skin);
-        Label speedLabel = new Label("Maximum speed (in m/s): ", skin);
-        final TextField speedField = new TextField("15", skin);*/
-
         ChangeListener listener = new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                /*TODO: add sth that checks if the function has been correctly formatted
-                    Or alternatively, sth like a scientific calculator, so the user always puts in a
-                    correct value*/
                 float goalX = 0, goalY = 0, goalRadius = 0, startX = 0, startY = 0;
                 Function function = new Derivatives(functionField.getText());
                 int length = 0, width = 0;
@@ -126,10 +120,11 @@ public class CreatorMenu extends GameState {
                 float MU = 1.5f;
                 float vMax = 15;
 
-                boolean error;
+                //Makes sure that fields have been correctly filled in
                 error = goalXField.toString().isEmpty() || goalYField.toString().isEmpty() ||
                         functionField.toString().isEmpty() || courseWidthField.toString().isEmpty() ||
                         courseLengthField.toString().isEmpty();
+                //Converts text to a value, otherwise the user needs to enter the values again
                 try {
                     windEnabled = windCheck.isChecked();
                     mazeEnabled = mazeCheck.isChecked();
@@ -141,59 +136,11 @@ public class CreatorMenu extends GameState {
                     goalRadius = Float.parseFloat(goalRadiusField.getText().replaceAll(" ", ""));
                     width = Integer.parseInt(courseWidthField.getText().replaceAll(" ", ""));
                     length = Integer.parseInt(courseLengthField.getText().replaceAll(" ", ""));
-                    /*MU = Float.parseFloat(frictionField.getText().replaceAll(" ", ""));
-                    vMax = Float.parseFloat(speedField.getText().replaceAll(" ", ""));*/
                 } catch (Exception e) {
-                    TextButton buttonOK = new TextButton("Ok", skin);
-                    Label labelError0 = new Label("Not all fields contain real values.", skin);
-                    labelError0.setColor(Color.RED);
-
-                    final Dialog parseError = new Dialog("", skin);
-                    parseError.setWidth(300);
-                    parseError.setHeight(200);
-                    parseError.setModal(true);
-
-                    buttonOK.addListener(new InputListener() {
-                        @Override
-                        public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                            parseError.hide();
-                            parseError.cancel();
-                            parseError.remove();
-                            return true;
-                        }
-                    });
-
-                    parseError.getContentTable().add(labelError0).pad(20, 20, 20, 20);
-                    parseError.getButtonTable().add(buttonOK).width(50).height(50).pad(20, 20,
-                            20, 20);
-                    parseError.show(stage).setPosition(200, 200);
-                    error = true;
+                    errorScreen("Not all fields contain proper values (they all need to be real, and the fieldsize needs to be an integer)");
                 }
                 if(function.evaluateHeight(startX,startY) < -0.10f || function.evaluateHeight(goalX,goalY) < -0.10f ){
-                    TextButton buttonOK = new TextButton("Ok", skin);
-                    Label labelError0 = new Label("Ball or Hole in WATER!", skin);
-                    labelError0.setColor(Color.RED);
-
-                    final Dialog parseError = new Dialog("", skin);
-                    parseError.setWidth(300);
-                    parseError.setHeight(200);
-                    parseError.setModal(true);
-
-                    buttonOK.addListener(new InputListener() {
-                        @Override
-                        public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                            parseError.hide();
-                            parseError.cancel();
-                            parseError.remove();
-                            return true;
-                        }
-                    });
-
-                    parseError.getContentTable().add(labelError0).pad(20, 20, 20, 20);
-                    parseError.getButtonTable().add(buttonOK).width(50).height(50).pad(20, 20,
-                            20, 20);
-                    parseError.show(stage).setPosition(200, 200);
-                    error = true;
+                    errorScreen("Ball or Hole in WATER!");
                 }
                 if (!error) {
                     PhysicsSolver solver = SolverFactory.get().makeSolver(selectedSolver);
@@ -230,11 +177,6 @@ public class CreatorMenu extends GameState {
         fieldSize.addActor(courseWidthLabel);
         fieldSize.addActor(courseWidthField);
 
-        /*constants.addActor(frictionLabel);
-        constants.addActor(frictionField);
-        constants.addActor(speedLabel);
-        constants.addActor(speedField);*/
-
         solverAndPlayer.addActor(playerLabel);
         solverAndPlayer.addActor(playerSelect);
         solverAndPlayer.addActor(solverLabel);
@@ -257,8 +199,6 @@ public class CreatorMenu extends GameState {
         main.add(functionField).fillY().align(Align.center).width(300);
         main.row().pad(20, 0, 20, 0);
         main.add(fieldSize).fillY().align(Align.left);
-        /*main.row().pad(5, 0, 5, 0);
-        main.add(constants).fillY().align(Align.left);*/
         main.row().pad(20, 0, 20, 0);
         main.add(solverAndPlayer).fillY().align(Align.center);
         main.row().pad(20, 0, 20, 0);
@@ -272,6 +212,9 @@ public class CreatorMenu extends GameState {
         stage.addActor(main);
     }
 
+    /**
+     * Not used yet for this menu
+     */
     @Override
     public void update(float dt) {
         handleInput();
@@ -290,13 +233,46 @@ public class CreatorMenu extends GameState {
         spriteBatch.end();
     }
 
+    /**
+     * Not used yet for this menu
+     */
     @Override
     public void handleInput() {
 
     }
 
+    /**
+     * Not used yet for this menu
+     */
     @Override
     public void dispose() {
 
+    }
+
+    private void errorScreen(String errorText){
+        TextButton buttonOK = new TextButton("Ok", skin);
+        Label errorLabel = new Label(errorText, skin);
+        errorLabel.setColor(Color.RED);
+
+        final Dialog parseError = new Dialog("", skin);
+        parseError.setWidth(300);
+        parseError.setHeight(200);
+        parseError.setModal(true);
+
+        buttonOK.addListener(new InputListener() {
+            @Override
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                parseError.hide();
+                parseError.cancel();
+                parseError.remove();
+                return true;
+            }
+        });
+
+        parseError.getContentTable().add(errorLabel).pad(20, 20, 20, 20);
+        parseError.getButtonTable().add(buttonOK).width(50).height(50).pad(20, 20,
+                20, 20);
+        parseError.show(stage).setPosition(200, 200);
+        error = true;
     }
 }

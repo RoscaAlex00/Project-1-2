@@ -21,10 +21,16 @@ public abstract class GameState {
         init();
     }
 
+    /**
+     * Initial method. Declares font, backgrounds etc. only once
+     */
     public abstract void init();
 
     public abstract void update(float dt) throws IllegalAccessException;
 
+    /**
+     * Makes sure that the menu visually updates its contents, once they're changed
+     */
     public abstract void draw() throws IllegalAccessException;
 
     public abstract void handleInput();

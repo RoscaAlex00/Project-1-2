@@ -6,10 +6,12 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.*;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.crazyputting.CrazyPutting;
@@ -18,49 +20,47 @@ import com.crazyputting.managers.GameStateManager;
 import com.crazyputting.states.gamestates.GameState;
 
 public class MainMenu extends GameState {
-    private final String title = "Crazy Putting";
     public int currentItem = 0;
     private SpriteBatch spriteBatch;
     private Stage stage;
     private Skin skin;
-    private TextureAtlas atlas;
-    private Viewport viewport;
-    private Texture img;
     private Image background;
     private BitmapFont comicFont;
-    private FreeTypeFontGenerator gen;
-    private Color ourColor;
+    private final Color selectColor = new Color(178f / 255f, 223f / 255f, 182f / 255f, 1f);
+    private final Color unselectedColor = Color.WHITE;
+    private TextButton[] textButtons;
 
     public MainMenu(GameStateManager gsm) {
         super(gsm);
     }
 
+    /**
+     * Initial method. Declares font, backgrounds etc. only once
+     */
     @Override
     public void init() {
         spriteBatch = new SpriteBatch();
-        viewport = new FitViewport(CrazyPutting.width, CrazyPutting.height, CrazyPutting.cam);
+        Viewport viewport = new FitViewport(CrazyPutting.width, CrazyPutting.height, CrazyPutting.cam);
         viewport.apply();
-        gen = new FreeTypeFontGenerator(Gdx.files.internal("comic/raw/PAC-FONT.ttf"));
-        img = new Texture("golfGAME.jpg");
+        FreeTypeFontGenerator gen = new FreeTypeFontGenerator(Gdx.files.internal("comic/raw/PAC-FONT.ttf"));
+        Texture img = new Texture("golfGAME.jpg");
         background = new Image(img);
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
         parameter.size = 72;
         comicFont = gen.generateFont(parameter);
         comicFont.setColor(Color.BLACK);
         stage = new Stage(viewport, spriteBatch);
-        atlas = new TextureAtlas("comic/skin/comic-ui.atlas");
         skin = new Skin(Gdx.files.internal("cloud-form/skin/cloud-form-ui.json"));
         CrazyPutting.cam.update();
         Gdx.input.setInputProcessor(stage);
-        ourColor = new Color(178f / 255f, 223f / 255f, 182f / 255f, 1f);
-
-
     }
 
+    /**
+     * Not used yet for this menu
+     */
     @Override
     public void update(float dt) {
         handleInput();
-
     }
 
     @Override
@@ -69,11 +69,16 @@ public class MainMenu extends GameState {
         TextButton newGame = new TextButton("Play", skin);
         TextButton preferences = new TextButton("Settings", skin);
         TextButton exit = new TextButton("Exit", skin);
-        table.add(newGame).width(250);
-        table.row().pad(20, 0, 20, 0);
-        table.add(preferences).fillX().uniformX();
-        table.row();
-        table.add(exit).fillX().uniformX();
+        textButtons = new TextButton[]{newGame, preferences, exit};
+
+        int BUTTON_WIDTH = 250;
+        table.add(textButtons[0]).width(BUTTON_WIDTH);
+        int SPACE_BETWEEN_BUTTONS = 20;
+        table.row().pad(SPACE_BETWEEN_BUTTONS, 0, SPACE_BETWEEN_BUTTONS, 0);
+        for (TextButton textButton : textButtons) {
+            table.add(textButton).fillX().uniformX();
+            table.row();
+        }
 
         table.setFillParent(true);
         table.setTransform(true);
@@ -83,62 +88,70 @@ public class MainMenu extends GameState {
         Gdx.gl.glClearColor(.1f, .12f, .16f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        for (int i = 0; i < 3; i++) {
-            if (currentItem == 0) {
-                newGame.setColor(ourColor);
-            } else {
-                newGame.setColor(Color.WHITE);
+        //Sets the colours of the buttons depending on whether they are selected.
+        for (int i = 0; i < textButtons.length; i++) {
+            if (currentItem == i){
+                textButtons[i].setColor(selectColor);
             }
-            if (currentItem == 1) {
-                preferences.setColor(ourColor);
-            } else {
-                preferences.setColor(Color.WHITE);
+            else {
+                textButtons[i].setColor(unselectedColor);
             }
-            if (currentItem == 2) {
-                exit.setColor(ourColor);
-            } else {
-                exit.setColor(Color.WHITE);
-            }
-
         }
 
         stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 30f));
         stage.draw();
         spriteBatch.begin();
+        String title = "Crazy Putting";
         comicFont.draw(spriteBatch, title, 100, 700);
         spriteBatch.end();
-
-
     }
 
+    /**
+     * Handles keyboard inputs to select the correct state.
+     */
     @Override
     public void handleInput() {
         if (GameKeys.isPressed(GameKeys.UP)) {
-            if (currentItem > 0)
+            //Prevents the currentItem from going out of bounds
+            if (currentItem > 0) {
                 currentItem--;
+            }
         }
         if (GameKeys.isPressed(GameKeys.DOWN)) {
-            if (currentItem < 2)
+            //Prevents the currentItem from going out of bounds
+            if (currentItem < (textButtons.length - 1)) {
                 currentItem++;
-
+            }
         }
         if (GameKeys.isPressed(GameKeys.ENTER)) {
             select();
         }
     }
 
-    public void select() {
-        if (currentItem == 0) {
-            gsm.setState(GameStateManager.COURSE_CREATOR);
+    /**
+     * Enters the selected state
+     */
+    private void select() {
+        int state = 0;
+        switch (currentItem){
+            case 0:
+                state = GameStateManager.COURSE_CREATOR;
+                break;
+            case 1:
+                state = GameStateManager.SETTINGS;
+                break;
+            case 2:
+                Gdx.app.exit();
+                break;
+            default:
+                break;
         }
-        if (currentItem == 1) {
-            gsm.setState(GameStateManager.SETTINGS);
-        }
-        if (currentItem == 2) {
-            Gdx.app.exit();
-        }
+        gsm.setState(state);
     }
 
+    /**
+     * Not used yet for this menu
+     */
     @Override
     public void dispose() {
 

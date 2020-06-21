@@ -17,17 +17,14 @@ import com.crazyputting.CrazyPutting;
 import com.crazyputting.managers.GameStateManager;
 import com.crazyputting.states.gamestates.GameState;
 
+/**
+ * Empty settings menu for now
+ */
 public class SettingsMenu extends GameState {
-    SpriteBatch myBatch;
     private SpriteBatch spriteBatch;
     private Stage stage;
-    private Skin skin;
-    private TextureAtlas atlas;
-    private Viewport viewport;
-    private Texture img;
     private Image background;
     private BitmapFont comicFont;
-    private FreeTypeFontGenerator gen;
 
     public SettingsMenu(GameStateManager gsm) {
         super(gsm);
@@ -36,23 +33,23 @@ public class SettingsMenu extends GameState {
     @Override
     public void init() {
         spriteBatch = new SpriteBatch();
-        viewport = new FitViewport(CrazyPutting.width, CrazyPutting.height, CrazyPutting.cam);
+        Viewport viewport = new FitViewport(CrazyPutting.width, CrazyPutting.height, CrazyPutting.cam);
         viewport.apply();
-        gen = new FreeTypeFontGenerator(Gdx.files.internal("comic/raw/SF_Arch_Rival.ttf"));
-        img = new Texture("blue.jpg");
+        FreeTypeFontGenerator gen = new FreeTypeFontGenerator(Gdx.files.internal("comic/raw/SF_Arch_Rival.ttf"));
+        Texture img = new Texture("blue.jpg");
         background = new Image(img);
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
         parameter.size = 65;
         comicFont = gen.generateFont(parameter);
         comicFont.setColor(Color.BLACK);
         stage = new Stage(viewport, spriteBatch);
-        atlas = new TextureAtlas("comic/skin/comic-ui.atlas");
-        skin = new Skin(Gdx.files.internal("comic/skin/comic-ui.json"));
         CrazyPutting.cam.update();
         Gdx.input.setInputProcessor(stage);
-
     }
 
+    /**
+     * Not used yet for this menu
+     */
     @Override
     public void update(float dt) {
         handleInput();
@@ -70,14 +67,19 @@ public class SettingsMenu extends GameState {
         spriteBatch.begin();
         comicFont.draw(spriteBatch, "Settings", 265, 540);
         spriteBatch.end();
-
     }
 
+    /**
+     * Not used yet for this menu
+     */
     @Override
     public void handleInput() {
 
     }
 
+    /**
+     * Not used yet for this menu
+     */
     @Override
     public void dispose() {
 
