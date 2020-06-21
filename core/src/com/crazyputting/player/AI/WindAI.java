@@ -12,11 +12,7 @@ import java.util.Random;
 
 public class WindAI implements Player {
     public int numberOfHits = 0;
-    private Hole hole;
-    private Ball ball;
     private Terrain terrain;
-    private Vector3 start;
-    private Vector3 velocity;
     private Vector3 vec;
     private Vector3 wind;
 
@@ -26,10 +22,10 @@ public class WindAI implements Player {
     }
 
     @Override
-    public Vector3 shot_velocity(Terrain terrain) {
-        this.ball = terrain.getBall();
-        this.hole = terrain.getHole();
-        this.start = terrain.getStartPos();
+    public void shot_velocity(Terrain terrain) {
+        Ball ball = terrain.getBall();
+        Hole hole = terrain.getHole();
+        Vector3 start = terrain.getStartPos();
 
         float subX = hole.getPosition().cpy().sub(terrain.getBall().getPosition().cpy()).x;
         float subY = hole.getPosition().cpy().sub(terrain.getBall().getPosition().cpy()).y;
@@ -74,6 +70,7 @@ public class WindAI implements Player {
             }
         }
 
+        Vector3 velocity;
         if (subX < 2f && subY < 2f && subX > -2f && subY > -2f) {
             velocity = hole.getPosition().cpy().sub(terrain.getBall().getPosition().cpy());
             ball.hit(velocity);
@@ -89,7 +86,6 @@ public class WindAI implements Player {
         }
 
 
-        return null;
     }
 
     public float randFloatSmall() {

@@ -1,6 +1,5 @@
 package com.crazyputting.player.AI;
 
-import com.badlogic.gdx.math.Vector;
 import com.badlogic.gdx.math.Vector3;
 import com.crazyputting.objects.Ball;
 import com.crazyputting.objects.Hole;
@@ -20,7 +19,7 @@ public class AlexAI implements Player {
     }
 
     @Override
-    public Vector3 shot_velocity(Terrain terrain) {
+    public void shot_velocity(Terrain terrain) {
         this.ball = terrain.getBall();
         Vector3 threshold = new Vector3(5f, 5f, 0);
         this.hole = terrain.getHole();
@@ -44,7 +43,6 @@ public class AlexAI implements Player {
         }
         System.out.println(hitCounter);
         ball.hit(velocity);
-        return null;
     }
 
     @Override

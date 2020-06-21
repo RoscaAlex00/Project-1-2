@@ -24,7 +24,7 @@ public class FrunzAI implements Player {
     }
 
     @Override
-    public Vector3 shot_velocity(Terrain terrain) {
+    public void shot_velocity(Terrain terrain) {
         this.ball = terrain.getBall();
         this.hole = terrain.getHole();
         this.start = terrain.getStartPos();
@@ -81,7 +81,6 @@ public class FrunzAI implements Player {
             numberOfHits++;
             System.out.println(numberOfHits);
         }
-        return null;
     }
 
     public float randFloatSmall() {

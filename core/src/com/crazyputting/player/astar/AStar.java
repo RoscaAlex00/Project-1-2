@@ -20,12 +20,7 @@ public class AStar implements Player {
     private Node endNode;
     private int index = 1;
     private int idCounter;
-    private int hitCounter;
     private Vector3 prevShot;
-
-    private final boolean PRINT_PATH = true;
-    private final boolean PRINT_SHOT = true;
-    private int shotType;
 
     /* Map with positions of objects as keys, the values correspond to the radius.
     *  It is meant for objects such as trees and rocks. */
@@ -35,15 +30,16 @@ public class AStar implements Player {
     *  the values correspond to the width and length of the obstacle. It is meant for objects such as walls. */
     private Map<Vector3, List<Float>> rectangularObstacles;
 
+    /**
+     * Only used for human player
+     */
     @Override
     public Vector3 shot_velocity(Vector3 camera_direction, float charge) throws IllegalAccessException {
         throw new IllegalAccessException("This is the wrong class");
     }
 
     @Override
-    public Vector3 shot_velocity(Terrain terrain) {
-        //TODO: handle slopes
-
+    public void shot_velocity(Terrain terrain) {
         this.ball = terrain.getBall();
         this.hole = terrain.getHole();
         this.terrain = terrain;
@@ -69,54 +65,33 @@ public class AStar implements Player {
         	// Construct a simplified path only containing the start and the end, as well as any turning node(s)
             assert path != null;
             createTurningNodes(path);
-        
-        	// Use for testing
-        	if (PRINT_PATH) {
-        		System.out.println("Complete path:");
-        		System.out.println(path);
-        		System.out.println();
-        		System.out.println("Hole position: " + hole.getPosition());
-        		System.out.println();
-        		System.out.println("Simplified path:");
-        		System.out.println(turningNodes);
-        		System.out.println();
-        	}
         }
         
         // Shoot the ball following the given path
         if (index < turningNodes.size()) {
         	Node node = turningNodes.get(index);
-                if (!equals(ball.getPosition().cpy(), node.getPosition().cpy())) {
-                    Vector3 velocity = node.getPosition().cpy().sub(ball.getPosition().cpy());
+            if (!equals(ball.getPosition().cpy(), node.getPosition().cpy())) {
+                Vector3 velocity = node.getPosition().cpy().sub(ball.getPosition().cpy());
 
-                    if (!terrain.getMazeEnabled()) {
-                        //Scale the velocity based on the current friction.
-                        float frictionCoefficient = estimateFriction();
-                        /* Here the formula for the stopping distance is used: s = v^2 / (2 * Mu * g). Rewriting gives:
-                         * v = sqrt(a * Mu) where a = s * 2 * g. Since a is a constant, and the variable is Mu in this case,
-                         * v depends on Mu. So the velocity needs to be scaled by: v2 / v1 = sqrt(Mu2) / sqrt(Mu1) = sqrt(Mu2 / Mu1). */
-                        velocity.scl((float) Math.sqrt(frictionCoefficient / Physics.GRASS_FRICTION_COEFFICIENT));
-                    }
-
-                    scaleVelocity(velocity);
-
-                    prevShot = velocity.cpy();
-                    ball.hit(velocity);
-                    hitCounter++;
-
-                    // Print shot info
-                    if (PRINT_SHOT) {
-                        System.out.println("Shottype: " + shotType);
-                        System.out.println("Velocity: " + velocity);
-                        System.out.println("Ball hit " + hitCounter + " time(s)!");
-                        System.out.println();
-                    }
+                if (!terrain.getMazeEnabled()) {
+                    //Scale the velocity based on the current friction.
+                    float frictionCoefficient = estimateFriction();
+                    /* Here the formula for the stopping distance is used: s = v^2 / (2 * Mu * g). Rewriting gives:
+                     * v = sqrt(a * Mu) where a = s * 2 * g. Since a is a constant, and the variable is Mu in this case,
+                     * v depends on Mu. So the velocity needs to be scaled by: v2 / v1 = sqrt(Mu2) / sqrt(Mu1) = sqrt(Mu2 / Mu1). */
+                    velocity.scl((float) Math.sqrt(frictionCoefficient / Physics.GRASS_FRICTION_COEFFICIENT));
                 }
-                else {
-                    index++;
-                }
+
+                scaleVelocity(velocity);
+
+                //used to estimate the friction
+                prevShot = velocity.cpy();
+                ball.hit(velocity);
+            }
+            else {
+                index++;
+            }
         }
-        return null;
     }
 
     // Perform A* search and return the shortest path
@@ -160,6 +135,11 @@ public class AStar implements Player {
         return null;
     }
 
+    /**
+     * Correctly makes the path, which the algorithm has found
+     * @param node initially the end node
+     * @return the path from the end to the beginning reversed
+     */
     private ArrayList<Node> makePath(Node node){
         ArrayList<Node> path = new ArrayList<>();
         while (node != null) {
@@ -170,6 +150,9 @@ public class AStar implements Player {
         return path;
     }
 
+    /**
+     * Creates a list of children by going in 8 directions around the considered node (the 4 straight and diagonal directions)
+     */
     private List<Node> createChildren(Node node){
         List<Node> children = new ArrayList<>();
         for (int i = 0; i < 8; i++) {
@@ -219,6 +202,9 @@ public class AStar implements Player {
         return children;
     }
 
+    /**
+     * Goes over the list of children which was just created and add it to the open list if applicable
+     */
     private void addToOpenList(List<Node> children, Node currentNode){
         for (Node child : children) {
             // Create the cost and the heuristic values
@@ -232,25 +218,35 @@ public class AStar implements Player {
                     break;
                 }
             }
-            if (skip) continue;
+            if (skip) {
+                continue;
+            }
 
             openList.add(child);
         }
     }
 
+    /**
+     * Goes over the path and finds the nodes where the orientation changes.
+     */
     private void createTurningNodes(List<Node> path){
         turningNodes = new ArrayList<>();
         assert path != null;
         turningNodes.add(path.get(0));
         for (int i = 1; i < path.size(); i++) {
             Node node = path.get(i);
-            if (i == path.size() - 1)
+            if (i == path.size() - 1){
                 turningNodes.add(node);
-            else if (i != 1 && node.getOrientation() != node.getParent().getOrientation())
+            }
+            else if (i != 1 && node.getOrientation() != node.getParent().getOrientation()){
                 turningNodes.add(node.getParent());
+            }
         }
     }
 
+    /**
+     * Adds the maze walls to the rectangularObstacles list
+     */
     private void addMazeWalls(){
         for (Vector3 obstaclePosCenter : terrain.getMazeWallCoordinates()) {
             List<Float> wallInfo = new ArrayList<>();
@@ -272,8 +268,7 @@ public class AStar implements Player {
      */
     private boolean walkable(Vector3 pos){
         for (Map.Entry<Vector3, Float> circularObstacle : circularObstacles.entrySet()){
-            float radiiSum = circularObstacle.getValue() + Ball.DIAMETER /2f;
-
+            float radiiSum = circularObstacle.getValue() + Ball.DIAMETER / 2f;
             // Check if the given position is in an obstacle
             if (pos.dst(circularObstacle.getKey()) <= radiiSum){
                 return false;
@@ -291,6 +286,7 @@ public class AStar implements Player {
                 return false;
             }
         }
+        //checks whether the position is in the water
         return (terrain.getFunction().evaluateHeight(pos.x, pos.y) >= 0);
     }
 
@@ -303,22 +299,21 @@ public class AStar implements Player {
         return true;
     }
 
+    /**
+     * Tests whether the two points are close
+     */
     private boolean equals(Vector3 a, Vector3 b) {
-        float threshold = 0.3f;
-        return (Math.abs(a.x - b.x) < threshold) && (Math.abs(a.y - b.y) < threshold);
+        float THRESHOLD = 0.3f;
+        return (Math.abs(a.x - b.x) < THRESHOLD) && (Math.abs(a.y - b.y) < THRESHOLD);
     }
 
+    /**
+     * Here the formula for the stopping distance is used: s = v^2 / (2 * Mu * g). Rewriting gives:
+     * v = sqrt(a * Mu) where a = s * 2 * g. Since a is a constant, and the variable is Mu in this case,
+     * v depends on Mu. So the velocity needs to be scaled by: v2 / v1 = sqrt(Mu2) / sqrt(Mu1) = sqrt(Mu2 / Mu1).
+     * @return
+     */
     private float estimateFriction(){
-
-        /*
-        //reverse engineer acceleration method
-        Vector3 acc = estimateAcceleration(ball);
-        acc.sub(calcGravity(ball.getPosition()));
-        return findFrictionCoefficient(acc, ball.getVelocity());
-        */
-
-
-        //stopping distance method, WIP
         float friction = Physics.GRASS_FRICTION_COEFFICIENT;
         if (prevShot != null) {
             float velocity = prevShot.len();
@@ -327,54 +322,24 @@ public class AStar implements Player {
             friction = (velocity * velocity) / (2 * dst * Physics.GRAVITY) * SCALING_FACTOR;
         }
         return Math.min(friction, Physics.SAND_FRICTION_COEFFICIENT);
-
-        //return terrain.getFrictionCoefficient();
     }
 
-    //unused now
-    /*
-    private Vector3 estimateAcceleration(Ball ball){
-        //TODO
-        Vector3 currentVelocity = ball.getVelocity().cpy();
-        Vector3 currentPosition = ball.getPosition().cpy();
-        Vector3 prevPos = ball.getHitPosition().cpy();
-
-        return null;
-    }
-
-    private Vector3 calcGravity(Vector3 postion){
-        Vector3 grav = new Vector3();
-        grav.x = (-ball.getMass() * Physics.GRAVITY * terrain.getFunction().calcXDeriv(postion.x, postion.y));
-        grav.y = (-ball.getMass() * Physics.GRAVITY * terrain.getFunction().calcYDeriv(postion.x, postion.y));
-        return grav;
-    }
-
-    private float findFrictionCoefficient(Vector3 acceleration, Vector3 velocity){
-        if (velocity.len() != 0) {
-            acceleration.scl(velocity.len() / (Ball.MASS * Physics.GRAVITY));
-            float divX = acceleration.x / velocity.x;
-            float divY = acceleration.y / velocity.y;
-            return (divX + divY) / 2;
-        }
-        return Physics.GRASS_FRICTION_COEFFICIENT;
-    }
-    */
-
+    /**
+     * Scale the velocity in different ways depending on the distance to the next coordinate
+     */
     private void scaleVelocity(Vector3 velocity){
         int THRESHOLD_X = 6;
         int THRESHOLD_Y = 6;
         float subX = velocity.x;
         float subY = velocity.y;
-        // Scale the velocity in different ways depending on the distance to the next coordinate
         if (subX < THRESHOLD_X && subY < THRESHOLD_Y && subX > -THRESHOLD_X && subY > -THRESHOLD_Y) {
             velocity.scl(1.07f);
-            shotType = 1;
-        } else if (subX < 15f && subY < 15f && subX > -15f && subY > -15f) {
+        }
+        else if (subX < 15f && subY < 15f && subX > -15f && subY > -15f) {
             velocity.scl(0.59f);
-            shotType = 2;
-        } else {
+        }
+        else {
             velocity.scl(0.325f);
-            shotType = 3;
         }
     }
 

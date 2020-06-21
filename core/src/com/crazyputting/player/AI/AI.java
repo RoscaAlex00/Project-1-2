@@ -29,14 +29,14 @@ public class AI implements Player {
     }
 
     @Override
-    public Vector3 shot_velocity(Terrain terrain) {
+    public void shot_velocity(Terrain terrain) {
         this.terrain = terrain;
         this.frictionCoefficient = terrain.getFrictionCoefficient();
         this.hole = terrain.getHole();
         this.ball = terrain.getBall();
         this.terrainFunction = terrain.getFunction();
 
-        return new Vector3(1, 1, 1);
+        new Vector3(1, 1, 1);
     }
 
     public void runLoop() {

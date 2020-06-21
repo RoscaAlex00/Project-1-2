@@ -30,16 +30,21 @@ public class Node {
     public String toString() {
         StringBuilder nodeToString = new StringBuilder("Node ");
         nodeToString.append(id);
-        if (parent != null)
-        	nodeToString.append(", Parent: ").append(parent.getId());
+        if (parent != null){
+            nodeToString.append(", Parent: ").append(parent.getId());
+        }
         nodeToString.append(", Position: ").append(position).append("\n");
         return nodeToString.toString();
     }
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         Node node = (Node) o;
         return this.position.x == node.position.x &&
                 this.position.y == node.position.y;
@@ -59,10 +64,7 @@ public class Node {
     public void setCost(float cost) {
     	this.cost = cost;
     }
-    
-    public float getHeurisitc() {
-    	return heuristic;
-    }
+
     public void setHeuristic(float heuristic) {
     	this.heuristic = heuristic;
     }
