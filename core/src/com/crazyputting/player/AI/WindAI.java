@@ -106,8 +106,8 @@ public class WindAI implements Player {
 
 
     public Vector3 estimateWind() {
-        float x = (float) (Math.cos(0.1f * Math.PI));
-        float y = (float) (Math.sin(0.1f * Math.PI));
+        float x = wind.x;
+        float y = wind.y;
         float windForceX = x * 0.5f * Physics.DRAG_COEFFICIENT
                 * matPower(Ball.DIAMETER / 2.0f, 2);
         float windForceY = y * 0.5f * Physics.DRAG_COEFFICIENT

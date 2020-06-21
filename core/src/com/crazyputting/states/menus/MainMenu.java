@@ -71,14 +71,11 @@ public class MainMenu extends GameState {
         TextButton exit = new TextButton("Exit", skin);
         textButtons = new TextButton[]{newGame, preferences, exit};
 
-        int BUTTON_WIDTH = 250;
-        table.add(textButtons[0]).width(BUTTON_WIDTH);
-        int SPACE_BETWEEN_BUTTONS = 20;
-        table.row().pad(SPACE_BETWEEN_BUTTONS, 0, SPACE_BETWEEN_BUTTONS, 0);
-        for (TextButton textButton : textButtons) {
-            table.add(textButton).fillX().uniformX();
-            table.row().pad(SPACE_BETWEEN_BUTTONS, 0, SPACE_BETWEEN_BUTTONS, 0);
-        }
+        table.add(textButtons[0]).width(250);
+        table.row().pad(20, 0, 20, 0);
+        table.add(textButtons[1]).fillX().uniformX();
+        table.row();
+        table.add(textButtons[2]).fillX().uniformX();
 
         table.setFillParent(true);
         table.setTransform(true);
