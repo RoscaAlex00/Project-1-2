@@ -136,6 +136,7 @@ public class ThreeDimensionalModel {
             Texture brick = new Texture("brick.jpg");
             Model wall1 = modelBuilder.createBox(1.4f, 48, 10,
                     new Material(TextureAttribute.createDiffuse(brick)), attr);
+
             addMazeWall(wall1, new Vector3(7, 24, 0));
             addMazeWall(wall1, new Vector3(14,26,0));
             addMazeWall(wall1, new Vector3(21,26,0));

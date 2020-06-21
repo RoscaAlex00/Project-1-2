@@ -121,7 +121,6 @@ public class HeightField implements Disposable {
 		this.height = height;
 		this.smooth = smooth;
 		this.data = new float[width * height];
-
 		this.stride = attributes.vertexSize / 4;
 
 		final int numVertices = smooth ? width * height : (width - 1) * (height - 1) * 4;

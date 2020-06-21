@@ -73,7 +73,6 @@ public class CreatorMenu extends GameState {
         Table fieldSize = new Table();
         Table solverAndPlayer = new Table();
         Table checkBoxes = new Table();
-
         LinkedList<Actor> actors = new LinkedList<>();
 
         Label startXLabel = new Label("Start X = ", skin);
