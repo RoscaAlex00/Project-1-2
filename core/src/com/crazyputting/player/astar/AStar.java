@@ -378,9 +378,6 @@ public class AStar implements Player {
         }
     }
 
-    @Override
-    public void runLoop() {
-    }
 
     @Override
     public void setTerrain(Terrain terrain) {

@@ -31,7 +31,6 @@ public class PlayState extends ThreeDimensional {
     private Player player;
     private SpriteBatch spriteBatch;
     private Stage hud;
-    //private Skin skin;
     private BitmapFont comicFont;
     private Image chargeBar;
     private Image chargeMeter;
@@ -57,7 +56,6 @@ public class PlayState extends ThreeDimensional {
         parameter.size = 20;
         comicFont = gen.generateFont(parameter);
         comicFont.setColor(Color.WHITE);
-        //skin = new Skin(Gdx.files.internal("comic/skin/comic-ui.json"));
 
         ball.update(terrain.getFunction().evaluateHeight(ball.getPosition().x, ball.getPosition().y));
         controller.initFocus(ball.getPosition());
@@ -101,7 +99,7 @@ public class PlayState extends ThreeDimensional {
 
         if (!ball.isStopped()) {
             ball.updateInstance(terrain.getFunction().evaluateHeight(ball.getPosition().x, ball.getPosition().y),
-                    physics.updateBall(dt));
+                    physics.update(dt));
         }
         if (ball.isStopped()) {
             if (player instanceof Human) {
@@ -119,7 +117,6 @@ public class PlayState extends ThreeDimensional {
                     hitCounter++;
                 }
             } else if (player instanceof AI) {
-                player.runLoop();
                 ball.setPosition(new Vector3(10, 10, 0));
             } else {
                 player.shot_velocity(terrain);

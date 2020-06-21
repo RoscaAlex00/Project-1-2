@@ -1,6 +1,9 @@
 package com.crazyputting.physicsengine;
 
 import com.badlogic.gdx.math.Vector3;
+/**
+ * Euler Solver
+ */
 
 public class Euler implements PhysicsSolver {
     private Physics physics;
@@ -9,9 +12,6 @@ public class Euler implements PhysicsSolver {
         this.physics = physics;
     }
 
-    @Override
-    public void set_step_size(double h) {
-    }
 
     @Override
     public Vector3 getPosition(Vector3 position, Vector3 velocity) {

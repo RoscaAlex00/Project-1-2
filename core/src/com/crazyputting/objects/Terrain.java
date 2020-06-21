@@ -76,14 +76,6 @@ public class Terrain {
         return hole;
     }
 
-    public float getMaximumVelocity() {
-        return maximumVelocity;
-    }
-
-    public String getName() {
-        return name;
-    }
-
     public float getHoleDiameter() {
         return 1.10f;
     }
@@ -104,10 +96,6 @@ public class Terrain {
         this.ball = ball;
     }
 
-    public Ball setBall() {
-        this.ball = new Ball(startPos.cpy());
-        return ball;
-    }
 
     public List<Vector3> getTreeCoordinates() {
         return treeCoordinates;

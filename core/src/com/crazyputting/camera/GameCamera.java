@@ -155,8 +155,5 @@ public class GameCamera extends InputAdapter {
         distanceCamFocus.set(camera.position).sub(focus);
     }
 
-    public void toggleScroll() {
-        cScroll = !cScroll;
-    }
 }
 

@@ -66,12 +66,8 @@ public class Ball {
         final float angle = speed * displacement * MathUtils.radiansToDegrees;
         Vector3 axis = temp.set(velocity).scl(-1f / speed).scl(displacement).crs(Vector3.Z);
         if (speed > 0.2f) {
-            ball.transform.rotate(new Quaternion(axis, angle/50));
+            ball.transform.rotate(new Quaternion(axis, angle / 50));
         }
-    }
-
-    public float getMass() {
-        return MASS;
     }
 
 
@@ -86,6 +82,7 @@ public class Ball {
     public Vector3 getVelocity() {
         return velocity;
     }
+
     public void setVelocity(Vector3 newVelocity) {
         this.velocity = newVelocity;
     }
@@ -93,6 +90,7 @@ public class Ball {
     public Vector3 getPosition() {
         return position;
     }
+
     public void setPosition(Vector3 pos) {
         this.position = pos;
     }
@@ -101,11 +99,7 @@ public class Ball {
         return ball;
     }
 
-    public void setPositionToHit() {
-        this.position.set(hitPosition);
-    }
-
-    public Vector3 getHitPosition(){
+    public Vector3 getHitPosition() {
         return this.hitPosition;
     }
 }

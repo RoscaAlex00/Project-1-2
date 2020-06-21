@@ -18,7 +18,11 @@ import com.crazyputting.CrazyPutting;
 import com.crazyputting.managers.GameStateManager;
 
 public class EndState extends GameState {
-    SpriteBatch myBatch;
+
+    /**
+     * The end game screen state which informs player of a win
+     */
+
     private SpriteBatch spriteBatch;
     private Stage stage;
     private Skin skin;
@@ -52,39 +56,9 @@ public class EndState extends GameState {
         Gdx.input.setInputProcessor(stage);
 
         Table main = new Table();
-        /*HorizontalGroup buttons = new HorizontalGroup();
-
-        Label quitLabel = new Label("Would you like to coninue?", skin);
-        final TextButton quitButton = new TextButton("Quit", skin);
-        final TextButton continueButton = new TextButton("New Game", skin);
-
-        ChangeListener listener = new ChangeListener() {
-            @Override
-            public void stateChanged(ChangeEvent e) {
-                if (e.getSource().equals(continueButton)){
-                    gsm.setState(GameStateManager.COURSE_CREATOR);
-                }
-                else if (e.getSource().equals(quitButton)){
-                    Gdx.app.exit();
-                }
-            }
-        };
-
-        quitButton.addListener(listener);
-        continueButton.addListener(listener);
-
-        buttons.addActor(quitButton);
-        buttons.addActor(continueButton);
-
-        main.row().pad(300,0,0,0);
-        main.add(quitLabel);
-        main.row().pad(20,0,20,0);
-        main.add(buttons);*/
         main.setBackground(new TextureRegionDrawable(new TextureRegion(img)));
         main.setFillParent(true);
-
         stage.addActor(main);
-        //TODO: draw label and buttons
     }
 
     @Override

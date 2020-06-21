@@ -2,12 +2,13 @@ package com.crazyputting.physicsengine;
 
 import com.badlogic.gdx.math.Vector3;
 
+/**
+ * Runge-Kutta 4th order Solver
+ */
+
 public class RungeKutta implements PhysicsSolver {
     private Physics physics;
 
-    @Override
-    public void set_step_size(double h) {
-    }
 
     @Override
     public void setPhysics(Physics physics) {
@@ -87,9 +88,5 @@ public class RungeKutta implements PhysicsSolver {
         physics.setDt(physics.getDt() / (sclFactor));
 
         return sclSpeed;
-    }
-
-    public float rungeFunction(float x, float y) {
-        return (x - y) / 2;
     }
 }

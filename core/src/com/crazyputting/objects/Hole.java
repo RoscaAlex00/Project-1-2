@@ -18,12 +18,4 @@ public class Hole {
     public float getHoleRadius() {
         return holeRadius;
     }
-
-    public void setHoleRadius(float holeRadius) {
-        this.holeRadius = holeRadius;
-    }
-
-    public void setPos(Vector3 pos) {
-        this.pos = pos;
-    }
 }

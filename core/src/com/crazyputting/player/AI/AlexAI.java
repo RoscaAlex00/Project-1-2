@@ -46,10 +46,6 @@ public class AlexAI implements Player {
     }
 
     @Override
-    public void runLoop() {
-    }
-
-    @Override
     public void setTerrain(Terrain terrain) {
         this.terrain = terrain;
     }

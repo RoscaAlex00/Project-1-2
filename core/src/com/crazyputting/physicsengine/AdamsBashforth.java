@@ -5,6 +5,10 @@ import com.badlogic.gdx.math.Vector3;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Adams-Bashforth Solver
+ */
+
 public class AdamsBashforth implements PhysicsSolver {
     private final int ORDER = 4;
     private final int[] ab4Coefficients = new int[]{-9, 37, -59, 55};
@@ -13,11 +17,6 @@ public class AdamsBashforth implements PhysicsSolver {
     private PhysicsSolver bootstrap = new RungeKutta();
     private List<Vector3> positions = new ArrayList<>();
     private List<Vector3> velocities = new ArrayList<>();
-
-    @Override
-    public void set_step_size(double h) {
-
-    }
 
     @Override
     public void setPhysics(Physics physics) {
