@@ -77,7 +77,7 @@ public class MainMenu extends GameState {
         table.row().pad(SPACE_BETWEEN_BUTTONS, 0, SPACE_BETWEEN_BUTTONS, 0);
         for (TextButton textButton : textButtons) {
             table.add(textButton).fillX().uniformX();
-            table.row();
+            table.row().pad(SPACE_BETWEEN_BUTTONS, 0, SPACE_BETWEEN_BUTTONS, 0);
         }
 
         table.setFillParent(true);
