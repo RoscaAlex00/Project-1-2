@@ -168,9 +168,10 @@ public class CreatorMenu extends GameState {
                 float MAXIMUM_VELOCITY = 15;
 
                 //Makes sure that fields have been correctly filled in
-                error = goalXField.toString().isEmpty() || goalYField.toString().isEmpty() ||
-                        functionField.toString().isEmpty() || courseWidthField.toString().isEmpty() ||
-                        courseLengthField.toString().isEmpty();
+                error = startXField.toString().isEmpty() || startYField.toString().isEmpty() ||
+                        goalXField.toString().isEmpty() || goalYField.toString().isEmpty() ||
+                        goalRadiusField.toString().isEmpty() || functionField.toString().isEmpty() ||
+                        courseWidthField.toString().isEmpty() || courseLengthField.toString().isEmpty();
                 //Converts text to a value, otherwise the user needs to enter the values again
                 try {
                     startX = Float.parseFloat(startXField.getText().replaceAll(" ", ""));
