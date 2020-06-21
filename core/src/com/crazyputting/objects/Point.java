@@ -11,14 +11,6 @@ public class Point {
     private float y;
 
 
-    public Point(Vector3 pointPosition) {
-        this.disHole = 0;
-        this.disStart = 0;
-        this.x = pointPosition.x;
-        this.y = pointPosition.y;
-    }
-
-
     public Point(float x, float y) {
         this.disHole = 0;
         this.disStart = 0;
@@ -27,17 +19,11 @@ public class Point {
         this.pointPosition = new Vector3(x, y, 0);
     }
 
-    public float getDisStart() {
-        return disStart;
-    }
 
     public void setDisStart(float disStart) {
         this.disStart = disStart;
     }
 
-    public float getDisHole() {
-        return disHole;
-    }
 
     public void setDisHole(float disHole) {
         this.disHole = disHole;
@@ -56,9 +42,6 @@ public class Point {
         return pointPosition;
     }
 
-    public void setPointPosition(Vector3 pos) {
-        this.pointPosition = pos;
-    }
 
     public float holeDisCalc(Point p, Hole hole) {
 

@@ -2,12 +2,12 @@ package com.crazyputting.physicsengine;
 
 import com.badlogic.gdx.math.Vector3;
 
+/**
+ * Verlet (acceleration) solver
+ */
+
 public class Verlet implements PhysicsSolver {
     private Physics physics;
-
-    @Override
-    public void set_step_size(double h) {
-    }
 
     @Override
     public void setPhysics(Physics physics) {

@@ -16,7 +16,6 @@ public class AI implements Player {
     private Hole hole;
     private Ball ball;
     private Function terrainFunction;
-    private HeapSort heapSort = new HeapSort();
     private Population population;
 
     public AI(float maximumVelocity) {
@@ -53,7 +52,6 @@ public class AI implements Player {
             ball.hit(population.getIndividuals()[i].getShotVelocity());
             population.getIndividuals()[i].calcFitness(ball.getPosition().cpy());
         }
-        heapSort.sort(population.getIndividuals());
 
 
         for (int i = 0; i < population.getIndividuals().length; i++) {

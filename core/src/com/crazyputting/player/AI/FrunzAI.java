@@ -32,8 +32,8 @@ public class FrunzAI implements Player {
         float subX = hole.getPosition().cpy().sub(terrain.getBall().getPosition().cpy()).x;
         float subY = hole.getPosition().cpy().sub(terrain.getBall().getPosition().cpy()).y;
 
-        float generated1=0f;
-        float generated2=0f;
+        float generated1;
+        float generated2;
 
         Point[] pointCollection = new Point[10];
         for (int i = 0; i < pointCollection.length; i++) {
@@ -93,20 +93,6 @@ public class FrunzAI implements Player {
         Random rand = new Random();
         return (rand.nextFloat() * (70 - 0f) + 0f);
 
-    }
-
-    public float getMin(float[] inputArray) {
-        float minVal = inputArray[0];
-        for (int i = 1; i < inputArray.length; i++) {
-            if (inputArray[i] > minVal) {
-                minVal = inputArray[i];
-            }
-        }
-        return minVal;
-    }
-
-    @Override
-    public void runLoop() {
     }
 
     @Override

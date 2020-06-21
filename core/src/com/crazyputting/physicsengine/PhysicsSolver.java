@@ -4,7 +4,6 @@ import com.badlogic.gdx.math.Vector3;
 import com.crazyputting.physicsengine.Physics;
 
 public interface PhysicsSolver {
-    void set_step_size(double h);
 
     void setPhysics(Physics physics);
 

@@ -87,26 +87,21 @@ public class Physics {
         return v;
     }
 
-    private Vector3 calcWind(Vector3 velocity){
-        float windForceX =  windForce.x * 0.5f  * DRAG_COEFFICIENT
-                 * matPower(Ball.DIAMETER / 2.0f, 2);
-        float windForceY = windForce.y * 0.5f  * DRAG_COEFFICIENT
-                * matPower(Ball.DIAMETER / 2.0f, 2) ;
+    private Vector3 calcWind(Vector3 velocity) {
+        float windForceX = windForce.x * 0.5f * DRAG_COEFFICIENT
+                * matPower(Ball.DIAMETER / 2.0f, 2);
+        float windForceY = windForce.y * 0.5f * DRAG_COEFFICIENT
+                * matPower(Ball.DIAMETER / 2.0f, 2);
         Vector3 windForceNew = new Vector3(windForceX, windForceY, 0f);
-        if(velocity.len()<2f) {
-            windForceNew.scl((float) (-1f * velocity.len() * Math.PI) * 5);
-        }else
-        {
-            windForceNew.scl((float) (-1f * 2f * Math.PI) * 5);
-        }
 
+            windForceNew.scl((float) (-1f * velocity.len() * Math.PI) * 2.75f);
         return windForceNew;
     }
 
     public Vector3 getAcceleration(Vector3 position, Vector3 velocity) {
         Vector3 acc = calcGravity(position);
         acc.add(calcFriction(velocity));
-        if(terrain.getWindEnabled()) {
+        if (terrain.getWindEnabled()) {
             acc.add(calcWind(velocity));
         }
         return acc;
@@ -126,7 +121,7 @@ public class Physics {
         return goal;
     }
 
-    public float updateBall(float dt) {
+    public float update(float dt) {
         this.dt = dt;
 
         solver.setHit(ball.isHit());
@@ -143,22 +138,17 @@ public class Physics {
         if (!terrain.getSeasonsEnabled()) {
             if (checkInGroundType(terrain.getSandCoordinates(), newPos)) {
                 terrain.setFrictionCoefficient(SAND_FRICTION_COEFFICIENT);
-            }
-            else {
+            } else {
                 terrain.setFrictionCoefficient(GRASS_FRICTION_COEFFICIENT);
             }
-        }
-        else {
+        } else {
             if (checkInGroundType(terrain.getSandCoordinates(), newPos)) {
                 terrain.setFrictionCoefficient(SAND_FRICTION_COEFFICIENT);
-            }
-            else if (checkInGroundType(terrain.getDirtCoordinates(), newPos)) {
+            } else if (checkInGroundType(terrain.getDirtCoordinates(), newPos)) {
                 terrain.setFrictionCoefficient(DIRT_FRICTION_COEFFICIENT);
-            }
-            else if (checkInGroundType(terrain.getDarkGrassCoordinates(), newPos)) {
+            } else if (checkInGroundType(terrain.getDarkGrassCoordinates(), newPos)) {
                 terrain.setFrictionCoefficient(DARK_GRASS_FRICTION_COEFFICIENT);
-            }
-            else {
+            } else {
                 terrain.setFrictionCoefficient(GRASS_FRICTION_COEFFICIENT);
             }
         }
@@ -181,11 +171,11 @@ public class Physics {
             ball.hit(new Vector3(0, 0, 0.001f));
         }
 
-        updateBall(newPos, newVel);
+        update(newPos, newVel);
         return position.dst(newPos);
     }
 
-    protected void updateBall(Vector3 position, Vector3 velocity) {
+    protected void update(Vector3 position, Vector3 velocity) {
         //Collisions for trees, which are considered to have circular trunks
         for (Vector3 treeCoordinate : terrain.getTreeCoordinates()) {
             //The ball collides with the tree if the next position of the ball is within the bounds of the tree.
@@ -333,7 +323,7 @@ public class Physics {
         return dstBallCenterToLine <= ballRadius;
     }
 
-    private Vector3 normalOfLine(Vector3 lineStart, Vector3 lineEnd){
+    private Vector3 normalOfLine(Vector3 lineStart, Vector3 lineEnd) {
         Vector3 line = lineEnd.cpy().sub(lineStart.cpy());
         return line.rotate(new Vector3(0, 0, 1), 90).nor();
     }
@@ -341,9 +331,11 @@ public class Physics {
     public int getTreeHitCounter() {
         return treeHitCounter;
     }
+
     public void setTreeHitCounter(int counter) {
         this.treeHitCounter = counter;
     }
+
     public void resetTreeHitCounter() {
         this.treeHitCounter = 0;
     }
@@ -351,9 +343,11 @@ public class Physics {
     public int getRockHitCounter() {
         return rockHitCounter;
     }
+
     public void setRockHitCounter(int counter) {
         this.rockHitCounter = counter;
     }
+
     public void resetRockHitCounter() {
         this.rockHitCounter = 0;
     }
@@ -361,9 +355,11 @@ public class Physics {
     public int getMazeWallHitCounter() {
         return mazeWallHitCounter;
     }
+
     public void setMazeWallHitCounter(int counter) {
         this.mazeWallHitCounter = counter;
     }
+
     public void resetMazeWallHitCounter() {
         this.mazeWallHitCounter = 0;
     }
@@ -371,9 +367,11 @@ public class Physics {
     public int getWallHitCounter() {
         return wallHitCounter;
     }
+
     public void setWallHitCounter(int counter) {
         this.wallHitCounter = counter;
     }
+
     public void resetWallHitCounter() {
         this.wallHitCounter = 0;
     }
@@ -393,8 +391,5 @@ public class Physics {
 
     public Vector3 getWindForce() {
         return windForce;
-    }
-    public void setWindForce(Vector3 windForce1) {
-        this.windForce = windForce1;
     }
 }
