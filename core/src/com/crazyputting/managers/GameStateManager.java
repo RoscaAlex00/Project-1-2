@@ -25,21 +25,22 @@ public class GameStateManager {
         if (gameState != null) {
             gameState.dispose();
         }
-        if (state == MENU) {
-            gameState = new MainMenu(this);
-        }
-        if (state == PLAY) {
-            gameState = new PlayState(this, terrain);
-            //gameState = new PlayState(this, course);
-        }
-        if (state == SETTINGS) {
-            gameState = new SettingsMenu(this);
-        }
-        if (state == COURSE_CREATOR) {
-            gameState = new CreatorMenu(this);
-        }
-        if (state == END) {
-            gameState = new EndState(this);
+        switch (state){
+            case MENU:
+                gameState = new MainMenu(this);
+                break;
+            case PLAY:
+                gameState = new PlayState(this, terrain);
+                break;
+            case SETTINGS:
+                gameState = new SettingsMenu(this);
+                break;
+            case COURSE_CREATOR:
+                gameState = new CreatorMenu(this);
+                break;
+            case END:
+                gameState = new EndState(this);
+                break;
         }
     }
 
@@ -54,7 +55,6 @@ public class GameStateManager {
     public Terrain getTerrain() {
         return terrain;
     }
-
     public void setTerrain(Terrain newTerrain) {
         this.terrain = newTerrain;
     }
