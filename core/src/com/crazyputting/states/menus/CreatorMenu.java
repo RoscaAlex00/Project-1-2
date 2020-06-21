@@ -29,13 +29,15 @@ import com.crazyputting.objects.Hole;
 import com.crazyputting.objects.Terrain;
 import com.crazyputting.states.gamestates.GameState;
 
+import java.util.LinkedList;
+
 public class CreatorMenu extends GameState {
 
     private SpriteBatch spriteBatch;
     private Stage stage;
     private Skin skin;
     private BitmapFont comicFont;
-    private boolean error;
+    private boolean error = true;
 
     public CreatorMenu(GameStateManager gsm) {
         super(gsm);
@@ -46,10 +48,8 @@ public class CreatorMenu extends GameState {
      */
     @Override
     public void init() {
-        final String[] SOLVER_STRING = new String[]{"Euler", "Verlet", "Runge-Kutta", "Adams-Bashforth"};
-        final Array<String> SOLVERS = new Array<>(SOLVER_STRING);
-        final String[] PLAYER_STRING = new String[]{"Human", "AI", "AlexAI", "FrunzAI", "AStar","WindAi"};
-        final Array<String> PLAYERS = new Array<>(PLAYER_STRING);
+        final Array<String> SOLVERS = new Array<>(new String[]{"Euler", "Verlet", "Runge-Kutta", "Adams-Bashforth"});
+        final Array<String> PLAYERS = new Array<>(new String[]{"Human", "AI", "AlexAI", "FrunzAI", "AStar", "WindAi"});
 
         spriteBatch = new SpriteBatch();
         Viewport viewport = new FitViewport(CrazyPutting.width, CrazyPutting.height, CrazyPutting.cam);
@@ -67,58 +67,105 @@ public class CreatorMenu extends GameState {
         Gdx.input.setInputProcessor(stage);
 
         Table main = new Table();
-        HorizontalGroup start = new HorizontalGroup();
-        final HorizontalGroup goal = new HorizontalGroup();
-        HorizontalGroup fieldSize = new HorizontalGroup();
-        HorizontalGroup solverAndPlayer = new HorizontalGroup();
-        HorizontalGroup checkBoxes = new HorizontalGroup();
+        Table start = new Table();
+        final Table goal = new Table();
+        Table function = new Table();
+        Table fieldSize = new Table();
+        Table solverAndPlayer = new Table();
+        Table checkBoxes = new Table();
 
-        Label startXLabel = new Label("                       Start X = ", skin);
+        LinkedList<Actor> actors = new LinkedList<>();
+
+        Label startXLabel = new Label("Start X = ", skin);
         final TextField startXField = new TextField("10", skin);
-        Label startYLabel = new Label("        Start Y = ", skin);
+        Label startYLabel = new Label("Start Y = ", skin);
         final TextField startYField = new TextField("10", skin);
 
-        Label goalXLabel = new Label("    Goal X = ", skin);
+        start.add(startXLabel);
+        int HORIZONTAL_ACTORS_DISTANCE = 20;
+        start.add(startXField).padRight(HORIZONTAL_ACTORS_DISTANCE);
+        start.add(startYLabel);
+        start.add(startYField);
+        actors.add(start);
+
+        Label goalXLabel = new Label("Goal X = ", skin);
         final TextField goalXField = new TextField("20", skin);
-        Label goalYLabel = new Label("     Goal Y = ", skin);
+        Label goalYLabel = new Label("Goal Y = ", skin);
         final TextField goalYField = new TextField("20", skin);
-        Label goalRadiusLabel = new Label("     Goal Radius: ", skin);
+        Label goalRadiusLabel = new Label("Goal Radius: ", skin);
         final TextField goalRadiusField = new TextField("1", skin);
+
+        goal.add(goalXLabel);
+        goal.add(goalXField).padRight(HORIZONTAL_ACTORS_DISTANCE);
+        goal.add(goalYLabel);
+        goal.add(goalYField).padRight(HORIZONTAL_ACTORS_DISTANCE);
+        goal.add(goalRadiusLabel);
+        goal.add(goalRadiusField);
+        actors.add(goal);
 
         Label functionLabel = new Label("Function of Terrain: ", skin);
         final TextField functionField = new TextField("0", skin);
 
-        Label courseLengthLabel = new Label("                  Field Length: ", skin);
+        function.add(functionLabel);
+        int VERTICAL_ACTORS_DISTANCE = 20;
+        function.row().padTop(VERTICAL_ACTORS_DISTANCE);
+        int FUNCTION_FIELD_SIZE = 300;
+        function.add(functionField).width(FUNCTION_FIELD_SIZE);
+        actors.add(function);
+
+        Label courseLengthLabel = new Label("Field Length: ", skin);
         final TextField courseLengthField = new TextField("50", skin);
-        Label courseWidthLabel = new Label("    Field Width: ", skin);
+        Label courseWidthLabel = new Label("Field Width: ", skin);
         final TextField courseWidthField = new TextField("50", skin);
 
-        Label solverLabel = new Label("        Solver:  ", skin);
+        fieldSize.add(courseLengthLabel);
+        fieldSize.add(courseLengthField).padRight(HORIZONTAL_ACTORS_DISTANCE);
+        fieldSize.add(courseWidthLabel);
+        fieldSize.add(courseWidthField);
+        actors.add(fieldSize);
+
+        Label solverLabel = new Label("Solver:  ", skin);
         final SelectBox<String> solverSelect = new SelectBox<>(skin);
         solverSelect.setItems(SOLVERS);
-        Label playerLabel = new Label("                    Player: ", skin);
+        Label playerLabel = new Label("Player: ", skin);
         final SelectBox<String> playerSelect = new SelectBox<>(skin);
         playerSelect.setItems(PLAYERS);
-        Label windEnabled = new Label("          Wind Enabled: ",skin);
+
+        solverAndPlayer.add(playerLabel);
+        solverAndPlayer.add(playerSelect).padRight(HORIZONTAL_ACTORS_DISTANCE);
+        solverAndPlayer.add(solverLabel);
+        solverAndPlayer.add(solverSelect);
+        actors.add(solverAndPlayer);
+
+        Label windLabel = new Label("Wind Enabled: ",skin);
         final CheckBox windCheck = new CheckBox("",skin);
-        Label mazeEnabled = new Label("          Maze Enabled: ",skin);
+        Label mazeLabel = new Label("Maze Enabled: ",skin);
         final CheckBox mazeCheck = new CheckBox("",skin);
-        Label seasonsEnabled = new Label("          Seasons Enabled: ",skin);
+        Label seasonsLabel = new Label("Seasons Enabled: ",skin);
         final CheckBox seasonsCheck = new CheckBox("",skin);
 
+        checkBoxes.add(mazeLabel);
+        checkBoxes.add(mazeCheck).padRight(HORIZONTAL_ACTORS_DISTANCE);
+        checkBoxes.add(windLabel);
+        checkBoxes.add(windCheck).padRight(HORIZONTAL_ACTORS_DISTANCE);
+        checkBoxes.add(seasonsLabel);
+        checkBoxes.add(seasonsCheck);
+        actors.add(checkBoxes);
+
+        TextButton playButton = new TextButton("Play", skin);
         ChangeListener listener = new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 float goalX = 0, goalY = 0, goalRadius = 0, startX = 0, startY = 0;
                 Function function = new Derivatives(functionField.getText());
                 int length = 0, width = 0;
-                boolean windEnabled = false;
-                boolean mazeEnabled = false;
-                boolean seasonsEnabled = false;
+                boolean windEnabled = windCheck.isChecked();
+                boolean mazeEnabled = mazeCheck.isChecked();
+                boolean seasonsEnabled = seasonsCheck.isChecked();
                 String selectedSolver = solverSelect.getSelected();
                 String selectedPlayer = playerSelect.getSelected();
-                float MU = 1.5f;
-                float vMax = 15;
+                float FRICTION_COEFFICIENT = 1.5f;
+                float MAXIMUM_VELOCITY = 15;
 
                 //Makes sure that fields have been correctly filled in
                 error = goalXField.toString().isEmpty() || goalYField.toString().isEmpty() ||
@@ -126,9 +173,6 @@ public class CreatorMenu extends GameState {
                         courseLengthField.toString().isEmpty();
                 //Converts text to a value, otherwise the user needs to enter the values again
                 try {
-                    windEnabled = windCheck.isChecked();
-                    mazeEnabled = mazeCheck.isChecked();
-                    seasonsEnabled = seasonsCheck.isChecked();
                     startX = Float.parseFloat(startXField.getText().replaceAll(" ", ""));
                     startY = Float.parseFloat(startYField.getText().replaceAll(" ", ""));
                     goalX = Float.parseFloat(goalXField.getText().replaceAll(" ", ""));
@@ -137,74 +181,32 @@ public class CreatorMenu extends GameState {
                     width = Integer.parseInt(courseWidthField.getText().replaceAll(" ", ""));
                     length = Integer.parseInt(courseLengthField.getText().replaceAll(" ", ""));
                 } catch (Exception e) {
-                    errorScreen("Not all fields contain proper values (they all need to be real, and the fieldsize needs to be an integer)");
+                    errorScreen("Not all fields contain proper values (they all need to be real, and the field size needs to be an integer)");
                 }
                 if(function.evaluateHeight(startX,startY) < -0.10f || function.evaluateHeight(goalX,goalY) < -0.10f ){
-                    errorScreen("Ball or Hole in WATER!");
+                    errorScreen("Ball or Hole in water! (in a coordinate lower than 0)");
                 }
                 if (!error) {
                     PhysicsSolver solver = SolverFactory.get().makeSolver(selectedSolver);
-                    Player player = PlayerFactory.get().makePlayer(selectedPlayer, vMax);
+                    Player player = PlayerFactory.get().makePlayer(selectedPlayer, MAXIMUM_VELOCITY);
                     Vector3 teeVector = new Vector3(startX, startY, 0);
                     Vector3 holeVector = new Vector3(goalX, goalY, 0);
                     Hole hole = new Hole(goalRadius, holeVector);
 
-                    Terrain newTerrain = new Terrain(length, width, teeVector, hole, function, MU,
-                            vMax, "newTerrain", solver, player,windEnabled,mazeEnabled,seasonsEnabled);
+                    Terrain newTerrain = new Terrain(length, width, teeVector, hole, function, FRICTION_COEFFICIENT,
+                            MAXIMUM_VELOCITY, "newTerrain", solver, player, windEnabled, mazeEnabled, seasonsEnabled);
                     gsm.setTerrain(newTerrain);
                     gsm.setState(GameStateManager.PLAY);
                 }
             }
         };
-
-        TextButton playButton = new TextButton("Play", skin);
         playButton.addListener(listener);
+        actors.add(playButton);
 
-        start.addActor(startXLabel);
-        start.addActor(startXField);
-        start.addActor(startYLabel);
-        start.addActor(startYField);
-
-        goal.addActor(goalXLabel);
-        goal.addActor(goalXField);
-        goal.addActor(goalYLabel);
-        goal.addActor(goalYField);
-        goal.addActor(goalRadiusLabel);
-        goal.addActor(goalRadiusField);
-
-        fieldSize.addActor(courseLengthLabel);
-        fieldSize.addActor(courseLengthField);
-        fieldSize.addActor(courseWidthLabel);
-        fieldSize.addActor(courseWidthField);
-
-        solverAndPlayer.addActor(playerLabel);
-        solverAndPlayer.addActor(playerSelect);
-        solverAndPlayer.addActor(solverLabel);
-        solverAndPlayer.addActor(solverSelect);
-
-        checkBoxes.addActor(mazeEnabled);
-        checkBoxes.addActor(mazeCheck);
-        checkBoxes.addActor(windEnabled);
-        checkBoxes.addActor(windCheck);
-        checkBoxes.addActor(seasonsEnabled);
-        checkBoxes.addActor(seasonsCheck);
-
-        main.row();
-        main.add(start).fillY().align(Align.left);
-        main.row().pad(20, 0, 20, 0);
-        main.add(goal).fillY().align(Align.left);
-        main.row().pad(20, 0, 20, 0);
-        main.add(functionLabel).fillY().align(Align.center);
-        main.row().pad(20, 0, 20, 0);
-        main.add(functionField).fillY().align(Align.center).width(300);
-        main.row().pad(20, 0, 20, 0);
-        main.add(fieldSize).fillY().align(Align.left);
-        main.row().pad(20, 0, 20, 0);
-        main.add(solverAndPlayer).fillY().align(Align.center);
-        main.row().pad(20, 0, 20, 0);
-        main.add(checkBoxes).fillY().align(Align.center);
-        main.row().pad(20, 0, 20, 0);
-        main.add(playButton).align(Align.center);
+        for (Actor actor : actors) {
+            main.row().pad(VERTICAL_ACTORS_DISTANCE, 0, VERTICAL_ACTORS_DISTANCE, 0);
+            main.add(actor).fillY().align(Align.center);
+        }
         main.setY(main.getY());
 
         main.setFillParent(true);
@@ -249,6 +251,10 @@ public class CreatorMenu extends GameState {
 
     }
 
+    /**
+     * Screen that shows when a field is incorrectly accessed
+     * @param errorText the text that is required
+     */
     private void errorScreen(String errorText){
         TextButton buttonOK = new TextButton("Ok", skin);
         Label errorLabel = new Label(errorText, skin);
