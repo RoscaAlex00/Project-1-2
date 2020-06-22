@@ -1,7 +1,6 @@
 package com.crazyputting.physicsengine;
 
 import com.badlogic.gdx.math.Vector3;
-import com.crazyputting.physicsengine.Physics;
 
 public interface PhysicsSolver {
 

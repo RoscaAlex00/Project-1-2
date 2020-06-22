@@ -20,7 +20,7 @@ public class PlayerFactory {
     public Player makePlayer(String solverString, float maximumVelocity) {
         switch (solverString) {
             case "AI":
-                return new AI(maximumVelocity);
+                return new AI();
             case "AlexAI":
                 return new AlexAI();
             case "FrunzAI":

@@ -166,7 +166,7 @@ public class PlayState extends ThreeDimensional {
         hud.draw();
 
         spriteBatch.begin();
-        comicFont.draw(spriteBatch, "Hit Counter : " + hitCounter, 872, 760);
+        comicFont.draw(spriteBatch, "Hit Counter : " + hitCounter, 852, 760);
         //Only displays the shotcharge text if the player is human.
         if (player instanceof Human) {
             comicFont.draw(spriteBatch, "Shot Charge :", 15, 50);
