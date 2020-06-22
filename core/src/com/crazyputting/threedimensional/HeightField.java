@@ -3,6 +3,7 @@ package com.crazyputting.threedimensional;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Mesh;
 import com.badlogic.gdx.graphics.Pixmap;
+import com.badlogic.gdx.graphics.Pixmap.Format;
 import com.badlogic.gdx.graphics.VertexAttributes;
 import com.badlogic.gdx.graphics.VertexAttributes.Usage;
 import com.badlogic.gdx.graphics.g3d.utils.MeshBuilder;
@@ -12,6 +13,8 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.GdxRuntimeException;
+
+import java.nio.ByteBuffer;
 
 /** This is a test class, showing how one could implement a height field. Do not expect this to be
  * a fully supported and implemented height field class.
@@ -78,7 +81,7 @@ public class HeightField implements Disposable {
 	public final boolean smooth;
 	public final Mesh mesh;
 
-	private final float[] vertices;
+	private final float vertices[];
 	private final int stride;
 
 	private final int posPos;
@@ -101,6 +104,17 @@ public class HeightField implements Disposable {
 	private final Vector3 tmpV8 = new Vector3();
 	private final Color tmpC = new Color();
 
+	public HeightField(boolean isStatic, final Pixmap map, boolean smooth, int attributes) {
+		this(isStatic, map.getWidth(), map.getHeight(), smooth, attributes);
+		set(map);
+	}
+
+	public HeightField(boolean isStatic, final ByteBuffer colorData, final Pixmap.Format format, int width, int height,
+					   boolean smooth, int attributes) {
+		this(isStatic, width, height, smooth, attributes);
+		set(colorData, format);
+	}
+
 	public HeightField(boolean isStatic, final float[] data, int width, int height, boolean smooth, int attributes) {
 		this(isStatic, width, height, smooth, attributes);
 		set(data);
@@ -121,6 +135,7 @@ public class HeightField implements Disposable {
 		this.height = height;
 		this.smooth = smooth;
 		this.data = new float[width * height];
+
 		this.stride = attributes.vertexSize / 4;
 
 		final int numVertices = smooth ? width * height : (width - 1) * (height - 1) * 4;
@@ -135,7 +150,7 @@ public class HeightField implements Disposable {
 	private void setIndices () {
 		final int w = width - 1;
 		final int h = height - 1;
-		short[] indices = new short[w * h * 6];
+		short indices[] = new short[w * h * 6];
 		int i = -1;
 		for (int y = 0; y < h; ++y) {
 			for (int x = 0; x < w; ++x) {
@@ -156,14 +171,12 @@ public class HeightField implements Disposable {
 
 	public void update () {
 		if (smooth) {
-			if (norPos < 0) {
+			if (norPos < 0)
 				updateSimple();
-			} else {
+			else
 				updateSmooth();
-			}
-		} else {
+		} else
 			updateSharp();
-		}
 	}
 
 	private void updateSmooth () {
@@ -234,23 +247,23 @@ public class HeightField implements Disposable {
 		return out;
 	}
 
-	public void getWeightedNormalAt (Vector3 out, int x, int y) {
-/* This commented code is based on http://www.flipcode.com/archives/Calculating_Vertex_Normals_for_Height_Maps.shtml
- Note that this approach only works for a heightfield on the XZ plane with a magnitude on the y axis
- float sx = data[(x < width - 1 ? x + 1 : x) + y * width] + data[(x > 0 ? x-1 : x) + y * width];
- if (x == 0 || x == (width - 1))
- sx *= 2f;
- float sy = data[(y < height - 1 ? y + 1 : y) * width + x] + data[(y > 0 ? y-1 : y) * width + x];
- if (y == 0 || y == (height - 1))
- sy *= 2f;
- float xScale = (corner11.x - corner00.x) / (width - 1f);
- float zScale = (corner11.z - corner00.z) / (height - 1f);
- float yScale = magnitude.len();
- out.set(-sx * yScale, 2f * xScale, sy*yScale*xScale / zScale).nor();
- return out;*/
+	public Vector3 getWeightedNormalAt (Vector3 out, int x, int y) {
+// This commented code is based on http://www.flipcode.com/archives/Calculating_Vertex_Normals_for_Height_Maps.shtml
+// Note that this approach only works for a heightfield on the XZ plane with a magnitude on the y axis
+// float sx = data[(x < width - 1 ? x + 1 : x) + y * width] + data[(x > 0 ? x-1 : x) + y * width];
+// if (x == 0 || x == (width - 1))
+// sx *= 2f;
+// float sy = data[(y < height - 1 ? y + 1 : y) * width + x] + data[(y > 0 ? y-1 : y) * width + x];
+// if (y == 0 || y == (height - 1))
+// sy *= 2f;
+// float xScale = (corner11.x - corner00.x) / (width - 1f);
+// float zScale = (corner11.z - corner00.z) / (height - 1f);
+// float yScale = magnitude.len();
+// out.set(-sx * yScale, 2f * xScale, sy*yScale*xScale / zScale).nor();
+// return out;
 
-/* The following approach weights the normal of the four triangles (half quad) surrounding the position.
- A more accurate approach would be to weight the normal of the actual triangles.*/
+// The following approach weights the normal of the four triangles (half quad) surrounding the position.
+// A more accurate approach would be to weight the normal of the actual triangles.
 		int faces = 0;
 		out.set(0, 0, 0);
 
@@ -275,11 +288,11 @@ public class HeightField implements Disposable {
 			out.add(tmpV7.set(right).sub(center).nor().crs(tmpV8.set(center).sub(top).nor()).nor());
 			faces++;
 		}
-		if (faces != 0) {
+		if (faces != 0)
 			out.scl(1f / (float)faces);
-		} else {
+		else
 			out.set(magnitude).nor();
-		}
+		return out;
 	}
 
 	protected void setVertex (int index, VertexInfo info) {
@@ -306,6 +319,15 @@ public class HeightField implements Disposable {
 		}
 	}
 
+	public void set (final Pixmap map) {
+		if (map.getWidth() != width || map.getHeight() != height) throw new GdxRuntimeException("Incorrect map size");
+		set(map.getPixels(), map.getFormat());
+	}
+
+	public void set (final ByteBuffer colorData, final Pixmap.Format format) {
+		set(heightColorsToMap(colorData, format, width, height));
+	}
+
 	public void set (float[] data) {
 		set(data, 0);
 	}
@@ -321,4 +343,31 @@ public class HeightField implements Disposable {
 		mesh.dispose();
 	}
 
+	/** Simply creates an array containing only all the red components of the data. */
+	public static float[] heightColorsToMap (final ByteBuffer data, final Pixmap.Format format, int width, int height) {
+		final int bytesPerColor = (format == Format.RGB888 ? 3 : (format == Format.RGBA8888 ? 4 : 0));
+		if (bytesPerColor == 0) throw new GdxRuntimeException("Unsupported format, should be either RGB8 or RGBA8");
+		if (data.remaining() < (width * height * bytesPerColor)) throw new GdxRuntimeException("Incorrect map size");
+
+		final int startPos = data.position();
+		byte[] source = null;
+		int sourceOffset = 0;
+		if (data.hasArray() && !data.isReadOnly()) {
+			source = data.array();
+			sourceOffset = data.arrayOffset() + startPos;
+		} else {
+			source = new byte[width * height * bytesPerColor];
+			data.get(source);
+			data.position(startPos);
+		}
+
+		float[] dest = new float[width * height];
+		for (int i = 0; i < dest.length; ++i) {
+			int v = source[sourceOffset + i * bytesPerColor];
+			v = v < 0 ? 256 + v : v;
+			dest[i] = (float)v / 255f;
+		}
+
+		return dest;
+	}
 }
