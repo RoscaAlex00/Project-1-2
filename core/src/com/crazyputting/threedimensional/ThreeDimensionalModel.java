@@ -130,9 +130,8 @@ public class ThreeDimensionalModel {
                 }
             }
             terrain.setRockCoordinates(rockCoordinates);
-        }
-        //Create a maze
-        else {
+        } else {
+            //Create a maze
             Texture brick = new Texture("brick.jpg");
             Model wall1 = modelBuilder.createBox(1.4f, 48, 10,
                     new Material(TextureAttribute.createDiffuse(brick)), attr);
@@ -197,8 +196,7 @@ public class ThreeDimensionalModel {
                         y0 + (j / DIV_SIZE), 0)) <= hole_rad) {
                     heights[ih] = terrain.getFunction().evaluateHeight(x0 + (i / DIV_SIZE),
                             y0 + (j / DIV_SIZE)) - hole_depth;
-                }
-                else heights[ih] = terrain.getFunction().evaluateHeight(x0 + (i / DIV_SIZE), y0 + (j / DIV_SIZE));
+                } else heights[ih] = terrain.getFunction().evaluateHeight(x0 + (i / DIV_SIZE), y0 + (j / DIV_SIZE));
                 ih++;
             }
         }

@@ -9,8 +9,8 @@ public class GameKeys {
     public static final int ESCAPE = 5;
     public static final int SPACE = 6;
     private static final int NUM_KEYS = 7;
-    private static boolean[] keys;
-    private static boolean[] pkeys;
+    private static final boolean[] keys;
+    private static final boolean[] pkeys;
 
     static {
         keys = new boolean[NUM_KEYS];
@@ -18,9 +18,7 @@ public class GameKeys {
     }
 
     public static void update() {
-        for (int i = 0; i < NUM_KEYS; i++) {
-            pkeys[i] = keys[i];
-        }
+        System.arraycopy(keys, 0, pkeys, 0, NUM_KEYS);
     }
 
     public static void setKey(int k, boolean b) {

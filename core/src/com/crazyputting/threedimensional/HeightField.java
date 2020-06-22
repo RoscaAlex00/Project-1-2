@@ -158,12 +158,10 @@ public class HeightField implements Disposable {
 		if (smooth) {
 			if (norPos < 0) {
 				updateSimple();
-			}
-			else {
+			} else {
 				updateSmooth();
 			}
-		}
-		else {
+		} else {
 			updateSharp();
 		}
 	}
@@ -277,10 +275,11 @@ public class HeightField implements Disposable {
 			out.add(tmpV7.set(right).sub(center).nor().crs(tmpV8.set(center).sub(top).nor()).nor());
 			faces++;
 		}
-		if (faces != 0)
+		if (faces != 0) {
 			out.scl(1f / (float)faces);
-		else
+		} else {
 			out.set(magnitude).nor();
+		}
 	}
 
 	protected void setVertex (int index, VertexInfo info) {

@@ -30,9 +30,6 @@ public class AStar implements Player {
     *  the values correspond to the width and length of the obstacle. It is meant for objects such as walls. */
     private Map<Vector3, List<Float>> rectangularObstacles;
 
-    /**
-     * Only used for human player
-     */
     @Override
     public Vector3 shot_velocity(Vector3 camera_direction, float charge) throws IllegalAccessException {
         throw new IllegalAccessException("This is the wrong class");
@@ -87,8 +84,7 @@ public class AStar implements Player {
                 //used to estimate the friction
                 prevShot = velocity.cpy();
                 ball.hit(velocity);
-            }
-            else {
+            } else {
                 index++;
             }
         }
@@ -237,8 +233,7 @@ public class AStar implements Player {
             Node node = path.get(i);
             if (i == path.size() - 1){
                 turningNodes.add(node);
-            }
-            else if (i != 1 && node.getOrientation() != node.getParent().getOrientation()){
+            } else if (i != 1 && node.getOrientation() != node.getParent().getOrientation()){
                 turningNodes.add(node.getParent());
             }
         }
@@ -311,7 +306,6 @@ public class AStar implements Player {
      * Here the formula for the stopping distance is used: s = v^2 / (2 * Mu * g). Rewriting gives:
      * v = sqrt(a * Mu) where a = s * 2 * g. Since a is a constant, and the variable is Mu in this case,
      * v depends on Mu. So the velocity needs to be scaled by: v2 / v1 = sqrt(Mu2) / sqrt(Mu1) = sqrt(Mu2 / Mu1).
-     * @return
      */
     private float estimateFriction(){
         float friction = Physics.GRASS_FRICTION_COEFFICIENT;
@@ -328,17 +322,15 @@ public class AStar implements Player {
      * Scale the velocity in different ways depending on the distance to the next coordinate
      */
     private void scaleVelocity(Vector3 velocity){
-        int THRESHOLD_X = 6;
-        int THRESHOLD_Y = 6;
+        int THRESHOLD1 = 6;
+        int THRESHOLD2 = 15;
         float subX = velocity.x;
         float subY = velocity.y;
-        if (subX < THRESHOLD_X && subY < THRESHOLD_Y && subX > -THRESHOLD_X && subY > -THRESHOLD_Y) {
+        if (subX < THRESHOLD1 && subY < THRESHOLD1 && subX > -THRESHOLD1 && subY > -THRESHOLD1) {
             velocity.scl(1.07f);
-        }
-        else if (subX < 15f && subY < 15f && subX > -15f && subY > -15f) {
+        } else if (subX < THRESHOLD2 && subY < THRESHOLD2 && subX > -THRESHOLD2 && subY > -THRESHOLD2) {
             velocity.scl(0.59f);
-        }
-        else {
+        } else {
             velocity.scl(0.325f);
         }
     }

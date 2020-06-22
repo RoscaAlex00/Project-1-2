@@ -90,8 +90,7 @@ public abstract class ThreeDimensional extends GameState {
         if (!terrain.getMazeEnabled()) {
             batch.render(threeDimensionalModel.getTree(), environment);
             batch.render(threeDimensionalModel.getRock(), environment);
-        }
-        else {
+        } else {
             batch.render(threeDimensionalModel.getMaze(), environment);
         }
         batch.end();
@@ -167,8 +166,7 @@ public abstract class ThreeDimensional extends GameState {
                     default:
                         field.material = new Material(TextureAttribute.createDiffuse(new Texture("grass.jpg")));
                 }
-            }
-            else {
+            } else {
                 field.material = new Material(TextureAttribute.createDiffuse(new Texture("grass.jpg")));
             }
             fields.add(field);

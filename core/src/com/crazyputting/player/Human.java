@@ -23,9 +23,6 @@ public class Human implements Player {
         return camera_direction.scl(reverse * scalingFactor * charge);
     }
 
-    /**
-     * Only used for the AI classes
-     */
     @Override
     public void shot_velocity(Terrain terrain) throws IllegalAccessException {
         throw new IllegalAccessException("This is the wrong class");

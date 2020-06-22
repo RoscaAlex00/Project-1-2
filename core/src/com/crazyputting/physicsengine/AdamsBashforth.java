@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Adams-Bashforth Solver
+ * Adams-Bashforth 4-stage Solver
  */
 
 public class AdamsBashforth implements PhysicsSolver {
@@ -14,9 +14,9 @@ public class AdamsBashforth implements PhysicsSolver {
     private final int[] ab4Coefficients = new int[]{-9, 37, -59, 55};
     private boolean isHit = false;
     private Physics physics;
-    private PhysicsSolver bootstrap = new RungeKutta();
-    private List<Vector3> positions = new ArrayList<>();
-    private List<Vector3> velocities = new ArrayList<>();
+    private final PhysicsSolver bootstrap = new RungeKutta();
+    private final List<Vector3> positions = new ArrayList<>();
+    private final List<Vector3> velocities = new ArrayList<>();
 
     @Override
     public void setPhysics(Physics physics) {
@@ -45,7 +45,7 @@ public class AdamsBashforth implements PhysicsSolver {
                 velocityFunctions[i] = velocities.get(i).cpy();
             }
 
-            Vector3 funSum = new Vector3(0, 0, 0);
+            Vector3 funSum = new Vector3();
             for (int i = velocityFunctions.length - 1; i >= 0; i--) {
                 funSum.add(velocityFunctions[i].scl(ab4Coefficients[i]));
             }
@@ -77,7 +77,7 @@ public class AdamsBashforth implements PhysicsSolver {
                 accelerationFunctions[i] = physics.getAcceleration(positions.get(i), velocities.get(i)).cpy();
             }
 
-            Vector3 funSum = new Vector3(0, 0, 0);
+            Vector3 funSum = new Vector3();
             for (int i = accelerationFunctions.length - 1; i >= 0; i--) {
                 funSum.add(accelerationFunctions[i].scl(ab4Coefficients[i]));
             }

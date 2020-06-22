@@ -17,7 +17,6 @@ public class Individual {
     private Vector3 shotVelocity;
 
     public Individual(Terrain terrain) {
-
         this.terrain = terrain;
         this.hole = terrain.getHole();
         this.ball = terrain.getBall();

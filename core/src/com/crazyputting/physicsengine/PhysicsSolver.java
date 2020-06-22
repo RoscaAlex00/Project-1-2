@@ -11,6 +11,8 @@ public interface PhysicsSolver {
 
     Vector3 getSpeed(Vector3 position, Vector3 velocity);
 
-    //Only used for AdamsBashforth
+    /**
+     * Only used for Adams Bashforth solver
+     */
     void setHit(boolean isHit);
 }

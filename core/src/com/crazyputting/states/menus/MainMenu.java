@@ -89,8 +89,7 @@ public class MainMenu extends GameState {
         for (int i = 0; i < textButtons.length; i++) {
             if (currentItem == i){
                 textButtons[i].setColor(selectColor);
-            }
-            else {
+            } else {
                 textButtons[i].setColor(unselectedColor);
             }
         }

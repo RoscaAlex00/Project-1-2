@@ -10,11 +10,6 @@ import com.crazyputting.player.Player;
 import java.util.Random;
 
 public class FrunzAI implements Player {
-    private Hole hole;
-    private Ball ball;
-    private Terrain terrain;
-    private Vector3 start;
-    private Vector3 velocity;
     private Vector3 vec;
     public int numberOfHits=0;
 
@@ -25,12 +20,11 @@ public class FrunzAI implements Player {
 
     @Override
     public void shot_velocity(Terrain terrain) {
-        this.ball = terrain.getBall();
-        this.hole = terrain.getHole();
-        this.start = terrain.getStartPos();
+        Ball ball = terrain.getBall();
+        Hole hole = terrain.getHole();
+        Vector3 start = terrain.getStartPos();
 
-        float subX = hole.getPosition().cpy().sub(terrain.getBall().getPosition().cpy()).x;
-        float subY = hole.getPosition().cpy().sub(terrain.getBall().getPosition().cpy()).y;
+        Vector3 sub = hole.getPosition().cpy().sub(terrain.getBall().getPosition().cpy());
 
         float generated1;
         float generated2;
@@ -40,26 +34,20 @@ public class FrunzAI implements Player {
             if(start.dst(hole.getPosition())<25f) {
                 generated1 = randFloatSmall();
                 generated2 = randFloatSmall();
-            }
-            else{
+            } else{
                 generated1 = randFloatBig();
                 generated2 = randFloatBig();
-
             }
             pointCollection[i] = new Point(generated1, generated2);
             float holeDis = pointCollection[i].holeDisCalc(pointCollection[i], hole);
             float startDis = pointCollection[i].startDisCalc(pointCollection[i], start);
-            pointCollection[i].setDisHole(holeDis);
-            pointCollection[i].setDisStart(startDis);
             pointCollection[i].setCumulativeDistance(holeDis + 4 * startDis);
-
         }
 
         float minDis = pointCollection[0].getCumulativeDistance();
         for (int i = 1; i < pointCollection.length; i++) {
             if (pointCollection[i].getCumulativeDistance() < minDis) {
                 minDis = pointCollection[i].getCumulativeDistance();
-
             }
         }
 
@@ -68,7 +56,9 @@ public class FrunzAI implements Player {
                 vec = point.getPointPosition();
             }
         }
-        if (subX < 2f && subY < 2f && subX > -2f && subY > -2f) {
+        Vector3 velocity;
+        float THRESHOLD = 2f;
+        if (-THRESHOLD < sub.x && sub.x < THRESHOLD && -THRESHOLD < sub.y && sub.y < THRESHOLD) {
             velocity = hole.getPosition().cpy().sub(terrain.getBall().getPosition().cpy());
             ball.hit(velocity);
             numberOfHits++;
@@ -86,16 +76,16 @@ public class FrunzAI implements Player {
     public float randFloatSmall() {
         Random rand = new Random();
         return (rand.nextFloat() * (35 - 0f) + 0f);
-
     }
     public float randFloatBig() {
         Random rand = new Random();
         return (rand.nextFloat() * (70 - 0f) + 0f);
-
     }
 
+    /**
+     * Not used in this AI
+     */
     @Override
     public void setTerrain(Terrain terrain) {
-        this.terrain = terrain;
     }
 }

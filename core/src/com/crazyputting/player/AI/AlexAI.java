@@ -7,46 +7,38 @@ import com.crazyputting.objects.Terrain;
 import com.crazyputting.player.Player;
 
 public class AlexAI implements Player {
-    private Hole hole;
-    private Ball ball;
-    private Terrain terrain;
-    private Vector3 velocity;
-    private int hitCounter;
 
     @Override
     public Vector3 shot_velocity(Vector3 camera_direction, float charge) throws IllegalAccessException {
         throw new IllegalAccessException("This is the wrong class");
     }
 
+    /**
+     * Scale the velocity in different ways depending on the distance to the next coordinate
+     */
     @Override
     public void shot_velocity(Terrain terrain) {
-        this.ball = terrain.getBall();
-        Vector3 threshold = new Vector3(5f, 5f, 0);
-        this.hole = terrain.getHole();
-        velocity = new Vector3();
-        hitCounter++;
-        float subX = hole.getPosition().cpy().sub(ball.getPosition().cpy()).x;
-        float subY = hole.getPosition().cpy().sub(ball.getPosition().cpy()).y;
-
-        if (subX < threshold.x && subY < threshold.y && subX > -threshold.x && subY > -threshold.y) {
-            //System.out.println("threshold: " + subX + " y: " + subY);
-            velocity = hole.getPosition().cpy().sub(ball.getPosition().cpy());
+        Ball ball = terrain.getBall();
+        Hole hole = terrain.getHole();
+        Vector3 velocity = hole.getPosition().cpy().sub(ball.getPosition().cpy());
+        int THRESHOLD1 = 5;
+        int THRESHOLD2 = 15;
+        float subX = velocity.x;
+        float subY = velocity.y;
+        if (subX < THRESHOLD1 && subY < THRESHOLD1 && subX > -THRESHOLD1 && subY > -THRESHOLD1) {
             velocity.scl(1.07f);
-        } else if (subX < 15f && subY < 15f && subX > -15f && subY > -15f) {
-            // System.out.println("regular: " + subX + " y: " + subY);
-            velocity = hole.getPosition().cpy().sub(ball.getPosition().cpy());
+        } else if (subX < THRESHOLD2 && subY < THRESHOLD2 && subX > -THRESHOLD2 && subY > -THRESHOLD2) {
             velocity.scl(0.65f);
         } else {
-            //System.out.println("regula22: " + subX + " y: " + subY);
-            velocity = hole.getPosition().cpy().sub(ball.getPosition().cpy());
             velocity.scl(0.325f);
         }
-        System.out.println(hitCounter);
         ball.hit(velocity);
     }
 
+    /**
+     * Not used in this AI
+     */
     @Override
     public void setTerrain(Terrain terrain) {
-        this.terrain = terrain;
     }
 }

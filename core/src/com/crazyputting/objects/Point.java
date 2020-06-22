@@ -3,30 +3,15 @@ package com.crazyputting.objects;
 import com.badlogic.gdx.math.Vector3;
 
 public class Point {
-    private Vector3 pointPosition;
-    private float disHole;
-    private float disStart;
+    private final Vector3 pointPosition;
     private float cumulativeDistance;
-    private float x;
-    private float y;
-
+    private final float x;
+    private final float y;
 
     public Point(float x, float y) {
-        this.disHole = 0;
-        this.disStart = 0;
         this.x = x;
         this.y = y;
         this.pointPosition = new Vector3(x, y, 0);
-    }
-
-
-    public void setDisStart(float disStart) {
-        this.disStart = disStart;
-    }
-
-
-    public void setDisHole(float disHole) {
-        this.disHole = disHole;
     }
 
     public float getCumulativeDistance() {
@@ -37,14 +22,11 @@ public class Point {
         this.cumulativeDistance = cumulativeDistance;
     }
 
-
     public Vector3 getPointPosition() {
         return pointPosition;
     }
 
-
     public float holeDisCalc(Point p, Hole hole) {
-
         double holeDisxd = Math.pow((hole.getPosition().x - p.x), 2);
         double holeDisyd = Math.pow((hole.getPosition().y - p.y), 2);
         double holeDisd = holeDisxd + holeDisyd;
@@ -57,6 +39,4 @@ public class Point {
         double startDisd = startDisxd + startDisyd;
         return (float) startDisd;
     }
-
-
 }

@@ -76,8 +76,7 @@ public class PlayState extends ThreeDimensional {
 
             hud.addActor(chargeMeter);
             hud.addActor(chargeBar);
-        }
-        else {
+        } else {
             player.setTerrain(terrain);
         }
         //If the player is the windAI, declare the wind
@@ -99,16 +98,15 @@ public class PlayState extends ThreeDimensional {
         handleInput();
         super.update(dt);
 
-        //update the ball's model when it's moved
+        // update the ball's model when it's moved
         if (!ball.isStopped()) {
             ball.updateInstance(terrain.getFunction().evaluateHeight(ball.getPosition().x, ball.getPosition().y),
                     physics.update(dt));
-        }
-        //Only if the ball is stopped, a ball can be shot or a goal can be scored
-        else {
-            /* The player can determine the shot-strength by pressing space twice within a certain interval.
-            * They can also determine the direction with the camera angle */
+        } else {
+            // The player shoots the ball here
             if (player instanceof Human) {
+                /* The human player can determine the shot-strength by pressing space twice within a certain interval.
+                 * They can also determine the direction with the camera angle */
                 if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
                     isSpacePressed = true;
                     startChargeTime = System.currentTimeMillis();
@@ -122,12 +120,12 @@ public class PlayState extends ThreeDimensional {
                     ball.hit(player.shot_velocity(cameraDirection, charge));
                     hitCounter++;
                 }
-            }
-            else if (player instanceof AI) {
+            } else if (player instanceof AI) {
                 ball.setPosition(new Vector3(10, 10, 0));
-            }
-            else {
+                hitCounter++;
+            } else {
                 player.shot_velocity(terrain);
+                hitCounter++;
             }
             if (physics.isGoal()) {
                 gsm.setState(GameStateManager.END);
@@ -151,8 +149,7 @@ public class PlayState extends ThreeDimensional {
         float remainder = chargeTime % 2;
         if ((((int) chargeTime) % 2) == 0) {
             return remainder;
-        }
-        else {
+        } else {
             return (2.0f - remainder);
         }
     }
@@ -168,13 +165,13 @@ public class PlayState extends ThreeDimensional {
         hud.act();
         hud.draw();
 
-        //Only displays the hitcounter and shotcharge text if the player is human.
+        spriteBatch.begin();
+        comicFont.draw(spriteBatch, "Hit Counter : " + hitCounter, 872, 760);
+        //Only displays the shotcharge text if the player is human.
         if (player instanceof Human) {
-            spriteBatch.begin();
-            comicFont.draw(spriteBatch, "Hit Counter : " + hitCounter, 872, 760);
             comicFont.draw(spriteBatch, "Shot Charge :", 15, 50);
-            spriteBatch.end();
         }
+        spriteBatch.end();
     }
 
     /**

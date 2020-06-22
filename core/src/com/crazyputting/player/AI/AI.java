@@ -93,7 +93,6 @@ public class AI implements Player {
         return tournamentPopulation;
     }
 
-    //TODO: Crossover
     Individual[] crossover(Population population) {
         int length = population.getIndividuals().length;
         Individual[] offsprings = new Individual[length];
@@ -117,8 +116,6 @@ public class AI implements Player {
         return offSpring;
     }
 
-
-    //TODO: Mutation
     void mutation(Population population) {
         double chanceOfMutation = 0.07;
         double xOrYOrZ = Math.random();

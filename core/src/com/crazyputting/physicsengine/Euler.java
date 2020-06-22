@@ -1,6 +1,7 @@
 package com.crazyputting.physicsengine;
 
 import com.badlogic.gdx.math.Vector3;
+
 /**
  * Euler Solver
  */

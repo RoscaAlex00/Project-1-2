@@ -194,7 +194,7 @@ public class CreatorMenu extends GameState {
                     Hole hole = new Hole(goalRadius, holeVector);
 
                     Terrain newTerrain = new Terrain(length, width, teeVector, hole, function, FRICTION_COEFFICIENT,
-                            MAXIMUM_VELOCITY, "newTerrain", solver, player, windEnabled, mazeEnabled, seasonsEnabled);
+                            solver, player, windEnabled, mazeEnabled, seasonsEnabled);
                     gsm.setTerrain(newTerrain);
                     gsm.setState(GameStateManager.PLAY);
                 }

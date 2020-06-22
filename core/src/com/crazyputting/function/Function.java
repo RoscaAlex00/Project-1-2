@@ -8,7 +8,5 @@ public interface Function {
 
     float calcYDeriv(float x, float y);
 
-    double evaluate(Vector3 pos);
-
     float evaluateHeight(float f, float g);
 }

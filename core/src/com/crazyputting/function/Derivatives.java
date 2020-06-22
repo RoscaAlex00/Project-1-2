@@ -1,8 +1,5 @@
 package com.crazyputting.function;
 
-import com.badlogic.gdx.math.Vector3;
-
-import java.io.Serializable;
 import java.util.Stack;
 
 public class Derivatives implements Function {
@@ -20,7 +17,7 @@ public class Derivatives implements Function {
 
     public Derivatives(String[] postFix) {
         this.postfix = postFix;
-        Stack<Node> nodeStack = new Stack();
+        Stack<Node> nodeStack = new Stack<>();
         Node tempRoot, tempLeft, tempRight;
 
         for (String fix : postFix) {
@@ -80,8 +77,8 @@ public class Derivatives implements Function {
     }
 
     private static String[] convert(String[] infix) {
-        Stack<String> operatorStack = new Stack();
-        Stack<String> postfixStack = new Stack();
+        Stack<String> operatorStack = new Stack<>();
+        Stack<String> postfixStack = new Stack<>();
 
         for (String currentSymbol : infix) {
             if (isOperator(currentSymbol)) {
@@ -128,11 +125,6 @@ public class Derivatives implements Function {
 
     public float calcYDeriv(float x, float y) {
         return evaluate(yDeriv, x, y);
-    }
-
-    @Override
-    public double evaluate(Vector3 pos) {
-        return 0;
     }
 
     private float evaluate(Node root, float xValue, float yValue) {
@@ -282,7 +274,6 @@ public class Derivatives implements Function {
                 tempNode.left = xDerive(root.left);
                 tempNode.right = root.left;
             }
-
             return tempNode;
         }
 
@@ -297,7 +288,6 @@ public class Derivatives implements Function {
                 tempNode.left = xDerive(root.left);
                 tempNode.right.right = root.left;
             }
-
             return tempNode;
         }
 
@@ -313,7 +303,6 @@ public class Derivatives implements Function {
             tempNode.left = xDerive(root.left);
             tempNode.right.right.right = root.left;
         }
-
         return tempNode;
     }
 
@@ -399,7 +388,6 @@ public class Derivatives implements Function {
                 tempNode.left = yDerive(root.left);
                 tempNode.right = root.left;
             }
-
             return tempNode;
         }
 
@@ -414,7 +402,6 @@ public class Derivatives implements Function {
                 tempNode.left = yDerive(root.left);
                 tempNode.right.right = root.left;
             }
-
             return tempNode;
         }
 
@@ -430,7 +417,6 @@ public class Derivatives implements Function {
             tempNode.left = yDerive(root.left);
             tempNode.right.right.right = root.left;
         }
-
         return tempNode;
     }
 

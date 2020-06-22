@@ -6,6 +6,7 @@ import com.crazyputting.objects.Ball;
 import com.crazyputting.objects.Hole;
 import com.crazyputting.objects.Terrain;
 import com.crazyputting.player.Human;
+import com.crazyputting.threedimensional.ThreeDimensionalModel;
 
 import java.util.List;
 import java.util.Random;
@@ -14,7 +15,7 @@ import java.util.Random;
 public class Physics {
     public static final float TREE_RADIUS = 0.5f;
     public static final float ROCK_RADIUS = 0.35f;
-    public static final float FIELD_SQUARE_WIDTH = 5;
+    public static final float FIELD_SQUARE_WIDTH = ThreeDimensionalModel.CHUNK_SIZE;
     public static final float WALL_LENGTH = 48.4f;
     public static final float WALL_WIDTH = 2f;
 
@@ -28,24 +29,18 @@ public class Physics {
     protected final double SPVELOCITY = 0.20;
     protected final double SPACCELERATION = 0.9;
 
-    private final float GOAL_TOLERANCE = 2f;
-    private final float WALL_POWER_LOSS = -0.80f;
-    private final float TREE_POWER_LOSS = -0.65f;
-    private final float ROCK_POWER_LOSS = -0.50f;
-
     float dt = Gdx.graphics.getDeltaTime();
 
-    private Ball ball;
-    private Terrain terrain;
-    private PhysicsSolver solver;
-    private Hole hole;
-    private float radius;
+    private final Ball ball;
+    private final Terrain terrain;
+    private final PhysicsSolver solver;
+    private final Hole hole;
+    private final float radius;
     private int wallHitCounter;
     private int treeHitCounter;
     private int rockHitCounter;
     private int mazeWallHitCounter;
     private Vector3 windForce;
-
 
     public Physics(Ball yourBall, Terrain yourTerrain, Hole newHole, PhysicsSolver solver) {
         this.ball = yourBall;
@@ -88,14 +83,10 @@ public class Physics {
     }
 
     private Vector3 calcWind(Vector3 velocity) {
-        float windForceX = windForce.x * 0.5f * DRAG_COEFFICIENT
-                * matPower(Ball.DIAMETER / 2.0f, 2);
-        float windForceY = windForce.y * 0.5f * DRAG_COEFFICIENT
-                * matPower(Ball.DIAMETER / 2.0f, 2);
+        float windForceX = windForce.x * 0.5f * DRAG_COEFFICIENT * matPower(Ball.DIAMETER / 2.0f, 2);
+        float windForceY = windForce.y * 0.5f * DRAG_COEFFICIENT * matPower(Ball.DIAMETER / 2.0f, 2);
         Vector3 windForceNew = new Vector3(windForceX, windForceY, 0f);
-
-            windForceNew.scl((float) (-1f * velocity.len() * Math.PI) * 2.75f);
-        return windForceNew;
+        return windForceNew.scl((float) (-1f * velocity.len() * Math.PI) * 2.75f);
     }
 
     public Vector3 getAcceleration(Vector3 position, Vector3 velocity) {
@@ -115,6 +106,7 @@ public class Physics {
         vel.z = 0f;
         hol.z = 0f;
         boolean goal = false;
+        float GOAL_TOLERANCE = 2f;
         if ((pos.dst(hol) < radius) && vel.len() < GOAL_TOLERANCE) {
             goal = true;
         }
@@ -155,22 +147,19 @@ public class Physics {
 
         //Do something when the ball gets in the water
         if (terrain.getFunction().evaluateHeight(newPos.x, newPos.y) <= -0.1f) {
-            //Option 1
+            /* if the player is human, the ball is set back to the previous position when it hits the water
+            * otherwise the ball is set back a bit*/
             if (terrain.getPlayer() instanceof Human) {
                 ball.setStopped();
                 ball.getPosition().set(ball.getHitPosition());
-            }
-            //option 2
-            else {
+            } else {
                 ball.setStopped();
-                //set the ball back a bit out of the water
                 Vector3 outOfWaterPos = newPos.cpy().add(position.cpy().sub(newPos.cpy()).nor().scl(3));
                 ball.getPosition().set(outOfWaterPos);
             }
             //update ball for debugging reasons
             ball.hit(new Vector3(0, 0, 0.001f));
         }
-
         update(newPos, newVel);
         return position.dst(newPos);
     }
@@ -178,10 +167,10 @@ public class Physics {
     protected void update(Vector3 position, Vector3 velocity) {
         //Collisions for trees, which are considered to have circular trunks
         for (Vector3 treeCoordinate : terrain.getTreeCoordinates()) {
-            //The ball collides with the tree if the next position of the ball is within the bounds of the tree.
             if (ballIsCollidingWithCircle(ball, treeCoordinate, TREE_RADIUS)) {
                 treeHitCounter++;
                 if (getTreeHitCounter() == 1) {
+                    float TREE_POWER_LOSS = -0.65f;
                     ball.setVelocity(findReflection(ball, TREE_POWER_LOSS, findNormalOfCircleCollision(ball, treeCoordinate)));
                 }
             }
@@ -192,12 +181,14 @@ public class Physics {
             if (ballIsCollidingWithCircle(ball, rockCoordinate, ROCK_RADIUS)) {
                 rockHitCounter++;
                 if (getRockHitCounter() == 1) {
+                    float ROCK_POWER_LOSS = -0.50f;
                     ball.setVelocity(findReflection(ball, ROCK_POWER_LOSS, findNormalOfCircleCollision(ball, rockCoordinate)));
                 }
             }
         }
 
         //Collisions for maze walls
+        float WALL_POWER_LOSS = -0.80f;
         if (terrain.getMazeEnabled()) {
             for (Vector3 mazeWallCoordinate : terrain.getMazeWallCoordinates()) {
                 if (mazeWallCoordinate.x - WALL_WIDTH / 2f <= position.x && position.x <= mazeWallCoordinate.x + WALL_WIDTH / 2f
@@ -292,14 +283,20 @@ public class Physics {
         return ballVelocity.sub(normal.scl(2 * normal.dot(ballVelocity))).scl(-powerLoss);
     }
 
+    /**
+     * Since the ball collides with an obstacle when it's next position would be in the obstacle,
+     * and the normal of the circle is calculated at this time. The normal line can be off,
+     * since the frame where the ball collides with the obstacle is usually not the exact position where
+     * the ball should hit the obstacle.
+     */
     private Vector3 findNormalOfCircleCollision(Ball ball, Vector3 obstacle) {
         return ball.getPosition().cpy().sub(obstacle.cpy()).nor();
     }
 
-    private boolean ballIsCollidingWithCircle(Ball ball, Vector3 tree, float radius) {
-        float distance = ball.getPosition().dst(tree);
+    private boolean ballIsCollidingWithCircle(Ball ball, Vector3 obstacle, float obstacleRadius) {
+        float distance = ball.getPosition().dst(obstacle);
         float ballRadius = Ball.DIAMETER / 2f;
-        return distance <= (ballRadius + radius);
+        return distance <= (ballRadius + obstacleRadius);
     }
 
     private boolean ballIsInGroundType(Vector3 ball, Vector3 ground) {

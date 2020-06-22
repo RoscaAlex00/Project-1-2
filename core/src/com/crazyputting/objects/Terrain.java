@@ -7,15 +7,12 @@ import com.crazyputting.function.Function;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class Terrain {
     private final float height;
     private final float width;
     private final Vector3 startPos;
     private final Hole hole;
-    private final String name;
     private final Function yourFunction;
-    private final float maximumVelocity;
     private final PhysicsSolver solver;
     private final Player player;
     private float frictionCoefficient;
@@ -26,22 +23,19 @@ public class Terrain {
     private List<Vector3> mazeWallCoordinates;
     private List<Vector3> dirtCoordinates;
     private List<Vector3> darkGrassCoordinates;
-    private boolean windEnabled;
-    private boolean mazeEnabled;
-    private boolean seasonsEnabled;
+    private final boolean windEnabled;
+    private final boolean mazeEnabled;
+    private final boolean seasonsEnabled;
 
 
     public Terrain(float ourHeight, float ourWidth, Vector3 teeVector, Hole endHole, Function function, float MU,
-                   float maxSpeed, String name, PhysicsSolver solver, Player player, boolean windEnabled, boolean mazeEnabled,
-                   boolean seasonsEnabled) {
+                   PhysicsSolver solver, Player player, boolean windEnabled, boolean mazeEnabled, boolean seasonsEnabled) {
         this.height = ourHeight;
         this.width = ourWidth;
         this.startPos = teeVector;
         this.hole = endHole;
-        this.name = name;
         this.yourFunction = function;
         this.frictionCoefficient = MU;
-        this.maximumVelocity = maxSpeed;
         this.sandCoordinates = new ArrayList<>();
         this.solver = solver;
         this.player = player;
@@ -96,7 +90,6 @@ public class Terrain {
         this.ball = ball;
     }
 
-
     public List<Vector3> getTreeCoordinates() {
         return treeCoordinates;
     }
@@ -129,7 +122,6 @@ public class Terrain {
         this.rockCoordinates = newCoords;
     }
 
-
     public List<Vector3> getDirtCoordinates() {
         return dirtCoordinates;
     }
@@ -158,9 +150,7 @@ public class Terrain {
         return windEnabled;
     }
 
-
     public boolean getMazeEnabled() {
-
         return mazeEnabled;
     }
 
