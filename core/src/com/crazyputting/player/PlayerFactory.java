@@ -1,6 +1,6 @@
 package com.crazyputting.player;
 
-import com.crazyputting.player.AI.AI;
+import com.crazyputting.player.AI.GeneticAlgorithm;
 import com.crazyputting.player.AI.AlexAI;
 import com.crazyputting.player.AI.FrunzAI;
 import com.crazyputting.player.AI.WindAI;
@@ -19,8 +19,8 @@ public class PlayerFactory {
 
     public Player makePlayer(String solverString, float maximumVelocity) {
         switch (solverString) {
-            case "AI":
-                return new AI();
+            case "GA":
+                return new GeneticAlgorithm();
             case "AlexAI":
                 return new AlexAI();
             case "FrunzAI":

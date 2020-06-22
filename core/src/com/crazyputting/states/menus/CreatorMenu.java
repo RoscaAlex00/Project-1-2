@@ -49,7 +49,7 @@ public class CreatorMenu extends GameState {
     @Override
     public void init() {
         final Array<String> SOLVERS = new Array<>(new String[]{"Euler", "Verlet", "Runge-Kutta", "Adams-Bashforth"});
-        final Array<String> PLAYERS = new Array<>(new String[]{"Human", "AI", "AlexAI", "FrunzAI", "AStar", "WindAi"});
+        final Array<String> PLAYERS = new Array<>(new String[]{"Human", "AlexAI", "FrunzAI", "AStar", "WindAi","GA"});
 
         spriteBatch = new SpriteBatch();
         Viewport viewport = new FitViewport(CrazyPutting.width, CrazyPutting.height, CrazyPutting.cam);

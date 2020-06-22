@@ -1,0 +1,89 @@
+<changelist name="Uncommitted_changes_before_Update_at_6_22_2020_3_38_PM_[Default_Changelist]" date="1592829498722" recycled="true" deleted="true">
+  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_6_22_2020_3_38_PM_[Default_Changelist]/shelved.patch" />
+  <option name="DESCRIPTION" value="Uncommitted changes before Update at 6/22/2020 3:38 PM [Default Changelist]" />
+  <binary>
+    <option name="BEFORE_PATH" value=".gradle/5.4.1/executionHistory/executionHistory.bin" />
+    <option name="AFTER_PATH" value=".gradle/5.4.1/executionHistory/executionHistory.bin" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_6_22_2020_3_38_PM_[Default_Changelist]/executionHistory.bin" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value=".gradle/5.4.1/executionHistory/executionHistory.lock" />
+    <option name="AFTER_PATH" value=".gradle/5.4.1/executionHistory/executionHistory.lock" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_6_22_2020_3_38_PM_[Default_Changelist]/executionHistory.lock" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value=".gradle/5.4.1/fileHashes/resourceHashesCache.bin" />
+    <option name="AFTER_PATH" value=".gradle/5.4.1/fileHashes/resourceHashesCache.bin" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_6_22_2020_3_38_PM_[Default_Changelist]/resourceHashesCache.bin" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="desktop/build/classes/java/main/com/crazyputting/desktop/DesktopLauncher.class" />
+    <option name="AFTER_PATH" value="desktop/build/classes/java/main/com/crazyputting/desktop/DesktopLauncher.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_6_22_2020_3_38_PM_[Default_Changelist]/DesktopLauncher.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="core/build/classes/java/main/com/crazyputting/player/astar/AStar.class" />
+    <option name="AFTER_PATH" value="core/build/classes/java/main/com/crazyputting/player/astar/AStar.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_6_22_2020_3_38_PM_[Default_Changelist]/AStar.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value=".gradle/5.4.1/javaCompile/classAnalysis.bin" />
+    <option name="AFTER_PATH" value=".gradle/5.4.1/javaCompile/classAnalysis.bin" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_6_22_2020_3_38_PM_[Default_Changelist]/classAnalysis.bin" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="core/build/classes/java/main/com/crazyputting/objects/Terrain.class" />
+    <option name="AFTER_PATH" value="core/build/classes/java/main/com/crazyputting/objects/Terrain.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_6_22_2020_3_38_PM_[Default_Changelist]/Terrain.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="core/build/libs/core-1.0.jar" />
+    <option name="AFTER_PATH" value="core/build/libs/core-1.0.jar" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_6_22_2020_3_38_PM_[Default_Changelist]/core-1.0.jar" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value=".gradle/5.4.1/javaCompile/jarAnalysis.bin" />
+    <option name="AFTER_PATH" value=".gradle/5.4.1/javaCompile/jarAnalysis.bin" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_6_22_2020_3_38_PM_[Default_Changelist]/jarAnalysis.bin" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value=".gradle/5.4.1/fileHashes/fileHashes.lock" />
+    <option name="AFTER_PATH" value=".gradle/5.4.1/fileHashes/fileHashes.lock" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_6_22_2020_3_38_PM_[Default_Changelist]/fileHashes.lock" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value=".gradle/buildOutputCleanup/buildOutputCleanup.lock" />
+    <option name="AFTER_PATH" value=".gradle/buildOutputCleanup/buildOutputCleanup.lock" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_6_22_2020_3_38_PM_[Default_Changelist]/buildOutputCleanup.lock" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="core/build/classes/java/main/com/crazyputting/states/gamestates/ThreeDimensional.class" />
+    <option name="AFTER_PATH" value="core/build/classes/java/main/com/crazyputting/states/gamestates/ThreeDimensional.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_6_22_2020_3_38_PM_[Default_Changelist]/ThreeDimensional.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value=".gradle/5.4.1/javaCompile/javaCompile.lock" />
+    <option name="AFTER_PATH" value=".gradle/5.4.1/javaCompile/javaCompile.lock" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_6_22_2020_3_38_PM_[Default_Changelist]/javaCompile.lock" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value=".gradle/5.4.1/javaCompile/taskHistory.bin" />
+    <option name="AFTER_PATH" value=".gradle/5.4.1/javaCompile/taskHistory.bin" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_6_22_2020_3_38_PM_[Default_Changelist]/taskHistory.bin" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value=".gradle/5.4.1/fileHashes/fileHashes.bin" />
+    <option name="AFTER_PATH" value=".gradle/5.4.1/fileHashes/fileHashes.bin" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_6_22_2020_3_38_PM_[Default_Changelist]/fileHashes.bin" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="core/build/classes/java/main/com/crazyputting/physicsengine/Physics.class" />
+    <option name="AFTER_PATH" value="core/build/classes/java/main/com/crazyputting/physicsengine/Physics.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_6_22_2020_3_38_PM_[Default_Changelist]/Physics.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="core/build/classes/java/main/com/crazyputting/objects/Ball.class" />
+    <option name="AFTER_PATH" value="core/build/classes/java/main/com/crazyputting/objects/Ball.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_6_22_2020_3_38_PM_[Default_Changelist]/Ball.class" />
+  </binary>
+</changelist>

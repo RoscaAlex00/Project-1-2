@@ -20,7 +20,7 @@ import com.crazyputting.managers.GameStateManager;
 import com.crazyputting.objects.Ball;
 import com.crazyputting.objects.Hole;
 import com.crazyputting.objects.Terrain;
-import com.crazyputting.player.AI.AI;
+import com.crazyputting.player.AI.GeneticAlgorithm;
 import com.crazyputting.player.AI.WindAI;
 
 public class PlayState extends ThreeDimensional {
@@ -120,7 +120,7 @@ public class PlayState extends ThreeDimensional {
                     ball.hit(player.shot_velocity(cameraDirection, charge));
                     hitCounter++;
                 }
-            } else if (player instanceof AI) {
+            } else if (player instanceof GeneticAlgorithm) {
                 ball.setPosition(new Vector3(10, 10, 0));
                 hitCounter++;
             } else {
